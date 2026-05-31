@@ -1,9 +1,10 @@
-import { ConflictException, Injectable, NotFoundException } from "@nestjs/common"
+import { BadRequestException, ConflictException, ForbiddenException, Injectable, NotFoundException } from "@nestjs/common"
 import { ApplicationsService } from "../applications/applications.service"
 import { InjectRepository } from "@nestjs/typeorm"
 import { DataSource, In, Repository } from "typeorm"
 import { ExamRegistration, ScheduleSlot } from "../../entities/schedule-slot.entity"
 import { StudentProfile } from "../../entities/student-profile.entity"
+import { LicenseApplication } from "../../entities/license-application.entity"
 
 const HELD_STATUSES = ["pending", "confirmed"] as const
 
@@ -16,6 +17,8 @@ export class SchedulesService {
     private readonly registrationsRepo: Repository<ExamRegistration>,
     @InjectRepository(StudentProfile)
     private readonly profilesRepo: Repository<StudentProfile>,
+    @InjectRepository(LicenseApplication)
+    private readonly appsRepo: Repository<LicenseApplication>,
     private readonly dataSource: DataSource,
     private readonly applications: ApplicationsService,
   ) {}
@@ -90,9 +93,10 @@ export class SchedulesService {
 
     if (userId) {
       const profile = await this.profilesRepo.findOne({ where: { userId } })
-      if (profile?.centerId) {
-        qb.andWhere("s.center_id = :centerId", { centerId: profile.centerId })
+      if (!profile?.centerId) {
+        return []
       }
+      qb.andWhere("s.center_id = :centerId", { centerId: profile.centerId })
     }
 
     const slots = await qb.getMany()
@@ -132,6 +136,25 @@ export class SchedulesService {
         .where("s.id = :slotId", { slotId })
         .getOne()
       if (!slot) throw new NotFoundException("Không tìm thấy ca thi")
+
+        const approvedApp = await this.appsRepo.findOne({
+          where: { userId, status: "approved" },
+          order: { updatedAt: "DESC" },
+        })
+        if (!approvedApp) {
+          throw new ForbiddenException(
+            "Cần hồ sơ sát hạch đã được duyệt trước khi đăng ký ca thi chính thức.",
+          )
+        }
+        if (slot.licenseClass && slot.licenseClass !== approvedApp.licenseClass) {
+          throw new BadRequestException(
+            `Ca thi hạng ${slot.licenseClass} không khớp hồ sơ đã duyệt (${approvedApp.licenseClass})`,
+          )
+        }
+        const profile = await this.profilesRepo.findOne({ where: { userId } })
+        if (profile?.centerId && slot.centerId && slot.centerId !== profile.centerId) {
+          throw new ForbiddenException("Ca thi không thuộc trung tâm của bạn")
+        }
 
       const held = await manager.getRepository(ExamRegistration).count({
         where: { slotId, status: In([...HELD_STATUSES]) },

@@ -198,7 +198,7 @@ export class StudyService {
     } else {
       progress.percent = Math.max(progress.percent, clamped)
       if (clamped >= 100) {
-        progress.completedLessons += 1
+        progress.completedLessons = Math.max(progress.completedLessons, 1)
       }
     }
 

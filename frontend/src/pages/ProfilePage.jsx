@@ -27,6 +27,8 @@ export function ProfilePage() {
   const [phone, setPhone] = useState("")
   const [targetClass, setTargetClass] = useState("B2")
   const [heldLicenses, setHeldLicenses] = useState([])
+  const [centers, setCenters] = useState([])
+  const [centerId, setCenterId] = useState("")
   const [saving, setSaving] = useState(false)
   const [notice, setNotice] = useState(null)
   const [error, setError] = useState(null)
@@ -40,7 +42,14 @@ export function ProfilePage() {
     if (Array.isArray(user?.profile?.heldLicenses)) {
       setHeldLicenses(user.profile.heldLicenses)
     }
+    setCenterId(user?.profile?.centerId ?? user?.centerId ?? "")
   }, [user])
+
+  useEffect(() => {
+    apiFetch("/lookup/centers")
+      .then((rows) => setCenters(Array.isArray(rows) ? rows : []))
+      .catch(() => setCenters([]))
+  }, [])
 
   useEffect(() => {
     apiFetch("/applications/me", { auth: true })
@@ -74,6 +83,7 @@ export function ProfilePage() {
           phone: phone.trim(),
           licenseClass: targetClass,
           heldLicenses,
+          ...(centerId ? { centerId } : {}),
         }),
       })
       await refreshUser()
@@ -151,6 +161,22 @@ export function ProfilePage() {
             value={targetClass}
             onChange={(e) => setTargetClass(e.target.value)}
           />
+          <label className="block text-sm sm:col-span-2">
+            <span className="mb-2 block font-medium text-drive-text">Trung tâm đào tạo</span>
+            <select
+              className="w-full rounded-drive border border-drive-border bg-drive-elevated px-3 py-2 text-white"
+              value={centerId}
+              onChange={(e) => setCenterId(e.target.value)}
+            >
+              <option value="">— Chọn trung tâm —</option>
+              {centers.map((c) => (
+                <option key={c.id} value={c.id}>
+                  {c.name}
+                  {c.city ? ` (${c.city})` : ""}
+                </option>
+              ))}
+            </select>
+          </label>
           <div className="sm:col-span-2">
             <p className="mb-2 text-sm font-medium text-drive-text">{t("pages.profile.heldLicenses")}</p>
             <p className="mb-3 text-xs text-drive-muted">{t("pages.profile.heldLicensesHint")}</p>

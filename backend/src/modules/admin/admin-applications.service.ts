@@ -102,7 +102,7 @@ export class AdminApplicationsService {
       relations: { documents: true, user: true },
     })
     if (!app) throw new NotFoundException("Không tìm thấy hồ sơ")
-    await this.scope.assertCenterAccessAsync(admin, app.centerId)
+    await this.scope.assertApplicationAccessAsync(admin, app.centerId, app.userId)
 
     const profile = await this.profilesRepo.findOne({ where: { userId: app.userId } })
 
@@ -137,14 +137,14 @@ export class AdminApplicationsService {
       relations: { application: true },
     })
     if (!doc) throw new NotFoundException("Không tìm thấy tài liệu")
-    await this.scope.assertCenterAccessAsync(admin, doc.application.centerId)
+    await this.scope.assertApplicationAccessAsync(admin, doc.application.centerId, doc.application.userId)
     return this.applicationsService.resolveDocumentStream(doc)
   }
 
   async patchStatus(admin: AuthUser, id: string, dto: PatchApplicationAdminDto) {
     const app = await this.appsRepo.findOne({ where: { id } })
     if (!app) throw new NotFoundException("Không tìm thấy hồ sơ")
-    await this.scope.assertCenterAccessAsync(admin, app.centerId)
+    await this.scope.assertApplicationAccessAsync(admin, app.centerId, app.userId)
 
     const allowed: Record<string, ApplicationStatus[]> = {
       submitted: ["reviewing", "approved", "rejected"],
@@ -184,7 +184,7 @@ export class AdminApplicationsService {
   async requestDossier(admin: AuthUser, id: string, dto: { deadline?: string }) {
     const app = await this.appsRepo.findOne({ where: { id } })
     if (!app) throw new NotFoundException("Không tìm thấy hồ sơ")
-    await this.scope.assertCenterAccessAsync(admin, app.centerId)
+    await this.scope.assertApplicationAccessAsync(admin, app.centerId, app.userId)
 
     const deadline = dto.deadline ? new Date(dto.deadline) : undefined
     await this.applicationsService.requestDossier(id, deadline)
@@ -206,8 +206,14 @@ export class AdminApplicationsService {
     const centerId = await this.scope.getCenterIdForAdmin(admin)
     const qb = this.appsRepo
       .createQueryBuilder("a")
+      .leftJoin(StudentProfile, "p", "p.user_id = a.user_id")
       .where("a.status = :status", { status })
-    if (centerId) qb.andWhere("a.center_id = :centerId", { centerId })
+    if (centerId) {
+      qb.andWhere(
+        "(a.center_id = :centerId OR (a.center_id IS NULL AND p.center_id = :centerId))",
+        { centerId },
+      )
+    }
     return qb.getCount()
   }
 }

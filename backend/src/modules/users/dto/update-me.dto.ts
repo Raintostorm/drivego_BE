@@ -1,4 +1,5 @@
 import { IsArray, IsOptional, IsString, MaxLength } from "class-validator"
+import { IsUUID } from "class-validator"
 
 export class UpdateMeDto {
   @IsOptional()
@@ -22,4 +23,8 @@ export class UpdateMeDto {
   @IsString({ each: true })
   @MaxLength(16, { each: true })
   heldLicenses?: string[]
+
+  @IsOptional()
+  @IsUUID()
+  centerId?: string
 }

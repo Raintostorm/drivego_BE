@@ -57,7 +57,6 @@ export function AuthProvider({ children }) {
     const data = await apiFetch("/auth/register", {
       method: "POST",
       body: JSON.stringify({
-        role: "student",
         email: payload.email,
         password: payload.password,
         fullName: payload.fullName,

@@ -39,23 +39,6 @@ export class ApplicationsService {
     mkdirSync(UPLOAD_DIR, { recursive: true })
   }
 
-  async hasSubmittedApplication(userId: string) {
-    const app = await this.appsRepo.findOne({
-      where: { userId },
-      order: { updatedAt: "DESC" },
-    })
-    return this.isExamEligible(app?.status)
-  }
-
-  async assertSubmittedForExam(userId: string) {
-    const ok = await this.hasSubmittedApplication(userId)
-    if (!ok) {
-      throw new ForbiddenException(
-        "Cần nộp hồ sơ sát hạch (đủ giấy tờ theo quy định mới nhất) trước khi đăng ký ca thi.",
-      )
-    }
-  }
-
   async assertApprovedForExam(userId: string) {
     const app = await this.appsRepo.findOne({
       where: { userId, status: "approved" },
@@ -108,12 +91,12 @@ export class ApplicationsService {
     if (!app) {
       return {
         application: null,
-        examEligible: await this.hasApprovedApplication(userId),
+        examEligible: await this.examEligibleForUser(userId),
       }
     }
     return {
       application: this.toResponse(app),
-      examEligible: await this.hasApprovedApplication(userId),
+      examEligible: await this.examEligibleForUser(userId),
     }
   }
 
@@ -123,9 +106,8 @@ export class ApplicationsService {
     })
     return count > 0
   }
-
-  private isExamEligible(status?: string) {
-    return status === "submitted" || status === "reviewing" || status === "approved"
+  private async examEligibleForUser(userId: string) {
+    return this.hasApprovedApplication(userId)
   }
 
   async createDraft(userId: string, licenseClass = "B2") {
@@ -136,7 +118,7 @@ export class ApplicationsService {
     if (existing) {
       return {
         application: this.toResponse(existing),
-        examEligible: this.isExamEligible(existing.status),
+        examEligible: await this.examEligibleForUser(userId)
       }
     }
 
@@ -149,7 +131,7 @@ export class ApplicationsService {
     await this.appsRepo.save(app)
     return {
       application: this.toResponse(app),
-      examEligible: false,
+      examEligible: await this.examEligibleForUser(userId),
     }
   }
 
@@ -171,7 +153,7 @@ export class ApplicationsService {
     })
     return {
       application: this.toResponse(reloaded!),
-      examEligible: this.isExamEligible(reloaded!.status),
+      examEligible: await this.examEligibleForUser(userId),
     }
   }
 
@@ -241,7 +223,7 @@ export class ApplicationsService {
     })
     return {
       application: this.toResponse(reloaded!),
-      examEligible: this.isExamEligible(reloaded!.status),
+      examEligible: await this.examEligibleForUser(userId),
     }
   }
 
@@ -290,7 +272,7 @@ export class ApplicationsService {
     })
     return {
       application: this.toResponse(reloaded!),
-      examEligible: true,
+      examEligible: await this.examEligibleForUser(userId),
     }
   }
 

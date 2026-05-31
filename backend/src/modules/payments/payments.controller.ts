@@ -36,6 +36,7 @@ export class PaymentsController {
     return this.paymentsService.getStatus(user.userId, id)
   }
 
+  /** Staging/production: bắt buộc xác thực webhook SePay (SEPAY_WEBHOOK_HMAC_SECRET hoặc SEPAY_WEBHOOK_API_KEY). */
   @Post("sepay/webhook")
   sepayWebhook(
     @Req() req: Request,

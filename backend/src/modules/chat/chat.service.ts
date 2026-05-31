@@ -1,4 +1,4 @@
-import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common"
+import { BadRequestException, Injectable, Logger, NotFoundException } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Repository } from "typeorm"
 import { PremiumService } from "../../common/premium.service"
@@ -26,6 +26,8 @@ export class ChatService {
     private readonly premium: PremiumService,
     private readonly gemini: GeminiService,
   ) {}
+
+  private readonly logger = new Logger(ChatService.name)
 
   async listSessions(userId: string) {
     const sessions = await this.sessionsRepo.find({
@@ -96,20 +98,27 @@ export class ChatService {
       return this.demoReply(userContent)
     }
 
-    const prior = await this.messagesRepo.find({
-      where: { sessionId },
-      order: { createdAt: "ASC" },
-      take: 20,
-    })
+    try {
+      const prior = await this.messagesRepo.find({
+        where: { sessionId },
+        order: { createdAt: "ASC" },
+        take: 20,
+      })
 
-    const history = prior
-      .filter((m) => m.role === "user" || m.role === "assistant")
-      .map((m) => ({
-        role: m.role as "user" | "assistant",
-        content: m.content,
-      }))
+      const history = prior
+        .filter((m) => m.role === "user" || m.role === "assistant")
+        .map((m) => ({
+          role: m.role as "user" | "assistant",
+          content: m.content,
+        }))
 
-    return this.gemini.generateReply(history, userContent)
+      return await this.gemini.generateReply(history, userContent)
+    } catch (err) {
+      this.logger.warn(
+        `Gemini failed, using demo reply: ${err instanceof Error ? err.message : err}`,
+      )
+      return this.demoReply(userContent)
+    }
   }
 
   async sendMessage(userId: string, sessionId: string, content: string) {

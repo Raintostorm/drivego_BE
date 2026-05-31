@@ -5,6 +5,11 @@ import { LookupService } from "./lookup.service"
 export class LookupController {
   constructor(private readonly lookupService: LookupService) {}
 
+  @Get("centers")
+  listCenters() {
+    return this.lookupService.listCenters()
+  }
+
   @Get()
   lookup(@Query("code") code?: string) {
     return this.lookupService.search(code ?? "")

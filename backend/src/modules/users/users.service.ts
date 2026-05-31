@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from "@nestjs/common"
+import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Repository } from "typeorm"
 import { TrainingCenter } from "../../entities/schedule-slot.entity"
@@ -22,28 +22,34 @@ export class UsersService {
       where: { id: userId },
       relations: { profile: true },
     })
-
+  
     if (!user) {
       throw new NotFoundException("User not found")
     }
-
+  
+    const isStudent = user.role === "student"
+    const effectiveCenterId = isStudent
+      ? (user.profile?.centerId ?? null)
+      : (user.centerId ?? null)
+  
     let centerName: string | null = null
-    if (user.centerId) {
-      const center = await this.centersRepo.findOne({ where: { id: user.centerId } })
+    if (effectiveCenterId) {
+      const center = await this.centersRepo.findOne({ where: { id: effectiveCenterId } })
       centerName = center?.name ?? null
     }
-
+  
     return {
       id: user.id,
       email: user.email,
       role: user.role,
-      centerId: user.centerId ?? null,
+      centerId: effectiveCenterId,
       centerName,
       profile: user.profile
         ? {
             fullName: user.profile.fullName,
             phone: user.profile.phone,
             licenseClass: user.profile.licenseClass,
+            centerId: user.profile.centerId ?? null,
             premiumUntil: user.profile.premiumUntil,
             heldLicenses: user.profile.heldLicenses ?? [],
           }
@@ -70,6 +76,14 @@ export class UsersService {
     if (dto.licenseClass !== undefined) profile.licenseClass = dto.licenseClass
     if (dto.heldLicenses !== undefined) {
       profile.heldLicenses = [...new Set(dto.heldLicenses.map((c) => c.trim()).filter(Boolean))]
+    }
+
+    if (dto.centerId !== undefined) {
+      const center = await this.centersRepo.findOne({ where: { id: dto.centerId } })
+      if (!center) {
+        throw new BadRequestException("Trung tâm không tồn tại")
+      }
+      profile.centerId = dto.centerId
     }
 
     await this.profilesRepo.save(profile)

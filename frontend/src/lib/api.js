@@ -49,7 +49,7 @@ export async function apiFetch(path, options = {}) {
   const data = await response.json().catch(() => null)
 
   if (!response.ok) {
-    throw new Error(formatApiError(data, response.statusText || "Request failed"))
+    throw new Error(formatApiError(data, response.statusText || "Yêu cầu thất bại"))
   }
 
   return data
@@ -75,7 +75,7 @@ export async function apiUpload(path, formData, options = {}) {
   const data = await response.json().catch(() => null)
 
   if (!response.ok) {
-    throw new Error(formatApiError(data, response.statusText || "Upload failed"))
+    throw new Error(formatApiError(data, response.statusText || "Tải lên thất bại"))
   }
 
   return data
@@ -98,7 +98,7 @@ export async function apiFetchBlob(path, options = {}) {
   const response = await fetch(url, { ...rest, headers })
   if (!response.ok) {
     const data = await response.json().catch(() => null)
-    throw new Error(formatApiError(data, response.statusText || "Request failed"))
+    throw new Error(formatApiError(data, response.statusText || "Yêu cầu thất bại"))
   }
 
   return response.blob()

@@ -80,6 +80,11 @@ export class AdminClassSessionsService {
     if (!session) throw new NotFoundException("Không tìm thấy buổi học")
     await this.scope.assertCenterAccessAsync(admin, session.centerId)
 
+    const count = await this.attendanceRepo.count({ where: { sessionId } })
+    if (count >= session.maxCapacity) {
+      throw new BadRequestException("Buổi học đã đủ sĩ số")
+    }
+
     const existing = await this.attendanceRepo.findOne({
       where: { sessionId, userId },
     })

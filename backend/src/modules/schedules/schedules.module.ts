@@ -6,10 +6,11 @@ import { ApplicationsModule } from "../applications/applications.module"
 import { AuthModule } from "../auth/auth.module"
 import { SchedulesController } from "./schedules.controller"
 import { SchedulesService } from "./schedules.service"
+import { LicenseApplication } from "../../entities/license-application.entity"
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([ScheduleSlot, ExamRegistration, StudentProfile]),
+    TypeOrmModule.forFeature([ScheduleSlot, ExamRegistration, StudentProfile, LicenseApplication]),
     AuthModule,
     ApplicationsModule,
   ],

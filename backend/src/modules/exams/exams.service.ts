@@ -114,6 +114,26 @@ export class ExamsService {
 
     const rules = await this.examRules.getRules(paper.licenseClass)
 
+    if (!dto.startedAt?.trim()) {
+      throw new BadRequestException("Thiếu thời gian bắt đầu bài thi (startedAt)")
+    }
+    const startedAt = new Date(dto.startedAt)
+    if (Number.isNaN(startedAt.getTime())) {
+      throw new BadRequestException("startedAt không hợp lệ")
+    }
+    const finishedAt = new Date()
+    const elapsedMs = finishedAt.getTime() - startedAt.getTime()
+    const maxMs = rules.durationMinutes * 60 * 1000
+    const graceMs = 5_000
+    if (elapsedMs < 0) {
+      throw new BadRequestException("startedAt không hợp lệ")
+    }
+    if (elapsedMs > maxMs + graceMs) {
+      throw new BadRequestException(
+        `Hết thời gian làm bài (${rules.durationMinutes} phút). Vui lòng làm đề mới.`,
+      )
+    }
+
     let correct = 0
     let wrong = 0
     let failedCritical = false
@@ -121,8 +141,17 @@ export class ExamsService {
 
     for (const question of questions) {
       const selected = dto.answers[question.id]
-      const isCorrect =
-        typeof selected === "number" && selected === question.correctIndex
+      if (typeof selected !== "number" || !Number.isInteger(selected)) {
+        throw new BadRequestException(
+          `Câu hỏi chưa có đáp án hợp lệ (id: ${question.id})`,
+        )
+      }
+      const choices = Array.isArray(question.answers) ? question.answers.length : 0
+      if (choices === 0 || selected < 0 || selected >= choices) {
+        throw new BadRequestException(`Đáp án không hợp lệ cho câu hỏi ${question.id}`)
+      }
+      const isCorrect = selected === question.correctIndex
+      
       detail[question.id] = {
         selected: selected ?? -1,
         correct: question.correctIndex,
@@ -146,9 +175,6 @@ export class ExamsService {
       paper.questionCount = total
       await this.papersRepo.save(paper)
     }
-
-    const startedAt = dto.startedAt ? new Date(dto.startedAt) : new Date()
-    const finishedAt = new Date()
 
     const attempt = this.attemptsRepo.create({
       userId,

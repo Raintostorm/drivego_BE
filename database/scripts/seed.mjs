@@ -116,9 +116,11 @@ async function seed() {
     `INSERT INTO student_profiles (user_id, full_name, phone, license_class, center_id, premium_until)
      VALUES ($1, $2, $3, $4, $5, NOW() + INTERVAL '30 days')
      ON CONFLICT (user_id) DO UPDATE SET
-       full_name = EXCLUDED.full_name,
-       phone = EXCLUDED.phone,
-       license_class = EXCLUDED.license_class`,
+     full_name = EXCLUDED.full_name,
+     phone = EXCLUDED.phone,
+     license_class = EXCLUDED.license_class,
+     center_id = EXCLUDED.center_id,
+     premium_until = EXCLUDED.premium_until`,
     [ID.userStudent, "Nguyễn Văn An", "0912345678", "B2", ID.center],
   )
 
