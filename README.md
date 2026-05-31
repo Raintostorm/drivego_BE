@@ -46,6 +46,7 @@ npm run dev:be       # chỉ backend
 
 ## Tài liệu
 
+- **[Cài đặt đầy đủ & test SePay](docs/SETUP-DAY-DU.md)** (clone GitHub, thanh toán, ngrok)
 - **[Hướng dẫn cài đặt & seed database](docs/HUONG-DAN-CAI-DAT.md)** (tiếng Việt)
 - [Kiến trúc](docs/architecture.md)
 - [Domain từ UI](docs/domain-from-ui.md)

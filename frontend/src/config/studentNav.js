@@ -1,4 +1,5 @@
 export const studentNav = [
+  { to: "/", labelKey: "nav.home" },
   { to: "/student-dashboard", labelKey: "nav.studentDashboard" },
   { to: "/theory", labelKey: "nav.theory" },
   { to: "/exam", labelKey: "nav.exam" },

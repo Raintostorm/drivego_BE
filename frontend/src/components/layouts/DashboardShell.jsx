@@ -18,6 +18,7 @@ export function DashboardShell({ children, variant, navItems }) {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
   const premium = isPremiumActive(user)
+  const logoTo = variant === "admin" ? "/admin-dashboard" : "/"
 
   const items = useMemo(() => {
     if (variant !== "student") return navItems
@@ -34,28 +35,31 @@ export function DashboardShell({ children, variant, navItems }) {
 
   return (
     <div className="-mx-4 flex min-h-[calc(100vh-3rem)] flex-col sm:-mx-6 lg:-mx-10 lg:flex-row">
-      <div className="border-b border-drive-border-soft bg-drive-sidebar px-4 py-4 lg:fixed lg:inset-y-0 lg:left-0 lg:z-20 lg:w-72 lg:border-r lg:border-b-0 lg:px-0 lg:py-6">
-        <div className="mb-6 hidden px-5 lg:block">
-          <BrandLogo />
-          {variant === "admin" ? (
-            <p className="mt-2 text-xs font-medium uppercase tracking-wide text-drive-action">
-              Portal quản trị
-            </p>
+      <aside className="flex flex-col border-b border-drive-border-soft bg-drive-sidebar lg:fixed lg:inset-y-0 lg:left-0 lg:z-20 lg:w-72 lg:border-r lg:border-b-0">
+        <div className="shrink-0 px-4 py-4 lg:px-0 lg:py-6">
+          <div className="mb-0 hidden px-5 lg:block">
+            <BrandLogo to={logoTo} />
+            {variant === "admin" ? (
+              <p className="mt-2 text-xs font-medium uppercase tracking-wide text-drive-action">
+                Portal quản trị
+              </p>
+            ) : null}
+          </div>
+          <div className="px-2 lg:hidden">
+            <BrandLogo size="sm" to={logoTo} />
+          </div>
+        </div>
+
+        <div className="min-h-0 flex-1 overflow-y-auto px-0 pb-2 lg:max-h-[calc(100vh-12rem)]">
+          <SidebarNav items={items} />
+          {variant === "student" ? (
+            <div className="mt-4">
+              <LicenseClassSwitcher />
+            </div>
           ) : null}
         </div>
-        <Link
-          to={variant === "admin" ? "/admin-dashboard" : "/"}
-          className="mb-4 flex items-center gap-2 px-2 lg:hidden"
-        >
-          <BrandLogo size="sm" />
-        </Link>
-        <SidebarNav items={items} />
-        {variant === "student" ? (
-          <div className="mt-4">
-            <LicenseClassSwitcher />
-          </div>
-        ) : null}
-        <div className="mt-6 space-y-2 px-3">
+
+        <div className="shrink-0 space-y-2 border-t border-drive-border-soft px-3 py-4">
           {variant === "student" ? (
             premium ? (
               <Link
@@ -93,7 +97,8 @@ export function DashboardShell({ children, variant, navItems }) {
             Đăng xuất
           </button>
         </div>
-      </div>
+      </aside>
+
       <div className="min-w-0 flex-1 lg:pl-72">
         <div className="px-4 py-6 sm:px-6 lg:px-10">{children}</div>
       </div>

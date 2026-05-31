@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { Link, NavLink } from "react-router-dom"
 import { useAuth } from "../context/AuthContext.jsx"
-import { isStaffRole } from "../lib/roles.js"
+import { dashboardPathForRole, isStaffRole } from "../lib/roles.js"
 import { t } from "../lib/strings.js"
 import { marketingRoutes, moreRoutes } from "../routes.jsx"
 import { BrandLogo } from "./BrandLogo.jsx"
@@ -21,6 +21,8 @@ export function MarketingNav() {
     document.addEventListener("mousedown", handleClickOutside)
     return () => document.removeEventListener("mousedown", handleClickOutside)
   }, [])
+
+  const appHome = user ? dashboardPathForRole(user.role) : null
 
   return (
     <header className="sticky top-0 z-30 -mx-4 mb-8 border-b border-drive-border-soft bg-drive-canvas/90 px-4 py-4 backdrop-blur-md sm:-mx-6 sm:px-6">
@@ -68,23 +70,39 @@ export function MarketingNav() {
         </nav>
 
         <div className="flex items-center gap-3">
-          {staff ? (
-            <Link
-              to="/admin-dashboard"
-              className="hidden text-sm font-medium text-drive-action hover:underline sm:inline"
-            >
-              Vào quản trị
-            </Link>
-          ) : null}
-          <Link to="/login" className="hidden text-sm font-medium text-drive-muted hover:text-white sm:inline">
-            {t("nav.login")}
-          </Link>
-          <Link
-            to="/register"
-            className="rounded-drive-pill bg-drive-action px-6 py-3 text-sm font-bold text-white shadow-drive-action transition hover:brightness-110"
-          >
-            {t("nav.register")}
-          </Link>
+          {user ? (
+            <>
+              <span
+                className="hidden max-w-[140px] truncate text-sm text-drive-muted sm:inline"
+                title={user.email}
+              >
+                {user.profile?.fullName || user.email}
+              </span>
+              {appHome ? (
+                <Link
+                  to={appHome}
+                  className="rounded-drive-pill bg-drive-action px-5 py-2.5 text-sm font-bold text-white shadow-drive-action transition hover:brightness-110"
+                >
+                  {staff ? "Vào quản trị" : "Vào học"}
+                </Link>
+              ) : null}
+            </>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="hidden text-sm font-medium text-drive-muted hover:text-white sm:inline"
+              >
+                {t("nav.login")}
+              </Link>
+              <Link
+                to="/register"
+                className="rounded-drive-pill bg-drive-action px-6 py-3 text-sm font-bold text-white shadow-drive-action transition hover:brightness-110"
+              >
+                {t("nav.register")}
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </header>

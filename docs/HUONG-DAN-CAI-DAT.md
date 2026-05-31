@@ -200,6 +200,7 @@ npm run build
 
 ## 10. Tài liệu liên quan
 
+- **[Cài đặt đầy đủ & test thanh toán SePay](./SETUP-DAY-DU.md)** (ngrok, webhook, checklist clone repo)
 - [Kiến trúc](./architecture.md)
 - [Tích hợp bên thứ ba](./integrations.md)
 - [Tóm tắt dự án / QA](./project-recap.md)
