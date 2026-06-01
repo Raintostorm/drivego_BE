@@ -23,15 +23,23 @@ async function bootstrap() {
     }),
   )
 
- // Sửa đoạn này trong file main.ts của bạn:
+  // Đoạn cấu hình CORS đã được thêm Type định danh để hết lỗi TypeScript:
   app.enableCors({
-    origin: [
-      "http://localhost:5173", 
-      "https://drivego-fe-frontend.vercel.app"
-    ], // Cho phép cả app chạy ở local lẫn trang live trên Vercel
+    origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+      // Cho phép: local, link chính thức, và BẤT KỲ link preview nào của Vercel kết thúc bằng .vercel.app
+      if (
+        !origin || 
+        origin === 'http://localhost:5173' || 
+        origin.endsWith('.vercel.app')
+      ) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
-  })
+  });
 
   const port = Number(config.get<string>("PORT")) || 3000
   await app.listen(port)
