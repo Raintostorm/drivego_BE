@@ -23,8 +23,13 @@ async function bootstrap() {
     }),
   )
 
+ // Sửa đoạn này trong file main.ts của bạn:
   app.enableCors({
-    origin: config.get<string>("CORS_ORIGIN", "http://localhost:5173"),
+    origin: [
+      "http://localhost:5173", 
+      "https://drivego-fe-frontend.vercel.app"
+    ], // Cho phép cả app chạy ở local lẫn trang live trên Vercel
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
   })
 
