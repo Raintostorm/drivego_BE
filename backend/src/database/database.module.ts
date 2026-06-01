@@ -61,7 +61,7 @@ import { User } from "../entities/user.entity"
             ClassSession,
             SessionAttendance,
           ],
-          synchronize: false,
+          synchronize: true,
         }
       },
     }),
