@@ -21,6 +21,14 @@ export function TheoryPage() {
 
   useEffect(() => {
     let cancelled = false
+    if (enrollmentsLoading) return undefined
+    if (!isEnrolled(activeClass)) {
+      setLoading(false)
+      setChapters([])
+      setContentReady(false)
+      return undefined
+    }
+
     setLoading(true)
     setError(null)
     async function load() {
@@ -49,7 +57,7 @@ export function TheoryPage() {
     return () => {
       cancelled = true
     }
-  }, [activeClass])
+  }, [activeClass, enrollmentsLoading, isEnrolled])
 
   const active = useMemo(
     () => chapters.find((c) => c.id === activeId) ?? chapters[0],
