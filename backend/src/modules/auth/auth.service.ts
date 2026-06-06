@@ -10,7 +10,7 @@ import { InjectRepository } from "@nestjs/typeorm"
 import * as bcrypt from "bcryptjs"
 import { randomBytes, randomUUID } from "crypto"
 import nodemailer from "nodemailer"
-import { Repository } from "typeorm"
+import { DataSource, Repository } from "typeorm"
 import { FirebaseAdminService } from "../../firebase/firebase-admin.service"
 import { PasswordResetToken } from "../../entities/password-reset-token.entity"
 import { StudentProfile } from "../../entities/student-profile.entity"
@@ -47,6 +47,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly firebaseAdmin: FirebaseAdminService,
     private readonly config: ConfigService,
+    private readonly dataSource: DataSource,
   ) {}
 
   async register(dto: RegisterDto): Promise<AuthResponse> {
@@ -161,6 +162,7 @@ export class AuthService {
   }
 
   async forgotPassword(dto: ForgotPasswordDto) {
+    await this.ensurePasswordResetTable()
     const email = dto.email.trim().toLowerCase()
     const user = await this.usersRepo.findOne({ where: { email } })
     if (!user) {
@@ -182,6 +184,7 @@ export class AuthService {
   }
 
   async resetPassword(dto: ResetPasswordDto) {
+    await this.ensurePasswordResetTable()
     const row = await this.resetTokensRepo.findOne({
       where: { token: dto.token },
       relations: { user: true },
@@ -223,21 +226,46 @@ export class AuthService {
       auth: { user, pass },
     })
 
-    await transporter.sendMail({
-      from,
-      to: email,
-      subject: "Đặt lại mật khẩu DriveGo",
-      text: [
-        "Bạn vừa yêu cầu đặt lại mật khẩu DriveGo.",
-        `Mở link sau trong 60 phút để tạo mật khẩu mới: ${resetUrl}`,
-        "Nếu bạn không yêu cầu thao tác này, hãy bỏ qua email.",
-      ].join("\n\n"),
-      html: `
-        <p>Bạn vừa yêu cầu đặt lại mật khẩu DriveGo.</p>
-        <p><a href="${resetUrl}">Đặt lại mật khẩu</a></p>
-        <p>Link có hiệu lực trong 60 phút. Nếu bạn không yêu cầu thao tác này, hãy bỏ qua email.</p>
-      `,
-    })
+    try {
+      await transporter.sendMail({
+        from,
+        to: email,
+        subject: "Đặt lại mật khẩu DriveGo",
+        text: [
+          "Bạn vừa yêu cầu đặt lại mật khẩu DriveGo.",
+          `Mở link sau trong 60 phút để tạo mật khẩu mới: ${resetUrl}`,
+          "Nếu bạn không yêu cầu thao tác này, hãy bỏ qua email.",
+        ].join("\n\n"),
+        html: `
+          <p>Bạn vừa yêu cầu đặt lại mật khẩu DriveGo.</p>
+          <p><a href="${resetUrl}">Đặt lại mật khẩu</a></p>
+          <p>Link có hiệu lực trong 60 phút. Nếu bạn không yêu cầu thao tác này, hãy bỏ qua email.</p>
+        `,
+      })
+    } catch (err) {
+      throw new ServiceUnavailableException(
+        `Không gửi được email đặt lại mật khẩu. Kiểm tra SMTP_USER/SMTP_PASS/MAIL_FROM trên backend. ${err instanceof Error ? err.message : err}`,
+      )
+    }
+  }
+
+  private async ensurePasswordResetTable() {
+    await this.dataSource.query(`
+      CREATE TABLE IF NOT EXISTS password_reset_tokens (
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+        user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+        token VARCHAR(255) NOT NULL UNIQUE,
+        expires_at TIMESTAMPTZ NOT NULL
+      )
+    `)
+    await this.dataSource.query(`
+      CREATE INDEX IF NOT EXISTS idx_password_reset_tokens_user_id
+        ON password_reset_tokens(user_id)
+    `)
+    await this.dataSource.query(`
+      CREATE INDEX IF NOT EXISTS idx_password_reset_tokens_expires_at
+        ON password_reset_tokens(expires_at)
+    `)
   }
 
   private buildAuthResponse(user: User): AuthResponse {

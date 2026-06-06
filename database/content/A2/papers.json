@@ -7,11 +7,11 @@
       "isMock": true,
       "questions": [
         {
-          "body": "Phần củ# đường bộđược sửdụng ch! phưGng tiện gi#! thông đường bộđi lại là gì?",
+          "body": "Phần của đường bộ được sử dụng cho phương tiện giao thông đường bộ đi lại là gì?",
           "answers": [
-            "Phần mặt đường và lềđường.",
-            "Phần đường x\" chạy.",
-            "Phần đường x\" c\u001b giới.",
+            "Phần mặt đường và lề đường.",
+            "Phần đường xe chạy.",
+            "Phần đường xe cơ giới.",
             "—"
           ],
           "correctIndex": 1,
@@ -21,9 +21,9 @@
         {
           "body": "Làn đường là gì?",
           "answers": [
-            "Là một phần củ\u0011 phần đường x\" chạy được chi\u0011 th\". chiề1 dọc củ\u0011 đường, sử dụng ch. x\" chạy.",
-            "Là một phần củ\u0011 phần đường x\" chạy được chi\u0011 th\". chiề1 dọc củ\u0011 đường, có đủchiề1 rộng ch. x\" chạy \u0011n t.àn.",
-            "Là đường ch. x\" ô tô chạy, dừng, đỗ\u0011n t.àn.",
+            "Là một phần của phần đường xe chạy được chia theo chiều dọc của đường, sử dụng cho xe chạy.",
+            "Là một phần của phần đường xe chạy được chia theo chiều dọc của đường, có đủ chiều rộng cho xe chạy an toàn.",
+            "Là đường cho xe ô tô chạy, dừng, đỗan toàn.",
             "—"
           ],
           "correctIndex": 1,
@@ -31,203 +31,11 @@
           "imageUrl": null
         },
         {
-          "body": "Khổgiới hạn củ# đường bộđược hiểu như thếnà! là đúng?",
+          "body": "Theo Luật Phòng chống tác hại của rượu, bia, đối tượng nào dưới đây bị cấm sử dụng rượu, bia khi tham gia giao thông?",
           "answers": [
-            "Khổgiới hạn củ\u0011 đường bộlà kh.ảng trống có kích thước giới hạn vềchiề1 rộng, chiề1 c\u0011. củ\u0011 đường bộđểcác x\", b\u0011. gồm cảhàng h.á xếp trên x\" đi q1\u0011 được \u0011n t.àn và được xác định th\". q1y ch1ẩn, tiê1 ch1ẩn kỹth1ật củ\u0011 đường bộ.",
-            "Là kh.ảng trống có kích thước giới hạn vềchiề1 rộng củ\u0011 đường, cầ1, bến phà, hầm trên đường b ộđểcác x\" kểcảhàng hó\u0011 xếp trên x\" đi q1\u0011 được \u0011n t.àn.",
-            "Là kh.ảng trống có kích thước giới hạn vềchiề1 c\u0011. củ\u0011 cầ1, bến phà, hầm trên đường bộđểcác x\" đi q1\u0011 được \u0011n t.àn.",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": true,
-          "imageUrl": null
-        },
-        {
-          "body": "Dải phân cách được lắp đặt đểlàm gì?",
-          "answers": [
-            "Đểphân chi\u0011 các làn đường dành ch. x\" c\u001b giới và x\" thô s\u001b trên đường c\u0011. tốc.",
-            "Đểphân chi\u0011 phần đường x\" chạy thành h\u0011i chiề1 riêng biệt h.ặc đểphân chi\u0011 phần đường dành ch. x\" c\u001b giới và x\" thô s\u001b h.ặc củ\u0011 nhiề1 l.ại x\" khác nh\u00111 trên cùng một chiề1 đường.",
-            "Đểphân tách phần đường x\" chạy và hành l\u0011ng \u0011n t.àn gi\u0011. thông.",
-            "—"
-          ],
-          "correctIndex": 1,
-          "isCritical": true,
-          "imageUrl": null
-        },
-        {
-          "body": "Vạch kẻđường là gì?",
-          "answers": [
-            "Là bá. hiệ1 đường bộđểhỗtrợcảnh bá. ng1y hiểm ch. người th\u0011m gi\u0011 gi\u0011. thông đường bộ.",
-            "Là vạch chỉsựphân chi\u0011 làn đường, vịtrí h.ặc hướng đi, vịtrí dừng lại.",
-            "Là bá. hiệ1 ch. người th\u0011m gi\u0011 gi\u0011. thông đường bộvềcác thông tin củ\u0011 đường bộ.",
-            "Cảb\u0011 ý trên."
-          ],
-          "correctIndex": 1,
-          "isCritical": true,
-          "imageUrl": null
-        },
-        {
-          "body": "Người điều khiển phưGng tiện th#m gi# gi#! thông đường bộđược hiểu như thếnà! là đúng?",
-          "answers": [
-            "Là người điề1 khiển x\" c\u001b giới, người điề1 khiển x\" thô s\u001b, người điề1 khiển x\" máy ch1yên dùng.",
-            "Là người được gi\u0011. nhiệm vụhướng dẫn gi\u0011. thông trên đường bộ.",
-            "Cảh\u0011i ý trên.",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": true,
-          "imageUrl": null
-        },
-        {
-          "body": "Người lái xQ được hiểu như thếnà! là đúng?",
-          "answers": [
-            "Là người điề1 khiển x\" c\u001b giới.",
-            "Là người điề1 khiển x\" thô s\u001b.",
-            "Là người điề1 khiển x\" máy ch1yên dùng.",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": true,
-          "imageUrl": null
-        },
-        {
-          "body": "Tr!ng nhóm các phưGng tiện gi#! thông đường bộdưới đây, nhóm phưGng tiện nà! là xQ cG giới?",
-          "answers": [
-            "X\" ô tô; máy ké.; x\" mô tô h\u0011i bánh; x\" mô tô b\u0011 bánh; x\" gắn máy; x\" c\u001b giới dùng ch. người kh1yết tật và x\" máy ch1yên dùng; x\" đạp, x\" đạp máy, x\" đạp điện.",
-            "X\" ô tô; r\u001b m.óc được ké. bởi x\" ô tô; s\u001b mi r\u001b m.óc được ké. bởi ô tô đầ1 ké.; x\" chởngười bốn bánh có gắn động c\u001b; x\" chởhàng bốn bánh có gắn động c\u001b; x\" mô tô, x\" gắn máy và các l.ại x\" tư\u001bng tự.",
-            "—",
-            "—"
-          ],
-          "correctIndex": 1,
-          "isCritical": true,
-          "imageUrl": null
-        },
-        {
-          "body": "Tr!ng nhóm các phưGng tiện gi#! thông đường bộdưới đây, nhóm phưGng tiện nà! là xQ thô sG?",
-          "answers": [
-            "X\" đạp, x\" đạp máy, x\" đạp điện; x\" xích lô; x\" lăn dùng ch. người kh1yết tật; x\" vật n1ôi ké. và các l.ại x\" tư\u001bng tự.",
-            "X\" đạp (kểcảx\" đạp máy, x\" đạp điện), x\" gắn máy, x\" c\u001b giới dùng ch. người kh1yết tật và x\" máy ch1yên dùng.",
-            "X\" ô tô, máy ké., r\u001b m.óc h.ặc s\u001b mi r\u001b m.óc được ké. bởi x\" ô tô, máy ké..",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": true,
-          "imageUrl": null
-        },
-        {
-          "body": "PhưGng tiện gi#! thông đường bộgồm những l!ại nà!?",
-          "answers": [
-            "Phư\u001bng tiện gi\u0011. thông c\u001b giới đường bộ.",
-            "Phư\u001bng tiện gi\u0011. thông thô s\u001b đường bộ, x\" máy ch1yên dùng và các l.ại x\" tư\u001bng tự.",
-            "Cảh\u0011i ý trên.",
-            "—"
-          ],
-          "correctIndex": 2,
-          "isCritical": true,
-          "imageUrl": null
-        },
-        {
-          "body": "Người th#m gi# gi#! thông đường bộgồm những đối tượng nà!?",
-          "answers": [
-            "Người điề1 khiển, người được chởtrên phư\u001bng tiện th\u0011m gi\u0011 gi\u0011. thông đường bộ.",
-            "Người điề1 khiển, dẫn dắt vật n1ôi trên đường bộ; người đi bộtrên đường bộ.",
-            "Cảh\u0011i ý trên.",
-            "—"
-          ],
-          "correctIndex": 2,
-          "isCritical": true,
-          "imageUrl": null
-        },
-        {
-          "body": "Người điều khiển phưGng tiện th#m gi# gi#! thông đường bộgồm những đối tượng nà! dưới đây?",
-          "answers": [
-            "Người điề1 khiển x\" c\u001b giới, người điề1 khiển x\" thô s\u001b.",
-            "Người điề1 khiển x\" máy ch1yên dùng.",
-            "Cảh\u0011i ý trên.",
-            "—"
-          ],
-          "correctIndex": 2,
-          "isCritical": true,
-          "imageUrl": null
-        },
-        {
-          "body": "Người điều khiển gi#! thông đường bộđược hiểu như thếnà! là đúng?",
-          "answers": [
-            "Là người điề1 khiển phư\u001bng tiện th\u0011m gi\u0011 gi\u0011. thông đường bộ.",
-            "Là Cảnh sát gi\u0011. thông và người được gi\u0011. nhiệm vụhướng dẫn gi\u0011. thông trên đường bộ.",
-            "Là người th\u0011m gi\u0011 gi\u0011. thông đường bộ.",
-            "—"
-          ],
-          "correctIndex": 1,
-          "isCritical": true,
-          "imageUrl": null
-        },
-        {
-          "body": "Hành vi nà! dưới đây bịnghiêm cấm?",
-          "answers": [
-            "Sửdụng x\" đạp đi trên các t1yến q1ốc lộ.",
-            "Rải vật sắc nhọn, đổchất gây tr\u001bn trượt trên đường bộ.",
-            "Cảh\u0011i ý trên.",
-            "—"
-          ],
-          "correctIndex": 1,
-          "isCritical": true,
-          "imageUrl": null
-        },
-        {
-          "body": "Hành vi đư# xQ cG giới, xQ máy chuyên dùng th#m gi# gi#! thông đường bộnà! dưới đây bịcấm?",
-          "answers": [
-            "Không có chứng nhận kiểm định \u0011n t.àn kỹth1ật và bả. vệmôi trường.",
-            "Hết niên hạn sửdụng.",
-            "Cảh\u0011i ý trên.",
-            "—"
-          ],
-          "correctIndex": 2,
-          "isCritical": true,
-          "imageUrl": null
-        },
-        {
-          "body": "Tổchức đu# xQ được phép thực hiện khi nà!?",
-          "answers": [
-            "Trên đường phốkhông có người q1\u0011 lại.",
-            "Được người dân ủng hộ.",
-            "Được c\u001b q1\u0011n có thẩm q1yền cấp phép.",
-            "—"
-          ],
-          "correctIndex": 2,
-          "isCritical": true,
-          "imageUrl": null
-        },
-        {
-          "body": "Hành vi đu# xQ trái phép bịxửlý như thếnà!?",
-          "answers": [
-            "Chỉbịnhắc nhở.",
-            "Tùy th\". mức độcủ\u0011 hành vi vi phạm có thểbịxửlý hành chính h.ặc xửlý hình sự.",
-            "—",
-            "—"
-          ],
-          "correctIndex": 1,
-          "isCritical": true,
-          "imageUrl": null
-        },
-        {
-          "body": "Người điều khiển phưGng tiện th#m gi# gi#! thông đường bộmà tr!ng máu h!ặc hGi thởcó nồng độcồn có bịnghiêm cấm không?",
-          "answers": [
-            "Bịnghiêm cấm.",
-            "Không bịnghiêm cấm.",
-            "Không bịnghiêm cấm, nế1 nồng độcồn tr.ng má1 ởmức nhẹ, có thểđiề1 khiển phư\u001bng tiện th\u0011m gi\u0011 gi\u0011. thông.",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": true,
-          "imageUrl": null
-        },
-        {
-          "body": "ThQ! Luật Phòng chống tác hại củ# rượu, bi#, đối tượng nà! dưới đây bịcấm sửdụng rượu, bi# khi th#m gi# gi#! thông?",
-          "answers": [
-            "Người điề1 khiển x\" ô tô, x\" mô tô, x\" đạp, x\" gắn máy.",
-            "Người được chởtrên x\" c\u001b giới.",
-            "Cảh\u0011i ý trên.",
+            "Người điều khiển xe ô tô, xe mô tô, xe đạp, xe gắn máy.",
+            "Người được chở trên xe cơ giới.",
+            "Cảhai ý trên.",
             "—"
           ],
           "correctIndex": 0,
@@ -235,23 +43,23 @@
           "imageUrl": null
         },
         {
-          "body": "Hành vi gi#! xQ ô tô, mô tô ch! người nà! s#u đây th#m gi# gi#! thông đường bộbịnghiêm cấm?",
+          "body": "Hành vi giao xe ô tô, mô tô cho người nào sau đây tham gia giao thông đường bộ bị nghiêm cấm?",
           "answers": [
-            "Người chư\u0011 đủt1ổi th\". q1y định.",
-            "Người không có giấy phép lái x\".",
-            "Người có giấy phép lái x\" nhưng đã bịtrừhết 12 điểm.",
-            "Cảb\u0011 ý trên."
+            "Người chưa đủ tuổi theo quy định.",
+            "Người không có giấy phép lái xe.",
+            "Người có giấy phép lái xe nhưng đã bị trừhết 12 điểm.",
+            "Cảba ý trên."
           ],
           "correctIndex": 3,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Hành vi nà! s#u đây bịnghiêm cấm?",
+          "body": "Hành vi nào sau đây bị nghiêm cấm?",
           "answers": [
-            "Điề1 khiển x\" c\u001b giới lạng lách, đánh võng, rú g\u0011 liên tục khi th\u0011m gi\u0011 gi\u0011. thông trên đường.",
-            "Xúc phạm, đ\" dọ\u0011, cản trở, chống đối h.ặc không chấp hành hiệ1 lệnh, hướng dẫn, yê1 cầ1 kiểm tr\u0011, kiểm s.át củ\u0011 người thi hành công vụvềbả. đảm trật tự, \u0011n t.àn gi\u0011. thông đường bộ.",
-            "Cảh\u0011i ý trên.",
+            "Điều khiển xe cơ giới lạng lách, đánh võng, rú ga liên tục khi tham gia giao thông trên đường.",
+            "Xúc phạm, đe dọa, cản trở, chống đối hoặc không chấp hành hiệu lệnh, hướng dẫn, yêu cầu kiểm tra, kiểm soát của người thi hành công vụ về bảo đảm trật tự, an toàn giao thông đường bộ.",
+            "Cảhai ý trên.",
             "—"
           ],
           "correctIndex": 2,
@@ -259,10 +67,10 @@
           "imageUrl": null
         },
         {
-          "body": "Các hành vi nà! s#u đây bịcấm đối với phưGng tiện th#m gi# gi#! thông đường bộ?",
+          "body": "Các hành vi nào sau đây bị cấm đối với phương tiện tham gia giao thông đường bộ?",
           "answers": [
-            "Cải tạ. x\" ô tô l.ại khác thành x\" ô tô chởngười phục vụmục đích q1ốc phòng, \u0011n ninh.",
-            "Cải tạ. trái phép; cốý c\u0011n thiệp làm s\u0011i lệch chỉsốtrên đồng hồbá. q1ãng đường đã chạy củ\u0011 x\" ô tô; cắt, hàn, tẩy xó\u0011, đục sử\u0011, đóng lại trái phép sốkh1ng, sốđộng c\u001b củ\u0011 x\" c\u001b giới, x\" máy ch1yên dùng.",
+            "Cải tạo xe ô tô loại khác thành xe ô tô chở người phục vụ mục đích quốc phòng, an ninh.",
+            "Cải tạo trái phép; cốý can thiệp làm sai lệch chỉsốtrên đồng hồbáo quãng đường đã chạy của xe ô tô; cắt, hàn, tẩy xóa, đục sử a, đóng lại trái phép sốkhung, sốđộng cơ của xe cơ giới, xe máy chuyên dùng.",
             "—",
             "—"
           ],
@@ -271,11 +79,11 @@
           "imageUrl": null
         },
         {
-          "body": "Hành vi nà! s#u đây bịcấm?",
+          "body": "Hành vi nào sau đây bị cấm?",
           "answers": [
-            "Lắp đặt, sửdụng thiết bịâm th\u0011nh, ánh sáng trên x\" c\u001b giới, x\" máy ch1yên dùng gây mất trật tự, \u0011n t.àn gi\u0011. thông đường bộ.",
-            "Cản trởngười, phư\u001bng tiện th\u0011m gi\u0011 gi\u0011. thông trên đường bộ; ném gạch, đất, đá, cát h.ặc vật thểkhác và. người, phư\u001bng tiện đ\u0011ng th\u0011m gi\u0011 gi\u0011. thông trên đường bộ.",
-            "Cảh\u0011i ý trên.",
+            "Lắp đặt, sử dụng thiết bị âm thanh, ánh sáng trên xe cơ giới, xe máy chuyên dùng gây mất trật tự, an toàn giao thông đường bộ.",
+            "Cản trởngười, phương tiện tham gia giao thông trên đường bộ; ném gạch, đất, đá, cát hoặc vật thểkhác vào người, phương tiện đang tham gia giao thông trên đường bộ.",
+            "Cảhai ý trên.",
             "—"
           ],
           "correctIndex": 2,
@@ -283,11 +91,11 @@
           "imageUrl": null
         },
         {
-          "body": "Việc sản xuất, sửdụng, mu#, bán trái phép biển sốxQ có bịnghiêm cấm h#y không?",
+          "body": "Việc sản xuất, sử dụng, mua, bán trái phép biển sốxe có bị nghiêm cấm hay không?",
           "answers": [
-            "Không bịnghiêm cấm.",
+            "Không bị nghiêm cấm.",
             "Bịnghiêm cấm.",
-            "Bịnghiêm cấm t1ỳtrường hợp.",
+            "Bịnghiêm cấm tuỳtrường hợp.",
             "—"
           ],
           "correctIndex": 1,
@@ -295,14 +103,206 @@
           "imageUrl": null
         },
         {
-          "body": "Khi điều khiển phưGng tiện th#m gi# gi#! thông, những hành vi nà! dưới đây bịnghiêm cấm?",
+          "body": "Khi điều khiển phương tiện tham gia giao thông, những hành vi nào dưới đây bị nghiêm cấm?",
           "answers": [
-            "Th\u0011y đổi tốc độcủ\u0011 x\" nhiề1 lần.",
-            "Điề1 khiển phư\u001bng tiện s\u00111 23 giờtr.ng ngày.",
-            "Lạng lách, đánh võng, rú g\u0011 liên tục.",
+            "Thay đổi tốc độcủa xe nhiều lần.",
+            "Điều khiển phương tiện sau 23 giờtrong ngày.",
+            "Lạng lách, đánh võng, rú ga liên tục.",
             "—"
           ],
           "correctIndex": 2,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Có bao nhiêu nhóm biển báo hiệu đường bộ?",
+          "answers": [
+            "Ba nhóm: Biển báo cấm, biển báo nguy hiểm và biển hiệu lệnh.",
+            "Bốn nhóm: Biển báo cấm, biển báo nguy hiểm, biển hiệu lệnh và biển phụ.",
+            "Năm nhóm: Biển báo cấm, biển báo nguy hiểm, biển hiệu lệnh, biển chỉdẫn, biển phụ.",
+            "—"
+          ],
+          "correctIndex": 2,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Tại nơi có vạch kẻđường hoặc tại nơi mà người đi bộ, xe lăn của người khuyết tật đang qua đường, người điều khiển phương tiện tham gia giao thông phải thực hiện như thếnào?",
+          "answers": [
+            "ơiảm tốc độvà nhường đường cho người đi bộ, xe lăn của người khuyết tật qua đường đảm bảo an toàn.",
+            "euan sát, giảm tốc độhoặc dừng lại để bảo đảm an toàn cho người đi bộ, xe lăn của người khuyết tật qua đường.",
+            "euan sát, tăng tốc độvà điều khiển phương tiện nhanh chóng đi qua.",
+            "—"
+          ],
+          "correctIndex": 1,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người điều khiển xe mô tô phải phải quan sát, giảm tốc độhoặc dừng lại để bảo đảm an toàn trong các trường hợp nào dưới đây?",
+          "answers": [
+            "Đường hẹp, đường vòng, đường quanh c., đường đè., dốc.",
+            "Nơi cầu, cống hẹp, đập tràn, đường ngầm, hầm chui, hầm đường bộ.",
+            "Trời mưa, gió, sương, khói, bụi, mặt đường trơn trượt, lầy lội, có nhiều đất đá, vật liệu rơi vãi ảnh hưởng đến an toàn giao thông đường bộ.",
+            "Cảba ý trên."
+          ],
+          "correctIndex": 3,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Khi gặp hiệu lệnh điều khiển của Cảnh sát giao thông như hình dưới đây thì người tham gia giao thông đường bộ phải đi như thếnào là đúng quy tắc giao thông?",
+          "answers": [
+            "Người tham gia giao thông đường bộ ởcác hướng phải dừng lại.",
+            "Người tham gia giao thông đường bộ ởcác hướng được đi theo chiều gậy chỉ của Cảnh sát giao thông.",
+            "Người tham gia giao thông đường bộ ởphía trước và phía sau người điều khiển được đi tất cảcác hướng; người tham gia giao thông đường bộ ởphía bên phải và phía bên trái người điều khiển phải dừng lại.",
+            "Người tham gia giao thông đường bộ ởphía trước và phía sau người điều khiển phải dừng lại; người tham gia giao thông đường bộ ởphía bên phải và phía bên trái người điều khiển được đi tất cảcác hướng."
+          ],
+          "correctIndex": 3,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Khi gặp hiệu lệnh điều khiển của Cảnh sát giao thông như hình dưới đây thì người tham gia giao thông đường bộ phải đi như thếnào là đúng quy tắc giao thông?",
+          "answers": [
+            "Người tham gia giao thông đường bộ ởphía sau Cảnh sát giao thông được đi, các hướng khác phải dừng lại.",
+            "Người tham gia giao thông đường bộ được rẽphải theo chiều mũi tên màu xanh ởbục Cảnh sát giao thông.",
+            "Người tham gia giao thông đường bộ ởtất cảcác hướng phải dừng lại, trừcác xe đã ởtrong khu vực giao nhau.",
+            "Người tham gia giao thông đường bộ ởphía trước Cảnh sát giao thông phải dừng lại, các hướng khác được đi."
+          ],
+          "correctIndex": 2,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Khi hiệu lệnh của người điều khiển giao thông trái với tín hiệu đèn giao thông hoặc biển báo hiệu đường bộ thì người tham gia giao thông đường bộ phải chấp hành báo hiệu đường bộ nào dưới đây?",
+          "answers": [
+            "Theo hiệu lệnh của người điều khiển giao thông.",
+            "Theo tín hiệu đèn giao thông.",
+            "Theo biển báo hiệu đường bộ.",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Khi ởmột vịtrí vừa có biển báo hiệu đặt cốđịnh vừa có biển báo hiệu tạm thời mà hai biển có ý nghĩa khác nhau, người tham gia giao thông đường bộ phải chấp hành hiệu lệnh của biển báo hiệu nào?",
+          "answers": [
+            "Biển báo hiệu đặt cốđịnh.",
+            "Biển báo hiệu tạm thời.",
+            "Theo quyết định của người tham gia giao thông nhưng phải bảo đảm an toàn.",
+            "—"
+          ],
+          "correctIndex": 1,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Tại nơi đường giao nhau, khi đèn điều khiển giao thông có tín hiệu màu vàng, người điều khiển phương tiện tham gia giao thông phải chấp hành như thếnào là đúng quy tắc giao thông?",
+          "answers": [
+            "Dừng lại trước vạch dừng; trường hợp đang đi trên vạch dừng hoặc đã đi qua vạch dừng mà tín hiệu đèn màu vàng thì được đi tiếp; trường hợp tín hiệu đèn màu vàng nhấp nháy, người điều khiển phương tiện tham gia giao thông đường bộ được đi nhưng phải quan sát, giảm tốc độhoặc dừng lại nhường đường cho người đi bộ, xe lăn của người khuyết tật qua đường hoặc các phương tiện khác.",
+            "Tăng tốc độnhanh chóng vượt qua nút gia..",
+            "euan sát, giảm tốc độ, từtừvượt qua nút gia..",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người lái xe trên đường cần chấp hành quy định về tốc độtối đa như thếnào?",
+          "answers": [
+            "Chỉlớn hơn tốc độtối đa cho phép khi đường vắng.",
+            "Chỉlớn hơn tốc độtối đa cho phép khi vào ban đêm.",
+            "Không vượt quá tốc độtối đa cho phép.",
+            "—"
+          ],
+          "correctIndex": 2,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Phương tiện tham gia giao thông đường bộ di chuyển với tốc độthấp hơn phải đi như thếnào?",
+          "answers": [
+            "Đi về bên trái theo chiều đi của mình.",
+            "Đi về bên phải theo chiều đi của mình.",
+            "Đi ởbất cứbên nào nhưng phải bấm đèn cảnh báo nguy hiểm để báo hiệu cho các phương tiện khác.",
+            "—"
+          ],
+          "correctIndex": 1,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Trên một chiều đường có vạch kẻphân làn đường, người lái xe cơ giới, xe máy chuyên dùng phải điều khiển xe đi trên làn đường nào?",
+          "answers": [
+            "Đi trên làn đường bên phải trong cùng.",
+            "Đi trên làn đường bên trái.",
+            "Đi ởbất cứlàn nào nhưng phải bảo đảm tốc độcho phép.",
+            "—"
+          ],
+          "correctIndex": 1,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người lái xe phải giảm tốc độ, có tín hiệu rẽphải và đi sát về bên phải của phần đường xe chạy trong các trường hợp nào dưới đây?",
+          "answers": [
+            "Khi xe chạy phía trước có tín hiệu vượt xe khác.",
+            "Khi phía trước có xe chạy ngược chiều.",
+            "Khi xe sau xin vượt nếu đủ điều kiện an toàn.",
+            "Khi xe sau có tín hiệu vượt bên phải."
+          ],
+          "correctIndex": 2,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Vượt xe là gì?",
+          "answers": [
+            "Là tình huống giao thông trên đường mà mỗi chiều đường xe chạy chỉcó một làn đường dành cho xe cơ giới, xe đi phía sau di chuyển sang bên trái để di chuyển lên trước xe phía trước.",
+            "Là tình huống giao thông trên đường có từhai làn đường dành cho xe cơ giới cùng chiều trởlên được phân biệt bằng vạch kẻđường, xe đi phía sau di chuyển lên trước xe phía trước theo quy tắc sử dụng làn đường.",
+            "—",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người lái xe được phép vượt xe trên cầu hẹp có một làn đường, đường cong có tầm nhìn bị hạn chếhay không?",
+          "answers": [
+            "Được phép vượt khi đường vắng.",
+            "Không được phép vượt.",
+            "Được phép vượt khi có việc gấp.",
+            "—"
+          ],
+          "correctIndex": 1,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Muốn vượt xe phía trước, người lái xe mô tô phải có tín hiệu như thế nào dưới đây để bảo đảm an toàn?",
+          "answers": [
+            "Bấm còi liên tục để xe phía trước biết xe mình xin vượt.",
+            "Rú ga liên tục để xe phía trước biết xe mình xin vượt.",
+            "Báo hiệu nhấp nháy bằng đèn chiếu sáng phía trước hoặc còi.",
+            "—"
+          ],
+          "correctIndex": 2,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Khi lái xe trong khu đông dân cư, khu vực cơ sởkhám bệnh, chữa bệnh trừcác khu vực có biển cấm sử dụng còi, người lái xe được sử dụng còi trong thời gian nào?",
+          "answers": [
+            "Từ22 giờngày hôm trước đến 05 giờngày hôm sau.",
+            "Từ05 giờđến 22 giờ.",
+            "Từ23 giờngày hôm trước đến 05 giờsáng hôm sau.",
+            "—"
+          ],
+          "correctIndex": 1,
           "isCritical": false,
           "imageUrl": null
         }
@@ -315,107 +315,35 @@
       "isMock": true,
       "questions": [
         {
-          "body": "Có b#! nhiêu nhóm biển bá! hiệu đường bộ?",
+          "body": "Khổgiới hạn của đường bộ được hiểu như thếnào là đúng?",
           "answers": [
-            "B\u0011 nhóm: Biển bá. cấm, biển bá. ng1y hiểm và biển hiệ1 lệnh.",
-            "Bốn nhóm: Biển bá. cấm, biển bá. ng1y hiểm, biển hiệ1 lệnh và biển phụ.",
-            "Năm nhóm: Biển bá. cấm, biển bá. ng1y hiểm, biển hiệ1 lệnh, biển chỉdẫn, biển phụ.",
-            "—"
-          ],
-          "correctIndex": 2,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Tại nGi có vạch kẻđường h!ặc tại nGi mà người đi bộ, xQ lăn củ# người khuyết tật đ#ng qu# đường, người điều khiển phưGng tiện th#m gi# gi#! thông phải thực hiện như thếnà!?",
-          "answers": [
-            "Giảm tốc độvà nhường đường ch. người đi bộ, x\" lăn củ\u0011 người kh1yết tật q1\u0011 đường đảm bả. \u0011n t.àn.",
-            "Q1\u0011n sát, giảm tốc độh.ặc dừng lại đểbả. đảm \u0011n t.àn ch. người đi bộ, x\" lăn củ\u0011 người kh1yết tật q1\u0011 đường.",
-            "Q1\u0011n sát, tăng tốc độvà điề1 khiển phư\u001bng tiện nh\u0011nh chóng đi q1\u0011.",
-            "—"
-          ],
-          "correctIndex": 1,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người điều khiển xQ mô tô phải phải qu#n sát, giảm tốc độh!ặc dừng lại đểbả! đảm #n t!àn tr!ng các trường hợp nà! dưới đây?",
-          "answers": [
-            "Đường hẹp, đường vòng, đường q1\u0011nh c., đường đè., dốc.",
-            "N\u001bi cầ1, cống hẹp, đập tràn, đường ngầm, hầm ch1i, hầm đường bộ.",
-            "Trời mư\u0011, gió, sư\u001bng, khói, bụi, mặt đường tr\u001bn trượt, lầy lội, có nhiề1 đất đá, vật liệ1 r\u001bi vãi ảnh hưởng đến \u0011n t.àn gi\u0011. thông đường bộ.",
-            "Cảb\u0011 ý trên."
-          ],
-          "correctIndex": 3,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Khi gặp hiệu lệnh điều khiển củ# Cảnh sát gi#! thông như hình dưới đây thì người th#m gi# gi#! thông đường bộphải đi như thếnà! là đúng quy tắc gi#! thông?",
-          "answers": [
-            "Người th\u0011m gi\u0011 gi\u0011. thông đường bộởcác hướng phải dừng lại.",
-            "Người th\u0011m gi\u0011 gi\u0011. thông đường bộởcác hướng được đi th\". chiề1 gậy chỉ củ\u0011 Cảnh sát gi\u0011. thông.",
-            "Người th\u0011m gi\u0011 gi\u0011. thông đường bộởphí\u0011 trước và phí\u0011 s\u00111 người điề1 khiển được đi tất cảcác hướng; người th\u0011m gi\u0011 gi\u0011. thông đường bộởphí\u0011 bên phải và phí\u0011 bên trái người điề1 khiển phải dừng lại.",
-            "Người th\u0011m gi\u0011 gi\u0011. thông đường bộởphí\u0011 trước và phí\u0011 s\u00111 người điề1 khiển phải dừng lại; người th\u0011m gi\u0011 gi\u0011. thông đường bộởphí\u0011 bên phải và phí\u0011 bên trái người điề1 khiển được đi tất cảcác hướng."
-          ],
-          "correctIndex": 3,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Khi gặp hiệu lệnh điều khiển củ# Cảnh sát gi#! thông như hình dưới đây thì người th#m gi# gi#! thông đường bộphải đi như thếnà! là đúng quy tắc gi#! thông?",
-          "answers": [
-            "Người th\u0011m gi\u0011 gi\u0011. thông đường bộởphí\u0011 s\u00111 Cảnh sát gi\u0011. thông được đi, các hướng khác phải dừng lại.",
-            "Người th\u0011m gi\u0011 gi\u0011. thông đường bộđược rẽphải th\". chiề1 mũi tên mà1 x\u0011nh ởbục Cảnh sát gi\u0011. thông.",
-            "Người th\u0011m gi\u0011 gi\u0011. thông đường bộởtất cảcác hướng phải dừng lại, trừcác x\" đã ởtr.ng kh1 vực gi\u0011. nh\u00111.",
-            "Người th\u0011m gi\u0011 gi\u0011. thông đường bộởphí\u0011 trước Cảnh sát gi\u0011. thông phải dừng lại, các hướng khác được đi."
-          ],
-          "correctIndex": 2,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Khi hiệu lệnh củ# người điều khiển gi#! thông trái với tín hiệu đèn gi#! thông h!ặc biển bá! hiệu đường bộthì người th#m gi# gi#! thông đường bộphải chấp hành bá! hiệu đường bộnà! dưới đây?",
-          "answers": [
-            "Th\". hiệ1 lệnh củ\u0011 người điề1 khiển gi\u0011. thông.",
-            "Th\". tín hiệ1 đèn gi\u0011. thông.",
-            "Th\". biển bá. hiệ1 đường bộ.",
+            "Khổgiới hạn của đường bộ là khoảng trống có kích thước giới hạn về chiều rộng, chiều cao của đường bộ để các xe, bao gồm cảhàng hoá xếp trên xe đi qua được an toàn và được xác định theo quy chuẩn, tiêu chuẩn kỹthuật của đường bộ.",
+            "Là khoảng trống có kích thước giới hạn về chiều rộng của đường, cầu, bến phà, hầm trên đường b ộđể các xe kểcảhàng hóa xếp trên xe đi qua được an toàn.",
+            "Là khoảng trống có kích thước giới hạn về chiều cao của cầu, bến phà, hầm trên đường bộ để các xe đi qua được an toàn.",
             "—"
           ],
           "correctIndex": 0,
-          "isCritical": false,
+          "isCritical": true,
           "imageUrl": null
         },
         {
-          "body": "Khi ởmột vịtrí vừ# có biển bá! hiệu đặt cốđịnh vừ# có biển bá! hiệu tạm thời mà h#i biển có ý nghĩ# khác nh#u, người th#m gi# gi#! thông đường bộphải chấp hành hiệu lệnh củ# biển bá! hiệu nà!?",
+          "body": "Dải phân cách được lắp đặt để làm gì?",
           "answers": [
-            "Biển bá. hiệ1 đặt cốđịnh.",
-            "Biển bá. hiệ1 tạm thời.",
-            "Th\". q1yết định củ\u0011 người th\u0011m gi\u0011 gi\u0011. thông nhưng phải bả. đảm \u0011n t.àn.",
+            "Đểphân chia các làn đường dành cho xe cơ giới và xe thô sơ trên đường cao tốc.",
+            "Đểphân chia phần đường xe chạy thành hai chiều riêng biệt hoặc để phân chia phần đường dành cho xe cơ giới và xe thô sơ hoặc của nhiều loại xe khác nhau trên cùng một chiều đường.",
+            "Đểphân tách phần đường xe chạy và hành lang an toàn giao thông.",
             "—"
           ],
           "correctIndex": 1,
-          "isCritical": false,
+          "isCritical": true,
           "imageUrl": null
         },
         {
-          "body": "Tại nGi đường gi#! nh#u, khi đèn điều khiển gi#! thông có tín hiệu màu vàng, người điều khiển phưGng tiện th#m gi# gi#! thông phải chấp hành như thếnà! là đúng quy tắc gi#! thông?",
+          "body": "Người lái xe sử dụng đèn như thếnào khi đi trên các đoạn đường qua khu đông dân cư có hệthống chiếu sáng đang hoạt động?",
           "answers": [
-            "Dừng lại trước vạch dừng; trường hợp đ\u0011ng đi trên vạch dừng h.ặc đã đi q1\u0011 vạch dừng mà tín hiệ1 đèn mà1 vàng thì được đi tiếp; trường hợp tín hiệ1 đèn mà1 vàng nhấp nháy, người điề1 khiển phư\u001bng tiện th\u0011m gi\u0011 gi\u0011. thông đường bộ được đi nhưng phải q1\u0011n sát, giảm tốc độh.ặc dừng lại nhường đường ch. người đi bộ, x\" lăn củ\u0011 người kh1yết tật q1\u0011 đường h.ặc các phư\u001bng tiện khác.",
-            "Tăng tốc độnh\u0011nh chóng vượt q1\u0011 nút gi\u0011..",
-            "Q1\u0011n sát, giảm tốc độ, từtừvượt q1\u0011 nút gi\u0011..",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người lái xQ trên đường cần chấp hành quy định vềtốc độtối đ# như thếnà!?",
-          "answers": [
-            "Chỉlớn h\u001bn tốc độtối đ\u0011 ch. phép khi đường vắng.",
-            "Chỉlớn h\u001bn tốc độtối đ\u0011 ch. phép khi và. b\u0011n đêm.",
-            "Không vượt q1á tốc độtối đ\u0011 ch. phép.",
+            "Chỉbật đèn chiếu xa (đèn pha).",
+            "Bật đèn chiếu xa (đèn pha) khi đường vắng, bật đèn chiếu gần (đèn cốt) khi có xe đi ngược chiều.",
+            "Chỉbật đèn chiếu gần (đèn cốt).",
             "—"
           ],
           "correctIndex": 2,
@@ -423,46 +351,10 @@
           "imageUrl": null
         },
         {
-          "body": "PhưGng tiện th#m gi# gi#! thông đường bộdi chuyển với tốc độthấp hGn phải đi như thếnà!?",
+          "body": "Khi điều khiển phương tiện tham gia giao thông, hành vi nào sau đây bị cấm?",
           "answers": [
-            "Đi vềbên trái th\". chiề1 đi củ\u0011 mình.",
-            "Đi vềbên phải th\". chiề1 đi củ\u0011 mình.",
-            "Đi ởbất cứbên nà. nhưng phải bấm đèn cảnh bá. ng1y hiểm đểbá. hiệ1 ch. các phư\u001bng tiện khác.",
-            "—"
-          ],
-          "correctIndex": 1,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Trên một chiều đường có vạch kẻphân làn đường, người lái xQ cG giới, xQ máy chuyên dùng phải điều khiển xQ đi trên làn đường nà!?",
-          "answers": [
-            "Đi trên làn đường bên phải tr.ng cùng.",
-            "Đi trên làn đường bên trái.",
-            "Đi ởbất cứlàn nà. nhưng phải bả. đảm tốc độch. phép.",
-            "—"
-          ],
-          "correctIndex": 1,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người lái xQ phải giảm tốc độ, có tín hiệu rẽphải và đi sát vềbên phải củ# phần đường xQ chạy tr!ng các trường hợp nà! dưới đây?",
-          "answers": [
-            "Khi x\" chạy phí\u0011 trước có tín hiệ1 vượt x\" khác.",
-            "Khi phí\u0011 trước có x\" chạy ngược chiề1.",
-            "Khi x\" s\u00111 xin vượt nế1 đủđiề1 kiện \u0011n t.àn.",
-            "Khi x\" s\u00111 có tín hiệ1 vượt bên phải."
-          ],
-          "correctIndex": 2,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Vượt xQ là gì?",
-          "answers": [
-            "Là tình h1ống gi\u0011. thông trên đường mà mỗi chiề1 đường x\" chạy chỉcó một làn đường dành ch. x\" c\u001b giới, x\" đi phí\u0011 s\u00111 di ch1yển s\u0011ng bên trái đểdi ch1yển lên trước x\" phí\u0011 trước.",
-            "Là tình h1ống gi\u0011. thông trên đường có từh\u0011i làn đường dành ch. x\" c\u001b giới cùng chiề1 trởlên được phân biệt bằng vạch kẻđường, x\" đi phí\u0011 s\u00111 di ch1yển lên trước x\" phí\u0011 trước th\". q1y tắc sửdụng làn đường.",
+            "Dùng tay cầm và sử dụng điện thoại hoặc thiết bị điện tửkhác.",
+            "Chỉđược chở người trên thùng xe ô tô chở hàng trong trường hợp chở người đi làm nhiệm vụ cứu nạn, cứu hộ, phòng, chống thiên tai, dịch bệnh hoặc thực hiện nhiệm vụ khẩn cấp.",
             "—",
             "—"
           ],
@@ -471,59 +363,11 @@
           "imageUrl": null
         },
         {
-          "body": "Người lái xQ được phép vượt xQ trên cầu hẹp có một làn đường, đường c!ng có tầm nhìn bịhạn chếh#y không?",
+          "body": "Người lái xe không được vượt xe khác khi gặp trường hợp nào dưới đây?",
           "answers": [
-            "Được phép vượt khi đường vắng.",
-            "Không được phép vượt.",
-            "Được phép vượt khi có việc gấp.",
-            "—"
-          ],
-          "correctIndex": 1,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Muốn vượt xQ phí# trước, người lái xQ mô tô phải có tín hiệu như thế nà! dưới đây đểbả! đảm #n t!àn?",
-          "answers": [
-            "Bấm còi liên tục đểx\" phí\u0011 trước biết x\" mình xin vượt.",
-            "Rú g\u0011 liên tục đểx\" phí\u0011 trước biết x\" mình xin vượt.",
-            "Bá. hiệ1 nhấp nháy bằng đèn chiế1 sáng phí\u0011 trước h.ặc còi.",
-            "—"
-          ],
-          "correctIndex": 2,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Khi lái xQ tr!ng khu đông dân cư, khu vực cG sởkhám bệnh, chữ# bệnh trừcác khu vực có biển cấm sửdụng còi, người lái xQ được sửdụng còi tr!ng thời gi#n nà!?",
-          "answers": [
-            "Từ22 giờngày hôm trước đến 05 giờngày hôm s\u00111.",
-            "Từ05 giờđến 22 giờ.",
-            "Từ23 giờngày hôm trước đến 05 giờsáng hôm s\u00111.",
-            "—"
-          ],
-          "correctIndex": 1,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người lái xQ sửdụng đèn như thếnà! khi đi trên các đ!ạn đường qu# khu đông dân cư có hệthống chiếu sáng đ#ng h!ạt động?",
-          "answers": [
-            "Chỉbật đèn chiế1 x\u0011 (đèn ph\u0011).",
-            "Bật đèn chiế1 x\u0011 (đèn ph\u0011) khi đường vắng, bật đèn chiế1 gần (đèn cốt) khi có x\" đi ngược chiề1.",
-            "Chỉbật đèn chiế1 gần (đèn cốt).",
-            "—"
-          ],
-          "correctIndex": 2,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Khi điều khiển phưGng tiện th#m gi# gi#! thông, hành vi nà! s#u đây bịcấm?",
-          "answers": [
-            "Dùng t\u0011y cầm và sửdụng điện th.ại h.ặc thiết bịđiện tửkhác.",
-            "Chỉđược chởngười trên thùng x\" ô tô chởhàng tr.ng trường hợp chởngười đi làm nhiệm vụcứ1 nạn, cứ1 hộ, phòng, chống thiên t\u0011i, dịch bệnh h.ặc thực hiện nhiệm vụkhẩn cấp.",
-            "—",
+            "Trên cầu hẹp có một làn đường; nơi đường giao nhau, đường bộ giao nhau cùng mức với đường sắt; khi gặp xe ưu tiên.",
+            "Trên cầu có từ02 làn xe trởlên.",
+            "Trên đường có 02 làn đường được phân chia làn bằng vạch kẻnét đứt.",
             "—"
           ],
           "correctIndex": 0,
@@ -531,23 +375,11 @@
           "imageUrl": null
         },
         {
-          "body": "Người lái xQ không được vượt xQ khác khi gặp trường hợp nà! dưới đây?",
+          "body": "Nơi nào cấm quay đầu xe?",
           "answers": [
-            "Trên cầ1 hẹp có một làn đường; n\u001bi đường gi\u0011. nh\u00111, đường bộgi\u0011. nh\u00111 cùng mức với đường sắt; khi gặp x\" ư1 tiên.",
-            "Trên cầ1 có từ02 làn x\" trởlên.",
-            "Trên đường có 02 làn đường được phân chi\u0011 làn bằng vạch kẻnét đứt.",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "NGi nà! cấm qu#y đầu xQ?",
-          "answers": [
-            "Ởphần đường dành ch. người đi bộq1\u0011 đường, trên cầ1, đầ1 cầ1, gầm cầ1 vượt, ngầm.",
-            "Tại n\u001bi đường bộgi\u0011. nh\u00111 cùng mức với đường sắt, đường hẹp, đường dốc, đ.ạn đường c.ng tầm nhìn bịch\" kh1ất, trên đường c\u0011. tốc, tr.ng hầm đường bộ, trên đường một chiề1.",
-            "Cảh\u0011i ý trên.",
+            "Ởphần đường dành cho người đi bộ qua đường, trên cầu, đầu cầu, gầm cầu vượt, ngầm.",
+            "Tại nơi đường bộ giao nhau cùng mức với đường sắt, đường hẹp, đường dốc, đoạn đường cong tầm nhìn bị che khuất, trên đường cao tốc, trong hầm đường bộ, trên đường một chiều.",
+            "Cảhai ý trên.",
             "—"
           ],
           "correctIndex": 2,
@@ -555,23 +387,23 @@
           "imageUrl": null
         },
         {
-          "body": "Trước khi ch! xQ chuyển hướng, người lái xQ phải làm gì đểbả! đảm #n t!àn gi#! thông?",
+          "body": "Trước khi cho xe chuyển hướng, người lái xe phải làm gì để bảo đảm an toàn giao thông?",
           "answers": [
-            "Phải q1\u0011n sát, bả. đảm kh.ảng cách \u0011n t.àn với x\" phí\u0011 s\u00111.",
-            "Giảm tốc độvà có tín hiệ1 bá. hướng rẽ.",
-            "Ch1yển dần s\u0011ng làn gần nhất với hướng rẽ. Khi bả. đảm \u0011n t.àn, không gây trởngại ch. người và phư\u001bng tiện khác mới được ch1yển hướng.",
-            "Cảb\u0011 ý trên."
+            "Phải quan sát, bảo đảm khoảng cách an toàn với xe phía sau.",
+            "ơiảm tốc độvà có tín hiệu báo hướng rẽ.",
+            "Chuyển dần sang làn gần nhất với hướng rẽ. Khi bảo đảm an toàn, không gây trởngại cho người và phương tiện khác mới được chuyển hướng.",
+            "Cảba ý trên."
           ],
           "correctIndex": 3,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Khi chuyển làn đường, người lái xQ phải bật đèn tín hiệu bá! rẽnhư thếnà! là đúng quy tắc gi#! thông?",
+          "body": "Khi chuyển làn đường, người lái xe phải bật đèn tín hiệu báo rẽnhư thếnào là đúng quy tắc giao thông?",
           "answers": [
-            "Khi bắt đầ1 ch1yển làn đường.",
-            "Trước khi th\u0011y đổi làn đường.",
-            "S\u00111 khi th\u0011y đổi làn đường.",
+            "Khi bắt đầu chuyển làn đường.",
+            "Trước khi thay đổi làn đường.",
+            "Sau khi thay đổi làn đường.",
             "—"
           ],
           "correctIndex": 1,
@@ -579,11 +411,11 @@
           "imageUrl": null
         },
         {
-          "body": "Người điều khiển phưGng tiện th#m gi# gi#! thông không được dừng xQ, đỗxQ ởnhững vịtrí nà! s#u đây?",
+          "body": "Người điều khiển phương tiện tham gia giao thông không được dừng xe, đỗxe ởnhững vịtrí nào sau đây?",
           "answers": [
-            "Trên miệng cống th.át nước, miệng hầm củ\u0011 đường điện th.ại, điện c\u0011. thế, chỗdành riêng ch. x\" chữ\u0011 cháy lấy nước.",
-            "Tr.ng phạm vi \u0011n t.àn củ\u0011 đường sắt.",
-            "Cảh\u0011i ý trên.",
+            "Trên miệng cống thoát nước, miệng hầm của đường điện thoại, điện cao thế, chỗdành riêng cho xe chữa cháy lấy nước.",
+            "Trong phạm vi an toàn của đường sắt.",
+            "Cảhai ý trên.",
             "—"
           ],
           "correctIndex": 2,
@@ -591,10 +423,10 @@
           "imageUrl": null
         },
         {
-          "body": "Người điều khiển xQ mô tô h#i bánh, xQ mô tô b# bánh, xQ gắn máy có được phép sửdụng xQ đểké! h!ặc đẩy các phưGng tiện khác khi th#m gi# gi#! thông không?",
+          "body": "Người điều khiển xe mô tô hai bánh, xe mô tô ba bánh, xe gắn máy có được phép sử dụng xe để kéo hoặc đẩy các phương tiện khác khi tham gia giao thông không?",
           "answers": [
             "Được phép.",
-            "Nế1 phư\u001bng tiện được ké., đẩy có khối lượng nhỏh\u001bn phư\u001bng tiện củ\u0011 mình.",
+            "Nếu phương tiện được ké., đẩy có khối lượng nhỏhơn phương tiện của mình.",
             "Tùy trường hợp.",
             "Không được phép."
           ],
@@ -603,14 +435,182 @@
           "imageUrl": null
         },
         {
-          "body": "Khi điều khiển xQ mô tô h#i bánh, xQ mô tô b# bánh, xQ gắn máy, những hành vi nà! s#u đây không được phép?",
+          "body": "Khi điều khiển xe mô tô hai bánh, xe mô tô ba bánh, xe gắn máy, những hành vi nào sau đây không được phép?",
           "answers": [
-            "B1ông cảh\u0011i t\u0011y; đứng, nằm trên x\" điề1 khiển x\"; sửdụng chân chống h.ặc vật khác q1ệt x1ống đường khi x\" đ\u0011ng chạy.",
-            "Chởtối đ\u0011 h\u0011i người phí\u0011 s\u00111 khi chởngười bệnh đi cấp cứ1, áp giải người có hành vi vi phạm pháp l1ật, trẻ\"m dưới 12 t1ổi và người già yế1 h.ặc người kh1yết tật.",
+            "Buông cảhai tay; đứng, nằm trên xe điều khiển xe; sử dụng chân chống hoặc vật khác quệt xuống đường khi xe đang chạy.",
+            "Chởtối đa hai người phía sau khi chở người bệnh đi cấp cứu, áp giải người có hành vi vi phạm pháp luật, trẻem dưới 12 tuổi và người già yếu hoặc người khuyết tật.",
             "—",
             "—"
           ],
           "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Khi điều khiển xe mô tô hai bánh, xe mô tô ba bánh, xe gắn máy, những hành vi nào sau đây không được phép?",
+          "answers": [
+            "Buông cảhai tay; sử dụng xe để ké., đẩy xe khác, vật khác; sử dụng chân chống hoặc vật khác quệt xuống đường khi xe đang chạy.",
+            "Sửdụng xe để chở người hoặc hàng hóa; để chân chạm xuống đất khi khởi hành.",
+            "Đội mũ bảo hiểm; chạy xe đúng tốc độquy định và chấp hành đúng quy tắc giao thông đường bộ.",
+            "Chởngười ngồi sau dưới 16 tuổi."
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người được chở trên xe mô tô hai bánh, xe mô tô ba bánh, xe gắn máy khi tham gia giao thông đường bộ không được thực hiện hành vi nào sau đây?",
+          "answers": [
+            "Mang, vác vật cồng kềnh.",
+            "Bám, kéo hoặc đẩy các phương tiện khác.",
+            "Dùng tay cầm điện thoại hoặc các thiết bị điện tửkhác.",
+            "Ý 1 và ý 2."
+          ],
+          "correctIndex": 3,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người được chở trên xe mô tô hai bánh, xe mô tô ba bánh, xe gắn máy khi tham gia giao thông đường bộ có được bám, kéo hoặc đẩy các phương tiện khác không?",
+          "answers": [
+            "Được phép.",
+            "Được bám trong trường hợp phương tiện của mình bị hỏng.",
+            "Được ké., đẩy trong trường hợp phương tiện khác bị hỏng.",
+            "Không được phép."
+          ],
+          "correctIndex": 3,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người lái xe, người được chở trên xe mô tô hai bánh, xe mô tô ba bánh, xe gắn máy phải thực hiện quy định nào dưới đây?",
+          "answers": [
+            "Đội mũ bảo hiểm theo đúng quy chuẩn kỹthuật quốc gia và cài quai đúng quy cách.",
+            "Người lái xe phải đội mũ bảo hiểm, người được chở trên xe không nhất thiết phải đội mũ bảo hiểm.",
+            "Phải đội mũ bảo hiểm nhưng không nhất thiết phải cài quai.",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người lái xe mô tô hai bánh, xe gắn máy được phép chở tối đa hai người trong những trường hợp nào?",
+          "answers": [
+            "Chởngười bệnh đi cấp cứu; áp giải người có hành vi vi phạm pháp luật; trẻem dưới 12 tuổi; người già yếu hoặc người khuyết tật.",
+            "Người đã uống rượu, bia; người trong cơ thểcó chất ma tuý.",
+            "Cảhai ý trên.",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người lái xe mô tô hai bánh, xe mô tô ba bánh, xe gắn máy không được thực hiện các hành vi nào dưới đây?",
+          "answers": [
+            "Đi xe dàn hàng ngang; buông cảhai tay.",
+            "Sửdụng xe để ké., đẩy xe khác, vật khác, dẫn dắt vật nuôi, mang, vác và chở vật cồng kềnh; chở người đứng trên xe, giá đèo hàng hoặc ngồi trên tay lái; xếp hàng hóa trên xe quá giới hạn quy định.",
+            "Ngồi về một bên điều khiển xe; đứng, nằm trên xe điều khiển xe; thay người lái xe khi xe đang chạy; quay người về phía sau để điều khiển xe hoặc bị t mắt điều khiển xe; sử dụng chân chống hoặc vật khác quệt xuống đường khi xe đang chạy.",
+            "Cảba ý trên."
+          ],
+          "correctIndex": 3,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người lái xe mô tô hai bánh, xe mô tô ba bánh, xe gắn máy không được thực hiện các hành vi nào sau đây?",
+          "answers": [
+            "Đi xe dàn hàng ngang; đi xe vào phần đường dành cho người đi bộ và phương tiện khác.",
+            "Sửdụng ô, thiết bị âm thanh, trừthiết bị trợ thính.",
+            "Cảhai ý trên.",
+            "—"
+          ],
+          "correctIndex": 2,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người lái xe mô tô hai bánh, xe mô tô ba bánh, xe gắn máy không được thực hiện hành vi nào sau đây?",
+          "answers": [
+            "Đi trên phần đường, làn đường quy định, chấp hành hiệu lệnh của người điều khiển giao thông, đèn tín hiệu giao thông.",
+            "Đi xe dàn hàng ngang, đi xe vào phần đường dành cho người đi bộ.",
+            "Cảhai ý trên.",
+            "—"
+          ],
+          "correctIndex": 1,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người được chở trên xe mô tô hai bánh, xe mô tô ba bánh, xe gắn máy khi tham gia giao thông đường bộ có được sử dụng ô khi trời mưa hay không?",
+          "answers": [
+            "Được sử dụng.",
+            "Chỉngười ngồi sau được sử dụng.",
+            "Không được sử dụng.",
+            "Được sử dụng nếu không có áo mưa."
+          ],
+          "correctIndex": 2,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người được chở trên xe mô tô có được kéo theo người đang điều khiển xe đạp hay không?",
+          "answers": [
+            "Chỉđược phép nếu cảhai đội mũ bảo hiểm.",
+            "Không được phép.",
+            "Chỉđược thực hiện trên đường vắng.",
+            "—"
+          ],
+          "correctIndex": 1,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Trường hợp người được chở trên xe mô tô, xe gắn máy, các loại xe tương tựxe mô tô và các loại xe tương tựxe gắn máy không đội emũ bảo hiểm cho người đi mô tô, xe máye hoặc không cài quai đúng quy cách (trừ trường hợp chở người bệnh đi cấp cứu, trẻem dưới 06 tuổi, áp giải người có hành vi vi phạm pháp luật) thì việc xửphạt vi phạm hành chính được quy định như thếnào?",
+          "answers": [
+            "Không bị xửphạt chỉbị nhắc nhở.",
+            "Người được chở không bị xửphạt, chỉxửphạt người điều khiển xe mô tô, xe gắn máy.",
+            "Người được chở bị xửphạt, không xửphạt người điều khiển xe mô tô, xe gắn máy.",
+            "Xửphạt cảngười điều khiển và người được chở trên xe mô tô, xe gắn máy."
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Trong các trường hợp dưới đây, để bảo đảm an toàn khi tham gia giao thông, người lái xe mô tô cần thực hiện như thếnào?",
+          "answers": [
+            "Phải đội mũ bảo hiểm theo đúng quy chuẩn kỹthuật quốc gia và cài quai đúng quy cách, không sử dụng ô, điện thoại di động, thiết bị âm thanh (trừthiết bị trợ thính).",
+            "Phải đội mũ bảo hiểm khi trời mưa gió hoặc trời quá nắng; có thểsử dụng ô, điện thoại di động, thiết bị âm thanh nhưng phải bảo đảm an toàn.",
+            "Phải đội mũ bảo hiểm khi cảm thấy mất an toàn giao thông hoặc khi chuẩn bị di chuyển quãng đường xa.",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Thứtựxuống phà như thếnào là đúng quy tắc giao thông?",
+          "answers": [
+            "Xe thô sơ, người đi bộ xuống trước, xe cơ giới, xe máy chuyên dùng xuống sau.",
+            "Xe cơ giới, xe máy chuyên dùng xuống trước, xe thô sơ, người đi bộ xuống sau.",
+            "Xe cơ giới, xe thô sơ xuống trước, xe máy chuyên dùng, người đi bộ xuống sau.",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Khi lái xe trong đô thịvà khu đông dân cư trong thời gian từ22 giờ ngày hôm trước đến 05 giờngày hôm sau, nếu cần vượt một xe khác, người lái xe phải báo hiệu như thếnào là đúng quy tắc giao thông?",
+          "answers": [
+            "Chỉđược báo hiệu bằng còi.",
+            "Phải báo hiệu bằng cảcòi và đèn.",
+            "Chỉđược báo hiệu bằng đèn.",
+            "—"
+          ],
+          "correctIndex": 2,
           "isCritical": false,
           "imageUrl": null
         }
@@ -623,95 +623,35 @@
       "isMock": true,
       "questions": [
         {
-          "body": "Khi điều khiển xQ mô tô h#i bánh, xQ mô tô b# bánh, xQ gắn máy, những hành vi nà! s#u đây không được phép?",
+          "body": "Vạch kẻđường là gì?",
           "answers": [
-            "B1ông cảh\u0011i t\u0011y; sửdụng x\" đểké., đẩy x\" khác, vật khác; sửdụng chân chống h.ặc vật khác q1ệt x1ống đường khi x\" đ\u0011ng chạy.",
-            "Sửdụng x\" đểchởngười h.ặc hàng hó\u0011; đểchân chạm x1ống đất khi khởi hành.",
-            "Đội mũ bả. hiểm; chạy x\" đúng tốc độq1y định và chấp hành đúng q1y tắc gi\u0011. thông đường bộ.",
-            "Chởngười ngồi s\u00111 dưới 16 t1ổi."
+            "Là báo hiệu đường bộ để hỗtrợ cảnh báo nguy hiểm cho người tham gia giao thông đường bộ.",
+            "Là vạch chỉsựphân chia làn đường, vịtrí hoặc hướng đi, vịtrí dừng lại.",
+            "Là báo hiệu cho người tham gia giao thông đường bộ về các thông tin của đường bộ.",
+            "Cảba ý trên."
           ],
-          "correctIndex": 0,
-          "isCritical": false,
+          "correctIndex": 1,
+          "isCritical": true,
           "imageUrl": null
         },
         {
-          "body": "Người được chởtrên xQ mô tô h#i bánh, xQ mô tô b# bánh, xQ gắn máy khi th#m gi# gi#! thông đường bộkhông được thực hiện hành vi nà! s#u đây?",
+          "body": "Người điều khiển phương tiện tham gia giao thông đường bộ được hiểu như thếnào là đúng?",
           "answers": [
-            "M\u0011ng, vác vật cồng kềnh.",
-            "Bám, ké. h.ặc đẩy các phư\u001bng tiện khác.",
-            "Dùng t\u0011y cầm điện th.ại h.ặc các thiết bịđiện tửkhác.",
-            "Ý 1 và ý 2."
-          ],
-          "correctIndex": 3,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người được chởtrên xQ mô tô h#i bánh, xQ mô tô b# bánh, xQ gắn máy khi th#m gi# gi#! thông đường bộcó được bám, ké! h!ặc đẩy các phưGng tiện khác không?",
-          "answers": [
-            "Được phép.",
-            "Được bám tr.ng trường hợp phư\u001bng tiện củ\u0011 mình bịhỏng.",
-            "Được ké., đẩy tr.ng trường hợp phư\u001bng tiện khác bịhỏng.",
-            "Không được phép."
-          ],
-          "correctIndex": 3,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người lái xQ, người được chởtrên xQ mô tô h#i bánh, xQ mô tô b# bánh, xQ gắn máy phải thực hiện quy định nà! dưới đây?",
-          "answers": [
-            "Đội mũ bả. hiểm th\". đúng q1y ch1ẩn kỹth1ật q1ốc gi\u0011 và cài q1\u0011i đúng q1y cách.",
-            "Người lái x\" phải đội mũ bả. hiểm, người được chởtrên x\" không nhất thiết phải đội mũ bả. hiểm.",
-            "Phải đội mũ bả. hiểm nhưng không nhất thiết phải cài q1\u0011i.",
+            "Là người điều khiển xe cơ giới, người điều khiển xe thô sơ, người điều khiển xe máy chuyên dùng.",
+            "Là người được giao nhiệm vụ hướng dẫn giao thông trên đường bộ.",
+            "Cảhai ý trên.",
             "—"
           ],
           "correctIndex": 0,
-          "isCritical": false,
+          "isCritical": true,
           "imageUrl": null
         },
         {
-          "body": "Người lái xQ mô tô h#i bánh, xQ gắn máy được phép chởtối đ# h#i người tr!ng những trường hợp nà!?",
+          "body": "Khi điều khiển xe chạy trên đường, biết có xe sau xin vượt, nếu đủ điều kiện an toàn người điều khiển phương tiện phải làm gì?",
           "answers": [
-            "Chởngười bệnh đi cấp cứ1; áp giải người có hành vi vi phạm pháp l1ật; trẻ\"m dưới 12 t1ổi; người già yế1 h.ặc người kh1yết tật.",
-            "Người đã 1ống rượ1, bi\u0011; người tr.ng c\u001b thểcó chất m\u0011 t1ý.",
-            "Cảh\u0011i ý trên.",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người lái xQ mô tô h#i bánh, xQ mô tô b# bánh, xQ gắn máy không được thực hiện các hành vi nà! dưới đây?",
-          "answers": [
-            "Đi x\" dàn hàng ng\u0011ng; b1ông cảh\u0011i t\u0011y.",
-            "Sửdụng x\" đểké., đẩy x\" khác, vật khác, dẫn dắt vật n1ôi, m\u0011ng, vác và chở vật cồng kềnh; chởngười đứng trên x\", giá đè. hàng h.ặc ngồi trên t\u0011y lái; xếp hàng hó\u0011 trên x\" q1á giới hạn q1y định.",
-            "Ngồi vềmột bên điề1 khiển x\"; đứng, nằm trên x\" điề1 khiển x\"; th\u0011y người lái x\" khi x\" đ\u0011ng chạy; q1\u0011y người vềphí\u0011 s\u00111 đểđiề1 khiển x\" h.ặc bịt mắt điề1 khiển x\"; sửdụng chân chống h.ặc vật khác q1ệt x1ống đường khi x\" đ\u0011ng chạy.",
-            "Cảb\u0011 ý trên."
-          ],
-          "correctIndex": 3,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người lái xQ mô tô h#i bánh, xQ mô tô b# bánh, xQ gắn máy không được thực hiện các hành vi nà! s#u đây?",
-          "answers": [
-            "Đi x\" dàn hàng ng\u0011ng; đi x\" và. phần đường dành ch. người đi bộvà phư\u001bng tiện khác.",
-            "Sửdụng ô, thiết bịâm th\u0011nh, trừthiết bịtrợthính.",
-            "Cảh\u0011i ý trên.",
-            "—"
-          ],
-          "correctIndex": 2,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người lái xQ mô tô h#i bánh, xQ mô tô b# bánh, xQ gắn máy không được thực hiện hành vi nà! s#u đây?",
-          "answers": [
-            "Đi trên phần đường, làn đường q1y định, chấp hành hiệ1 lệnh củ\u0011 người điề1 khiển gi\u0011. thông, đèn tín hiệ1 gi\u0011. thông.",
-            "Đi x\" dàn hàng ng\u0011ng, đi x\" và. phần đường dành ch. người đi bộ.",
-            "Cảh\u0011i ý trên.",
+            "Tăng tốc độvà ra hiệu cho xe sau vượt, không được gây trởngại cho xe xin vượt.",
+            "ơiảm tốc độ, có tín hiệu rẽphải để báo hiệu cho người điều khiển phương tiện tham gia giao thông đường bộ phía sau biết được vượt và đi sát về bên phải của phần đường xe chạy cho đến khi xe sau đã vượt qua, không được cản trởđối với xe xin vượt.",
+            "Cho xe đi sát về bên trái của phần đường xe chạy và ra hiệu cho xe sau vượt, không được gây trởngại cho xe xin vượt.",
             "—"
           ],
           "correctIndex": 1,
@@ -719,47 +659,11 @@
           "imageUrl": null
         },
         {
-          "body": "Người được chởtrên xQ mô tô h#i bánh, xQ mô tô b# bánh, xQ gắn máy khi th#m gi# gi#! thông đường bộcó được sửdụng ô khi trời mư# h#y không?",
+          "body": "Trên đường không phân chia thành hai chiều xe chạy riêng biệt, người điều khiển phương tiện tham gia giao thông đường bộ phải tránh xe đi ngược chiều như thếnào để bảo đảm an toàn?",
           "answers": [
-            "Được sửdụng.",
-            "Chỉngười ngồi s\u00111 được sửdụng.",
-            "Không được sửdụng.",
-            "Được sửdụng nế1 không có á. mư\u0011."
-          ],
-          "correctIndex": 2,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người được chởtrên xQ mô tô có được ké! thQ! người đ#ng điều khiển xQ đạp h#y không?",
-          "answers": [
-            "Chỉđược phép nế1 cảh\u0011i đội mũ bả. hiểm.",
-            "Không được phép.",
-            "Chỉđược thực hiện trên đường vắng.",
-            "—"
-          ],
-          "correctIndex": 1,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Trường hợp người được chởtrên xQ mô tô, xQ gắn máy, các l!ại xQ tưGng tựxQ mô tô và các l!ại xQ tưGng tựxQ gắn máy không đội \"mũ bả! hiểm ch! người đi mô tô, xQ máy\" h!ặc không cài qu#i đúng quy cách (trừ trường hợp chởngười bệnh đi cấp cứu, trẻQm dưới 06 tuổi, áp giải người có hành vi vi phạm pháp luật) thì việc xửphạt vi phạm hành chính được quy định như thếnà!?",
-          "answers": [
-            "Không bịxửphạt chỉbịnhắc nhở.",
-            "Người được chởkhông bịxửphạt, chỉxửphạt người điề1 khiển x\" mô tô, x\" gắn máy.",
-            "Người được chởbịxửphạt, không xửphạt người điề1 khiển x\" mô tô, x\" gắn máy.",
-            "Xửphạt cảngười điề1 khiển và người được chởtrên x\" mô tô, x\" gắn máy."
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Tr!ng các trường hợp dưới đây, đểbả! đảm #n t!àn khi th#m gi# gi#! thông, người lái xQ mô tô cần thực hiện như thếnà!?",
-          "answers": [
-            "Phải đội mũ bả. hiểm th\". đúng q1y ch1ẩn kỹth1ật q1ốc gi\u0011 và cài q1\u0011i đúng q1y cách, không sửdụng ô, điện th.ại di động, thiết bịâm th\u0011nh (trừthiết bịtrợ thính).",
-            "Phải đội mũ bả. hiểm khi trời mư\u0011 gió h.ặc trời q1á nắng; có thểsửdụng ô, điện th.ại di động, thiết bịâm th\u0011nh nhưng phải bả. đảm \u0011n t.àn.",
-            "Phải đội mũ bả. hiểm khi cảm thấy mất \u0011n t.àn gi\u0011. thông h.ặc khi ch1ẩn bị di ch1yển q1ãng đường x\u0011.",
+            "ơiảm tốc độvà cho xe đi về bên phải theo chiều xe chạy của mình.",
+            "Một trong hai xe phải dừng lại cho xe kia đi qua mới được đi.",
+            "Tăng tốc độ, cho xe đi về bên phải theo chiều xe chạy của mình để nhanh chóng vượt qua.",
             "—"
           ],
           "correctIndex": 0,
@@ -767,71 +671,23 @@
           "imageUrl": null
         },
         {
-          "body": "Thứtựxuống phà như thếnà! là đúng quy tắc gi#! thông?",
+          "body": "Khi tránh xe đi ngược chiều, các xe phải nhường đường như thếnào là đúng quy tắc giao thông?",
           "answers": [
-            "X\" thô s\u001b, người đi bộx1ống trước, x\" c\u001b giới, x\" máy ch1yên dùng x1ống s\u00111.",
-            "X\" c\u001b giới, x\" máy ch1yên dùng x1ống trước, x\" thô s\u001b, người đi bộx1ống s\u00111.",
-            "X\" c\u001b giới, x\" thô s\u001b x1ống trước, x\" máy ch1yên dùng, người đi bộx1ống s\u00111.",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Khi lái xQ tr!ng đô thịvà khu đông dân cư tr!ng thời gi#n từ22 giờ ngày hôm trước đến 05 giờngày hôm s#u, nếu cần vượt một xQ khác, người lái xQ phải bá! hiệu như thếnà! là đúng quy tắc gi#! thông?",
-          "answers": [
-            "Chỉđược bá. hiệ1 bằng còi.",
-            "Phải bá. hiệ1 bằng cảcòi và đèn.",
-            "Chỉđược bá. hiệ1 bằng đèn.",
-            "—"
-          ],
-          "correctIndex": 2,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Khi điều khiển xQ chạy trên đường, biết có xQ s#u xin vượt, nếu đủ điều kiện #n t!àn người điều khiển phưGng tiện phải làm gì?",
-          "answers": [
-            "Tăng tốc độvà r\u0011 hiệ1 ch. x\" s\u00111 vượt, không được gây trởngại ch. x\" xin vượt.",
-            "Giảm tốc độ, có tín hiệ1 rẽphải đểbá. hiệ1 ch. người điề1 khiển phư\u001bng tiện th\u0011m gi\u0011 gi\u0011. thông đường bộphí\u0011 s\u00111 biết được vượt và đi sát vềbên phải củ\u0011 phần đường x\" chạy ch. đến khi x\" s\u00111 đã vượt q1\u0011, không được cản trởđối với x\" xin vượt.",
-            "Ch. x\" đi sát vềbên trái củ\u0011 phần đường x\" chạy và r\u0011 hiệ1 ch. x\" s\u00111 vượt, không được gây trởngại ch. x\" xin vượt.",
-            "—"
-          ],
-          "correctIndex": 1,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Trên đường không phân chi# thành h#i chiều xQ chạy riêng biệt, người điều khiển phưGng tiện th#m gi# gi#! thông đường bộphải tránh xQ đi ngược chiều như thếnà! đểbả! đảm #n t!àn?",
-          "answers": [
-            "Giảm tốc độvà ch. x\" đi vềbên phải th\". chiề1 x\" chạy củ\u0011 mình.",
-            "Một tr.ng h\u0011i x\" phải dừng lại ch. x\" ki\u0011 đi q1\u0011 mới được đi.",
-            "Tăng tốc độ, ch. x\" đi vềbên phải th\". chiề1 x\" chạy củ\u0011 mình đểnh\u0011nh chóng vượt q1\u0011.",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Khi tránh xQ đi ngược chiều, các xQ phải nhường đường như thếnà! là đúng quy tắc gi#! thông?",
-          "answers": [
-            "N\u001bi đường hẹp chỉđủch. một x\" chạy và có chỗtránh x\" thì x\" nà. ởgần chỗ tránh h\u001bn phải và. vịtrí tránh, nhường đường ch. x\" đi ngược chiề1.",
-            "X\" x1ống dốc phải nhường đường ch. x\" lên dốc.",
-            "X\" có chướng ngại vật phí\u0011 trước phải nhường đường ch. x\" không có chướng ngại vật phí\u0011 trước.",
-            "Cảb\u0011 ý trên."
+            "Nơi đường hẹp chỉđủ cho một xe chạy và có chỗtránh xe thì xe nào ởgần chỗ tránh hơn phải vào vịtrí tránh, nhường đường cho xe đi ngược chiều.",
+            "Xe xuống dốc phải nhường đường cho xe lên dốc.",
+            "Xe có chướng ngại vật phía trước phải nhường đường cho xe không có chướng ngại vật phía trước.",
+            "Cảba ý trên."
           ],
           "correctIndex": 3,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Người lái xQ phải làm gì đểbả! đảm #n t!àn khi lái xQ trên đường c!ng có tầm nhìn bịhạn chế?",
+          "body": "Người lái xe phải làm gì để bảo đảm an toàn khi lái xe trên đường cong có tầm nhìn bị hạn chế?",
           "answers": [
-            "Q1\u0011n sát, giảm tốc độh.ặc dừng lại đểbả. đảm \u0011n t.àn.",
-            "Đi s\u0011ng làn đường củ\u0011 x\" ngược chiề1 đểmởrộng tầm nhìn và vượt x\" khác.",
-            "Ch. x\" đi sát bên phải làn đường, bật tín hiệ1 bá. hiệ1 đểvượt bên phải x\" khác.",
+            "euan sát, giảm tốc độhoặc dừng lại để bảo đảm an toàn.",
+            "Đi sang làn đường của xe ngược chiều để mởrộng tầm nhìn và vượt xe khác.",
+            "Cho xe đi sát bên phải làn đường, bật tín hiệu báo hiệu để vượt bên phải xe khác.",
             "—"
           ],
           "correctIndex": 0,
@@ -839,11 +695,11 @@
           "imageUrl": null
         },
         {
-          "body": "Tại nGi đường gi#! nh#u, người lái xQ đ#ng đi trên đường không ưu tiên, đường nhánh phải nhường đường như thếnà! là đúng quy tắc gi#! thông?",
+          "body": "Tại nơi đường giao nhau, người lái xe đang đi trên đường không ưu tiên, đường nhánh phải nhường đường như thếnào là đúng quy tắc giao thông?",
           "answers": [
-            "Nhường đường ch. x\" đi ởbên phải mình tới.",
-            "Nhường đường ch. x\" đi ởbên trái mình tới.",
-            "Nhường đường ch. x\" đi trên đường ư1 tiên h.ặc đường chính từbất kỳhướng nà. tới.",
+            "Nhường đường cho xe đi ởbên phải mình tới.",
+            "Nhường đường cho xe đi ởbên trái mình tới.",
+            "Nhường đường cho xe đi trên đường ưu tiên hoặc đường chính từbất kỳhướng nào tới.",
             "—"
           ],
           "correctIndex": 2,
@@ -851,10 +707,10 @@
           "imageUrl": null
         },
         {
-          "body": "Tại nGi đường gi#! nh#u có bá! hiệu đi thQ! vòng xuyến, người lái xQ phải nhường đường như thếnà! là đúng quy tắc gi#! thông?",
+          "body": "Tại nơi đường giao nhau có báo hiệu đi theo vòng xuyến, người lái xe phải nhường đường như thếnào là đúng quy tắc giao thông?",
           "answers": [
-            "Nhường đường ch. x\" đi đến từbên phải.",
-            "Nhường đường ch. x\" đi đến từbên trái.",
+            "Nhường đường cho xe đi đến từbên phải.",
+            "Nhường đường cho xe đi đến từbên trái.",
             "Không phải nhường đường.",
             "—"
           ],
@@ -863,11 +719,11 @@
           "imageUrl": null
         },
         {
-          "body": "Tại nGi đường gi#! nh#u không có bá! hiệu đi thQ! vòng xuyến, người điều khiển phưGng tiện phải nhường đường như thếnà! là đúng quy tắc gi#! thông?",
+          "body": "Tại nơi đường giao nhau không có báo hiệu đi theo vòng xuyến, người điều khiển phương tiện phải nhường đường như thếnào là đúng quy tắc giao thông?",
           "answers": [
-            "Phải nhường đường ch. x\" đi đến từbên phải.",
-            "X\" bá. hiệ1 xin đường trước, x\" đó được đi trước.",
-            "Phải nhường đường ch. x\" đi đến từbên trái.",
+            "Phải nhường đường cho xe đi đến từbên phải.",
+            "Xe báo hiệu xin đường trước, xe đó được đi trước.",
+            "Phải nhường đường cho xe đi đến từbên trái.",
             "—"
           ],
           "correctIndex": 0,
@@ -875,11 +731,11 @@
           "imageUrl": null
         },
         {
-          "body": "Người lái xQ phải nh#nh chóng giảm tốc độ, đi sát lềđường bên phải h!ặc dừng lại đểnhường đường ch! các l!ại xQ nà! dưới đây?",
+          "body": "Người lái xe phải nhanh chóng giảm tốc độ, đi sát lề đường bên phải hoặc dừng lại để nhường đường cho các loại xe nào dưới đây?",
           "answers": [
-            "X\" chữ\u0011 cháy củ\u0011 Cảnh sát phòng cháy, chữ\u0011 cháy và cứ1 nạn, cứ1 hộvà x\" chữ\u0011 cháy củ\u0011 các lực lượng khác; x\" củ\u0011 lực lượng q1ân sự, công \u0011n và kiểm sát; đ.àn x\" có x\" Cảnh sát gi\u0011. thông dẫn đường; x\" cứ1 thư\u001bng; x\" hộđê không có tín hiệ1 ư1 tiên th\". q1y định.",
-            "X\" ư1 tiên gồm x\" chữ\u0011 cháy củ\u0011 Cảnh sát phòng cháy, chữ\u0011 cháy và cứ1 nạn, cứ1 hộvà x\" chữ\u0011 cháy củ\u0011 các lực lượng khác được h1y động đi làm nhiệm vụ chữ\u0011 cháy; x\" củ\u0011 lực lượng q1ân sự, công \u0011n và kiểm sát đi làm nhiệm vụkhẩn cấp; đ.àn x\" có x\" Cảnh sát gi\u0011. thông dẫn đường; x\" cứ1 thư\u001bng đi làm nhiệm vụcấp cứ1; x\" hộđê đi làm nhiệm vụ; x\" đi làm nhiệm vụcứ1 nạn, cứ1 hộ, khắc phục sựcốthiên t\u0011i, dịch bệnh h.ặc x\" đi làm nhiệm vụtr.ng tình trạng khẩn cấp th\". q1y định củ\u0011 pháp l1ật; đ.àn x\" t\u0011ng.",
-            "X\" ô tô, x\" máy, đ.àn x\" đ\u0011ng diễ1 hành có tổchức có bá. tín hiệ1 xin vượt bằng còi và đèn.",
+            "Xe chữa cháy của Cảnh sát phòng cháy, chữa cháy và cứu nạn, cứu hộvà xe chữa cháy của các lực lượng khác; xe của lực lượng quân sự, công an và kiểm sát; đoàn xe có xe Cảnh sát giao thông dẫn đường; xe cứu thương; xe hộđê không có tín hiệu ưu tiên theo quy định.",
+            "Xe ưu tiên gồm xe chữa cháy của Cảnh sát phòng cháy, chữa cháy và cứu nạn, cứu hộvà xe chữa cháy của các lực lượng khác được huy động đi làm nhiệm vụ chữa cháy; xe của lực lượng quân sự, công an và kiểm sát đi làm nhiệm vụ khẩn cấp; đoàn xe có xe Cảnh sát giao thông dẫn đường; xe cứu thương đi làm nhiệm vụ cấp cứu; xe hộđê đi làm nhiệm vụ; xe đi làm nhiệm vụ cứu nạn, cứu hộ, khắc phục sựcốthiên tai, dịch bệnh hoặc xe đi làm nhiệm vụ trong tình trạng khẩn cấp theo quy định của pháp luật; đoàn xe tang.",
+            "Xe ô tô, xe máy, đoàn xe đang diễu hành có tổchức có báo tín hiệu xin vượt bằng còi và đèn.",
             "—"
           ],
           "correctIndex": 1,
@@ -887,11 +743,11 @@
           "imageUrl": null
         },
         {
-          "body": "Khi có tín hiệu củ# xQ ưu tiên, người và phưGng tiện th#m gi# gi#! thông đường bộphải tuân thủquy định nà! dưới đây?",
+          "body": "Khi có tín hiệu của xe ưu tiên, người và phương tiện tham gia giao thông đường bộ phải tuân thủquy định nào dưới đây?",
           "answers": [
-            "Giảm tốc độ, đi sát lềđường bên phải h.ặc dừng lại đểnhường đường.",
-            "Tăng tốc độvà đi sát lềđường bên phải đểnhường đường.",
-            "Giảm tốc độ, đi sát lềđường bên trái đểnhường đường.",
+            "ơiảm tốc độ, đi sát lề đường bên phải hoặc dừng lại để nhường đường.",
+            "Tăng tốc độvà đi sát lề đường bên phải để nhường đường.",
+            "ơiảm tốc độ, đi sát lề đường bên trái để nhường đường.",
             "—"
           ],
           "correctIndex": 0,
@@ -899,11 +755,11 @@
           "imageUrl": null
         },
         {
-          "body": "Khi đ#ng lái xQ, phí# trước có một xQ Cảnh sát gi#! thông không phát tín hiệu ưu tiên, người lái xQ có được phép vượt h#y không?",
+          "body": "Khi đang lái xe, phía trước có một xe Cảnh sát giao thông không phát tín hiệu ưu tiên, người lái xe có được phép vượt hay không?",
           "answers": [
             "Không được vượt.",
-            "Được phép vượt ởphần đường dành ch. người đi bộq1\u0011 đường.",
-            "Được vượt khi bả. đảm \u0011n t.àn.",
+            "Được phép vượt ởphần đường dành cho người đi bộ qua đường.",
+            "Được vượt khi bảo đảm an toàn.",
             "—"
           ],
           "correctIndex": 2,
@@ -911,12 +767,156 @@
           "imageUrl": null
         },
         {
-          "body": "Khi đ#ng lái xQ, phí# trước có một xQ cứu thưGng đ#ng phát tín hiệu ưu tiên, người lái xQ có được phép vượt h#y không?",
+          "body": "Khi đang lái xe, phía trước có một xe cứu thương đang phát tín hiệu ưu tiên, người lái xe có được phép vượt hay không?",
           "answers": [
             "Không được vượt.",
-            "Được vượt khi đ\u0011ng đi trên cầ1.",
-            "Được phép vượt khi đi q1\u0011 n\u001bi gi\u0011. nh\u00111 có ít phư\u001bng tiện cùng th\u0011m gi\u0011 gi\u0011. thông.",
-            "Được vượt khi bả. đảm \u0011n t.àn."
+            "Được vượt khi đang đi trên cầu.",
+            "Được phép vượt khi đi qua nơi giao nhau có ít phương tiện cùng tham gia giao thông.",
+            "Được vượt khi bảo đảm an toàn."
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Khi tới đường ngang không có người gác, chắn đường bộ, chuông, đèn tín hiệu, người tham gia giao thông đường bộ phải làm gì để bảo đảm an toàn?",
+          "answers": [
+            "Dừng lại về bên phải đường của mình, trước vạch dừng xe và quan sát hai phía, khi không có phương tiện giao thông đường sắt tới mới được đi qua.",
+            "euan sát hai phía, khi không có phương tiện giao thông đường sắt tới thì nhanh chóng đi qua.",
+            "Dừng lại khoảng cách tối thiểu 3 mét tính từray đường sắt gần nhất, khi không có phương tiện giao thông đường sắt tới thì nhanh chóng đi qua.",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Tại đường ngang, cầu chung đường sắt, khi có hiệu lệnh của nhân viên gác chắn, đèn đỏsáng nhấp nháy, chuông kêu, chắn đường bộ đang dịch chuyển hoặc đã đóng, người tham gia giao thông đường bộ phải làm gì để bảo đảm an toàn?",
+          "answers": [
+            "Dừng lại về bên trái đường của mình, trước vạch dừng xe.",
+            "Dừng lại giữa đường của mình, trước vạch dừng xe.",
+            "Dừng lại về bên phải đường của mình, trước vạch dừng xe.",
+            "—"
+          ],
+          "correctIndex": 2,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người tham gia giao thông đường bộ phải dừng lại về bên phải đường của mình trước vạch dừng xe tại đường ngang, cầu chung đường sắt khi có báo hiệu nào dưới đây?",
+          "answers": [
+            "Hiệu lệnh của nhân viên gác chắn.",
+            "Đèn đỏsáng nhấp nháy, chuông kêu.",
+            "Chắn đường bộ đang dịch chuyển hoặc đã đóng.",
+            "Cảba ý trên."
+          ],
+          "correctIndex": 3,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người điều khiển phương tiện tham gia giao thông trong hầm đường bộ ngoài việc phải tuân thủcác quy tắc giao thông còn phải thực hiện những quy định nào dưới đây?",
+          "answers": [
+            "Xe cơ giới, xe máy chuyên dùng phải bật đèn chiếu gần; xe thô sơ phải bật đèn hoặc có vật phát sáng báo hiệu; không dừng xe, đỗxe trong hầm đường bộ; trường hợp gặp sựcốkỹthuật hoặc bất khảkháng khác buộc phải dừng xe, đỗxe, người lái xe, người điều khiển xe máy chuyên dùng phải đưa xe vào vịtrí dừng xe, đỗ xe khẩn cấp, nếu không di chuyển được, phải có báo hiệu bằng đèn khẩn cấp và đặt biển hoặc đèn cảnh báo về phía sau xe khoảng cách bảo đảm an toàn.",
+            "Xe cơ giới, xe máy chuyên dùng phải bật đèn chiếu xa; được dừng xe, đỗxe khi cần thiết.",
+            "Phải cho xe chạy trên một làn đường và chỉchuyển làn ởnơi được phép; được quay đầu xe, lùi xe khi cần thiết.",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người điều khiển phương tiện tham gia giao thông đường bộ phải quan sát, giảm tốc độhoặc dừng lại để bảo đảm an toàn trong các trường hợp nào dưới đây?",
+          "answers": [
+            "Có báo hiệu cảnh báo nguy hiểm hoặc có chướng ngại vật trên đường; chuyển hướng xe chạy hoặc tầm nhìn bị hạn chế.",
+            "Nơi cầu, cống hẹp, đập tràn, đường ngầm, hầm chui, hầm đường bộ; có vật nuôi đi trên đường hoặc chăn thảởven đường.",
+            "Điểm dừng xe, đỗxe trên đường bộ có khách đang lên, xuống xe.",
+            "Cảba ý trên."
+          ],
+          "correctIndex": 3,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người lái xe được phép vượt xe khác về bên phải trong trường hợp nào dưới đây?",
+          "answers": [
+            "Xe phía trước có tín hiệu rẽtrái hoặc đang rẽtrái hoặc khi xe chuyên dùng đang làm việc trên đường mà không thểvượt bên trái.",
+            "Xe phía trước đang đi sát lề đường bên trái.",
+            "Cảhai ý trên.",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Khi có xe xin vượt, người lái xe mô tô xửlý như thếnào nếu đủ điều kiện an toàn cho xe phía sau vượt?",
+          "answers": [
+            "ơiảm tốc độ, có tín hiệu rẽphải để báo hiệu cho người điều khiển phương tiện tham gia giao thông đường bộ phía sau biết được vượt và đi sát về bên phải của phần đường xe chạy cho đến khi xe sau đã vượt qua, không được cản trởđối với xe xin vượt.",
+            "Lái xe vào lề đường bên trái và giảm tốc độđể xe phía sau vượt qua, không được gây trởngại đối với xe xin vượt.",
+            "Tăng tốc độ, đi sát về bên phải của phần đường xe chạy cho đến khi xe sau đã vượt qua.",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Những trường hợp nào dưới đây không được đi trên đường cao tốc, trừngười, phương tiện giao thông đường bộ và thiết bị phục vụ việc quản lý, bảo trì đường cao tốc?",
+          "answers": [
+            "Xe máy chuyên dùng có tốc độthiết kếnhỏhơn tốc độtối thiểu quy định đối với đường cao tốc, xe chở người bốn bánh có gắn động cơ, xe chở hàng bốn bánh có gắn động cơ, xe mô tô, xe gắn máy, các loại xe tương tựxe mô tô, xe gắn máy, xe thô sơ, người đi bộ.",
+            "Xe máy chuyên dùng có tốc độthiết kếlớn hơn tốc độtối thiểu quy định đối với đường cao tốc.",
+            "Xe ô tô và xe máy chuyên dùng có tốc độthiết kếlớn hơn 80 km/h.",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Theo quy định về độtuổi, người đủ bao nhiêu tuổi trởlên thì được cấp giấy phép lái xe mô tô hai bánh có dung tích xi lanh đến 125 cm3 và xe ô tô chở người đến 8 chỗ(không kểchỗcủa người lái xe); xe ô tô tải và ô tô chuyên dùng có khối lượng toàn bộ theo thiết kếđến 3.500 kg?",
+          "answers": [
+            "16 tuổi.",
+            "17 tuổi",
+            "18 tuổi.",
+            "—"
+          ],
+          "correctIndex": 2,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người đủ u6 tuổi đến dưới 18 tuổi chỉđược điều khiển các loại xe nào dưới đây?",
+          "answers": [
+            "Xe mô tô hai bánh có dung tích xi-lanh đến 125 cm3.",
+            "Xe gắn máy.",
+            "Xe ô tô chở người đến 08 chỗ(không kểchỗcủa người lái xe); xe ô tô tải và ô tô chuyên dùng có khối lượng toàn bộ theo thiết kếđến 3.500 kg; các loại xe ô tô quy định cho giấy phép lái xe hạng B kéo rơ moóc có khối lượng toàn bộ theo thiết kếđến 750 kg.",
+            "Cảba ý trên."
+          ],
+          "correctIndex": 1,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người có ơiấy phép lái xe mô tô hạng \u00061 không được phép điều khiển loại xe nào dưới đây?",
+          "answers": [
+            "Xe mô tô hai bánh có dung tích xi-lanh 125 cm3hoặc có công suất động cơ điện đến 11 kW.",
+            "Xe mô tô ba bánh.",
+            "Cảhai ý trên.",
+            "—"
+          ],
+          "correctIndex": 1,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người có ơiấy phép lái xe mô tô hạng \u00061 được cấp sau ngày 01/01/2025 được phép điều khiển loại xe nào dưới đây?",
+          "answers": [
+            "Xe mô tô hai bánh có dung tích xi-lanh đến 125 cm3 hoặc có công suất động cơ điện đến 11 kW.",
+            "Xe mô tô ba bánh.",
+            "Cảhai ý trên.",
+            "—"
           ],
           "correctIndex": 0,
           "isCritical": false,
@@ -931,155 +931,35 @@
       "isMock": true,
       "questions": [
         {
-          "body": "Khi tới đường ng#ng không có người gác, chắn đường bộ, chuông, đèn tín hiệu, người th#m gi# gi#! thông đường bộphải làm gì đểbả! đảm #n t!àn?",
+          "body": "Người lái xe được hiểu như thếnào là đúng?",
           "answers": [
-            "Dừng lại vềbên phải đường củ\u0011 mình, trước vạch dừng x\" và q1\u0011n sát h\u0011i phí\u0011, khi không có phư\u001bng tiện gi\u0011. thông đường sắt tới mới được đi q1\u0011.",
-            "Q1\u0011n sát h\u0011i phí\u0011, khi không có phư\u001bng tiện gi\u0011. thông đường sắt tới thì nh\u0011nh chóng đi q1\u0011.",
-            "Dừng lại kh.ảng cách tối thiể1 3 mét tính từr\u0011y đường sắt gần nhất, khi không có phư\u001bng tiện gi\u0011. thông đường sắt tới thì nh\u0011nh chóng đi q1\u0011.",
+            "Là người điều khiển xe cơ giới.",
+            "Là người điều khiển xe thô sơ.",
+            "Là người điều khiển xe máy chuyên dùng.",
             "—"
           ],
           "correctIndex": 0,
-          "isCritical": false,
+          "isCritical": true,
           "imageUrl": null
         },
         {
-          "body": "Tại đường ng#ng, cầu chung đường sắt, khi có hiệu lệnh củ# nhân viên gác chắn, đèn đỏsáng nhấp nháy, chuông kêu, chắn đường bộđ#ng dịch chuyển h!ặc đã đóng, người th#m gi# gi#! thông đường bộphải làm gì để bả! đảm #n t!àn?",
+          "body": "Trong nhóm các phương tiện giao thông đường bộ dưới đây, nhóm phương tiện nào là xe cơ giới?",
           "answers": [
-            "Dừng lại vềbên trái đường củ\u0011 mình, trước vạch dừng x\".",
-            "Dừng lại giữ\u0011 đường củ\u0011 mình, trước vạch dừng x\".",
-            "Dừng lại vềbên phải đường củ\u0011 mình, trước vạch dừng x\".",
-            "—"
-          ],
-          "correctIndex": 2,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người th#m gi# gi#! thông đường bộphải dừng lại vềbên phải đường củ# mình trước vạch dừng xQ tại đường ng#ng, cầu chung đường sắt khi có bá! hiệu nà! dưới đây?",
-          "answers": [
-            "Hiệ1 lệnh củ\u0011 nhân viên gác chắn.",
-            "Đèn đỏsáng nhấp nháy, ch1ông kê1.",
-            "Chắn đường bộđ\u0011ng dịch ch1yển h.ặc đã đóng.",
-            "Cảb\u0011 ý trên."
-          ],
-          "correctIndex": 3,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người điều khiển phưGng tiện th#m gi# gi#! thông tr!ng hầm đường bộng!ài việc phải tuân thủcác quy tắc gi#! thông còn phải thực hiện những quy định nà! dưới đây?",
-          "answers": [
-            "X\" c\u001b giới, x\" máy ch1yên dùng phải bật đèn chiế1 gần; x\" thô s\u001b phải bật đèn h.ặc có vật phát sáng bá. hiệ1; không dừng x\", đỗx\" tr.ng hầm đường bộ; trường hợp gặp sựcốkỹth1ật h.ặc bất khảkháng khác b1ộc phải dừng x\", đỗx\", người lái x\", người điề1 khiển x\" máy ch1yên dùng phải đư\u0011 x\" và. vịtrí dừng x\", đỗ x\" khẩn cấp, nế1 không di ch1yển được, phải có bá. hiệ1 bằng đèn khẩn cấp và đặt biển h.ặc đèn cảnh bá. vềphí\u0011 s\u00111 x\" kh.ảng cách bả. đảm \u0011n t.àn.",
-            "X\" c\u001b giới, x\" máy ch1yên dùng phải bật đèn chiế1 x\u0011; được dừng x\", đỗx\" khi cần thiết.",
-            "Phải ch. x\" chạy trên một làn đường và chỉch1yển làn ởn\u001bi được phép; được q1\u0011y đầ1 x\", lùi x\" khi cần thiết.",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người điều khiển phưGng tiện th#m gi# gi#! thông đường bộphải qu#n sát, giảm tốc độh!ặc dừng lại đểbả! đảm #n t!àn tr!ng các trường hợp nà! dưới đây?",
-          "answers": [
-            "Có bá. hiệ1 cảnh bá. ng1y hiểm h.ặc có chướng ngại vật trên đường; ch1yển hướng x\" chạy h.ặc tầm nhìn bịhạn chế.",
-            "N\u001bi cầ1, cống hẹp, đập tràn, đường ngầm, hầm ch1i, hầm đường bộ; có vật n1ôi đi trên đường h.ặc chăn thảởv\"n đường.",
-            "Điểm dừng x\", đỗx\" trên đường bộcó khách đ\u0011ng lên, x1ống x\".",
-            "Cảb\u0011 ý trên."
-          ],
-          "correctIndex": 3,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người lái xQ được phép vượt xQ khác vềbên phải tr!ng trường hợp nà! dưới đây?",
-          "answers": [
-            "X\" phí\u0011 trước có tín hiệ1 rẽtrái h.ặc đ\u0011ng rẽtrái h.ặc khi x\" ch1yên dùng đ\u0011ng làm việc trên đường mà không thểvượt bên trái.",
-            "X\" phí\u0011 trước đ\u0011ng đi sát lềđường bên trái.",
-            "Cảh\u0011i ý trên.",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Khi có xQ xin vượt, người lái xQ mô tô xửlý như thếnà! nếu đủđiều kiện #n t!àn ch! xQ phí# s#u vượt?",
-          "answers": [
-            "Giảm tốc độ, có tín hiệ1 rẽphải đểbá. hiệ1 ch. người điề1 khiển phư\u001bng tiện th\u0011m gi\u0011 gi\u0011. thông đường bộphí\u0011 s\u00111 biết được vượt và đi sát vềbên phải củ\u0011 phần đường x\" chạy ch. đến khi x\" s\u00111 đã vượt q1\u0011, không được cản trởđối với x\" xin vượt.",
-            "Lái x\" và. lềđường bên trái và giảm tốc độđểx\" phí\u0011 s\u00111 vượt q1\u0011, không được gây trởngại đối với x\" xin vượt.",
-            "Tăng tốc độ, đi sát vềbên phải củ\u0011 phần đường x\" chạy ch. đến khi x\" s\u00111 đã vượt q1\u0011.",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Những trường hợp nà! dưới đây không được đi trên đường c#! tốc, trừngười, phưGng tiện gi#! thông đường bộvà thiết bịphục vụviệc quản lý, bả! trì đường c#! tốc?",
-          "answers": [
-            "X\" máy ch1yên dùng có tốc độthiết kếnhỏh\u001bn tốc độtối thiể1 q1y định đối với đường c\u0011. tốc, x\" chởngười bốn bánh có gắn động c\u001b, x\" chởhàng bốn bánh có gắn động c\u001b, x\" mô tô, x\" gắn máy, các l.ại x\" tư\u001bng tựx\" mô tô, x\" gắn máy, x\" thô s\u001b, người đi bộ.",
-            "X\" máy ch1yên dùng có tốc độthiết kếlớn h\u001bn tốc độtối thiể1 q1y định đối với đường c\u0011. tốc.",
-            "X\" ô tô và x\" máy ch1yên dùng có tốc độthiết kếlớn h\u001bn 80 km/h.",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "ThQ! quy định vềđộtuổi, người đủb#! nhiêu tuổi trởlên thì được cấp giấy phép lái xQ mô tô h#i bánh có dung tích xi l#nh đến 125 cm3 và xQ ô tô chởngười đến 8 chỗ(không kểchỗcủ# người lái xQ); xQ ô tô tải và ô tô chuyên dùng có khối lượng t!àn bộthQ! thiết kếđến 3.500 kg?",
-          "answers": [
-            "16 t1ổi.",
-            "17 t1ổi",
-            "18 t1ổi.",
-            "—"
-          ],
-          "correctIndex": 2,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người đủ16 tuổi đến dưới 18 tuổi chỉđược điều khiển các l!ại xQ nà! dưới đây?",
-          "answers": [
-            "X\" mô tô h\u0011i bánh có d1ng tích xi-l\u0011nh đến 125 cm3.",
-            "X\" gắn máy.",
-            "X\" ô tô chởngười đến 08 chỗ(không kểchỗcủ\u0011 người lái x\"); x\" ô tô tải và ô tô ch1yên dùng có khối lượng t.àn bộth\". thiết kếđến 3.500 kg; các l.ại x\" ô tô q1y định ch. giấy phép lái x\" hạng B ké. r\u001b m.óc có khối lượng t.àn bộth\". thiết kếđến 750 kg.",
-            "Cảb\u0011 ý trên."
-          ],
-          "correctIndex": 1,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người có Giấy phép lái xQ mô tô hạng \u00061 không được phép điều khiển l!ại xQ nà! dưới đây?",
-          "answers": [
-            "X\" mô tô h\u0011i bánh có d1ng tích xi-l\u0011nh 125 cm3h.ặc có công s1ất động c\u001b điện đến 11 kW.",
-            "X\" mô tô b\u0011 bánh.",
-            "Cảh\u0011i ý trên.",
+            "Xe ô tô; máy ké.; xe mô tô hai bánh; xe mô tô ba bánh; xe gắn máy; xe cơ giới dùng cho người khuyết tật và xe máy chuyên dùng; xe đạp, xe đạp máy, xe đạp điện.",
+            "Xe ô tô; rơ moóc được kéo bởi xe ô tô; sơ mi rơ moóc được kéo bởi ô tô đầu ké.; xe chở người bốn bánh có gắn động cơ; xe chở hàng bốn bánh có gắn động cơ; xe mô tô, xe gắn máy và các loại xe tương tự.",
+            "—",
             "—"
           ],
           "correctIndex": 1,
-          "isCritical": false,
+          "isCritical": true,
           "imageUrl": null
         },
         {
-          "body": "Người có Giấy phép lái xQ mô tô hạng \u00061 được cấp s#u ngày 01/01/2025 được phép điều khiển l!ại xQ nà! dưới đây?",
+          "body": "Người có ơiấy phép lái xe mô tô hạng \u0006 được phép điều khiển loại xe nào dưới đây?",
           "answers": [
-            "X\" mô tô h\u0011i bánh có d1ng tích xi-l\u0011nh đến 125 cm3 h.ặc có công s1ất động c\u001b điện đến 11 kW.",
-            "X\" mô tô b\u0011 bánh.",
-            "Cảh\u0011i ý trên.",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người có Giấy phép lái xQ mô tô hạng \u0006 được phép điều khiển l!ại xQ nà! dưới đây?",
-          "answers": [
-            "X\" mô tô h\u0011i bánh có d1ng tích xi-l\u0011nh đến 125 cm3 h.ặc có công s1ất động c\u001b điện đến 11 kW.",
-            "X\" mô tô h\u0011i bánh có d1ng tích xi-l\u0011nh trên 125 cm3 h.ặc có công s1ất động c\u001b điện trên 11 kW.",
-            "Cảh\u0011i ý trên.",
+            "Xe mô tô hai bánh có dung tích xi-lanh đến 125 cm3 hoặc có công suất động cơ điện đến 11 kW.",
+            "Xe mô tô hai bánh có dung tích xi-lanh trên 125 cm3 hoặc có công suất động cơ điện trên 11 kW.",
+            "Cảhai ý trên.",
             "—"
           ],
           "correctIndex": 2,
@@ -1087,11 +967,11 @@
           "imageUrl": null
         },
         {
-          "body": "Người lái xQ khi th#m gi# gi#! thông đường bộphải đảm bả! các điều kiện nà! dưới đây?",
+          "body": "Người lái xe khi tham gia giao thông đường bộ phải đảm bảo các điều kiện nào dưới đây?",
           "answers": [
-            "Phải đủt1ổi, sức khỏ\" th\". q1y định củ\u0011 pháp l1ật; có giấy phép lái x\" đ\u0011ng còn điểm, còn hiệ1 lực phù hợp với l.ại x\" đ\u0011ng điề1 khiển d. c\u001b q1\u0011n có thẩm q1yền cấp (trừngười lái x\" gắn máy).",
-            "Phải là người đứng tên tr.ng đăng ký x\".",
-            "Cảh\u0011i ý trên.",
+            "Phải đủ tuổi, sức khỏe theo quy định của pháp luật; có giấy phép lái xe đang còn điểm, còn hiệu lực phù hợp với loại xe đang điều khiển do cơ quan có thẩm quyền cấp (trừngười lái xe gắn máy).",
+            "Phải là người đứng tên trong đăng ký xe.",
+            "Cảhai ý trên.",
             "—"
           ],
           "correctIndex": 0,
@@ -1099,22 +979,22 @@
           "imageUrl": null
         },
         {
-          "body": "Khi th#m gi# gi#! thông đường bộ, người lái xQ phải m#ng thQ! các giấy tờgì?",
+          "body": "Khi tham gia giao thông đường bộ, người lái xe phải mang theo các giấy tờgì?",
           "answers": [
-            "Chứng nhận đăng ký x\" h.ặc bản s\u0011. Chứng nhận đăng ký x\" có chứng thực kèm bản gốc giấy tờxác nhận củ\u0011 tổchức tín dụng, chi nhánh ngân hàng nước ng.ài còn hiệ1 lực tr.ng trường hợp x\" đ\u0011ng được thếchấp tại tổchức tín dụng, chi nhánh ngân hàng nước ng.ài.",
-            "Giấy phép lái x\" phù hợp với l.ại x\" đ\u0011ng điề1 khiển; chứng nhận kiểm định \u0011n t.àn kỹth1ật và bả. vệmôi trường đối với x\" c\u001b giới th\". q1y định củ\u0011 pháp l1ật; chứng nhận bả. hiểm bắt b1ộc trách nhiệm dân sựcủ\u0011 chủx\" c\u001b giới.",
-            "Trường hợp các giấy tờnê1 trên đã được tích hợp và. tài kh.ản định d\u0011nh điện tửthì việc x1ất trình, kiểm tr\u0011 có thểthực hiện thông q1\u0011 tài kh.ản định d\u0011nh điện tử.",
-            "Cảb\u0011 ý trên."
+            "Chứng nhận đăng ký xe hoặc bản sa. Chứng nhận đăng ký xe có chứng thực kèm bản gốc giấy tờxác nhận của tổchức tín dụng, chi nhánh ngân hàng nước ngoài còn hiệu lực trong trường hợp xe đang được thếchấp tại tổchức tín dụng, chi nhánh ngân hàng nước ngoài.",
+            "ơiấy phép lái xe phù hợp với loại xe đang điều khiển; chứng nhận kiểm định an toàn kỹthuật và bảo vệmôi trường đối với xe cơ giới theo quy định của pháp luật; chứng nhận bảo hiểm bắt buộc trách nhiệm dân sựcủa chủxe cơ giới.",
+            "Trường hợp các giấy tờnêu trên đã được tích hợp vào tài khoản định danh điện tửthì việc xuất trình, kiểm tra có thểthực hiện thông qua tài khoản định danh điện tử.",
+            "Cảba ý trên."
           ],
           "correctIndex": 3,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Người có giấy phép lái xQ chư# bịtrừhết 12 điểm, được phục hồi điểm giấy phép lái xQ tr!ng trường hợp nà! s#u đây?",
+          "body": "Người có giấy phép lái xe chưa bị trừhết 12 điểm, được phục hồi điểm giấy phép lái xe trong trường hợp nào sau đây?",
           "answers": [
             "Không được phục hồi.",
-            "Được phục hồi đủ12 điểm, nế1 không bịtrừđiểm tr.ng thời hạn 12 tháng từ ngày bịtrừđiểm gần nhất.",
+            "Được phục hồi đủ u2 điểm, nếu không bị trừđiểm trong thời hạn 12 tháng từ ngày bị trừđiểm gần nhất.",
             "—",
             "—"
           ],
@@ -1123,11 +1003,11 @@
           "imageUrl": null
         },
         {
-          "body": "Người có giấy phép lái xQ đã bịtrừhết điểm phải làm gì đểphục hồi điểm giấy phép lái xQ?",
+          "body": "Người có giấy phép lái xe đã bị trừhết điểm phải làm gì để phục hồi điểm giấy phép lái xe?",
           "answers": [
-            "Không vi phạm pháp l1ật trật tự, \u0011n t.àn gi\u0011. thông đường bộtr.ng thời gi\u0011n 12 tháng kểtừngày bịtrừhết điểm.",
-            "S\u00111 thời hạn ít nhất là 06 tháng kểtừngày bịtrừhết điểm, người có phép lái x\" được th\u0011m gi\u0011 kiểm tr\u0011 nội d1ng kiến thức pháp l1ật vềtrật tự, \u0011n t.àn gi\u0011. thông đường bộth\". q1y định, có kết q1ảđạt yê1 cầ1 thì được phục hồi đủ12 điểm.",
-            "Cảh\u0011i ý trên.",
+            "Không vi phạm pháp luật trật tự, an toàn giao thông đường bộ trong thời gian 12 tháng kểtừngày bị trừhết điểm.",
+            "Sau thời hạn ít nhất là 06 tháng kểtừngày bị trừhết điểm, người có phép lái xe được tham gia kiểm tra nội dung kiến thức pháp luật về trật tự, an toàn giao thông đường bộ theo quy định, có kết quảđạt yêu cầu thì được phục hồi đủ u2 điểm.",
+            "Cảhai ý trên.",
             "—"
           ],
           "correctIndex": 0,
@@ -1135,10 +1015,10 @@
           "imageUrl": null
         },
         {
-          "body": "Trách nhiệm củ# tổchức, cá nhân đứng tên tr!ng giấy chứng nhận đăng ký xQ khi chư# thực hiện thu hồi chứng nhận đăng ký xQ, biển sốxQ được quy định như thếnà!?",
+          "body": "Trách nhiệm của tổchức, cá nhân đứng tên trong giấy chứng nhận đăng ký xe khi chưa thực hiện thu hồi chứng nhận đăng ký xe, biển sốxe được quy định như thếnào?",
           "answers": [
-            "Tiếp tục chị1 trách nhiệm củ\u0011 chủx\".",
-            "Không chị1 trách nhiệm s\u00111 khi đã ch1yển nhượng, tr\u0011. đổi, tặng, ch..",
+            "Tiếp tục chịu trách nhiệm của chủxe.",
+            "Không chịu trách nhiệm sau khi đã chuyển nhượng, trao đổi, tặng, ch..",
             "—",
             "—"
           ],
@@ -1147,7 +1027,7 @@
           "imageUrl": null
         },
         {
-          "body": "Trên đường bộ, tr!ng khu vực đông dân cư, đường đôi h!ặc đường một chiều có từh#i làn xQ cG giới trởlên, xQ mô tô h#i bánh, ô tô chởngười đến 28 chỗkhông kểchỗcủ# người lái xQ th#m gi# gi#! thông với tốc độkh#i thác tối đ# ch! phép là b#! nhiêu?",
+          "body": "Trên đường bộ, trong khu vực đông dân cư, đường đôi hoặc đường một chiều có từhai làn xe cơ giới trởlên, xe mô tô hai bánh, ô tô chở người đến 28 chỗkhông kểchỗcủa người lái xe tham gia giao thông với tốc độkhai thác tối đa cho phép là bao nhiêu?",
           "answers": [
             "60 km/h.",
             "50 km/h.",
@@ -1159,7 +1039,7 @@
           "imageUrl": null
         },
         {
-          "body": "Trên đường bộ(trừđường c#! tốc) tr!ng khu vực đông dân cư, đường h#i chiều h!ặc đường một chiều có một làn xQ cG giới, xQ mô tô h#i bánh, ô tô chởngười đến 28 chỗkhông kểchỗcủ# người lái xQ th#m gi# gi#! thông với tốc độkh#i thác tối đ# ch! phép là b#! nhiêu?",
+          "body": "Trên đường bộ(trừđường cao tốc) trong khu vực đông dân cư, đường hai chiều hoặc đường một chiều có một làn xe cơ giới, xe mô tô hai bánh, ô tô chở người đến 28 chỗkhông kểchỗcủa người lái xe tham gia giao thông với tốc độkhai thác tối đa cho phép là bao nhiêu?",
           "answers": [
             "60 km/h.",
             "50 km/h.",
@@ -1171,46 +1051,46 @@
           "imageUrl": null
         },
         {
-          "body": "Trên đường bộng!ài khu vực đông dân cư, đường đôi h!ặc đường một chiều có từh#i làn xQ cG giới trởlên (trừđường c#! tốc) l!ại xQ nà! dưới đây được th#m gi# gi#! thông với tốc độkh#i thác tối đ# ch! phép là 70 km/h?",
+          "body": "Trên đường bộ ngoài khu vực đông dân cư, đường đôi hoặc đường một chiều có từhai làn xe cơ giới trởlên (trừđường cao tốc) loại xe nào dưới đây được tham gia giao thông với tốc độkhai thác tối đa cho phép là 70 km/h?",
           "answers": [
-            "X\" ô tô chởngười đến 28 chỗkhông kểchỗcủ\u0011 người lái x\" (trừx\" b1ýt); ô tô tải có trọng tải không lớn h\u001bn 3,5 tấn.",
-            "X\" ô tô chởngười trên 28 chỗkhông kểchỗngười lái x\" (trừx\" b1ýt); ô tô tải có trọng tải trên 3,5 tấn (trừô tô xi téc).",
-            "X\" b1ýt; ô tô đầ1 ké. ké. s\u001b mi r\u001b m.óc (trừô tô đầ1 ké. ké. s\u001b mi r\u001b m.óc xi téc); x\" mô tô; ô tô ch1yên dùng (trừô tô trộn vữ\u0011, ô tô trộn bê tông lư1 động).",
-            "Ô tô ké. r\u001b m.óc; ô tô ké. x\" khác; ô tô trộn vữ\u0011, ô tô trộn bê tông lư1 động, ô tô xi téc, ô tô đầ1 ké. ké. s\u001b mi r\u001b m.óc xi téc, ô tô ké. th\". r\u001b m.óc xi téc."
+            "Xe ô tô chở người đến 28 chỗkhông kểchỗcủa người lái xe (trừxe buýt); ô tô tải có trọng tải không lớn hơn 3,5 tấn.",
+            "Xe ô tô chở người trên 28 chỗkhông kểchỗngười lái xe (trừxe buýt); ô tô tải có trọng tải trên 3,5 tấn (trừô tô xi téc).",
+            "Xe buýt; ô tô đầu kéo kéo sơ mi rơ moóc (trừô tô đầu kéo kéo sơ mi rơ moóc xi téc); xe mô tô; ô tô chuyên dùng (trừô tô trộn vữa, ô tô trộn bê tông lưu động).",
+            "Ô tô kéo rơ moóc; ô tô kéo xe khác; ô tô trộn vữa, ô tô trộn bê tông lưu động, ô tô xi téc, ô tô đầu kéo kéo sơ mi rơ moóc xi téc, ô tô kéo theo rơ moóc xi téc."
           ],
           "correctIndex": 0,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Trên đường bộng!ài khu vực đông dân cư, đường h#i chiều h!ặc đường một chiều có một làn xQ cG giới (trừđường c#! tốc), l!ại xQ nà! dưới đây được th#m gi# gi#! thông với tốc độkh#i thác tối đ# ch! phép là 60 km/h?",
+          "body": "Trên đường bộ ngoài khu vực đông dân cư, đường hai chiều hoặc đường một chiều có một làn xe cơ giới (trừđường cao tốc), loại xe nào dưới đây được tham gia giao thông với tốc độkhai thác tối đa cho phép là 60 km/h?",
           "answers": [
-            "X\" ô tô chởngười đến 28 chỗkhông kểchỗcủ\u0011 người lái x\" (trừx\" b1ýt); ô tô tải có trọng tải không lớn h\u001bn 3,5 tấn.",
-            "X\" ô tô chởngười trên 28 chỗkhông kểchỗngười lái x\" (trừx\" b1ýt); ô tô tải có trọng tải trên 3,5 tấn (trừô tô xi téc).",
-            "X\" b1ýt; ô tô đầ1 ké. ké. s\u001b mi r\u001b m.óc (trừô tô đầ1 ké. ké. s\u001b mi r\u001b m.óc xi téc); x\" mô tô; ô tô ch1yên dùng (trừô tô trộn vữ\u0011, ô tô trộn bê tông lư1 động).",
-            "Ô tô ké. r\u001b m.óc; ô tô ké. x\" khác; ô tô trộn vữ\u0011, ô tô trộn bê tông lư1 động, ô tô xi téc, ô tô đầ1 ké. ké. s\u001b mi r\u001b m.óc xi téc, ô tô ké. th\". r\u001b m.óc xi téc."
+            "Xe ô tô chở người đến 28 chỗkhông kểchỗcủa người lái xe (trừxe buýt); ô tô tải có trọng tải không lớn hơn 3,5 tấn.",
+            "Xe ô tô chở người trên 28 chỗkhông kểchỗngười lái xe (trừxe buýt); ô tô tải có trọng tải trên 3,5 tấn (trừô tô xi téc).",
+            "Xe buýt; ô tô đầu kéo kéo sơ mi rơ moóc (trừô tô đầu kéo kéo sơ mi rơ moóc xi téc); xe mô tô; ô tô chuyên dùng (trừô tô trộn vữa, ô tô trộn bê tông lưu động).",
+            "Ô tô kéo rơ moóc; ô tô kéo xe khác; ô tô trộn vữa, ô tô trộn bê tông lưu động, ô tô xi téc, ô tô đầu kéo kéo sơ mi rơ moóc xi téc, ô tô kéo theo rơ moóc xi téc."
           ],
           "correctIndex": 0,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Người lái xQ phải giảm tốc độthấp hGn tốc độtối đ# ch! phép đến mức cần thiết, chú ý qu#n sát và chuẩn bịsẵn sàng những tình huống có thể xảy r# đểphòng ngừ# t#i nạn tr!ng các trường hợp nà! dưới đây?",
+          "body": "Người lái xe phải giảm tốc độthấp hơn tốc độtối đa cho phép đến mức cần thiết, chú ý quan sát và chuẩn bị sẵn sàng những tình huống có thể xảy ra để phòng ngừa tai nạn trong các trường hợp nào dưới đây?",
           "answers": [
-            "Gặp biển bá. ng1y hiểm và cảnh bá. trên đường.",
-            "Gặp biển chỉdẫn trên đường.",
-            "Gặp biển bá. hết mọi lệnh cấm.",
-            "Gặp biển bá. hết hạn chếtốc độtối đ\u0011 ch. phép."
+            "ơặp biển báo nguy hiểm và cảnh báo trên đường.",
+            "ơặp biển chỉdẫn trên đường.",
+            "ơặp biển báo hết mọi lệnh cấm.",
+            "ơặp biển báo hết hạn chếtốc độtối đa cho phép."
           ],
           "correctIndex": 0,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Khi gặp xQ buýt đ#ng dừng đón, trảkhách, người điều khiển xQ mô tô phải xửlý như thếnà! dưới đây?",
+          "body": "Khi gặp xe buýt đang dừng đón, trảkhách, người điều khiển xe mô tô phải xửlý như thếnào dưới đây?",
           "answers": [
-            "Tăng tốc độđểnh\u0011nh chóng vượt q1\u0011 x\" b1ýt.",
-            "Q1\u0011n sát, giảm tốc độđi q1\u0011 x\" b1ýt h.ặc dừng lại đểbả. đảm \u0011n t.àn.",
+            "Tăng tốc độđể nhanh chóng vượt qua xe buýt.",
+            "euan sát, giảm tốc độđi qua xe buýt hoặc dừng lại để bảo đảm an toàn.",
             "—",
             "—"
           ],
@@ -1219,11 +1099,131 @@
           "imageUrl": null
         },
         {
-          "body": "Việc sửdụng xQ mô tô, xQ gắn máy, xQ thô sG đểvận chuyển hành khách, hàng hó# phải thực hiện các quy định nà! dưới đây đểđảm bả! #n t!àn gi#! thông?",
+          "body": "Việc sử dụng xe mô tô, xe gắn máy, xe thô sơ để vận chuyển hành khách, hàng hóa phải thực hiện các quy định nào dưới đây để đảm bảo an toàn giao thông?",
           "answers": [
-            "Kiểm tr\u0011 điề1 kiện bả. đảm \u0011n t.àn củ\u0011 x\" trước khi th\u0011m gi\u0011 gi\u0011. thông đường bộ; m\u0011ng đủgiấy tờth\". q1y định củ\u0011 pháp l1ật.",
-            "Kiểm tr\u0011 việc sắp xếp hàng hó\u0011 bả. đảm \u0011n t.àn; không chởq1á sốngười, chở hành lý, hàng h.á vượt q1á khối lượng ch. phép h.ặc vượt q1á khổgiới hạn củ\u0011 x\".",
-            "Cảh\u0011i ý trên. CHƯƠNG II. VĂN HÓ\u0006 GI\u0006O THÔNG, ĐẠO ĐỨC NGƯỜI LÁI XE, KỸ NĂNG PHÒNG CHÁY, CHỮ\u0006 CHÁY VÀ CỨ\u0003 HỘ, CỨ\u0003 NẠN",
+            "Kiểm tra điều kiện bảo đảm an toàn của xe trước khi tham gia giao thông đường bộ; mang đủ giấy tờtheo quy định của pháp luật.",
+            "Kiểm tra việc sắp xếp hàng hóa bảo đảm an toàn; không chở quá sốngười, chở hành lý, hàng hoá vượt quá khối lượng cho phép hoặc vượt quá khổgiới hạn của xe.",
+            "Cảhai ý trên. CHƯƠNơ II. VĂN HÓ\u0006 ơI\u0006O THÔNơ, ĐẠO ĐỨC NơƯỜI LÁI XE, KỸ NĂNơ PHÒNơ CHÁY, CHỮ\u0006 CHÁY VÀ CỨ\u0003 HỘ, CỨ\u0003 NẠN",
+            "—"
+          ],
+          "correctIndex": 2,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Những hành vi nào sau đây thểhiện là người có văn hóa giao thông?",
+          "answers": [
+            "Luôn tuân thủpháp luật về trật tự, an toàn giao thông đường bộ, nhường nhịn và giúp đỡngười khác.",
+            "Đi nhanh, vượt đèn đỏnếu không có lực lượng Công an.",
+            "Bấm còi và nháy đèn liên tục để cảnh báo xe khác.",
+            "Tránh nhường đường để đi nhanh hơn."
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Khái niệm về văn hóa giao thông được hiểu như thếnào là đúng?",
+          "answers": [
+            "Là sựhiểu biết và chấp hành nghiêm chỉnh pháp luật về giao thông, là ý thức trách nhiệm với cộng đồng khi tham gia giao thông.",
+            "Là sựtôn trọng, nhường nhịn, giúp đỡvà ứng xửcó văn hóa giữa những người tham gia giao thông với nhau.",
+            "Cảhai ý trên.",
+            "—"
+          ],
+          "correctIndex": 2,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người lái xe không điều khiển xe đi đúng làn đường quy định, phóng nhanh, vượt ẩu, vượt đèn đỏ, đi vào đường cấm được coi là hành vi nào trong các hành vi dưới đây?",
+          "answers": [
+            "Là thiếu văn hóa giao thông, vi phạm pháp luật về trật tự, an toàn giao thông đường bộ.",
+            "Là thiếu văn hóa giao thông.",
+            "—",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người lái xe có văn hóa giao thông khi tham gia giao thông đường bộ phải đáp ứng các điều kiện nào dưới đây?",
+          "answers": [
+            "Hiểu biết và chấp hành nghiêm chỉnh pháp luật về giao thông đường bộ; có ý thức trách nhiệm với cộng đồng khi tham gia giao thông; tôn trọng, nhường nhịn, giúp đỡvà ứng xửcó văn hóa với những người cùng tham gia giao thông.",
+            "Điều khiển xe vượt quá tốc độ, đi không đúng làn đường.",
+            "—",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người lái xe mô tô có văn hóa giao thông khi tham gia giao thông phải tuân thủnhững quy định nào dưới đây?",
+          "answers": [
+            "Điều khiển xe đi bên phải theo chiều đi của mình; đi đúng phần đường, làn đường quy định; đội mũ bảo hiểm đúng quy chuẩn kỹthuật quốc gia, cài quai đúng quy cách.",
+            "Điều khiển xe đi trên phần đường, làn đường có ít phương tiện tham gia giao thông.",
+            "Điều khiển xe và đội mũ bảo hiểm ởnơi có biển báo bắt buộc đội mũ bảo hiểm.",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Trong các hành vi dưới đây, người lái xe có văn hóa giao thông phải ứng xửnhư thếnào?",
+          "answers": [
+            "Điều khiển xe đi bên phải theo chiều đi của mình; đi đúng phần đường, làn đường quy định; dừng, đỗxe đúng nơi quy định; đã uống rượu, bia thì không lái xe.",
+            "Điều khiển xe đi trên phần đường, làn đường có ít phương tiện giao thông; dừng xe, đỗxe ởnơi thuận tiện hoặc theo yêu cầu của hành khách, của người thân.",
+            "Dừng và đỗxe ởnơi thuận tiện cho việc chuyên chở hành khách và giao nhận hàng hóa; sử dụng ít rượu, bia thì có thểlái xe.",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Khi tham gia giao thông việc sử dụng còi xe nên dùng như thếnào để thểhiện là người có văn hóa giao thông?",
+          "answers": [
+            "Chỉbấm còi khi thật sựcần thiết, không bấm còi liên tục hoặc kéo dài, sử dụng còi với mức âm lượng theo quy định.",
+            "Bấm còi liên tục để các xe khác nhường đường.",
+            "Bấm còi to khi đi qua khu vực đông dân cư.",
+            "Không cần dùng còi, tránh gây tiếng ồn là văn minh."
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người điều khiển phương tiện tham giao thông đường bộ gây ra tai nạn giao thông đường bộ, người liên quan đến vụ tai nạn giao thông đường bộ có trách nhiệm gì dưới đây?",
+          "answers": [
+            "Dừng ngay phương tiện, cảnh báo nguy hiểm, giữnguyên hiện trường, trợ giúp người bị nạn và báo tin cho cơ quan Công an, cơ sởkhám bệnh, chữa bệnh.",
+            "Ởlại hiện trường vụ tai nạn giao thông đường bộ cho đến khi người của cơ quan Công an đến, trừtrường hợp phải đi cấp cứu, đưa người bị nạn đi cấp cứu hoặc xét thấy bị đe dọa đến tính mạng, sức khỏe nhưng phải đến trình báo ngay cơ quan Công an, Ủy ban nhân dân nơi gần nhất.",
+            "Cung cấp thông tin xác định danh tính về bản thân, người liên quan đến vụ tai nạn giao thông đường bộ và thông tin liên quan của vụ tai nạn giao thông đường bộ cho cơ quan có thẩm quyền.",
+            "Cảba ý trên."
+          ],
+          "correctIndex": 3,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Người có mặt tại nơi xảy ra vụ tai giao thông đường bộ có trách nhiệm gì dưới đây?",
+          "answers": [
+            "ơiúp đỡ, cứu chữa kịp thời người bị nạn; báo tin ngay cho cơ quan Công an, cơ sởkhám bệnh, chữa bệnh hoặc Ủy ban nhân dân nơi gần nhất; tham gia bảo vệ hiện trường; tham gia bảo vệtài sản của người bị nạn; cung cấp thông tin liên quan về vụ tai nạn theo yêu cầu của cơ quan có thẩm quyền.",
+            "Chụp lại hình ảnh vụ tai nạn (nếu có thiết bị ghi hình) và nhanh chóng rời khỏi hiện trường vụ tai nạn.",
+            "—",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Trong đoạn đường hai chiều tại khu đông dân cư đang ùn tắc, người điều khiển xe mô tô có văn hóa giao thông sẽlựa chọn cách xửlý tình huống nào dưới đây?",
+          "answers": [
+            "Cho xe lấn sang làn ngược chiều để nhanh chóng thoát khỏi nơi ùn tắc.",
+            "Điều khiển xe trên vỉa hè để nhanh chóng thoát khỏi nơi ùn tắc.",
+            "Kiên nhẫn tuân thủhướng dẫn của người điều khiển giao thông hoặc tín hiệu đèn giao thông, di chuyển trên đúng phần đường bên phải theo chiều đi, nhường đường cho các phương tiện đi ngược chiều. CHƯƠNơ III. KỸTH\u0003ẬT LÁI XE",
             "—"
           ],
           "correctIndex": 2,
@@ -1239,23 +1239,59 @@
       "isMock": true,
       "questions": [
         {
-          "body": "Những hành vi nà! s#u đây thểhiện là người có văn hó# gi#! thông?",
+          "body": "Trong nhóm các phương tiện giao thông đường bộ dưới đây, nhóm phương tiện nào là xe thô sơ?",
           "answers": [
-            "L1ôn t1ân thủpháp l1ật vềtrật tự, \u0011n t.àn gi\u0011. thông đường bộ, nhường nhịn và giúp đỡngười khác.",
-            "Đi nh\u0011nh, vượt đèn đỏnế1 không có lực lượng Công \u0011n.",
-            "Bấm còi và nháy đèn liên tục đểcảnh bá. x\" khác.",
-            "Tránh nhường đường đểđi nh\u0011nh h\u001bn."
+            "Xe đạp, xe đạp máy, xe đạp điện; xe xích lô; xe lăn dùng cho người khuyết tật; xe vật nuôi kéo và các loại xe tương tự.",
+            "Xe đạp (kểcảxe đạp máy, xe đạp điện), xe gắn máy, xe cơ giới dùng cho người khuyết tật và xe máy chuyên dùng.",
+            "Xe ô tô, máy ké., rơ moóc hoặc sơ mi rơ moóc được kéo bởi xe ô tô, máy ké..",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": true,
+          "imageUrl": null
+        },
+        {
+          "body": "Phương tiện giao thông đường bộ gồm những loại nào?",
+          "answers": [
+            "Phương tiện giao thông cơ giới đường bộ.",
+            "Phương tiện giao thông thô sơ đường bộ, xe máy chuyên dùng và các loại xe tương tự.",
+            "Cảhai ý trên.",
+            "—"
+          ],
+          "correctIndex": 2,
+          "isCritical": true,
+          "imageUrl": null
+        },
+        {
+          "body": "Khi điều khiển xe mô tô tay ga xuống đường dốc dài, độdốc cao, người lái xe cần thực hiện các thao tác nào dưới đây để bảo đảm an toàn? 1. ơiữtay ga ởmức độphù hợp, sử dụng phanh trước và phanh sau để giảm tốc độ.",
+          "answers": [
+            "Nhảhết tay ga, tắt động cơ, sử dụng phanh trước và phanh sau để giảm tốc độ.",
+            "Sửdụng phanh trước để giảm tốc độkết hợp với tắt chìa khóa điện của xe.",
+            "—",
+            "—"
           ],
           "correctIndex": 0,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Khái niệm vềvăn hó# gi#! thông được hiểu như thếnà! là đúng?",
+          "body": "Khi điều khiển xe trên đường vòng người lái xe cần phải làm gì để bảo đảm an toàn?",
           "answers": [
-            "Là sựhiể1 biết và chấp hành nghiêm chỉnh pháp l1ật vềgi\u0011. thông, là ý thức trách nhiệm với cộng đồng khi th\u0011m gi\u0011 gi\u0011. thông.",
-            "Là sựtôn trọng, nhường nhịn, giúp đỡvà ứng xửcó văn hó\u0011 giữ\u0011 những người th\u0011m gi\u0011 gi\u0011. thông với nh\u00111.",
-            "Cảh\u0011i ý trên.",
+            "euan sát cẩn thận các chướng ngại vật và báo hiệu bằng coi, đèn; giảm tốc độ tới mức cần thiết, về sốthấp và thực hiện quay vòng với tốc độphù hợp với bán kính cong của đường vòng.",
+            "euan sát cẩn thận các chướng ngại vật và báo hiệu bằng còi, đèn; tăng tốc để nhanh chóng qua đường vòng và giảm tốc độsau khi qua đường vòng.",
+            "—",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Khi điều khiển xe qua đường sắt, người lái xe cần phải thực hiện các thao tác nào dưới đây để bảo đảm an toàn?",
+          "answers": [
+            "Khi có chuông báo hoặc thanh chắn đã hạxuống, người lái xe phải dừng xe tạm thời đúng khoảng cách an toàn, kéo phanh tay nếu đường dốc hoặc phải chờlâu.",
+            "Khi không có chuông báo hoặc thanh chắn không hạxuống, người lái xe cần phải quan sát nếu thấy đủ điều kiện an toàn thì về sốthấp, tăng ga nhẹvà không thay đổi sốtrong quá trình vượt qua đường sắt để tránh động cơ chết máy cho xe cho vượt qua.",
+            "Cảhai ý trên.",
             "—"
           ],
           "correctIndex": 2,
@@ -1263,141 +1299,9 @@
           "imageUrl": null
         },
         {
-          "body": "Người lái xQ không điều khiển xQ đi đúng làn đường quy định, phóng nh#nh, vượt ẩu, vượt đèn đỏ, đi và! đường cấm được c!i là hành vi nà! tr!ng các hành vi dưới đây?",
+          "body": "Trong các loại nhiên liệu dưới đây, loại nhiên liệu nào giảm thiểu ô nhiễm môi trường?",
           "answers": [
-            "Là thiế1 văn hó\u0011 gi\u0011. thông, vi phạm pháp l1ật vềtrật tự, \u0011n t.àn gi\u0011. thông đường bộ.",
-            "Là thiế1 văn hó\u0011 gi\u0011. thông.",
-            "—",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người lái xQ có văn hó# gi#! thông khi th#m gi# gi#! thông đường bộphải đáp ứng các điều kiện nà! dưới đây?",
-          "answers": [
-            "Hiể1 biết và chấp hành nghiêm chỉnh pháp l1ật vềgi\u0011. thông đường bộ; có ý thức trách nhiệm với cộng đồng khi th\u0011m gi\u0011 gi\u0011. thông; tôn trọng, nhường nhịn, giúp đỡvà ứng xửcó văn hó\u0011 với những người cùng th\u0011m gi\u0011 gi\u0011. thông.",
-            "Điề1 khiển x\" vượt q1á tốc độ, đi không đúng làn đường.",
-            "—",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người lái xQ mô tô có văn hó# gi#! thông khi th#m gi# gi#! thông phải tuân thủnhững quy định nà! dưới đây?",
-          "answers": [
-            "Điề1 khiển x\" đi bên phải th\". chiề1 đi củ\u0011 mình; đi đúng phần đường, làn đường q1y định; đội mũ bả. hiểm đúng q1y ch1ẩn kỹth1ật q1ốc gi\u0011, cài q1\u0011i đúng q1y cách.",
-            "Điề1 khiển x\" đi trên phần đường, làn đường có ít phư\u001bng tiện th\u0011m gi\u0011 gi\u0011. thông.",
-            "Điề1 khiển x\" và đội mũ bả. hiểm ởn\u001bi có biển bá. bắt b1ộc đội mũ bả. hiểm.",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Tr!ng các hành vi dưới đây, người lái xQ có văn hó# gi#! thông phải ứng xửnhư thếnà!?",
-          "answers": [
-            "Điề1 khiển x\" đi bên phải th\". chiề1 đi củ\u0011 mình; đi đúng phần đường, làn đường q1y định; dừng, đỗx\" đúng n\u001bi q1y định; đã 1ống rượ1, bi\u0011 thì không lái x\".",
-            "Điề1 khiển x\" đi trên phần đường, làn đường có ít phư\u001bng tiện gi\u0011. thông; dừng x\", đỗx\" ởn\u001bi th1ận tiện h.ặc th\". yê1 cầ1 củ\u0011 hành khách, củ\u0011 người thân.",
-            "Dừng và đỗx\" ởn\u001bi th1ận tiện ch. việc ch1yên chởhành khách và gi\u0011. nhận hàng hó\u0011; sửdụng ít rượ1, bi\u0011 thì có thểlái x\".",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Khi th#m gi# gi#! thông việc sửdụng còi xQ nên dùng như thếnà! đểthểhiện là người có văn hó# gi#! thông?",
-          "answers": [
-            "Chỉbấm còi khi thật sựcần thiết, không bấm còi liên tục h.ặc ké. dài, sử dụng còi với mức âm lượng th\". q1y định.",
-            "Bấm còi liên tục đểcác x\" khác nhường đường.",
-            "Bấm còi t. khi đi q1\u0011 kh1 vực đông dân cư.",
-            "Không cần dùng còi, tránh gây tiếng ồn là văn minh."
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người điều khiển phưGng tiện th#m gi#! thông đường bộgây r# t#i nạn gi#! thông đường bộ, người liên qu#n đến vụt#i nạn gi#! thông đường bộcó trách nhiệm gì dưới đây?",
-          "answers": [
-            "Dừng ng\u0011y phư\u001bng tiện, cảnh bá. ng1y hiểm, giững1yên hiện trường, trợgiúp người bịnạn và bá. tin ch. c\u001b q1\u0011n Công \u0011n, c\u001b sởkhám bệnh, chữ\u0011 bệnh.",
-            "Ởlại hiện trường vụt\u0011i nạn gi\u0011. thông đường bộch. đến khi người củ\u0011 c\u001b q1\u0011n Công \u0011n đến, trừtrường hợp phải đi cấp cứ1, đư\u0011 người bịnạn đi cấp cứ1 h.ặc xét thấy bịđ\" dọ\u0011 đến tính mạng, sức khỏ\" nhưng phải đến trình bá. ng\u0011y c\u001b q1\u0011n Công \u0011n, Ủy b\u0011n nhân dân n\u001bi gần nhất.",
-            "C1ng cấp thông tin xác định d\u0011nh tính vềbản thân, người liên q1\u0011n đến vụt\u0011i nạn gi\u0011. thông đường bộvà thông tin liên q1\u0011n củ\u0011 vụt\u0011i nạn gi\u0011. thông đường bộch. c\u001b q1\u0011n có thẩm q1yền.",
-            "Cảb\u0011 ý trên."
-          ],
-          "correctIndex": 3,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Người có mặt tại nGi xảy r# vụt#i gi#! thông đường bộcó trách nhiệm gì dưới đây?",
-          "answers": [
-            "Giúp đỡ, cứ1 chữ\u0011 kịp thời người bịnạn; bá. tin ng\u0011y ch. c\u001b q1\u0011n Công \u0011n, c\u001b sởkhám bệnh, chữ\u0011 bệnh h.ặc Ủy b\u0011n nhân dân n\u001bi gần nhất; th\u0011m gi\u0011 bả. vệ hiện trường; th\u0011m gi\u0011 bả. vệtài sản củ\u0011 người bịnạn; c1ng cấp thông tin liên q1\u0011n vềvụt\u0011i nạn th\". yê1 cầ1 củ\u0011 c\u001b q1\u0011n có thẩm q1yền.",
-            "Chụp lại hình ảnh vụt\u0011i nạn (nế1 có thiết bịghi hình) và nh\u0011nh chóng rời khỏi hiện trường vụt\u0011i nạn.",
-            "—",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Tr!ng đ!ạn đường h#i chiều tại khu đông dân cư đ#ng ùn tắc, người điều khiển xQ mô tô có văn hó# gi#! thông sẽlự# chọn cách xửlý tình huống nà! dưới đây?",
-          "answers": [
-            "Ch. x\" lấn s\u0011ng làn ngược chiề1 đểnh\u0011nh chóng th.át khỏi n\u001bi ùn tắc.",
-            "Điề1 khiển x\" trên vỉ\u0011 hè đểnh\u0011nh chóng th.át khỏi n\u001bi ùn tắc.",
-            "Kiên nhẫn t1ân thủhướng dẫn củ\u0011 người điề1 khiển gi\u0011. thông h.ặc tín hiệ1 đèn gi\u0011. thông, di ch1yển trên đúng phần đường bên phải th\". chiề1 đi, nhường đường ch. các phư\u001bng tiện đi ngược chiề1. CHƯƠNG III. KỸTH\u0003ẬT LÁI XE",
-            "—"
-          ],
-          "correctIndex": 2,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Khi điều khiển xQ mô tô t#y g# xuống đường dốc dài, độdốc c#!, người lái xQ cần thực hiện các th#! tác nà! dưới đây đểbả! đảm #n t!àn? 1. Giữt\u0011y g\u0011 ởmức độphù hợp, sửdụng ph\u0011nh trước và ph\u0011nh s\u00111 đểgiảm tốc độ.",
-          "answers": [
-            "Nhảhết t\u0011y g\u0011, tắt động c\u001b, sửdụng ph\u0011nh trước và ph\u0011nh s\u00111 đểgiảm tốc độ.",
-            "Sửdụng ph\u0011nh trước đểgiảm tốc độkết hợp với tắt chì\u0011 khó\u0011 điện củ\u0011 x\".",
-            "—",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Khi điều khiển xQ trên đường vòng người lái xQ cần phải làm gì để bả! đảm #n t!àn?",
-          "answers": [
-            "Q1\u0011n sát cẩn thận các chướng ngại vật và bá. hiệ1 bằng c.i, đèn; giảm tốc độ tới mức cần thiết, vềsốthấp và thực hiện q1\u0011y vòng với tốc độphù hợp với bán kính c.ng củ\u0011 đường vòng.",
-            "Q1\u0011n sát cẩn thận các chướng ngại vật và bá. hiệ1 bằng còi, đèn; tăng tốc để nh\u0011nh chóng q1\u0011 đường vòng và giảm tốc độs\u00111 khi q1\u0011 đường vòng.",
-            "—",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Khi điều khiển xQ qu# đường sắt, người lái xQ cần phải thực hiện các th#! tác nà! dưới đây đểbả! đảm #n t!àn?",
-          "answers": [
-            "Khi có ch1ông bá. h.ặc th\u0011nh chắn đã hạx1ống, người lái x\" phải dừng x\" tạm thời đúng kh.ảng cách \u0011n t.àn, ké. ph\u0011nh t\u0011y nế1 đường dốc h.ặc phải chờlâ1.",
-            "Khi không có ch1ông bá. h.ặc th\u0011nh chắn không hạx1ống, người lái x\" cần phải q1\u0011n sát nế1 thấy đủđiề1 kiện \u0011n t.àn thì vềsốthấp, tăng g\u0011 nhẹvà không th\u0011y đổi sốtr.ng q1á trình vượt q1\u0011 đường sắt đểtránh động c\u001b chết máy ch. x\" ch. vượt q1\u0011.",
-            "Cảh\u0011i ý trên.",
-            "—"
-          ],
-          "correctIndex": 2,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Tr!ng các l!ại nhiên liệu dưới đây, l!ại nhiên liệu nà! giảm thiểu ô nhiễm môi trường?",
-          "answers": [
-            "Xăng và dầ1 di\"s\"l.",
+            "Xăng và dầu diesel.",
             "Xăng sinh học và khí sinh học.",
             "Ý 1 và ý 2.",
             "—"
@@ -1407,23 +1311,23 @@
           "imageUrl": null
         },
         {
-          "body": "Các biện pháp tiết kiệm nhiên liệu khi chạy xQ?",
+          "body": "Các biện pháp tiết kiệm nhiên liệu khi chạy xe?",
           "answers": [
-            "Bả. dưỡng x\" th\". định kỳvà có kếh.ạch lộtrình trước khi x\" chạy.",
-            "Kiểm tr\u0011 áp s1ất lốp th\". q1y định và chạy x\" với tốc độphù hợp với tình trạng mặt đường và mật độgi\u0011. thông trên đường.",
-            "Cảh\u0011i ý trên.",
-            "Câu 240. Khi tầm nhìn bịhạn chếbởi sưGng mù h!ặc mư# t!, người lái xQ phải thực hiện các th#! tác nà! đểbả! đảm #n t!àn?"
+            "Bảo dưỡng xe theo định kỳvà có kếhoạch lộtrình trước khi xe chạy.",
+            "Kiểm tra áp suất lốp theo quy định và chạy xe với tốc độphù hợp với tình trạng mặt đường và mật độgiao thông trên đường.",
+            "Cảhai ý trên.",
+            "Câu 240. Khi tầm nhìn bị hạn chếbởi sương mù hoặc mưa to, người lái xe phải thực hiện các thao tác nào để bảo đảm an toàn?"
           ],
           "correctIndex": 2,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Khi đèn ph# củ# xQ đi ngược chiều gây chói mắt, làm giảm khảnăng qu#n sát trên đường, người lái xQ xửlý như thếnà! dưới đây đểbả! đảm #n t!àn?",
+          "body": "Khi đèn pha của xe đi ngược chiều gây chói mắt, làm giảm khảnăng quan sát trên đường, người lái xe xửlý như thếnào dưới đây để bảo đảm an toàn?",
           "answers": [
-            "Giảm tốc độ, giữvững t\u0011y lái, nhìn chếch s\u0011ng lềđường bên phải.",
-            "Bật đèn ph\u0011 chiế1 x\u0011 và giững1yên tốc độ.",
-            "Tăng tốc độ, bật đèn ph\u0011 đối diện x\" phí\u0011 trước.",
+            "ơiảm tốc độ, giữvững tay lái, nhìn chếch sang lề đường bên phải.",
+            "Bật đèn pha chiếu xa và giữnguyên tốc độ.",
+            "Tăng tốc độ, bật đèn pha đối diện xe phía trước.",
             "—"
           ],
           "correctIndex": 0,
@@ -1431,23 +1335,23 @@
           "imageUrl": null
         },
         {
-          "body": "Đểđạt được hiệu quảph#nh c#! nhất, người lái xQ mô tô phải sử dụng các kỹnăng như thếnà! dưới đây?",
+          "body": "Đểđạt được hiệu quảphanh cao nhất, người lái xe mô tô phải sử dụng các kỹnăng như thếnào dưới đây?",
           "answers": [
-            "Sửdụng ph\u0011nh trước.",
-            "Sửdụng ph\u0011nh s\u00111.",
-            "Giảm hết g\u0011, sửdụng đồng thời cảph\u0011nh s\u00111 và ph\u0011nh trước.",
-            "Câu 254. Khi đ#ng lái xQ mô tô h!ặc ô tô, nếu có nhu cầu sửdụng điện th!ại đểnhắn tin h!ặc gọi điện, người lái xQ phải thực hiện như thếnà! tr!ng các tình huống nêu dưới đây?"
+            "Sửdụng phanh trước.",
+            "Sửdụng phanh sau.",
+            "ơiảm hết ga, sử dụng đồng thời cảphanh sau và phanh trước.",
+            "Câu 254. Khi đang lái xe mô tô hoặc ô tô, nếu có nhu cầu sử dụng điện thoại để nhắn tin hoặc gọi điện, người lái xe phải thực hiện như thếnào trong các tình huống nêu dưới đây?"
           ],
           "correctIndex": 2,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Những thói quQn nà! dưới đây khi điều khiển xQ mô tô t#y g# th#m gi# gi#! thông dễgây t#i nạn nguy hiểm?",
+          "body": "Những thói quen nào dưới đây khi điều khiển xe mô tô tay ga tham gia giao thông dễgây tai nạn nguy hiểm?",
           "answers": [
             "Sửdụng còi.",
-            "Ph\u0011nh đồng thời cảph\u0011nh trước và ph\u0011nh s\u00111.",
-            "Chỉsửdụng ph\u0011nh trước.",
+            "Phanh đồng thời cảphanh trước và phanh sau.",
+            "Chỉsử dụng phanh trước.",
             "—"
           ],
           "correctIndex": 2,
@@ -1455,23 +1359,23 @@
           "imageUrl": null
         },
         {
-          "body": "Khi điều khiển xQ mô tô qu#y đầu, người lái xQ cần thực hiện như thếnà! đểbả! đảm #n t!àn?",
+          "body": "Khi điều khiển xe mô tô quay đầu, người lái xe cần thực hiện như thếnào để bảo đảm an toàn?",
           "answers": [
-            "Bật tín hiệ1 bá. rẽtrước khi q1\u0011y đầ1, từtừgiảm tốc độđến mức có thểdừng lại.",
-            "Chỉq1\u0011y đầ1 x\" tại những n\u001bi được phép q1\u0011y đầ1.",
-            "Q1\u0011n sát \u0011n t.àn các phư\u001bng tiện tới từphí\u0011 trước, phí\u0011 s\u00111, h\u0011i bên đồng thời nhường đường ch. x\" từbên phải và phí\u0011 trước đi tới.",
-            "Cảb\u0011 ý trên."
+            "Bật tín hiệu báo rẽtrước khi quay đầu, từtừgiảm tốc độđến mức có thểdừng lại.",
+            "Chỉquay đầu xe tại những nơi được phép quay đầu.",
+            "euan sát an toàn các phương tiện tới từphía trước, phía sau, hai bên đồng thời nhường đường cho xe từbên phải và phía trước đi tới.",
+            "Cảba ý trên."
           ],
           "correctIndex": 3,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "T#y g# trên xQ mô tô h#i bánh có tác dụng gì dưới đây?",
+          "body": "Tay ga trên xe mô tô hai bánh có tác dụng gì dưới đây?",
           "answers": [
-            "Đểđiề1 khiển x\" chạy vềphí\u0011 trước.",
-            "Đểđiề1 tiết công s1ất động c\u001b q1\u0011 đó điề1 khiển tốc độcủ\u0011 x\".",
-            "Đểđiề1 khiển x\" chạy lùi.",
+            "Đểđiều khiển xe chạy về phía trước.",
+            "Đểđiều tiết công suất động cơ qua đó điều khiển tốc độcủa xe.",
+            "Đểđiều khiển xe chạy lùi.",
             "Ý 1 và ý 2."
           ],
           "correctIndex": 3,
@@ -1479,60 +1383,156 @@
           "imageUrl": null
         },
         {
-          "body": "GưGng chiếu hậu củ# xQ mô tô h#i bánh có tác dụng gì dưới đây?",
+          "body": "ơương chiếu hậu của xe mô tô hai bánh có tác dụng gì dưới đây?",
           "answers": [
-            "Đểq1\u0011n sát \u0011n t.àn phí\u0011 bên trái khi ch1ẩn bịrẽtrái.",
-            "Đểq1\u0011n sát \u0011n t.àn phí\u0011 bên phải khi ch1ẩn bịrẽphải.",
-            "Đểq1\u0011n sát \u0011n t.àn phí\u0011 s\u00111 củ\u0011 bên trái và bên phải trước khi ch1yển hướng.",
-            "Đểq1\u0011n sát \u0011n t.àn phí\u0011 trước cảbên trái và bên phải trước khi ch1yển hướng."
+            "Đểquan sát an toàn phía bên trái khi chuẩn bị rẽtrái.",
+            "Đểquan sát an toàn phía bên phải khi chuẩn bị rẽphải.",
+            "Đểquan sát an toàn phía sau của bên trái và bên phải trước khi chuyển hướng.",
+            "Đểquan sát an toàn phía trước cảbên trái và bên phải trước khi chuyển hướng."
           ],
           "correctIndex": 0,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Đểbả! đảm #n t!àn khi th#m gi# gi#! thông, người lái xQ mô tô h#i bánh cần điều khiển t#y g# như thếnà!?",
+          "body": "Đểbảo đảm an toàn khi tham gia giao thông, người lái xe mô tô hai bánh cần điều khiển tay ga như thếnào?",
           "answers": [
-            "Tăng g\u0011 thật mạnh, giảm g\u0011 từtừ.",
-            "Tăng g\u0011 thật mạnh, giảm g\u0011 thật nh\u0011nh.",
-            "Tăng g\u0011 từtừ, giảm g\u0011 thật nh\u0011nh.",
-            "Tăng g\u0011 từtừ, giảm g\u0011 từtừ."
+            "Tăng ga thật mạnh, giảm ga từtừ.",
+            "Tăng ga thật mạnh, giảm ga thật nhanh.",
+            "Tăng ga từtừ, giảm ga thật nhanh.",
+            "Tăng ga từtừ, giảm ga từtừ."
           ],
           "correctIndex": 2,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Đểtránh đổ, ngã khi điều khiển xQ mô tô h#i bánh ởnGi đường xấu, nhỏvà hẹp, người lái xQ cần xửlý như thếnà!?",
+          "body": "Đểtránh đổ, ngã khi điều khiển xe mô tô hai bánh ởnơi đường xấu, nhỏvà hẹp, người lái xe cần xửlý như thếnào?",
           "answers": [
-            "Đi ởtốc độthấp, q1\u0011n sát liên tục kh.ảng cách từ05 m đến 10 m phí\u0011 trước để điề1 chỉnh sớm hướng di ch1yển.",
-            "Tr.ng q1á trình di ch1yển không nên dùng ph\u0011nh trước tránh làm khó\u0011 bánh dẫn hướng.",
-            "Không được lắc người s\u0011ng trái h.ặc phải nhiề1, trọng tâm c\u001b thểcần trùng với trọng tâm củ\u0011 x\".",
-            "Cảb\u0011 ý trên."
+            "Đi ởtốc độthấp, quan sát liên tục khoảng cách từ05 m đến 10 m phía trước để điều chỉnh sớm hướng di chuyển.",
+            "Trong quá trình di chuyển không nên dùng phanh trước tránh làm khóa bánh dẫn hướng.",
+            "Không được lắc người sang trái hoặc phải nhiều, trọng tâm cơ thểcần trùng với trọng tâm của xe.",
+            "Cảba ý trên."
           ],
           "correctIndex": 3,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Biển nà! cấm máy ké!?",
+          "body": "Biển nào cấm máy kéo?",
           "answers": [
             "Biển 1.",
             "Biển 2 và biển 3.",
             "Biển 1 và biển 3.",
-            "Cảb\u0011 biển."
+            "Cảba biển."
           ],
           "correctIndex": 1,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu cấm xQ mô tô b# bánh chởhàng đi qu#?",
+          "body": "Biển nào báo hiệu cấm xe mô tô ba bánh chở hàng đi qua?",
           "answers": [
             "Biển 1 và biển 2.",
             "Biển 1 và biển 3.",
             "Biển 2 và biển 3.",
             "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Biển nào dưới đây xe gắn máy được phép đi vào?",
+          "answers": [
+            "Biển 1.",
+            "Biển 2.",
+            "Cảhai biển.",
+            "—"
+          ],
+          "correctIndex": 2,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Biển nào báo hiệu cấm xe mô tô đi vào?",
+          "answers": [
+            "Biển 1.",
+            "Biển 2.",
+            "Biển 3.",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Khi gặp biển nào thì xe mô tô hai bánh được đi vào?",
+          "answers": [
+            "Không biển nà..",
+            "Biển 1 và biển 2.",
+            "Biển 2 và biển 3.",
+            "Cảba biển."
+          ],
+          "correctIndex": 2,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Biển nào cấm quay đầu xe?",
+          "answers": [
+            "Biển 1.",
+            "Biển 2.",
+            "Không biển nà..",
+            "Cảhai biển."
+          ],
+          "correctIndex": 1,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Biển nào cấm xe rẽtrái?",
+          "answers": [
+            "Biển 1.",
+            "Biển 2.",
+            "Cảhai biển.",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Khi gặp biển nào xe được rẽtrái?",
+          "answers": [
+            "Biển 1.",
+            "Biển 2.",
+            "Không biển nà..",
+            "—"
+          ],
+          "correctIndex": 1,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Biển nào cấm các phương tiện rẽphải?",
+          "answers": [
+            "Biển 1 và biển 2.",
+            "Biển 1 và biển 3.",
+            "Biển 2 và biển 3.",
+            "Cảba biển."
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Biển nào cấm các phương tiện rẽtrái?",
+          "answers": [
+            "Biển 1 và biển 2.",
+            "Biển 1 và biển 3.",
+            "Biển 2 và biển 3.",
+            "Cảba biển."
           ],
           "correctIndex": 0,
           "isCritical": false,
@@ -1547,67 +1547,31 @@
       "isMock": true,
       "questions": [
         {
-          "body": "Biển nà! dưới đây xQ gắn máy được phép đi và!?",
+          "body": "Người tham gia giao thông đường bộ gồm những đối tượng nào?",
           "answers": [
-            "Biển 1.",
-            "Biển 2.",
-            "Cảh\u0011i biển.",
+            "Người điều khiển, người được chở trên phương tiện tham gia giao thông đường bộ.",
+            "Người điều khiển, dẫn dắt vật nuôi trên đường bộ; người đi bộ trên đường bộ.",
+            "Cảhai ý trên.",
             "—"
           ],
           "correctIndex": 2,
-          "isCritical": false,
+          "isCritical": true,
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu cấm xQ mô tô đi và!?",
+          "body": "Người điều khiển phương tiện tham gia giao thông đường bộ gồm những đối tượng nào dưới đây?",
           "answers": [
-            "Biển 1.",
-            "Biển 2.",
-            "Biển 3.",
+            "Người điều khiển xe cơ giới, người điều khiển xe thô sơ.",
+            "Người điều khiển xe máy chuyên dùng.",
+            "Cảhai ý trên.",
             "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Khi gặp biển nà! thì xQ mô tô h#i bánh được đi và!?",
-          "answers": [
-            "Không biển nà..",
-            "Biển 1 và biển 2.",
-            "Biển 2 và biển 3.",
-            "Cảb\u0011 biển."
           ],
           "correctIndex": 2,
-          "isCritical": false,
+          "isCritical": true,
           "imageUrl": null
         },
         {
-          "body": "Biển nà! cấm qu#y đầu xQ?",
-          "answers": [
-            "Biển 1.",
-            "Biển 2.",
-            "Không biển nà..",
-            "Cảh\u0011i biển."
-          ],
-          "correctIndex": 1,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Biển nà! cấm xQ rẽtrái?",
-          "answers": [
-            "Biển 1.",
-            "Biển 2.",
-            "Cảh\u0011i biển.",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Khi gặp biển nà! xQ được rẽtrái?",
+          "body": "Biển nào xe được phép rẽtrái?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -1619,47 +1583,11 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! cấm các phưGng tiện rẽphải?",
-          "answers": [
-            "Biển 1 và biển 2.",
-            "Biển 1 và biển 3.",
-            "Biển 2 và biển 3.",
-            "Cảb\u0011 biển."
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Biển nà! cấm các phưGng tiện rẽtrái?",
-          "answers": [
-            "Biển 1 và biển 2.",
-            "Biển 1 và biển 3.",
-            "Biển 2 và biển 3.",
-            "Cảb\u0011 biển."
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Biển nà! xQ được phép rẽtrái?",
+          "body": "Biển nào xe quay đầu không bị cấm?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
-            "Không biển nà..",
-            "—"
-          ],
-          "correctIndex": 1,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Biển nà! xQ qu#y đầu không bịcấm?",
-          "answers": [
-            "Biển 1.",
-            "Biển 2.",
-            "Cảh\u0011i biển.",
+            "Cảhai biển.",
             "—"
           ],
           "correctIndex": 2,
@@ -1667,11 +1595,11 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! xQ được phép qu#y đầu nhưng không được rẽtrái?",
+          "body": "Biển nào xe được phép quay đầu nhưng không được rẽtrái?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
-            "Cảh\u0011i biển.",
+            "Cảhai biển.",
             "—"
           ],
           "correctIndex": 0,
@@ -1679,11 +1607,11 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! là biển \"Cấm đi ngược chiều\"?",
+          "body": "Biển nào là biển eCấm đi ngược chiềue?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
-            "Cảb\u0011 biển.",
+            "Cảba biển.",
             "—"
           ],
           "correctIndex": 1,
@@ -1691,7 +1619,7 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! dưới đây các phưGng tiện không được phép đi và!?",
+          "body": "Biển nào dưới đây các phương tiện không được phép đi vào?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -1703,11 +1631,11 @@
           "imageUrl": null
         },
         {
-          "body": "Khi gặp biển nà! xQ ưu tiên thQ! luật định vẫn phải dừng lại?",
+          "body": "Khi gặp biển nào xe ưu tiên theo luật định vẫn phải dừng lại?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
-            "Cảb\u0011 biển.",
+            "Cảba biển.",
             "—"
           ],
           "correctIndex": 1,
@@ -1715,11 +1643,11 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! cấm tất cảcác l!ại xQ cG giới và thô sG đi lại trên đường, trừxQ ưu tiên thQ! luật định (nếu đường vẫn ch! xQ chạy được)?",
+          "body": "Biển nào cấm tất cảcác loại xe cơ giới và thô sơ đi lại trên đường, trừxe ưu tiên theo luật định (nếu đường vẫn cho xe chạy được)?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
-            "Cảh\u0011i biển.",
+            "Cảhai biển.",
             "—"
           ],
           "correctIndex": 0,
@@ -1727,10 +1655,10 @@
           "imageUrl": null
         },
         {
-          "body": "Biển bá! này có ý nghĩ# như thếnà!?",
+          "body": "Biển báo này có ý nghĩa như thếnào?",
           "answers": [
-            "Tốc độtối đ\u0011 ch. phép vềb\u0011n đêm ch. các phư\u001bng tiện là 70 km/h.",
-            "Tốc độtối thiể1 ch. phép vềb\u0011n đêm ch. các phư\u001bng tiện là 70 km/h. Câu345.BiểnnàycóhiệulựcđốivớixQmôtôh#ibánh,b#bánhchởhàngkhông?",
+            "Tốc độtối đa cho phép về ban đêm cho các phương tiện là 70 km/h.",
+            "Tốc độtối thiểu cho phép về ban đêm cho các phương tiện là 70 km/h. Câu345.Biểnnàycóhiệulựcđốivớixemôtôhaibánh,babánhchở hàngkhông?",
             "Có.",
             "Không."
           ],
@@ -1739,11 +1667,11 @@
           "imageUrl": null
         },
         {
-          "body": "Biển này có ý nghĩ# như thếnà!?",
+          "body": "Biển này có ý nghĩa như thếnào?",
           "answers": [
-            "Cấm x\" c\u001b giới (trừx\" ư1 tiên th\". l1ật định) đi thẳng.",
-            "Cấm các l.ại x\" c\u001b giới và x\" mô tô (trừx\" ư1 tiên th\". l1ật định) đi vềbên trái và bên phải.",
-            "Hướng trái và phải không cấm x\" c\u001b giới.",
+            "Cấm xe cơ giới (trừxe ưu tiên theo luật định) đi thẳng.",
+            "Cấm các loại xe cơ giới và xe mô tô (trừxe ưu tiên theo luật định) đi về bên trái và bên phải.",
+            "Hướng trái và phải không cấm xe cơ giới.",
             "—"
           ],
           "correctIndex": 1,
@@ -1751,11 +1679,11 @@
           "imageUrl": null
         },
         {
-          "body": "Biển phụđặt dưới biển cấm bóp còi có ý nghĩ# như thếnà!?",
+          "body": "Biển phụđặt dưới biển cấm bóp còi có ý nghĩa như thếnào?",
           "answers": [
-            "Bá. kh.ảng cách đến n\u001bi cấm bóp còi.",
-            "Chiề1 dài đ.ạn đường cấm bóp còi từn\u001bi đặt biển.",
-            "Bá. cấm dùng còi có độv\u0011ng x\u0011 500m.",
+            "Báo khoảng cách đến nơi cấm bóp còi.",
+            "Chiều dài đoạn đường cấm bóp còi từnơi đặt biển.",
+            "Báo cấm dùng còi có độvang xa 500m.",
             "—"
           ],
           "correctIndex": 1,
@@ -1763,7 +1691,7 @@
           "imageUrl": null
         },
         {
-          "body": "Chiều dài đ!ạn đường 500 m từnGi đặt biển này, người lái xQ có được phép bấm còi không?",
+          "body": "Chiều dài đoạn đường 500 m từnơi đặt biển này, người lái xe có được phép bấm còi không?",
           "answers": [
             "Được phép.",
             "Không được phép.",
@@ -1775,7 +1703,7 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! xQ mô tô h#i bánh được đi và!?",
+          "body": "Biển nào xe mô tô hai bánh được đi vào?",
           "answers": [
             "Biển 1 và biển 2.",
             "Biển 1 và biển 3.",
@@ -1787,7 +1715,7 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! xQ mô tô h#i bánh không được đi và!?",
+          "body": "Biển nào xe mô tô hai bánh không được đi vào?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -1799,10 +1727,10 @@
           "imageUrl": null
         },
         {
-          "body": "B# biển này có hiệu lực như thếnà!?",
+          "body": "Ba biển này có hiệu lực như thếnào?",
           "answers": [
-            "Cấm các l.ại x\" ởbiển phụđi và..",
-            "Cấm các l.ại x\" c\u001b giới đi và. trừl.ại x\" ởbiển phụ.",
+            "Cấm các loại xe ởbiển phụđi và..",
+            "Cấm các loại xe cơ giới đi vào trừloại xe ởbiển phụ.",
             "—",
             "—"
           ],
@@ -1811,11 +1739,11 @@
           "imageUrl": null
         },
         {
-          "body": "Biển này có ý nghĩ# như thếnà!?",
+          "body": "Biển này có ý nghĩa như thếnào?",
           "answers": [
-            "Cấm dừng x\" vềhướng bên trái.",
-            "Cấm dừng và đỗx\" th\". hướng bên phải.",
-            "Được phép đỗx\" và dừng x\" th\". hướng bên phải.",
+            "Cấm dừng xe về hướng bên trái.",
+            "Cấm dừng và đỗxe theo hướng bên phải.",
+            "Được phép đỗxe và dừng xe theo hướng bên phải.",
             "—"
           ],
           "correctIndex": 1,
@@ -1823,11 +1751,11 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! là biển \"Tốc độtối đ# ch! phép vềb#n đêm\"?",
+          "body": "Biển nào là biển eTốc độtối đa cho phép về ban đême?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
-            "Cảh\u0011i biển.",
+            "Cảhai biển.",
             "—"
           ],
           "correctIndex": 0,
@@ -1835,7 +1763,7 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu hạn chếtốc độcủ# phưGng tiện không vượt quá trịsốghi trên biển? 1 2",
+          "body": "Biển nào báo hiệu hạn chếtốc độcủa phương tiện không vượt quá trịsốghi trên biển? 1 2",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -1843,6 +1771,78 @@
             "—"
           ],
           "correctIndex": 1,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Số50 ghi trên biển báo dưới đây có ý nghĩa như thếnào?",
+          "answers": [
+            "Tốc độtối đa các xe cơ giới được phép chạy.",
+            "Tốc độtối thiểu các xe cơ giới được phép chạy.",
+            "—",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Biển báo dưới đây có ý nghĩa như thếnào?",
+          "answers": [
+            "Báo hiệu tốc độtối đa cho phép các xe cơ giới chạy.",
+            "Báo hiệu tốc độtối thiểu cho phép các xe cơ giới chạy.",
+            "—",
+            "—"
+          ],
+          "correctIndex": 1,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "ơặp biển nào người lái xe phải nhường đường cho người đi bộ?",
+          "answers": [
+            "Biển 1.",
+            "Biển 2.",
+            "Biển 3.",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Biển nào chỉđường dành cho người đi bộ, các loại xe không được đi vào khi gặp biển này?",
+          "answers": [
+            "Biển 1.",
+            "Biển 1 và biển 3.",
+            "Biển 3.",
+            "Cảba biển."
+          ],
+          "correctIndex": 2,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Biển nào báo hiệu eĐường dành cho xe thô sơe?",
+          "answers": [
+            "Biển 1.",
+            "Biển 2.",
+            "Biển 3.",
+            "—"
+          ],
+          "correctIndex": 0,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Biển nào báo hiệu sắp đến chỗgiao nhau nguy hiểm?",
+          "answers": [
+            "Biển 1.",
+            "Biển 1 và biển 2.",
+            "Biển 2 và biển 3.",
+            "Cảba biển."
+          ],
+          "correctIndex": 3,
           "isCritical": false,
           "imageUrl": null
         }
@@ -1855,11 +1855,35 @@
       "isMock": true,
       "questions": [
         {
-          "body": "Số50 ghi trên biển bá! dưới đây có ý nghĩ# như thếnà!?",
+          "body": "Người điều khiển giao thông đường bộ được hiểu như thếnào là đúng?",
           "answers": [
-            "Tốc độtối đ\u0011 các x\" c\u001b giới được phép chạy.",
-            "Tốc độtối thiể1 các x\" c\u001b giới được phép chạy.",
-            "—",
+            "Là người điều khiển phương tiện tham gia giao thông đường bộ.",
+            "Là Cảnh sát giao thông và người được giao nhiệm vụ hướng dẫn giao thông trên đường bộ.",
+            "Là người tham gia giao thông đường bộ.",
+            "—"
+          ],
+          "correctIndex": 1,
+          "isCritical": true,
+          "imageUrl": null
+        },
+        {
+          "body": "Hành vi nào dưới đây bị nghiêm cấm?",
+          "answers": [
+            "Sửdụng xe đạp đi trên các tuyến quốc lộ.",
+            "Rải vật sắc nhọn, đổchất gây trơn trượt trên đường bộ.",
+            "Cảhai ý trên.",
+            "—"
+          ],
+          "correctIndex": 1,
+          "isCritical": true,
+          "imageUrl": null
+        },
+        {
+          "body": "Biển nào báo hiệu eơiao nhau với đường sắt có rào chắne?",
+          "answers": [
+            "Biển 1.",
+            "Biển 2 và biển 3.",
+            "Biển 3.",
             "—"
           ],
           "correctIndex": 0,
@@ -1867,115 +1891,43 @@
           "imageUrl": null
         },
         {
-          "body": "Biển bá! dưới đây có ý nghĩ# như thếnà!?",
+          "body": "Biển nào báo hiệu eơiao nhau có tín hiệu đène?",
           "answers": [
-            "Bá. hiệ1 tốc độtối đ\u0011 ch. phép các x\" c\u001b giới chạy.",
-            "Bá. hiệ1 tốc độtối thiể1 ch. phép các x\" c\u001b giới chạy.",
-            "—",
-            "—"
+            "Biển 1.",
+            "Biển 2.",
+            "Biển 3.",
+            "Cảba biển."
+          ],
+          "correctIndex": 2,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Biển nào báo hiệu nguy hiểm giao nhau với đường sắt?",
+          "answers": [
+            "Biển 1 và biển 2.",
+            "Biển 1 và biển 3.",
+            "Biển 2 và biển 3.",
+            "Cảba biển."
           ],
           "correctIndex": 1,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Gặp biển nà! người lái xQ phải nhường đường ch! người đi bộ?",
+          "body": "Biển nào báo hiệu đường bộ giao nhau với đường sắt không có rào chắn?",
           "answers": [
-            "Biển 1.",
-            "Biển 2.",
-            "Biển 3.",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Biển nà! chỉđường dành ch! người đi bộ, các l!ại xQ không được đi và! khi gặp biển này?",
-          "answers": [
-            "Biển 1.",
+            "Biển 1 và biển 2.",
             "Biển 1 và biển 3.",
-            "Biển 3.",
-            "Cảb\u0011 biển."
+            "Biển 2 và biển 3.",
+            "Cảba biển."
           ],
           "correctIndex": 2,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu \"Đường dành ch! xQ thô sG\"?",
-          "answers": [
-            "Biển 1.",
-            "Biển 2.",
-            "Biển 3.",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Biển nà! bá! hiệu sắp đến chỗgi#! nh#u nguy hiểm?",
-          "answers": [
-            "Biển 1.",
-            "Biển 1 và biển 2.",
-            "Biển 2 và biển 3.",
-            "Cảb\u0011 biển."
-          ],
-          "correctIndex": 3,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Biển nà! bá! hiệu \"Gi#! nh#u với đường sắt có rà! chắn\"?",
-          "answers": [
-            "Biển 1.",
-            "Biển 2 và biển 3.",
-            "Biển 3.",
-            "—"
-          ],
-          "correctIndex": 0,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Biển nà! bá! hiệu \"Gi#! nh#u có tín hiệu đèn\"?",
-          "answers": [
-            "Biển 1.",
-            "Biển 2.",
-            "Biển 3.",
-            "Cảb\u0011 biển."
-          ],
-          "correctIndex": 2,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Biển nà! bá! hiệu nguy hiểm gi#! nh#u với đường sắt?",
-          "answers": [
-            "Biển 1 và biển 2.",
-            "Biển 1 và biển 3.",
-            "Biển 2 và biển 3.",
-            "Cảb\u0011 biển."
-          ],
-          "correctIndex": 1,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Biển nà! bá! hiệu đường bộgi#! nh#u với đường sắt không có rà! chắn?",
-          "answers": [
-            "Biển 1 và biển 2.",
-            "Biển 1 và biển 3.",
-            "Biển 2 và biển 3.",
-            "Cảb\u0011 biển."
-          ],
-          "correctIndex": 2,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Biển nà! bá! hiệu sắp đến chỗgi#! nh#u giữ# đường bộvà đường sắt?",
+          "body": "Biển nào báo hiệu sắp đến chỗgiao nhau giữa đường bộ và đường sắt?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -1987,7 +1939,7 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu \"Cử# chui\"?",
+          "body": "Biển nào báo hiệu eCửa chuie?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -1999,11 +1951,11 @@
           "imageUrl": null
         },
         {
-          "body": "H#i biển này có ý nghĩ# như thếnà!?",
+          "body": "Hai biển này có ý nghĩa như thếnào?",
           "answers": [
-            "Đểchỉn\u001bi đường sắt gi\u0011. v1ông góc với đường bộkhông có rà. chắn.",
-            "Đểbá. trước sắp đến vịtrí gi\u0011. cắt đường bộvới đường sắt cùng mức, không v1ông góc và không có người gác, không có rà. chắn.",
-            "N\u001bi đường sắt gi\u0011. nh\u00111 với đường bộ.",
+            "Đểchỉnơi đường sắt giao vuông góc với đường bộ không có rào chắn.",
+            "Đểbáo trước sắp đến vịtrí giao cắt đường bộ với đường sắt cùng mức, không vuông góc và không có người gác, không có rào chắn.",
+            "Nơi đường sắt giao nhau với đường bộ.",
             "—"
           ],
           "correctIndex": 0,
@@ -2011,7 +1963,7 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu \"Hết đ!ạn đường ưu tiên\"?",
+          "body": "Biển nào báo hiệu eHết đoạn đường ưu tiêne?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -2023,19 +1975,19 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu, chỉdẫn xQ đi trên đường này được quyền ưu tiên qu# nGi gi#! nh#u?",
+          "body": "Biển nào báo hiệu, chỉdẫn xe đi trên đường này được quyền ưu tiên qua nơi giao nhau?",
           "answers": [
             "Biển 1 và biển 2.",
             "Biển 1 và biển 3.",
             "Biển 2 và biển 3.",
-            "Cảb\u0011 biển."
+            "Cảba biển."
           ],
           "correctIndex": 1,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu \"Gi#! nh#u với đường không ưu tiên\"?",
+          "body": "Biển nào báo hiệu eơiao nhau với đường không ưu tiêne?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -2047,19 +1999,19 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu \"Gi#! nh#u với đường ưu tiên\"?",
+          "body": "Biển nào báo hiệu eơiao nhau với đường ưu tiêne?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
             "Biển 3.",
-            "Cảb\u0011 biển."
+            "Cảba biển."
           ],
           "correctIndex": 2,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu \"Đường gi#! nh#u\" củ# các tuyến đường cùng cấp?",
+          "body": "Biển nào báo hiệu eĐường giao nhaue của các tuyến đường cùng cấp?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -2071,7 +2023,7 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu \"Đường h#i chiều\"?",
+          "body": "Biển nào báo hiệu eĐường hai chiềue?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -2083,7 +2035,7 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu phải giảm tốc độ, nhường đường ch! xQ cG giới đi ngược chiều qu# đường hẹp?",
+          "body": "Biển nào báo hiệu phải giảm tốc độ, nhường đường cho xe cơ giới đi ngược chiều qua đường hẹp?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -2095,7 +2047,7 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! chỉdẫn \"Được ưu tiên qu# đường hẹp\"?",
+          "body": "Biển nào chỉdẫn eĐược ưu tiên qua đường hẹpe?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -2107,7 +2059,7 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu \"Đường đôi\"?",
+          "body": "Biển nào báo hiệu eĐường đôie?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -2119,7 +2071,7 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu \"Kết thúc đường đôi\"?",
+          "body": "Biển nào báo hiệu eKết thúc đường đôie?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -2131,7 +2083,7 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu \"Gi#! nh#u với đường h#i chiều\"?",
+          "body": "Biển nào báo hiệu eơiao nhau với đường hai chiềue?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -2143,11 +2095,59 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu \"Gi#! nh#u với đường h#i chiều\"?",
+          "body": "Biển nào báo hiệu eơiao nhau với đường hai chiềue?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
             "Biển 3.",
+            "—"
+          ],
+          "correctIndex": 1,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Biển nào báo hiệu eChú ý chướng ngại vậte?",
+          "answers": [
+            "Biển 1.",
+            "Biển 2 và biển 3.",
+            "Cảba biển.",
+            "—"
+          ],
+          "correctIndex": 1,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Biển nào báo hiệu eĐường hầme?",
+          "answers": [
+            "Cảba biển.",
+            "Biển 2.",
+            "Biển 2 và biển 3.",
+            "—"
+          ],
+          "correctIndex": 1,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Biển nào dưới đây là biển eCầu hẹpe?",
+          "answers": [
+            "Biển 1.",
+            "Biển 2.",
+            "Biển 3.",
+            "—"
+          ],
+          "correctIndex": 1,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "ơặp biển nào người tham gia giao thông phải đi chậm và thận trọng đềphòng khảnăng xuất hiện và di chuyển bất ngờcủa trẻem trên mặt đường?",
+          "answers": [
+            "Biển 1.",
+            "Biển 2.",
+            "—",
             "—"
           ],
           "correctIndex": 1,
@@ -2163,55 +2163,31 @@
       "isMock": true,
       "questions": [
         {
-          "body": "Biển nà! bá! hiệu \"Chú ý chướng ngại vật\"?",
+          "body": "Hành vi đưa xe cơ giới, xe máy chuyên dùng tham gia giao thông đường bộ nào dưới đây bị cấm?",
           "answers": [
-            "Biển 1.",
-            "Biển 2 và biển 3.",
-            "Cảb\u0011 biển.",
+            "Không có chứng nhận kiểm định an toàn kỹthuật và bảo vệmôi trường.",
+            "Hết niên hạn sử dụng.",
+            "Cảhai ý trên.",
             "—"
           ],
-          "correctIndex": 1,
-          "isCritical": false,
+          "correctIndex": 2,
+          "isCritical": true,
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu \"Đường hầm\"?",
+          "body": "Tổchức đua xe được phép thực hiện khi nào?",
           "answers": [
-            "Cảb\u0011 biển.",
-            "Biển 2.",
-            "Biển 2 và biển 3.",
+            "Trên đường phốkhông có người qua lại.",
+            "Được người dân ủng hộ.",
+            "Được cơ quan có thẩm quyền cấp phép.",
             "—"
           ],
-          "correctIndex": 1,
-          "isCritical": false,
+          "correctIndex": 2,
+          "isCritical": true,
           "imageUrl": null
         },
         {
-          "body": "Biển nà! dưới đây là biển \"Cầu hẹp\"?",
-          "answers": [
-            "Biển 1.",
-            "Biển 2.",
-            "Biển 3.",
-            "—"
-          ],
-          "correctIndex": 1,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Gặp biển nà! người th#m gi# gi#! thông phải đi chậm và thận trọng đềphòng khảnăng xuất hiện và di chuyển bất ngờcủ# trẻQm trên mặt đường?",
-          "answers": [
-            "Biển 1.",
-            "Biển 2.",
-            "—",
-            "—"
-          ],
-          "correctIndex": 1,
-          "isCritical": false,
-          "imageUrl": null
-        },
-        {
-          "body": "Biển nà! chỉdẫn nGi bắt đầu đ!ạn đường dành ch! người đi bộ?",
+          "body": "Biển nào chỉdẫn nơi bắt đầu đoạn đường dành cho người đi bộ?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -2223,19 +2199,19 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! dưới đây bá! hiệu gần đến đ!ạn đường thường có trẻQm đi ng#ng qu#?",
+          "body": "Biển nào dưới đây báo hiệu gần đến đoạn đường thường có trẻem đi ngang qua?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
             "Biển 3.",
-            "Cảb\u0011 biển."
+            "Cảba biển."
           ],
           "correctIndex": 1,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Biển nà! s#u đây là biển \"Dốc xuống nguy hiểm\"?",
+          "body": "Biển nào sau đây là biển eDốc xuống nguy hiểme?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -2247,10 +2223,10 @@
           "imageUrl": null
         },
         {
-          "body": "Biển bá! này có ý nghĩ# như thếnà!?",
+          "body": "Biển báo này có ý nghĩa như thếnào?",
           "answers": [
-            "Bá. hiệ1 đường có ổgà, lồi lõm.",
-            "Bá. hiệ1 đường có gồgiảm tốc phí\u0011 trước.",
+            "Báo hiệu đường có ổgà, lồi lõm.",
+            "Báo hiệu đường có gồgiảm tốc phía trước.",
             "—",
             "—"
           ],
@@ -2259,11 +2235,11 @@
           "imageUrl": null
         },
         {
-          "body": "Các biển bá! này có ý nghĩ# như thếnà!?",
+          "body": "Các biển báo này có ý nghĩa như thếnào?",
           "answers": [
-            "Đểbá. trước gần tới đ.ạn đường có hiện tượng đất đá từtrên t\u0011 l1y dư\u001bng sụt lởbất ngờgây ng1y hiểm ch. x\" cộvà người đi đường.",
-            "Đểbá. trước n\u001bi có kết cấ1 mặt đường rời rạc, khi phư\u001bng tiện đi q1\u0011, làm ch. các viên đá, sỏi văng lên gây ng1y hiểm và mất \u0011n t.àn ch. người và phư\u001bng tiện th\u0011m gi\u0011 gi\u0011. thông.",
-            "Đểcảnh bá. những đ.ạn nền đường yế1, đ.ạn đường đ\u0011ng th\". dõi lún mà việc vận hành x\" ởtốc độc\u0011. có thểgây ng1y hiểm.",
+            "Đểbáo trước gần tới đoạn đường có hiện tượng đất đá từtrên ta luy dương sụt lởbất ngờgây nguy hiểm cho xe cộvà người đi đường.",
+            "Đểbáo trước nơi có kết cấu mặt đường rời rạc, khi phương tiện đi qua, làm cho các viên đá, sỏi văng lên gây nguy hiểm và mất an toàn cho người và phương tiện tham gia giao thông.",
+            "Đểcảnh báo những đoạn nền đường yếu, đoạn đường đang theo dõi lún mà việc vận hành xe ởtốc độcao có thểgây nguy hiểm.",
             "—"
           ],
           "correctIndex": 0,
@@ -2271,11 +2247,11 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu các phưGng tiện phải tuân thủtốc độtối đ# ch! phép trên từng làn đường?",
+          "body": "Biển nào báo hiệu các phương tiện phải tuân thủtốc độtối đa cho phép trên từng làn đường?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
-            "Cảh\u0011i biển.",
+            "Cảhai biển.",
             "—"
           ],
           "correctIndex": 2,
@@ -2283,7 +2259,7 @@
           "imageUrl": null
         },
         {
-          "body": "Khi gặp biển nà! thì các phưGng tiện không được đi và!, trừxQ ô tô và xQ mô tô?",
+          "body": "Khi gặp biển nào thì các phương tiện không được đi vào, trừxe ô tô và xe mô tô?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -2295,11 +2271,11 @@
           "imageUrl": null
         },
         {
-          "body": "Biển này có ý nghĩ# như thếnà!?",
+          "body": "Biển này có ý nghĩa như thếnào?",
           "answers": [
-            "Chỉhướng đi phải th\"..",
-            "Biển bá. hiệ1 ch. người lái x\" biết sốlượng làn đường trên mặt đường và hướng đi trên mỗi làn đường phải th\"..",
-            "Chỉhướng đường phải th\"..",
+            "Chỉhướng đi phải the..",
+            "Biển báo hiệu cho người lái xe biết sốlượng làn đường trên mặt đường và hướng đi trên mỗi làn đường phải the..",
+            "Chỉhướng đường phải the..",
             "—"
           ],
           "correctIndex": 1,
@@ -2307,7 +2283,7 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! (đặt trước ngã b#, ngã tư) ch! phép xQ được rẽs#ng hướng khác?",
+          "body": "Biển nào (đặt trước ngã ba, ngã tư) cho phép xe được rẽsang hướng khác?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -2319,7 +2295,7 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu \"Hướng đi thẳng phải thQ!\"?",
+          "body": "Biển nào báo hiệu eHướng đi thẳng phải theoe?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -2331,11 +2307,11 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu \"Đường một chiều\"?",
+          "body": "Biển nào báo hiệu eĐường một chiềue?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
-            "Cảh\u0011i biển.",
+            "Cảhai biển.",
             "—"
           ],
           "correctIndex": 1,
@@ -2343,31 +2319,31 @@
           "imageUrl": null
         },
         {
-          "body": "Tr!ng các biển dưới đây biển nà! là biển \"Hết tốc độtối đ# ch! phép\"?",
+          "body": "Trong các biển dưới đây biển nào là biển eHết tốc độtối đa cho phépe?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
             "Biển 3.",
-            "Cảb\u0011 biển."
+            "Cảba biển."
           ],
           "correctIndex": 0,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Tr!ng các biển dưới đây biển nà! là biển \"Hết tốc độtối thiểu\"?",
+          "body": "Trong các biển dưới đây biển nào là biển eHết tốc độtối thiểue?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
             "Biển 3.",
-            "Cảb\u0011 biển."
+            "Cảba biển."
           ],
           "correctIndex": 2,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Biển nà! dưới đây bá! hiệu hết cấm vượt?",
+          "body": "Biển nào dưới đây báo hiệu hết cấm vượt?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -2379,19 +2355,19 @@
           "imageUrl": null
         },
         {
-          "body": "Tr!ng các biển dưới đây biển nà! là biển \"Hết mọi lệnh cấm\"?",
+          "body": "Trong các biển dưới đây biển nào là biển eHết mọi lệnh cấm e?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
             "Biển 3.",
-            "Cảb\u0011 biển."
+            "Cảba biển."
           ],
           "correctIndex": 1,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Biển nà! ch! phép được qu#y đầu xQ đi thQ! hướng ngược lại khi đặt biển trước ngã b#, ngã tư?",
+          "body": "Biển nào cho phép được quay đầu xe đi theo hướng ngược lại khi đặt biển trước ngã ba, ngã tư?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -2403,7 +2379,7 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! không ch! phép rẽphải?",
+          "body": "Biển nào không cho phép rẽphải?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -2415,23 +2391,23 @@
           "imageUrl": null
         },
         {
-          "body": "Khi đến chỗgi#! nh#u, gặp biển nà! thì người lái xQ không được ch! xQ đi thẳng, phải rẽs#ng hướng khác?",
+          "body": "Khi đến chỗgiao nhau, gặp biển nào thì người lái xe không được cho xe đi thẳng, phải rẽsang hướng khác?",
           "answers": [
             "Biển 1 và biển 2.",
             "Biển 1 và biển 3.",
             "Biển 2 và biển 3.",
-            "Cảb\u0011 biển."
+            "Cảba biển."
           ],
           "correctIndex": 0,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Biển số1 có ý nghĩ# như thếnà!?",
+          "body": "Biển sốu có ý nghĩa như thếnào?",
           "answers": [
-            "Biển chỉdẫn hết cấm đỗx\" th\". giờtr.ng kh1 vực.",
-            "Biển chỉdẫn hết hiệ1 lực kh1 vực đỗx\" trên các t1yến đường đối ng.ại.",
-            "Biển chỉdẫn kh1 vực đỗx\" trên các t1yến đường đối ng.ại.",
+            "Biển chỉdẫn hết cấm đỗxe theo giờtrong khu vực.",
+            "Biển chỉdẫn hết hiệu lực khu vực đỗxe trên các tuyến đường đối ngoại.",
+            "Biển chỉdẫn khu vực đỗxe trên các tuyến đường đối ngoại.",
             "—"
           ],
           "correctIndex": 0,
@@ -2439,11 +2415,11 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! chỉdẫn ch! người đi bộsửdụng cầu vượt qu# đường?",
+          "body": "Biển nào chỉdẫn cho người đi bộ sử dụng cầu vượt qua đường?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
-            "Cảh\u0011i biển.",
+            "Cảhai biển.",
             "Không biển nà.."
           ],
           "correctIndex": 0,
@@ -2451,14 +2427,38 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! chỉdẫn ch! người đi bộsửdụng hầm chui qu# đường?",
+          "body": "Biển nào chỉdẫn cho người đi bộ sử dụng hầm chui qua đường?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
-            "Cảh\u0011i biển.",
+            "Cảhai biển.",
             "Không biển nà.."
           ],
           "correctIndex": 1,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "Biển nào báo hiệu eNơi đỗxe dành cho người khuyết tậte?",
+          "answers": [
+            "Biển 1.",
+            "Biển 2.",
+            "Biển 3.",
+            "—"
+          ],
+          "correctIndex": 1,
+          "isCritical": false,
+          "imageUrl": null
+        },
+        {
+          "body": "ơặp biển báo này, người tham gia giao thông phải xửlý như thế nào?",
+          "answers": [
+            "Dừng xe tại khu vực có trạm Cảnh sát giao thông.",
+            "Tiếp tục lưu thông với tốc độbình thường.",
+            "Phải giảm tốc độđến mức an toàn và không được vượt khi đi qua khu vực này.",
+            "—"
+          ],
+          "correctIndex": 0,
           "isCritical": false,
           "imageUrl": null
         }
@@ -2471,34 +2471,34 @@
       "isMock": true,
       "questions": [
         {
-          "body": "Biển nà! bá! hiệu \"NGi đỗxQ dành ch! người khuyết tật\"?",
+          "body": "Hành vi đua xe trái phép bị xửlý như thếnào?",
           "answers": [
-            "Biển 1.",
-            "Biển 2.",
-            "Biển 3.",
+            "Chỉbị nhắc nhở.",
+            "Tùy theo mức độcủa hành vi vi phạm có thểbị xửlý hành chính hoặc xửlý hình sự.",
+            "—",
             "—"
           ],
           "correctIndex": 1,
-          "isCritical": false,
+          "isCritical": true,
           "imageUrl": null
         },
         {
-          "body": "Gặp biển bá! này, người th#m gi# gi#! thông phải xửlý như thế nà!?",
+          "body": "Người điều khiển phương tiện tham gia giao thông đường bộ mà trong máu hoặc hơi thởcó nồng độcồn có bị nghiêm cấm không?",
           "answers": [
-            "Dừng x\" tại kh1 vực có trạm Cảnh sát gi\u0011. thông.",
-            "Tiếp tục lư1 thông với tốc độbình thường.",
-            "Phải giảm tốc độđến mức \u0011n t.àn và không được vượt khi đi q1\u0011 kh1 vực này.",
+            "Bịnghiêm cấm.",
+            "Không bị nghiêm cấm.",
+            "Không bị nghiêm cấm, nếu nồng độcồn trong máu ởmức nhẹ, có thểđiều khiển phương tiện tham gia giao thông.",
             "—"
           ],
           "correctIndex": 0,
-          "isCritical": false,
+          "isCritical": true,
           "imageUrl": null
         },
         {
-          "body": "Gặp biển bá! dưới đây, người lái xQ có bắt buộc phải chạy vòng thQ! đả! #n t!àn thQ! hướng mũi tên khi muốn chuyển hướng h#y không?",
+          "body": "ơặp biển báo dưới đây, người lái xe có bắt buộc phải chạy vòng theo đảo an toàn theo hướng mũi tên khi muốn chuyển hướng hay không?",
           "answers": [
-            "Bắt b1ộc.",
-            "Không bắt b1ộc.",
+            "Bắt buộc.",
+            "Không bắt buộc.",
             "—",
             "—"
           ],
@@ -2507,23 +2507,23 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu \"Cầu vượt liên thông\"?",
+          "body": "Biển nào báo hiệu eCầu vượt liên thông e?",
           "answers": [
             "Biển 2 và biển 3.",
             "Biển 1 và biển 2.",
             "Biển 1 và biển 3.",
-            "Cảb\u0011 biển."
+            "Cảba biển."
           ],
           "correctIndex": 2,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Biển số1 có ý nghĩ# như thếnà!?",
+          "body": "Biển sốu có ý nghĩa như thếnào?",
           "answers": [
-            "Đi thẳng h.ặc rẽtrái trên cầ1 vượt.",
-            "Đi thẳng h.ặc rẽphải trên cầ1 vượt.",
-            "Bá. hiệ1 cầ1 vượt liên thông.",
+            "Đi thẳng hoặc rẽtrái trên cầu vượt.",
+            "Đi thẳng hoặc rẽphải trên cầu vượt.",
+            "Báo hiệu cầu vượt liên thông.",
             "—"
           ],
           "correctIndex": 2,
@@ -2531,7 +2531,7 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! bá! hiệu \"Tuyến đường cầu vượt cắt qu#\"?",
+          "body": "Biển nào báo hiệu eTuyến đường cầu vượt cắt quae?",
           "answers": [
             "Biển 1 và biển 2.",
             "Biển 1 và biển 3.",
@@ -2543,22 +2543,22 @@
           "imageUrl": null
         },
         {
-          "body": "Biển bá! dưới đây có ý nghĩ# như thếnà!?",
+          "body": "Biển báo dưới đây có ý nghĩa như thếnào?",
           "answers": [
-            "Chỉdẫn kh.ảng cách đến làn đường cứ1 nạn (làn th.át x\" khẩn cấp).",
-            "Bá. hiệ1 đường cụt phí\u0011 trước.",
-            "Bá. hiệ1 nút gi\u0011. gần nhất phí\u0011 trước.",
-            "Bá. hiệ1 trạm dừng nghỉphí\u0011 trước."
+            "Chỉdẫn khoảng cách đến làn đường cứu nạn (làn thoát xe khẩn cấp).",
+            "Báo hiệu đường cụt phía trước.",
+            "Báo hiệu nút giao gần nhất phía trước.",
+            "Báo hiệu trạm dừng nghỉphía trước."
           ],
           "correctIndex": 0,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Tại đ!ạn đường có biển \"Làn đường dành riêng ch! từng l!ại xQ\" dưới đây, các phưGng tiện có được phép chuyển s#ng làn khác đểđi thQ! hành trình m!ng muốn khi đến gần nGi đường bộgi#! nh#u h#y không?",
+          "body": "Tại đoạn đường có biển eLàn đường dành riêng cho từng loại xee dưới đây, các phương tiện có được phép chuyển sang làn khác để đi theo hành trình mong muốn khi đến gần nơi đường bộ giao nhau hay không?",
           "answers": [
-            "Được phép ch1yển s\u0011ng làn khác.",
-            "Không được phép ch1yển s\u0011ng làn khác, chỉđược đi tr.ng làn q1y định th\". biển.",
+            "Được phép chuyển sang làn khác.",
+            "Không được phép chuyển sang làn khác, chỉđược đi trong làn quy định theo biển.",
             "—",
             "—"
           ],
@@ -2567,7 +2567,7 @@
           "imageUrl": null
         },
         {
-          "body": "Biển nà! chỉdẫn người lái xQ đi được cảh#i hướng?",
+          "body": "Biển nào chỉdẫn người lái xe đi được cảhai hướng?",
           "answers": [
             "Biển 1.",
             "Biển 2.",
@@ -2579,10 +2579,10 @@
           "imageUrl": null
         },
         {
-          "body": "Biển này có ý nghĩ# như thếnà!?",
+          "body": "Biển này có ý nghĩa như thếnào?",
           "answers": [
-            "Chỉdẫn chướng ngại vật phí\u0011 trước đểcảnh bá. phí\u0011 trước có sựcản trởlư1 thông bình thường (nằm bên tr.ng phần x\" chạy h\u0011y ng\u0011y sát phần đường x\" chạy) và chỉdẫn hướng đi q1\u0011 đó cần đặt biển.",
-            "Chỉdẫn hướng rẽđểnhắc người điề1 khiển phư\u001bng tiện ch1ẩn bịđổi hướng đi khi sắp và. đường c.ng ng1y hiểm, có bán kính c.ng nhỏ.",
+            "Chỉdẫn chướng ngại vật phía trước để cảnh báo phía trước có sựcản trởlưu thông bình thường (nằm bên trong phần xe chạy hay ngay sát phần đường xe chạy) và chỉdẫn hướng đi qua đó cần đặt biển.",
+            "Chỉdẫn hướng rẽđể nhắc người điều khiển phương tiện chuẩn bị đổi hướng đi khi sắp vào đường cong nguy hiểm, có bán kính cong nhỏ.",
             "—",
             "—"
           ],
@@ -2591,7 +2591,7 @@
           "imageUrl": null
         },
         {
-          "body": "Vạch mũi tên chỉhướng trên mặt đường nà! dưới đây ch! phép xQ chỉđược đi thẳng và rẽphải?",
+          "body": "Vạch mũi tên chỉhướng trên mặt đường nào dưới đây cho phép xe chỉđược đi thẳng và rẽphải?",
           "answers": [
             "Vạch 1.",
             "Vạch 2 và vạch 3.",
@@ -2603,23 +2603,23 @@
           "imageUrl": null
         },
         {
-          "body": "Vạch kẻđường nà! dưới đây là vạch phân chi# h#i chiều xQ chạy (vạch tim đường), xQ không được lấn làn, không được đè lên vạch?",
+          "body": "Vạch kẻđường nào dưới đây là vạch phân chia hai chiều xe chạy (vạch tim đường), xe không được lấn làn, không được đè lên vạch?",
           "answers": [
             "Vạch 1.",
             "Vạch 2.",
             "Vạch 3.",
-            "Cảb\u0011 vạch. CHƯƠNG VI. GIẢI THẾS\u0006 HÌNH VÀ KỸNĂNG XỬLÝ TÌNH H\u0003ỐNG GI\u0006O THÔNG"
+            "Cảba vạch. CHƯƠNơ VIo ơIẢI THẾS\u0006 HÌNH VÀ KỸNĂNơ XỬLÝ TÌNH H\u0003ỐNơ ơI\u0006O THÔNơ"
           ],
           "correctIndex": 1,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "ThQ! hướng mũi tên, xQ nà! chấp hành đúng quy tắc gi#! thông?",
+          "body": "Theo hướng mũi tên, xe nào chấp hành đúng quy tắc giao thông?",
           "answers": [
-            "X\" khách, x\" tải, x\" mô tô.",
-            "X\" tải, x\" mô tô.",
-            "Chỉx\" c.n.",
+            "Xe khách, xe tải, xe mô tô.",
+            "Xe tải, xe mô tô.",
+            "Chỉxe con.",
             "—"
           ],
           "correctIndex": 2,
@@ -2627,34 +2627,34 @@
           "imageUrl": null
         },
         {
-          "body": "ThQ! hướng mũi tên, thứtựcác xQ đi như thếnà! là đúng quy tắc gi#! thông?",
+          "body": "Theo hướng mũi tên, thứtựcác xe đi như thếnào là đúng quy tắc giao thông?",
           "answers": [
-            "X\" tải, x\" khách, x\" c.n, x\" mô tô.",
-            "X\" tải, x\" mô tô, x\" khách, x\" c.n.",
-            "X\" khách, x\" tải, x\" c.n, x\" mô tô.",
-            "X\" mô tô, x\" khách, x\" tải, x\" c.n."
+            "Xe tải, xe khách, xe con, xe mô tô.",
+            "Xe tải, xe mô tô, xe khách, xe con.",
+            "Xe khách, xe tải, xe con, xe mô tô.",
+            "Xe mô tô, xe khách, xe tải, xe con."
           ],
           "correctIndex": 1,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "ThQ! hướng mũi tên, thứtựcác xQ đi như thếnà! là đúng quy tắc gi#! thông?",
+          "body": "Theo hướng mũi tên, thứtựcác xe đi như thếnào là đúng quy tắc giao thông?",
           "answers": [
-            "X\" tải, x\" c.n, x\" mô tô.",
-            "X\" c.n, x\" tải, x\" mô tô.",
-            "X\" mô tô, x\" c.n, x\" tải.",
-            "X\" c.n, x\" mô tô, x\" tải."
+            "Xe tải, xe con, xe mô tô.",
+            "Xe con, xe tải, xe mô tô.",
+            "Xe mô tô, xe con, xe tải.",
+            "Xe con, xe mô tô, xe tải."
           ],
           "correctIndex": 2,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Trường hợp này xQ nà! được quyền đi trước?",
+          "body": "Trường hợp này xe nào được quyền đi trước?",
           "answers": [
-            "X\" mô tô.",
-            "X\" c.n.",
+            "Xe mô tô.",
+            "Xe con.",
             "—",
             "—"
           ],
@@ -2663,10 +2663,10 @@
           "imageUrl": null
         },
         {
-          "body": "XQ nà! được quyền đi trước tr!ng trường hợp này?",
+          "body": "Xe nào được quyền đi trước trong trường hợp này?",
           "answers": [
-            "X\" mô tô.",
-            "X\" cứ1 thư\u001bng đi làm nhiệm vụcấp cứ1.",
+            "Xe mô tô.",
+            "Xe cứu thương đi làm nhiệm vụ cấp cứu.",
             "—",
             "—"
           ],
@@ -2675,10 +2675,10 @@
           "imageUrl": null
         },
         {
-          "body": "ThQ! tín hiệu đèn, xQ nà! được phép đi?",
+          "body": "Theo tín hiệu đèn, xe nào được phép đi?",
           "answers": [
-            "X\" c.n và x\" khách.",
-            "X\" mô tô.",
+            "Xe con và xe khách.",
+            "Xe mô tô.",
             "—",
             "—"
           ],
@@ -2687,70 +2687,70 @@
           "imageUrl": null
         },
         {
-          "body": "ThQ! tín hiệu đèn, xQ nà! đi là đúng quy tắc gi#! thông?",
+          "body": "Theo tín hiệu đèn, xe nào đi là đúng quy tắc giao thông?",
           "answers": [
-            "X\" khách, x\" mô tô.",
-            "X\" c.n, x\" tải.",
-            "X\" tải, x\" mô tô. Câu503.CácxQđithQ!hướngmũitên,nhữngxQnà!viphạmquytắcgi#!thông?",
-            "X\" khách, x\" tải, x\" mô tô."
+            "Xe khách, xe mô tô.",
+            "Xe con, xe tải.",
+            "Xe tải, xe mô tô. Câu503.Cácxeđitheohướngmũitên,nhữngxenàoviphạmquytắcgiaothông?",
+            "Xe khách, xe tải, xe mô tô."
           ],
           "correctIndex": 3,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "ThQ! hướng mũi tên, thứtựcác xQ đi như thếnà! là đúng quy tắc gi#! thông?",
+          "body": "Theo hướng mũi tên, thứtựcác xe đi như thếnào là đúng quy tắc giao thông?",
           "answers": [
-            "X\" khách, x\" tải, x\" mô tô, x\" c.n.",
-            "X\" c.n, x\" khách, x\" tải, x\" mô tô.",
-            "X\" mô tô, x\" tải, x\" khách, x\" c.n.",
-            "X\" mô tô, x\" tải, x\" c.n, x\" khách."
+            "Xe khách, xe tải, xe mô tô, xe con.",
+            "Xe con, xe khách, xe tải, xe mô tô.",
+            "Xe mô tô, xe tải, xe khách, xe con.",
+            "Xe mô tô, xe tải, xe con, xe khách."
           ],
           "correctIndex": 2,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "Tr!ng trường hợp này xQ nà! đỗvi phạm quy tắc gi#! thông?",
+          "body": "Trong trường hợp này xe nào đỗvi phạm quy tắc giao thông?",
           "answers": [
-            "X\" tải.",
-            "X\" c.n và mô tô.",
-            "Cảb\u0011 x\".",
-            "X\" c.n và x\" tải. Câu 507: ThQ! hướng mũi tên, những hướng nà! xQ gắn máy được phép đi?"
+            "Xe tải.",
+            "Xe con và mô tô.",
+            "Cảba xe.",
+            "Xe con và xe tải. Câu 507: Theo hướng mũi tên, những hướng nào xe gắn máy được phép đi?"
           ],
           "correctIndex": 3,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "XQ nà! đỗvi phạm quy tắc gi#! thông?",
+          "body": "Xe nào đỗvi phạm quy tắc giao thông?",
           "answers": [
-            "Cảh\u0011i x\".",
-            "Không x\" nà. vi phạm.",
-            "Chỉx\" mô tô vi phạm.",
-            "Chỉx\" tải vi phạm."
+            "Cảhai xe.",
+            "Không xe nào vi phạm.",
+            "Chỉxe mô tô vi phạm.",
+            "Chỉxe tải vi phạm."
           ],
           "correctIndex": 0,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "XQ nà! đỗvi phạm quy tắc gi#! thông?",
+          "body": "Xe nào đỗvi phạm quy tắc giao thông?",
           "answers": [
-            "Chỉx\" mô tô.",
-            "Chỉx\" tải.",
-            "Cảb\u0011 x\".",
-            "Chỉx\" mô tô và x\" tải."
+            "Chỉxe mô tô.",
+            "Chỉxe tải.",
+            "Cảba xe.",
+            "Chỉxe mô tô và xe tải."
           ],
           "correctIndex": 2,
           "isCritical": false,
           "imageUrl": null
         },
         {
-          "body": "XQ nà! được quyền đi trước tr!ng trường hợp này?",
+          "body": "Xe nào được quyền đi trước trong trường hợp này?",
           "answers": [
-            "X\" c.n.",
-            "X\" mô tô.",
+            "Xe con.",
+            "Xe mô tô.",
             "—",
             "—"
           ],
@@ -2759,12 +2759,12 @@
           "imageUrl": null
         },
         {
-          "body": "ThQ! hướng mũi tên, thứtựcác xQ đi như thếnà! là đúng quy tắc gi#! thông?",
+          "body": "Theo hướng mũi tên, thứtựcác xe đi như thếnào là đúng quy tắc giao thông?",
           "answers": [
-            "X\" c.n (A), x\" mô tô, x\" c.n (B), x\" đạp.",
-            "X\" c.n (B), x\" đạp, x\" mô tô, x\" c.n (A).",
-            "X\" c.n (A), x\" c.n (B), x\" mô tô + x\" đạp.",
-            "X\" mô tô + x\" đạp, x\" c.n (A), x\" c.n (B)."
+            "Xe con (A), xe mô tô, xe con (B), xe đạp.",
+            "Xe con (B), xe đạp, xe mô tô, xe con (A).",
+            "Xe con (A), xe con (B), xe mô tô + xe đạp.",
+            "Xe mô tô + xe đạp, xe con (A), xe con (B)."
           ],
           "correctIndex": 3,
           "isCritical": false,

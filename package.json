@@ -33,6 +33,7 @@
     "import:content:all": "node database/scripts/bootstrap-license-content.mjs && node database/scripts/import-all-content.mjs",
     "parse:b2-pdf": "python database/scripts/parse-b2-pdf.py",
     "parse:motor-pdf": "python database/scripts/parse-motor-pdf.py",
+    "normalize:content": "node database/scripts/normalize-license-content.mjs",
     "setup:env": "node scripts/setup-env.mjs"
   },
   "devDependencies": {
