@@ -7,6 +7,8 @@ Mỗi hạng một folder dưới `database/content/`. Quy tắc thi (số câu/
 | A1, A2 | 250 câu (xe máy) | 10 đề | 25 | 21/25 | 19 phút |
 | B1, B2 | 600 câu (ô tô) | 20 đề | 30 | 26/30 | 22 phút |
 
+Điều kiện đạt: sai tối đa 4 câu và không sai bất kỳ câu điểm liệt nào.
+
 A1 và A2 dùng **cùng** bộ 250 câu; A2 clone từ A1 khi bootstrap (ảnh `/content/A2/images/`).
 
 ## Luồng đầy đủ
@@ -22,6 +24,7 @@ npm run parse:motor-pdf
 
 npm run seed:db
 npm run bootstrap:content
+npm run normalize:content
 npm run migrate:exam-rules
 npm run import:content:all
 ```
@@ -36,6 +39,7 @@ Hoặc: `npm run reset:db` (truncate + migrations + seed + import).
 - **B1:** bootstrap clone đề từ B2 (30 câu/đề).
 
 Import **validate** số câu/đề theo `license_classes.questions_per_exam`.
+`normalize:content` gom ngân hàng câu hỏi, phân phối lại 5 câu điểm liệt/đề và hạn chế trùng nguyên đề.
 
 ## Parse PDF
 

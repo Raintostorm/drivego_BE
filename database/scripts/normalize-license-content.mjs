@@ -4,6 +4,12 @@ import { fileURLToPath } from "url"
 
 const ROOT = resolve(fileURLToPath(new URL("../..", import.meta.url)))
 const CODES = ["A1", "A2", "B1", "B2"]
+const RULES = {
+  A1: { papersCount: 10, questionsPerPaper: 25, criticalPerPaper: 5 },
+  A2: { papersCount: 10, questionsPerPaper: 25, criticalPerPaper: 5 },
+  B1: { papersCount: 20, questionsPerPaper: 30, criticalPerPaper: 5 },
+  B2: { papersCount: 20, questionsPerPaper: 30, criticalPerPaper: 5 },
+}
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, "utf8"))
@@ -32,42 +38,98 @@ function cleanMotorText(value) {
     .trim()
 }
 
-function rebalanceCriticalQuestions(papers) {
-  const all = papers.flatMap((paper) => paper.questions ?? [])
-  const critical = all.filter((q) => q.isCritical)
-  const normal = all.filter((q) => !q.isCritical)
+function fingerprintQuestion(q) {
+  return [
+    q.body ?? "",
+    q.imageUrl ?? "",
+    JSON.stringify(q.answers ?? []),
+    q.correctIndex ?? 0,
+    q.isCritical ? "1" : "0",
+  ].join("|")
+}
+
+function dedupeQuestions(questions) {
+  const seen = new Set()
+  return questions.filter((q) => {
+    const key = fingerprintQuestion(q)
+    if (seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
+}
+
+function hashString(value) {
+  let hash = 2166136261
+  for (const ch of value) {
+    hash ^= ch.charCodeAt(0)
+    hash = Math.imul(hash, 16777619)
+  }
+  return hash >>> 0
+}
+
+function seededShuffle(items, seed) {
+  const result = [...items]
+  let state = hashString(seed) || 1
+  for (let i = result.length - 1; i > 0; i -= 1) {
+    state = (Math.imul(state, 1664525) + 1013904223) >>> 0
+    const j = state % (i + 1)
+    ;[result[i], result[j]] = [result[j], result[i]]
+  }
+  return result
+}
+
+function pickCycled(pool, count, start) {
+  if (!pool.length) return []
+  return Array.from({ length: count }, (_, i) => pool[(start + i) % pool.length])
+}
+
+function buildDistinctPapers(code, papers) {
+  const rule = RULES[code]
+  if (!rule) return papers
+
+  const paperCount = rule.papersCount ?? papers.length
+  const all = dedupeQuestions(papers.flatMap((paper) => paper.questions ?? []))
+  const critical = seededShuffle(all.filter((q) => q.isCritical), `${code}:critical`)
+  const normal = seededShuffle(all.filter((q) => !q.isCritical), `${code}:normal`)
   if (!critical.length || !normal.length) return papers
 
-  const perPaper = papers[0]?.questionCount ?? papers[0]?.questions?.length ?? 0
-  const paperCount = papers.length
-  const baseCritical = Math.floor(critical.length / paperCount)
-  let remainder = critical.length % paperCount
-  let criticalIndex = 0
-  let normalIndex = 0
+  const normalPerPaper = rule.questionsPerPaper - rule.criticalPerPaper
+  const normalStep = normalPerPaper
+  const criticalStep = Math.max(1, Math.ceil(critical.length / paperCount))
+  const signatures = new Set()
 
-  return papers.map((paper, index) => {
-    const targetCritical = baseCritical + (remainder > 0 ? 1 : 0)
-    if (remainder > 0) remainder -= 1
+  return Array.from({ length: paperCount }, (_, index) => {
+    const paper = papers[index] ?? papers[0] ?? {}
+    let criticalStart = index * criticalStep
+    let normalStart = index * normalStep
+    let questions = []
 
-    const nextQuestions = []
-    for (let i = 0; i < targetCritical && criticalIndex < critical.length; i += 1) {
-      nextQuestions.push(critical[criticalIndex])
-      criticalIndex += 1
-    }
-    while (nextQuestions.length < perPaper && normalIndex < normal.length) {
-      nextQuestions.push(normal[normalIndex])
-      normalIndex += 1
-    }
-    while (nextQuestions.length < perPaper && criticalIndex < critical.length) {
-      nextQuestions.push(critical[criticalIndex])
-      criticalIndex += 1
+    for (let attempt = 0; attempt < paperCount + 3; attempt += 1) {
+      const selectedCritical = pickCycled(
+        critical,
+        rule.criticalPerPaper,
+        criticalStart + attempt,
+      )
+      const selectedNormal = pickCycled(normal, normalPerPaper, normalStart + attempt * normalPerPaper)
+      questions = seededShuffle(
+        [...selectedCritical, ...selectedNormal],
+        `${code}:paper:${index + 1}:attempt:${attempt}`,
+      )
+      const signature = questions
+        .map(fingerprintQuestion)
+        .sort()
+        .join("\n")
+      if (!signatures.has(signature)) {
+        signatures.add(signature)
+        break
+      }
     }
 
     return {
       ...paper,
       paperNumber: index + 1,
-      questionCount: nextQuestions.length,
-      questions: nextQuestions,
+      questionCount: questions.length,
+      questions,
     }
   })
 }
@@ -85,7 +147,12 @@ for (const code of CODES) {
     }
   }
 
-  data.papers = rebalanceCriticalQuestions(data.papers)
+  data.papers = buildDistinctPapers(code, data.papers)
   writeJson(path, data)
-  console.log(`Normalized ${code}: ${data.papers.length} papers`)
+  const criticalCounts = data.papers.map(
+    (paper) => (paper.questions ?? []).filter((q) => q.isCritical).length,
+  )
+  console.log(
+    `Normalized ${code}: ${data.papers.length} papers, critical per paper: ${criticalCounts.join(", ")}`,
+  )
 }
