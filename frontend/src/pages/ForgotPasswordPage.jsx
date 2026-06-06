@@ -23,7 +23,7 @@ export function ForgotPasswordPage() {
       })
       setNotice(
         data?.message ??
-          "Tính năng đặt lại mật khẩu sắp ra mắt — chưa gửi email thật.",
+          "Nếu email tồn tại trong hệ thống, DriveGo đã gửi hướng dẫn đặt lại mật khẩu.",
       )
     } catch (err) {
       setError(err instanceof Error ? err.message : "Gửi yêu cầu thất bại")

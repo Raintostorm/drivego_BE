@@ -33,6 +33,11 @@ export function AiChatPage() {
         if (cancelled) return
         setSessions(list)
         if (list[0]) await loadSession(list[0].id)
+      } catch (err) {
+        if (!cancelled) {
+          setPremiumError(err instanceof Error ? err.message : "Không tải được chat")
+          setSessions([])
+        }
       } finally {
         if (!cancelled) setLoading(false)
       }

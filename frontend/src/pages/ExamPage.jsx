@@ -48,25 +48,42 @@ export function ExamPage() {
   }, [durationSeconds, selectedPaperId])
 
   useEffect(() => {
-    if (!enrolled) return undefined
+    if (enrollmentsLoading) return undefined
+    if (!enrolled) {
+      setLoading(false)
+      setPapers([])
+      setPaper(null)
+      setExamContentReady(false)
+      setSelectedPaperId(null)
+      return undefined
+    }
     let cancelled = false
+    setLoading(true)
+    setError(null)
     apiFetch(`/exams/papers?licenseClass=${activeClass}`, { auth: true })
       .then((data) => {
         if (!cancelled) {
           const list = data.papers ?? (Array.isArray(data) ? data : [])
           setPapers(list)
           setExamContentReady(Boolean(data.contentReady ?? list.length > 0))
-          if (list[0]) setSelectedPaperId(list[0].id)
-          else setSelectedPaperId(null)
+          if (list[0]) {
+            setSelectedPaperId(list[0].id)
+          } else {
+            setSelectedPaperId(null)
+            setLoading(false)
+          }
         }
       })
       .catch((err) => {
-        if (!cancelled) setError(err instanceof Error ? err.message : "Không tải được đề thi")
+        if (!cancelled) {
+          setError(err instanceof Error ? err.message : "Không tải được đề thi")
+          setLoading(false)
+        }
       })
     return () => {
       cancelled = true
     }
-  }, [enrolled, activeClass])
+  }, [enrollmentsLoading, enrolled, activeClass])
 
   useEffect(() => {
     if (!enrolled || !selectedPaperId) return undefined
@@ -147,19 +164,6 @@ export function ExamPage() {
     return <EnrollCourseCta licenseClass={activeClass} />
   }
 
-  if (!examContentReady) {
-    return (
-      <EnrollmentConsentCard
-        storageKey="drivego_consent_exam_v1"
-        title={t("consent.examTitle")}
-        bullets={[t("consent.examBullet1"), t("consent.examBullet2")]}
-        confirmLabel={t("consent.examConfirm")}
-      >
-        <LicenseContentEmpty feature="exam" />
-      </EnrollmentConsentCard>
-    )
-  }
-
   if (loading) return <p className="text-drive-muted">Đang tải đề thi…</p>
   if (error && !paper) {
     return (
@@ -171,6 +175,19 @@ export function ExamPage() {
           </Link>
         ) : null}
       </p>
+    )
+  }
+
+  if (!examContentReady) {
+    return (
+      <EnrollmentConsentCard
+        storageKey="drivego_consent_exam_v1"
+        title={t("consent.examTitle")}
+        bullets={[t("consent.examBullet1"), t("consent.examBullet2")]}
+        confirmLabel={t("consent.examConfirm")}
+      >
+        <LicenseContentEmpty feature="exam" />
+      </EnrollmentConsentCard>
     )
   }
 

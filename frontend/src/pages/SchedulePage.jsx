@@ -39,7 +39,15 @@ export function SchedulePage() {
           `/schedules?licenseClass=${licenseClass}&slotType=${slotType}`,
           { auth: Boolean(user) },
         )
-        if (!cancelled) setSlots(data)
+        if (!cancelled) {
+          setSlots(data)
+          setMessage(null)
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setSlots([])
+          setMessage(err instanceof Error ? err.message : "Không tải được lịch thi")
+        }
       } finally {
         if (!cancelled) setLoading(false)
       }
