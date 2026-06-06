@@ -209,6 +209,13 @@ export class AuthService {
       throw new ServiceUnavailableException("Chưa cấu hình FRONTEND_URL để gửi email đặt lại mật khẩu")
     }
 
+    const resetUrl = `${frontendUrl}/reset-password?token=${encodeURIComponent(token)}`
+    const resendKey = this.config.get<string>("RESEND_API_KEY")?.trim()
+    if (resendKey) {
+      await this.sendPasswordResetWithResend(email, resetUrl, resendKey)
+      return
+    }
+
     const host = this.config.get<string>("SMTP_HOST")
     const port = Number(this.config.get<string>("SMTP_PORT") ?? 465)
     const user = this.config.get<string>("SMTP_USER")
@@ -220,7 +227,6 @@ export class AuthService {
       )
     }
 
-    const resetUrl = `${frontendUrl}/reset-password?token=${encodeURIComponent(token)}`
     const smtpHost = await this.resolveSmtpHost(host)
     const mailOptions = {
       host: smtpHost,
@@ -259,6 +265,40 @@ export class AuthService {
     } catch (err) {
       throw new ServiceUnavailableException(
         `Không gửi được email đặt lại mật khẩu. Kiểm tra SMTP_USER/SMTP_PASS/MAIL_FROM trên backend. ${err instanceof Error ? err.message : err}`,
+      )
+    }
+  }
+
+  private async sendPasswordResetWithResend(email: string, resetUrl: string, apiKey: string) {
+    const from = this.config.get<string>("RESEND_FROM")?.trim() || "DriveGo <onboarding@resend.dev>"
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from,
+        to: [email],
+        subject: "Đặt lại mật khẩu DriveGo",
+        text: [
+          "Bạn vừa yêu cầu đặt lại mật khẩu DriveGo.",
+          `Mở link sau trong 60 phút để tạo mật khẩu mới: ${resetUrl}`,
+          "Nếu bạn không yêu cầu thao tác này, hãy bỏ qua email.",
+        ].join("\n\n"),
+        html: `
+          <p>Bạn vừa yêu cầu đặt lại mật khẩu DriveGo.</p>
+          <p><a href="${resetUrl}">Đặt lại mật khẩu</a></p>
+          <p>Link có hiệu lực trong 60 phút. Nếu bạn không yêu cầu thao tác này, hãy bỏ qua email.</p>
+        `,
+      }),
+    })
+
+    if (!response.ok) {
+      const data = await response.json().catch(() => null)
+      const message = data?.message ?? data?.error ?? response.statusText
+      throw new ServiceUnavailableException(
+        `Không gửi được email qua Resend. Kiểm tra RESEND_API_KEY/RESEND_FROM. ${message}`,
       )
     }
   }
