@@ -8,6 +8,7 @@ import { ConfigService } from "@nestjs/config"
 import { JwtService } from "@nestjs/jwt"
 import { InjectRepository } from "@nestjs/typeorm"
 import * as bcrypt from "bcryptjs"
+import { promises as dns } from "dns"
 import { randomBytes, randomUUID } from "crypto"
 import nodemailer from "nodemailer"
 import type SMTPTransport from "nodemailer/lib/smtp-transport"
@@ -220,14 +221,23 @@ export class AuthService {
     }
 
     const resetUrl = `${frontendUrl}/reset-password?token=${encodeURIComponent(token)}`
+    const smtpHost = await this.resolveSmtpHost(host)
     const mailOptions = {
-      host,
+      host: smtpHost,
       port,
       secure: port === 465,
       family: 4,
-      connectionTimeout: 15_000,
+      connectionTimeout: 8_000,
+      greetingTimeout: 8_000,
+      socketTimeout: 12_000,
+      tls: { servername: host },
       auth: { user, pass },
-    } as SMTPTransport.Options & { family: 4; connectionTimeout: number }
+    } as SMTPTransport.Options & {
+      family: 4
+      connectionTimeout: number
+      greetingTimeout: number
+      socketTimeout: number
+    }
     const transporter = nodemailer.createTransport(mailOptions)
 
     try {
@@ -250,6 +260,15 @@ export class AuthService {
       throw new ServiceUnavailableException(
         `Không gửi được email đặt lại mật khẩu. Kiểm tra SMTP_USER/SMTP_PASS/MAIL_FROM trên backend. ${err instanceof Error ? err.message : err}`,
       )
+    }
+  }
+
+  private async resolveSmtpHost(host: string) {
+    try {
+      const addresses = await dns.resolve4(host)
+      return addresses[0] ?? host
+    } catch {
+      return host
     }
   }
 
