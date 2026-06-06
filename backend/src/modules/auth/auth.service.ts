@@ -10,6 +10,7 @@ import { InjectRepository } from "@nestjs/typeorm"
 import * as bcrypt from "bcryptjs"
 import { randomBytes, randomUUID } from "crypto"
 import nodemailer from "nodemailer"
+import type SMTPTransport from "nodemailer/lib/smtp-transport"
 import { DataSource, Repository } from "typeorm"
 import { FirebaseAdminService } from "../../firebase/firebase-admin.service"
 import { PasswordResetToken } from "../../entities/password-reset-token.entity"
@@ -219,12 +220,15 @@ export class AuthService {
     }
 
     const resetUrl = `${frontendUrl}/reset-password?token=${encodeURIComponent(token)}`
-    const transporter = nodemailer.createTransport({
+    const mailOptions = {
       host,
       port,
       secure: port === 465,
+      family: 4,
+      connectionTimeout: 15_000,
       auth: { user, pass },
-    })
+    } as SMTPTransport.Options & { family: 4; connectionTimeout: number }
+    const transporter = nodemailer.createTransport(mailOptions)
 
     try {
       await transporter.sendMail({
