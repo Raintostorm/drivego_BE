@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from "@nestjs/common"
 import { AuthService } from "./auth.service"
-import { ForgotPasswordDto, GoogleLoginDto, LoginDto, RegisterDto } from "./dto/auth.dto"
+import { ForgotPasswordDto, GoogleLoginDto, LoginDto, RegisterDto, ResetPasswordDto } from "./dto/auth.dto"
 
 @Controller("auth")
 export class AuthController {
@@ -22,9 +22,12 @@ export class AuthController {
   }
 
   @Post("forgot-password")
-  forgotPassword(@Body() _body: ForgotPasswordDto) {
-    return {
-      message: "Tính năng gửi email reset mật khẩu sẽ được bật sau.",
-    }
+  forgotPassword(@Body() body: ForgotPasswordDto) {
+    return this.authService.forgotPassword(body)
+  }
+
+  @Post("reset-password")
+  resetPassword(@Body() body: ResetPasswordDto) {
+    return this.authService.resetPassword(body)
   }
 }

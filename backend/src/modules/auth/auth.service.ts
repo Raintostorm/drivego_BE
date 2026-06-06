@@ -4,16 +4,19 @@ import {
   ServiceUnavailableException,
   UnauthorizedException,
 } from "@nestjs/common"
+import { ConfigService } from "@nestjs/config"
 import { JwtService } from "@nestjs/jwt"
 import { InjectRepository } from "@nestjs/typeorm"
 import * as bcrypt from "bcryptjs"
-import { randomUUID } from "crypto"
+import { randomBytes, randomUUID } from "crypto"
+import nodemailer from "nodemailer"
 import { Repository } from "typeorm"
 import { FirebaseAdminService } from "../../firebase/firebase-admin.service"
+import { PasswordResetToken } from "../../entities/password-reset-token.entity"
 import { StudentProfile } from "../../entities/student-profile.entity"
 import { User } from "../../entities/user.entity"
 import { DEFAULT_LICENSE_CLASS } from "../../common/license-class.constants"
-import { GoogleLoginDto, LoginDto, RegisterDto, UserRole } from "./dto/auth.dto"
+import { ForgotPasswordDto, GoogleLoginDto, LoginDto, RegisterDto, ResetPasswordDto, UserRole } from "./dto/auth.dto"
 import { JwtPayload } from "./jwt.strategy"
 
 export type AuthResponseUser = {
@@ -28,6 +31,10 @@ export type AuthResponse = {
   user: AuthResponseUser
 }
 
+const RESET_TOKEN_TTL_MS = 60 * 60 * 1000
+const FORGOT_PASSWORD_MESSAGE =
+  "Nếu email tồn tại trong hệ thống, DriveGo đã gửi hướng dẫn đặt lại mật khẩu."
+
 @Injectable()
 export class AuthService {
   constructor(
@@ -35,8 +42,11 @@ export class AuthService {
     private readonly usersRepo: Repository<User>,
     @InjectRepository(StudentProfile)
     private readonly profilesRepo: Repository<StudentProfile>,
+    @InjectRepository(PasswordResetToken)
+    private readonly resetTokensRepo: Repository<PasswordResetToken>,
     private readonly jwtService: JwtService,
     private readonly firebaseAdmin: FirebaseAdminService,
+    private readonly config: ConfigService,
   ) {}
 
   async register(dto: RegisterDto): Promise<AuthResponse> {
@@ -148,6 +158,86 @@ export class AuthService {
     }
 
     return this.buildAuthResponse(user)
+  }
+
+  async forgotPassword(dto: ForgotPasswordDto) {
+    const email = dto.email.trim().toLowerCase()
+    const user = await this.usersRepo.findOne({ where: { email } })
+    if (!user) {
+      return { message: FORGOT_PASSWORD_MESSAGE }
+    }
+
+    const token = randomBytes(32).toString("hex")
+    await this.resetTokensRepo.delete({ userId: user.id })
+    await this.resetTokensRepo.save(
+      this.resetTokensRepo.create({
+        userId: user.id,
+        token,
+        expiresAt: new Date(Date.now() + RESET_TOKEN_TTL_MS),
+      }),
+    )
+
+    await this.sendPasswordResetEmail(email, token)
+    return { message: FORGOT_PASSWORD_MESSAGE }
+  }
+
+  async resetPassword(dto: ResetPasswordDto) {
+    const row = await this.resetTokensRepo.findOne({
+      where: { token: dto.token },
+      relations: { user: true },
+    })
+    if (!row || !row.user || row.expiresAt.getTime() < Date.now()) {
+      if (row) await this.resetTokensRepo.delete({ id: row.id })
+      throw new UnauthorizedException("Link đặt lại mật khẩu không hợp lệ hoặc đã hết hạn")
+    }
+
+    row.user.passwordHash = await bcrypt.hash(dto.password, 10)
+    await this.usersRepo.save(row.user)
+    await this.resetTokensRepo.delete({ id: row.id })
+
+    return { message: "Đặt lại mật khẩu thành công. Bạn có thể đăng nhập bằng mật khẩu mới." }
+  }
+
+  private async sendPasswordResetEmail(email: string, token: string) {
+    const frontendUrl = this.config.get<string>("FRONTEND_URL")?.replace(/\/$/, "")
+    if (!frontendUrl) {
+      throw new ServiceUnavailableException("Chưa cấu hình FRONTEND_URL để gửi email đặt lại mật khẩu")
+    }
+
+    const host = this.config.get<string>("SMTP_HOST")
+    const port = Number(this.config.get<string>("SMTP_PORT") ?? 465)
+    const user = this.config.get<string>("SMTP_USER")
+    const pass = this.config.get<string>("SMTP_PASS")
+    const from = this.config.get<string>("MAIL_FROM") ?? user
+    if (!host || !user || !pass || !from) {
+      throw new ServiceUnavailableException(
+        "Chưa cấu hình SMTP_HOST / SMTP_USER / SMTP_PASS / MAIL_FROM để gửi email",
+      )
+    }
+
+    const resetUrl = `${frontendUrl}/reset-password?token=${encodeURIComponent(token)}`
+    const transporter = nodemailer.createTransport({
+      host,
+      port,
+      secure: port === 465,
+      auth: { user, pass },
+    })
+
+    await transporter.sendMail({
+      from,
+      to: email,
+      subject: "Đặt lại mật khẩu DriveGo",
+      text: [
+        "Bạn vừa yêu cầu đặt lại mật khẩu DriveGo.",
+        `Mở link sau trong 60 phút để tạo mật khẩu mới: ${resetUrl}`,
+        "Nếu bạn không yêu cầu thao tác này, hãy bỏ qua email.",
+      ].join("\n\n"),
+      html: `
+        <p>Bạn vừa yêu cầu đặt lại mật khẩu DriveGo.</p>
+        <p><a href="${resetUrl}">Đặt lại mật khẩu</a></p>
+        <p>Link có hiệu lực trong 60 phút. Nếu bạn không yêu cầu thao tác này, hãy bỏ qua email.</p>
+      `,
+    })
   }
 
   private buildAuthResponse(user: User): AuthResponse {

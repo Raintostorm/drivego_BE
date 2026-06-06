@@ -68,6 +68,16 @@ export const routeConfig = [
     ),
   },
   {
+    path: "/reset-password",
+    labelKey: "nav.forgotPassword",
+    group: "auth",
+    layout: "auth",
+    LazyPage: lazyNamed(
+      () => import("./pages/ResetPasswordPage.jsx"),
+      "ResetPasswordPage",
+    ),
+  },
+  {
     path: "/history",
     labelKey: "nav.history",
     group: "app",
