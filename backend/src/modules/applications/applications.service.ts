@@ -2,12 +2,21 @@ import {
   BadRequestException,
   ForbiddenException,
   Injectable,
+  InternalServerErrorException,
   NotFoundException,
 } from "@nestjs/common"
+import {
+  DeleteObjectCommand,
+  GetObjectCommand,
+  PutObjectCommand,
+  S3Client,
+} from "@aws-sdk/client-s3"
 import { ConfigService } from "@nestjs/config"
 import { InjectRepository } from "@nestjs/typeorm"
 import { createReadStream, existsSync, mkdirSync, unlinkSync, writeFileSync } from "fs"
 import { join, extname } from "path"
+import { Readable } from "stream"
+import type { ReadableStream as NodeReadableStream } from "stream/web"
 import { randomUUID } from "crypto"
 import { Repository } from "typeorm"
 import { ApplicationDocument } from "../../entities/application-document.entity"
@@ -30,6 +39,9 @@ const MAX_FILE_BYTES = 5 * 1024 * 1024
 export class ApplicationsService {
   private readonly uploadRoot: string
   private readonly uploadDir: string
+  private readonly uploadProvider: string
+  private readonly r2Bucket?: string
+  private readonly r2Client?: S3Client
 
   constructor(
     @InjectRepository(LicenseApplication)
@@ -40,9 +52,28 @@ export class ApplicationsService {
     private readonly profilesRepo: Repository<StudentProfile>,
     private readonly config: ConfigService,
   ) {
+    this.uploadProvider = this.config.get<string>("UPLOAD_STORAGE_PROVIDER")?.trim().toLowerCase() || "local"
     this.uploadRoot = this.config.get<string>("UPLOAD_DIR")?.trim() || join(process.cwd(), "uploads")
     this.uploadDir = join(this.uploadRoot, "applications")
-    mkdirSync(this.uploadDir, { recursive: true })
+    if (this.uploadProvider === "r2") {
+      this.r2Bucket = this.config.get<string>("R2_BUCKET")?.trim()
+      const endpoint = this.normalizeR2Endpoint(
+        this.config.get<string>("R2_ENDPOINT")?.trim(),
+        this.r2Bucket,
+      )
+      const accessKeyId = this.config.get<string>("R2_ACCESS_KEY_ID")?.trim()
+      const secretAccessKey = this.config.get<string>("R2_SECRET_ACCESS_KEY")?.trim()
+      if (this.r2Bucket && endpoint && accessKeyId && secretAccessKey) {
+        this.r2Client = new S3Client({
+          region: "auto",
+          endpoint,
+          forcePathStyle: true,
+          credentials: { accessKeyId, secretAccessKey },
+        })
+      }
+    } else {
+      mkdirSync(this.uploadDir, { recursive: true })
+    }
   }
 
   async assertApprovedForExam(userId: string) {
@@ -198,18 +229,15 @@ export class ApplicationsService {
     }
 
     const ext = extname(file.originalname) || (mime === "application/pdf" ? ".pdf" : ".jpg")
-    const storedName = `${applicationId}_${docType}_${slotIndex}_${randomUUID()}${ext}`
-    const absolutePath = join(this.uploadDir, storedName)
-    writeFileSync(absolutePath, file.buffer)
-
-    const relativePath = join("applications", storedName)
+    const storedName = `${docType}_${slotIndex}_${randomUUID()}${ext}`
+    const filePath = `applications/${applicationId}/${storedName}`
+    await this.storeUploadedFile(filePath, file.buffer, mime)
 
     const existing = await this.docsRepo.findOne({
       where: { applicationId, docType, slotIndex },
     })
     if (existing?.filePath) {
-      const oldAbs = join(this.uploadRoot, existing.filePath)
-      if (existsSync(oldAbs)) unlinkSync(oldAbs)
+      await this.deleteStoredFile(existing.filePath)
       await this.docsRepo.remove(existing)
     }
 
@@ -217,7 +245,7 @@ export class ApplicationsService {
       applicationId,
       docType,
       slotIndex,
-      filePath: relativePath.replace(/\\/g, "/"),
+      filePath,
       originalName: file.originalname,
       mimeType: mime,
     })
@@ -295,6 +323,17 @@ export class ApplicationsService {
   }
 
   async resolveDocumentStream(doc: ApplicationDocument) {
+    if (this.uploadProvider === "r2") {
+      const r2Stream = await this.resolveR2Stream(doc.filePath).catch(() => null)
+      if (r2Stream) {
+        return {
+          stream: r2Stream,
+          mimeType: doc.mimeType ?? "application/octet-stream",
+          originalName: doc.originalName ?? "document",
+        }
+      }
+    }
+
     const absolutePath = join(this.uploadRoot, doc.filePath)
     if (!existsSync(absolutePath)) {
       throw new NotFoundException("File không tồn tại trên máy chủ")
@@ -304,6 +343,61 @@ export class ApplicationsService {
       mimeType: doc.mimeType ?? "application/octet-stream",
       originalName: doc.originalName ?? "document",
     }
+  }
+
+  private async storeUploadedFile(filePath: string, buffer: Buffer, mimeType: string) {
+    if (this.uploadProvider === "r2") {
+      if (!this.r2Client || !this.r2Bucket) {
+        throw new InternalServerErrorException("Chưa cấu hình R2 để lưu hồ sơ")
+      }
+      await this.r2Client.send(
+        new PutObjectCommand({
+          Bucket: this.r2Bucket,
+          Key: filePath,
+          Body: buffer,
+          ContentType: mimeType,
+        }),
+      )
+      return
+    }
+
+    mkdirSync(join(this.uploadRoot, "applications"), { recursive: true })
+    writeFileSync(join(this.uploadRoot, filePath), buffer)
+  }
+
+  private async deleteStoredFile(filePath: string) {
+    if (this.uploadProvider === "r2" && this.r2Client && this.r2Bucket) {
+      await this.r2Client
+        .send(new DeleteObjectCommand({ Bucket: this.r2Bucket, Key: filePath }))
+        .catch(() => undefined)
+      return
+    }
+
+    const oldAbs = join(this.uploadRoot, filePath)
+    if (existsSync(oldAbs)) unlinkSync(oldAbs)
+  }
+
+  private async resolveR2Stream(filePath: string) {
+    if (!this.r2Client || !this.r2Bucket) return null
+    const result = await this.r2Client.send(
+      new GetObjectCommand({ Bucket: this.r2Bucket, Key: filePath }),
+    )
+    const body = result.Body
+    if (!body) return null
+    if (body instanceof Readable) return body
+    if (typeof (body as { transformToWebStream?: () => unknown }).transformToWebStream === "function") {
+      const webStream = (body as { transformToWebStream: () => unknown }).transformToWebStream()
+      return Readable.fromWeb(webStream as NodeReadableStream)
+    }
+    return Readable.from(body as AsyncIterable<Uint8Array>)
+  }
+
+  private normalizeR2Endpoint(endpoint?: string, bucket?: string) {
+    if (!endpoint) return undefined
+    const trimmed = endpoint.replace(/\/+$/, "")
+    if (!bucket) return trimmed
+    const suffix = `/${bucket}`
+    return trimmed.endsWith(suffix) ? trimmed.slice(0, -suffix.length) : trimmed
   }
 
   /** Ưu tiên nháp đang soạn; không thì bản mới nhất (đã nộp / chờ nộp lại). */

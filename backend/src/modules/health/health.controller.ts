@@ -31,6 +31,17 @@ export class HealthController {
     if (production && uploadProvider === "local") {
       warnings.push("UPLOAD_STORAGE_PROVIDER=local: file upload có thể mất khi Render redeploy nếu không gắn persistent disk.")
     }
+    if (uploadProvider === "r2") {
+      const missingR2 = [
+        "R2_BUCKET",
+        "R2_ENDPOINT",
+        "R2_ACCESS_KEY_ID",
+        "R2_SECRET_ACCESS_KEY",
+      ].filter((key) => !has(key))
+      if (missingR2.length > 0) {
+        warnings.push(`UPLOAD_STORAGE_PROVIDER=r2 nhưng thiếu cấu hình: ${missingR2.join(", ")}.`)
+      }
+    }
     if (!has("RESEND_API_KEY") && !has("SMTP_USER")) {
       warnings.push("Chưa cấu hình email reset password (RESEND_API_KEY hoặc SMTP_USER).")
     }
@@ -51,7 +62,16 @@ export class HealthController {
           has("SEPAY_ACCOUNT_HOLDER"),
         sepayWebhook: has("SEPAY_WEBHOOK_API_KEY") || has("SEPAY_WEBHOOK_HMAC_SECRET"),
         gemini: has("GEMINI_API_KEY") && has("GEMINI_MODEL"),
-        uploadStorage: uploadProvider,
+        uploadStorage: {
+          provider: uploadProvider,
+          r2:
+            uploadProvider === "r2"
+              ? has("R2_BUCKET") &&
+                has("R2_ENDPOINT") &&
+                has("R2_ACCESS_KEY_ID") &&
+                has("R2_SECRET_ACCESS_KEY")
+              : null,
+        },
       },
       warnings,
     }
