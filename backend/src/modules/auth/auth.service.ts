@@ -104,7 +104,7 @@ export class AuthService {
   async loginWithGoogle(dto: GoogleLoginDto): Promise<AuthResponse> {
     if (!this.firebaseAdmin.isConfigured()) {
       throw new ServiceUnavailableException(
-        "Google Sign-in chưa cấu hình trên server (FIREBASE_PROJECT_ID / GOOGLE_APPLICATION_CREDENTIALS)",
+        "Google Sign-in chưa cấu hình trên server (FIREBASE_PROJECT_ID / FIREBASE_SERVICE_ACCOUNT_BASE64)",
       )
     }
 

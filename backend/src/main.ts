@@ -4,6 +4,15 @@ import { ValidationPipe } from "@nestjs/common"
 import { ConfigService } from "@nestjs/config"
 import { AppModule } from "./app.module"
 
+function parseAllowedOrigins(raw?: string) {
+  return new Set(
+    (raw ?? "")
+      .split(",")
+      .map((origin) => origin.trim().replace(/\/$/, ""))
+      .filter(Boolean),
+  )
+}
+
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { rawBody: true })
   const config = app.get(ConfigService)
@@ -23,23 +32,24 @@ async function bootstrap() {
     }),
   )
 
-  // Đoạn cấu hình CORS đã được thêm Type định danh để hết lỗi TypeScript:
+  const allowedOrigins = parseAllowedOrigins(config.get<string>("CORS_ORIGIN"))
+  allowedOrigins.add("http://localhost:5173")
+  allowedOrigins.add("https://drivego.space")
+  allowedOrigins.add("https://www.drivego.space")
+
   app.enableCors({
     origin: (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
-      // Cho phép: local, link chính thức, và BẤT KỲ link preview nào của Vercel kết thúc bằng .vercel.app
-      if (
-        !origin || 
-        origin === 'http://localhost:5173' || 
-        origin.endsWith('.vercel.app')
-      ) {
-        callback(null, true);
-      } else {
-        callback(new Error('Not allowed by CORS'));
-      }
+      const normalizedOrigin = origin?.replace(/\/$/, "")
+      const isAllowed =
+        !normalizedOrigin ||
+        allowedOrigins.has(normalizedOrigin) ||
+        normalizedOrigin.endsWith(".vercel.app")
+
+      callback(null, isAllowed)
     },
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     credentials: true,
-  });
+  })
 
   const port = Number(config.get<string>("PORT")) || 3000
   await app.listen(port)
