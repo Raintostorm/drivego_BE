@@ -16,6 +16,7 @@ import { User } from "../../entities/user.entity"
 import { ApplicationsModule } from "../applications/applications.module"
 import { AuthModule } from "../auth/auth.module"
 import { NotificationsModule } from "../notifications/notifications.module"
+import { PaymentsModule } from "../payments/payments.module"
 import { AdminApplicationsController } from "./admin-applications.controller"
 import { AdminApplicationsService } from "./admin-applications.service"
 import { AdminCentersController } from "./admin-centers.controller"
@@ -61,6 +62,7 @@ import { AdminUsersService } from "./admin-users.service"
     AuthModule,
     ApplicationsModule,
     NotificationsModule,
+    PaymentsModule,
   ],
   controllers: [
     AdminApplicationsController,

@@ -121,15 +121,32 @@ export class PaymentsService {
       throw new NotFoundException("Không tìm thấy giao dịch")
     }
 
-    return {
-      id: payment.id,
-      status: payment.status,
-      paymentType: payment.paymentType,
-      licenseClass: payment.licenseClass,
-      paymentCode: payment.customerInfo?.paymentCode ?? null,
-      amount: Number(payment.amount),
-      paidAt: payment.customerInfo?.paidAt ?? null,
+    return this.toPaymentStatus(payment)
+  }
+
+  async confirmManual(paymentId: string, adminUserId: string, note?: string) {
+    const payment = await this.paymentsRepo.findOne({ where: { id: paymentId } })
+    if (!payment) {
+      throw new NotFoundException("Không tìm thấy giao dịch")
     }
+    if (payment.status === "paid") {
+      return this.toPaymentStatus(payment)
+    }
+    if (payment.status !== "pending") {
+      throw new BadRequestException("Chỉ có thể xác nhận thủ công giao dịch đang chờ")
+    }
+    if (this.isExpired(payment)) {
+      payment.status = "expired"
+      await this.paymentsRepo.save(payment)
+      throw new BadRequestException("Giao dịch đã hết hạn")
+    }
+
+    await this.markPaid(payment, {
+      manual: true,
+      adminUserId,
+      note: note?.trim() || null,
+    })
+    return this.toPaymentStatus(payment)
   }
 
   async handleSepayWebhook(payload: SepayWebhookDto) {
@@ -209,14 +226,26 @@ export class PaymentsService {
     return new Date(expiresAt).getTime() < Date.now()
   }
 
-  private async markPaid(payment: Payment, payload: SepayWebhookDto) {
+  private async markPaid(
+    payment: Payment,
+    payload: SepayWebhookDto | { manual: true; adminUserId: string; note: string | null },
+  ) {
     payment.status = "paid"
+    const manualPayload = "manual" in payload
     payment.customerInfo = {
       ...(payment.customerInfo ?? {}),
-      sepayTransactionId: payload.id,
       paidAt: new Date().toISOString(),
-      sepayReferenceCode: payload.referenceCode ?? null,
-      sepayGateway: payload.gateway ?? null,
+      ...(manualPayload
+        ? {
+            manualConfirmed: true,
+            manualConfirmedBy: payload.adminUserId,
+            manualConfirmNote: payload.note,
+          }
+        : {
+            sepayTransactionId: payload.id,
+            sepayReferenceCode: payload.referenceCode ?? null,
+            sepayGateway: payload.gateway ?? null,
+          }),
     }
     await this.paymentsRepo.save(payment)
 
@@ -243,5 +272,18 @@ export class PaymentsService {
     premiumUntil.setDate(premiumUntil.getDate() + PREMIUM_DAYS)
 
     await this.profilesRepo.update(payment.userId, { premiumUntil })
+  }
+
+  private toPaymentStatus(payment: Payment) {
+    return {
+      id: payment.id,
+      status: payment.status,
+      paymentType: payment.paymentType,
+      licenseClass: payment.licenseClass,
+      paymentCode: payment.customerInfo?.paymentCode ?? null,
+      amount: Number(payment.amount),
+      paidAt: payment.customerInfo?.paidAt ?? null,
+      manualConfirmed: Boolean(payment.customerInfo?.manualConfirmed),
+    }
   }
 }

@@ -12,5 +12,6 @@ import { SepayConfigService } from "./sepay-config.service"
   imports: [TypeOrmModule.forFeature([Payment, SubscriptionPlan, StudentProfile, User])],
   controllers: [PaymentsController],
   providers: [PaymentsService, SepayConfigService],
+  exports: [PaymentsService, SepayConfigService],
 })
 export class PaymentsModule {}

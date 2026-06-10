@@ -4,6 +4,7 @@ import {
   Injectable,
   NotFoundException,
 } from "@nestjs/common"
+import { ConfigService } from "@nestjs/config"
 import { InjectRepository } from "@nestjs/typeorm"
 import { createReadStream, existsSync, mkdirSync, unlinkSync, writeFileSync } from "fs"
 import { join, extname } from "path"
@@ -24,10 +25,12 @@ import {
 import { UpdateApplicationDto } from "./dto/update-application.dto"
 
 const MAX_FILE_BYTES = 5 * 1024 * 1024
-const UPLOAD_DIR = join(process.cwd(), "uploads", "applications")
 
 @Injectable()
 export class ApplicationsService {
+  private readonly uploadRoot: string
+  private readonly uploadDir: string
+
   constructor(
     @InjectRepository(LicenseApplication)
     private readonly appsRepo: Repository<LicenseApplication>,
@@ -35,8 +38,11 @@ export class ApplicationsService {
     private readonly docsRepo: Repository<ApplicationDocument>,
     @InjectRepository(StudentProfile)
     private readonly profilesRepo: Repository<StudentProfile>,
+    private readonly config: ConfigService,
   ) {
-    mkdirSync(UPLOAD_DIR, { recursive: true })
+    this.uploadRoot = this.config.get<string>("UPLOAD_DIR")?.trim() || join(process.cwd(), "uploads")
+    this.uploadDir = join(this.uploadRoot, "applications")
+    mkdirSync(this.uploadDir, { recursive: true })
   }
 
   async assertApprovedForExam(userId: string) {
@@ -193,7 +199,7 @@ export class ApplicationsService {
 
     const ext = extname(file.originalname) || (mime === "application/pdf" ? ".pdf" : ".jpg")
     const storedName = `${applicationId}_${docType}_${slotIndex}_${randomUUID()}${ext}`
-    const absolutePath = join(UPLOAD_DIR, storedName)
+    const absolutePath = join(this.uploadDir, storedName)
     writeFileSync(absolutePath, file.buffer)
 
     const relativePath = join("applications", storedName)
@@ -202,7 +208,7 @@ export class ApplicationsService {
       where: { applicationId, docType, slotIndex },
     })
     if (existing?.filePath) {
-      const oldAbs = join(process.cwd(), "uploads", existing.filePath)
+      const oldAbs = join(this.uploadRoot, existing.filePath)
       if (existsSync(oldAbs)) unlinkSync(oldAbs)
       await this.docsRepo.remove(existing)
     }
@@ -289,7 +295,7 @@ export class ApplicationsService {
   }
 
   async resolveDocumentStream(doc: ApplicationDocument) {
-    const absolutePath = join(process.cwd(), "uploads", doc.filePath)
+    const absolutePath = join(this.uploadRoot, doc.filePath)
     if (!existsSync(absolutePath)) {
       throw new NotFoundException("File không tồn tại trên máy chủ")
     }

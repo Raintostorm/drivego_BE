@@ -23,6 +23,10 @@ export async function fetchAdminSummary() {
   return apiFetch("/admin/dashboard/summary", { auth: true })
 }
 
+export async function fetchAdminHealthConfig() {
+  return apiFetch("/health/config", { auth: true })
+}
+
 export async function fetchAdminApplications(params = {}) {
   const q = new URLSearchParams()
   if (params.status) q.set("status", params.status)
@@ -91,8 +95,17 @@ export async function fetchAdminEnrollments(params = {}) {
 export async function fetchAdminPayments(params = {}) {
   const q = new URLSearchParams()
   if (params.status) q.set("status", params.status)
+  if (params.paymentType) q.set("paymentType", params.paymentType)
   const qs = q.toString()
   return apiFetch(`/admin/payments${qs ? `?${qs}` : ""}`, { auth: true })
+}
+
+export async function confirmAdminPayment(paymentId, body = {}) {
+  return apiFetch(`/admin/payments/${paymentId}/confirm`, {
+    method: "POST",
+    auth: true,
+    body: JSON.stringify(body),
+  })
 }
 
 export async function fetchAdminSlots(params = {}) {

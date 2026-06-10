@@ -234,6 +234,16 @@ export const routeConfig = [
     ),
   },
   {
+    path: "/admin/payments",
+    labelKey: "nav.adminPayments",
+    group: "admin",
+    layout: "admin",
+    LazyPage: lazyNamed(
+      () => import("./pages/AdminPaymentsPage.jsx"),
+      "AdminPaymentsPage",
+    ),
+  },
+  {
     path: "/admin/schedules",
     labelKey: "nav.adminSchedules",
     group: "admin",
@@ -272,6 +282,13 @@ export const routeConfig = [
       () => import("./pages/AdminCourseChaptersPage.jsx"),
       "AdminCourseChaptersPage",
     ),
+  },
+  {
+    path: "/admin/health",
+    labelKey: "nav.adminHealth",
+    group: "admin",
+    layout: "admin",
+    LazyPage: lazyNamed(() => import("./pages/AdminHealthPage.jsx"), "AdminHealthPage"),
   },
   {
     path: "/admin/class-sessions",

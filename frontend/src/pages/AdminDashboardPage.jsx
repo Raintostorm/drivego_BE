@@ -10,11 +10,13 @@ import { t } from "../lib/strings.js"
 
 const QUICK_LINKS = [
   { to: "/admin/applications", title: "Hồ sơ sát hạch", desc: "Duyệt và yêu cầu nộp lại hồ sơ." },
+  { to: "/admin/payments", title: "Thanh toán", desc: "Theo dõi và xác nhận giao dịch khi webhook chậm." },
   { to: "/admin/students", title: "Học viên", desc: "Danh sách và chi tiết học viên trung tâm." },
   { to: "/admin/schedules", title: "Duyệt đăng ký ca thi", desc: "Xác nhận yêu cầu đăng ký ca sát hạch." },
   { to: "/admin/schedules/slots", title: "Quản lý ca thi", desc: "Tạo ca lý thuyết / chạy thử." },
   { to: "/admin/class-sessions", title: "Buổi học & điểm danh", desc: "Lịch lớp và check-in học viên." },
   { to: "/admin/courses", title: "Nội dung khóa", desc: "Xem chương và học phí theo hạng.", systemOnly: false },
+  { to: "/admin/health", title: "Cấu hình hệ thống", desc: "Kiểm tra DB, Firebase, Resend, SePay và upload." },
 ]
 
 export function AdminDashboardPage() {
