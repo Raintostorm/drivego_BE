@@ -1,6 +1,7 @@
 import {
   ConflictException,
   Injectable,
+  Logger,
   ServiceUnavailableException,
   UnauthorizedException,
 } from "@nestjs/common"
@@ -39,6 +40,8 @@ const FORGOT_PASSWORD_MESSAGE =
 
 @Injectable()
 export class AuthService {
+  private readonly logger = new Logger(AuthService.name)
+
   constructor(
     @InjectRepository(User)
     private readonly usersRepo: Repository<User>,
@@ -206,7 +209,8 @@ export class AuthService {
   private async sendPasswordResetEmail(email: string, token: string) {
     const frontendUrl = this.config.get<string>("FRONTEND_URL")?.replace(/\/$/, "")
     if (!frontendUrl) {
-      throw new ServiceUnavailableException("Chưa cấu hình FRONTEND_URL để gửi email đặt lại mật khẩu")
+      this.logger.error("Password reset email is unavailable: missing FRONTEND_URL")
+      throw new ServiceUnavailableException("Dịch vụ đặt lại mật khẩu tạm thời chưa sẵn sàng")
     }
 
     const resetUrl = `${frontendUrl}/reset-password?token=${encodeURIComponent(token)}`
@@ -224,8 +228,9 @@ export class AuthService {
     const pass = this.config.get<string>("SMTP_PASS")
     const from = this.config.get<string>("MAIL_FROM") ?? user
     if (!host || !user || !pass || !from) {
+      this.logger.error("Password reset SMTP fallback is unavailable: missing SMTP env")
       throw new ServiceUnavailableException(
-        "Chưa cấu hình SMTP_HOST / SMTP_USER / SMTP_PASS / MAIL_FROM để gửi email",
+        "Dịch vụ đặt lại mật khẩu tạm thời chưa sẵn sàng",
       )
     }
 
@@ -265,8 +270,11 @@ export class AuthService {
         `,
       })
     } catch (err) {
+      this.logger.error(
+        `Password reset SMTP send failed: ${err instanceof Error ? err.message : err}`,
+      )
       throw new ServiceUnavailableException(
-        `Không gửi được email đặt lại mật khẩu qua SMTP. Kiểm tra SMTP_USER/SMTP_PASS/MAIL_FROM hoặc dùng RESEND_API_KEY cho production. ${err instanceof Error ? err.message : err}`,
+        "Chưa gửi được email đặt lại mật khẩu. Vui lòng thử lại sau.",
       )
     }
   }
@@ -299,8 +307,9 @@ export class AuthService {
     if (!response.ok) {
       const data = await response.json().catch(() => null)
       const message = data?.message ?? data?.error ?? response.statusText
+      this.logger.error(`Password reset Resend send failed: ${response.status} ${message}`)
       throw new ServiceUnavailableException(
-        `Không gửi được email qua Resend. Kiểm tra RESEND_API_KEY/RESEND_FROM. ${message}`,
+        "Chưa gửi được email đặt lại mật khẩu. Vui lòng thử lại sau.",
       )
     }
   }

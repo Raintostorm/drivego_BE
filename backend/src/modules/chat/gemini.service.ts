@@ -35,8 +35,9 @@ export class GeminiService {
   ): Promise<string> {
     const apiKey = this.config.get<string>("GEMINI_API_KEY")?.trim()
     if (!apiKey) {
+      this.logger.warn("Gemini unavailable: missing GEMINI_API_KEY")
       throw new ServiceUnavailableException(
-        "Chưa cấu hình GEMINI_API_KEY trên server. Thêm vào backend/.env và khởi động lại backend.",
+        "AI hiện tạm thời chưa sẵn sàng. Vui lòng thử lại sau.",
       )
     }
 
@@ -67,7 +68,7 @@ export class GeminiService {
       })
     } catch (err) {
       this.logger.error("Gemini network error", err)
-      throw new ServiceUnavailableException("Không kết nối được Gemini API. Kiểm tra mạng hoặc thử lại sau.")
+      throw new ServiceUnavailableException("AI hiện tạm thời chưa sẵn sàng. Vui lòng thử lại sau.")
     }
 
     const data = (await response.json()) as GeminiResponse
@@ -76,7 +77,7 @@ export class GeminiService {
       const msg = data.error?.message ?? response.statusText
       this.logger.warn(`Gemini HTTP ${response.status}: ${msg}`)
       throw new ServiceUnavailableException(
-        `Gemini API lỗi (${response.status}): ${msg}`,
+        "AI hiện tạm thời chưa sẵn sàng. Vui lòng thử lại sau.",
       )
     }
 
@@ -86,7 +87,8 @@ export class GeminiService {
       .trim()
 
     if (!text) {
-      throw new ServiceUnavailableException("Gemini không trả về nội dung. Thử hỏi lại.")
+      this.logger.warn("Gemini returned an empty response")
+      throw new ServiceUnavailableException("AI hiện tạm thời chưa sẵn sàng. Vui lòng thử lại sau.")
     }
 
     return text
