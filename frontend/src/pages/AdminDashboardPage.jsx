@@ -92,13 +92,6 @@ export function AdminDashboardPage() {
           </UiCard>
         ))}
       </div>
-
-      <UiCard variant="panel" className="mt-6">
-        <p className="text-sm text-drive-muted">
-          Demo: <strong className="text-white">center@drivego.demo</strong> hoặc{" "}
-          <strong className="text-white">admin@drivego.demo</strong> · Mật khẩu DriveGo123!
-        </p>
-      </UiCard>
     </section>
   )
 }

@@ -23,6 +23,11 @@ export function MarketingNav() {
   }, [])
 
   const appHome = user ? dashboardPathForRole(user.role) : null
+  const visibleMoreRoutes = moreRoutes.filter((route) => {
+    if (!user) return route.group === "marketing"
+    if (staff) return route.group === "admin"
+    return route.group === "app"
+  })
 
   return (
     <header className="sticky top-0 z-30 -mx-4 mb-8 border-b border-drive-border-soft bg-drive-canvas/90 px-4 py-4 backdrop-blur-md sm:-mx-6 sm:px-6">
@@ -41,32 +46,34 @@ export function MarketingNav() {
               {t(labelKey)}
             </NavLink>
           ))}
-          <div className="relative" ref={wrapRef}>
-            <button
-              type="button"
-              onClick={() => setMoreOpen((o) => !o)}
-              className="text-sm font-medium text-drive-muted hover:text-white"
-            >
-              {t("nav.more")}
-            </button>
-            {moreOpen ? (
-              <div className="absolute right-0 z-50 mt-2 min-w-[200px] rounded-drive border border-drive-border bg-drive-panel py-2 shadow-xl">
-                <p className="px-3 py-1 text-[10px] font-semibold uppercase text-drive-placeholder">
-                  {t("nav.moreGroupApp")}
-                </p>
-                {moreRoutes.map(({ path, labelKey }) => (
-                  <NavLink
-                    key={path}
-                    to={path}
-                    className="block px-3 py-2 text-sm text-drive-text hover:bg-drive-elevated"
-                    onClick={() => setMoreOpen(false)}
-                  >
-                    {t(labelKey)}
-                  </NavLink>
-                ))}
-              </div>
-            ) : null}
-          </div>
+          {visibleMoreRoutes.length ? (
+            <div className="relative" ref={wrapRef}>
+              <button
+                type="button"
+                onClick={() => setMoreOpen((o) => !o)}
+                className="text-sm font-medium text-drive-muted hover:text-white"
+              >
+                {t("nav.more")}
+              </button>
+              {moreOpen ? (
+                <div className="absolute right-0 z-50 mt-2 min-w-[200px] rounded-drive border border-drive-border bg-drive-panel py-2 shadow-xl">
+                  <p className="px-3 py-1 text-[10px] font-semibold uppercase text-drive-placeholder">
+                    {t("nav.moreGroupApp")}
+                  </p>
+                  {visibleMoreRoutes.map(({ path, labelKey }) => (
+                    <NavLink
+                      key={path}
+                      to={path}
+                      className="block px-3 py-2 text-sm text-drive-text hover:bg-drive-elevated"
+                      onClick={() => setMoreOpen(false)}
+                    >
+                      {t(labelKey)}
+                    </NavLink>
+                  ))}
+                </div>
+              ) : null}
+            </div>
+          ) : null}
         </nav>
 
         <div className="flex items-center gap-3">

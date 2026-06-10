@@ -21,8 +21,14 @@ export function SocialAuthButtons({ onGoogleSuccess, disabled = false }) {
       const code = err?.code
       if (code === "auth/popup-closed-by-user") {
         setError(null)
+      } else if (code === "auth/unauthorized-domain") {
+        setError("Domain hiện tại chưa được bật trong Firebase Authentication.")
+      } else if (code === "auth/popup-blocked") {
+        setError("Trình duyệt đang chặn popup đăng nhập Google.")
+      } else if (code === "auth/cancelled-popup-request") {
+        setError(null)
       } else {
-        setError(err instanceof Error ? err.message : "Đăng nhập Google thất bại")
+        setError("Đăng nhập Google thất bại. Vui lòng thử lại.")
       }
     } finally {
       setLoading(false)

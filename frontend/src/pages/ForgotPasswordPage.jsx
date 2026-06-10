@@ -26,7 +26,7 @@ export function ForgotPasswordPage() {
           "Nếu email tồn tại trong hệ thống, DriveGo đã gửi hướng dẫn đặt lại mật khẩu.",
       )
     } catch (err) {
-      setError(err instanceof Error ? err.message : "Gửi yêu cầu thất bại")
+      setError("Chưa gửi được email đặt lại mật khẩu. Vui lòng thử lại sau hoặc liên hệ hỗ trợ.")
     } finally {
       setSubmitting(false)
     }
