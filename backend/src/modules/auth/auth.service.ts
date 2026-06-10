@@ -217,7 +217,9 @@ export class AuthService {
     }
 
     const host = this.config.get<string>("SMTP_HOST")
-    const port = Number(this.config.get<string>("SMTP_PORT") ?? 465)
+    const port = Number(this.config.get<string>("SMTP_PORT") ?? 587)
+    const secureRaw = this.config.get<string>("SMTP_SECURE")?.trim().toLowerCase()
+    const secure = secureRaw ? secureRaw === "true" : port === 465
     const user = this.config.get<string>("SMTP_USER")
     const pass = this.config.get<string>("SMTP_PASS")
     const from = this.config.get<string>("MAIL_FROM") ?? user
@@ -231,7 +233,7 @@ export class AuthService {
     const mailOptions = {
       host: smtpHost,
       port,
-      secure: port === 465,
+      secure,
       family: 4,
       connectionTimeout: 8_000,
       greetingTimeout: 8_000,
@@ -264,13 +266,13 @@ export class AuthService {
       })
     } catch (err) {
       throw new ServiceUnavailableException(
-        `Không gửi được email đặt lại mật khẩu. Kiểm tra SMTP_USER/SMTP_PASS/MAIL_FROM trên backend. ${err instanceof Error ? err.message : err}`,
+        `Không gửi được email đặt lại mật khẩu qua SMTP. Kiểm tra SMTP_USER/SMTP_PASS/MAIL_FROM hoặc dùng RESEND_API_KEY cho production. ${err instanceof Error ? err.message : err}`,
       )
     }
   }
 
   private async sendPasswordResetWithResend(email: string, resetUrl: string, apiKey: string) {
-    const from = this.config.get<string>("RESEND_FROM")?.trim() || "DriveGo <onboarding@resend.dev>"
+    const from = this.config.get<string>("RESEND_FROM")?.trim() || "DriveGo <no-reply@drivego.space>"
     const response = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {

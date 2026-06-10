@@ -3,7 +3,6 @@ import {
   ForbiddenException,
   Injectable,
   NotFoundException,
-  ServiceUnavailableException,
 } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { randomBytes } from "crypto"
@@ -42,12 +41,7 @@ export class PaymentsService {
       throw new ForbiddenException("Chỉ học viên mới được thanh toán trên hệ thống")
     }
 
-    const bank = this.sepay.getBankInfo()
-    if (!bank.accountNumber) {
-      throw new ServiceUnavailableException(
-        "SePay chưa cấu hình — thêm SEPAY_BANK_ACCOUNT vào backend/.env",
-      )
-    }
+    const bank = this.sepay.assertCheckoutConfigured()
 
     const paymentType = dto.paymentType ?? "premium"
     let amount = 0
@@ -162,7 +156,8 @@ export class PaymentsService {
     }
 
     const expectedAmount = Math.round(Number(payment.amount))
-    if (payload.transferAmount !== expectedAmount) {
+    const paidAmount = Math.round(Number(payload.transferAmount))
+    if (paidAmount !== expectedAmount) {
       return { success: true, message: "Amount mismatch — ignored" }
     }
 
@@ -188,7 +183,14 @@ export class PaymentsService {
       return String(payload.code).toUpperCase()
     }
 
-    const content = (payload.content ?? "").toUpperCase()
+    const content = [
+      payload.content,
+      payload.description,
+      payload.referenceCode,
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .toUpperCase()
     const match = content.match(new RegExp(`${prefix}[A-Z0-9]+`))
     return match?.[0] ?? null
   }

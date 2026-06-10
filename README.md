@@ -35,6 +35,7 @@ npm run dev:be       # chỉ backend
 - `backend/.env.example`
   - **Required:** `PORT`, `CORS_ORIGIN`, `DATABASE_URL`, `JWT_SECRET` (strong secret, no default)
   - **Payments:** `SEPAY_*` + `SEPAY_WEBHOOK_HMAC_SECRET` (recommended for webhook auth)
+  - **Email:** prefer `RESEND_API_KEY` + `RESEND_FROM` on the verified domain; SMTP is only fallback
   - **AI Chat:** `GEMINI_API_KEY`, `GEMINI_MODEL`
 - `database/.env.example` — `DATABASE_URL` (khi có DB)
 

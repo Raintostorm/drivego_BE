@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common"
+import { Injectable, ServiceUnavailableException, UnauthorizedException } from "@nestjs/common"
 import { ConfigService } from "@nestjs/config"
 import { createHmac, timingSafeEqual } from "crypto"
 import type { Request } from "express"
@@ -17,9 +17,9 @@ export class SepayConfigService {
 
   getBankInfo() {
     return {
-      bankName: this.config.get<string>("SEPAY_BANK_NAME") ?? "",
-      accountNumber: this.config.get<string>("SEPAY_BANK_ACCOUNT") ?? "",
-      accountHolder: this.config.get<string>("SEPAY_ACCOUNT_HOLDER") ?? "",
+      bankName: this.config.get<string>("SEPAY_BANK_NAME")?.trim() ?? "",
+      accountNumber: this.config.get<string>("SEPAY_BANK_ACCOUNT")?.trim() ?? "",
+      accountHolder: this.config.get<string>("SEPAY_ACCOUNT_HOLDER")?.trim() ?? "",
     }
   }
 
@@ -37,6 +37,23 @@ export class SepayConfigService {
       des: params.description,
     })
     return `https://qr.sepay.vn/img?${query.toString()}`
+  }
+
+  assertCheckoutConfigured() {
+    const bank = this.getBankInfo()
+    const missing = [
+      !bank.bankName ? "SEPAY_BANK_NAME" : null,
+      !bank.accountNumber ? "SEPAY_BANK_ACCOUNT" : null,
+      !bank.accountHolder ? "SEPAY_ACCOUNT_HOLDER" : null,
+    ].filter(Boolean)
+
+    if (missing.length) {
+      throw new ServiceUnavailableException(
+        `SePay chưa cấu hình đủ để tạo QR (${missing.join(", ")})`,
+      )
+    }
+
+    return bank
   }
 
   verifyWebhookRequest(req: Request) {
@@ -60,8 +77,13 @@ export class SepayConfigService {
     }
 
     const authorization = req.headers.authorization ?? ""
-    const apiKeyMatch = authorization.match(/^Apikey\s+(.+)$/i)
-    if (apiKeyMatch?.[1] && this.safeEqual(apiKeyMatch[1], configuredKey)) {
+    const apiKeyMatch = authorization.match(/^(Apikey|Bearer)\s+(.+)$/i)
+    if (apiKeyMatch?.[2] && this.safeEqual(apiKeyMatch[2], configuredKey)) {
+      return
+    }
+
+    const headerKey = req.headers["x-api-key"] ?? req.headers["x-sepay-api-key"]
+    if (typeof headerKey === "string" && this.safeEqual(headerKey, configuredKey)) {
       return
     }
 
