@@ -280,7 +280,7 @@ def category_for(question: Question) -> str:
 
 
 def paper_id(prefix: str, paper_number: int) -> str:
-    return f"{prefix}-{paper_number:012d}01"
+    return f"{prefix}-{paper_number:010d}01"
 
 
 def stable_hash(value: str) -> int:
