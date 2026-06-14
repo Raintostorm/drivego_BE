@@ -30,9 +30,10 @@
     "migrate:password-reset": "node database/scripts/run-migration.mjs database/migrations/013_password_reset_tokens.sql",
     "import:content": "node database/scripts/import-license-content.mjs",
     "bootstrap:content": "node database/scripts/bootstrap-license-content.mjs",
-    "import:content:all": "node database/scripts/bootstrap-license-content.mjs && node database/scripts/normalize-license-content.mjs && node database/scripts/import-all-content.mjs",
+    "import:content:all": "python database/scripts/parse-motor-docx.py && node database/scripts/bootstrap-license-content.mjs && node database/scripts/normalize-license-content.mjs && node database/scripts/import-all-content.mjs",
     "parse:b2-pdf": "python database/scripts/parse-b2-pdf.py",
     "parse:motor-pdf": "python database/scripts/parse-motor-pdf.py",
+    "parse:motor-docx": "python database/scripts/parse-motor-docx.py",
     "normalize:content": "node database/scripts/normalize-license-content.mjs",
     "setup:env": "node scripts/setup-env.mjs"
   },

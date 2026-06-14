@@ -5,8 +5,8 @@ import { fileURLToPath } from "url"
 const ROOT = resolve(fileURLToPath(new URL("../..", import.meta.url)))
 const CODES = ["A1", "A2", "B1", "B2"]
 const RULES = {
-  A1: { papersCount: 10, questionsPerPaper: 25, criticalPerPaper: 5 },
-  A2: { papersCount: 10, questionsPerPaper: 25, criticalPerPaper: 5 },
+  A1: { papersCount: 10, questionsPerPaper: 25, criticalPerPaper: 1 },
+  A2: { papersCount: 10, questionsPerPaper: 25, criticalPerPaper: 1 },
   B1: { papersCount: 20, questionsPerPaper: 30, criticalPerPaper: 5 },
   B2: { papersCount: 20, questionsPerPaper: 30, criticalPerPaper: 5 },
 }
@@ -238,6 +238,10 @@ function pickCycled(pool, count, start) {
 }
 
 function buildDistinctPapers(code, papers) {
+  if (code === "A1" || code === "A2") {
+    return papers
+  }
+
   const rule = RULES[code]
   if (!rule) return papers
 

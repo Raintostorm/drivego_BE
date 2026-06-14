@@ -2,7 +2,7 @@
  * Bootstrap content folders:
  * - B2: stable paper IDs (requires papers.json from parse:b2-pdf)
  * - B1: clone exam papers from B2, custom chapters
- * - A1: chapters only (papers from parse:motor-pdf)
+ * - A1: chapters only (papers from parse:motor-docx)
  * - A2: clone papers from A1 + copy images
  *
  * Usage: npm run bootstrap:content
@@ -113,7 +113,7 @@ function readB2Papers() {
 function readA1Papers() {
   const path = join(A1_DIR, "papers.json")
   if (!existsSync(path)) {
-    console.error("Missing database/content/A1/papers.json — run npm run parse:motor-pdf first.")
+    console.error("Missing database/content/A1/papers.json — run npm run parse:motor-docx first.")
     process.exit(1)
   }
   return readJson(path)
@@ -183,19 +183,22 @@ if (!existsSync(join(B2_DIR, "chapters.json"))) {
   process.exit(1)
 }
 
-// A1: chapters only (papers from parse:motor-pdf)
+// A1: chapters only (papers from parse:motor-docx)
 const a1Dir = join(ROOT, "database/content/A1")
 writeJson(a1Dir, "chapters.json", buildChapters("A1"))
 if (existsSync(join(a1Dir, "papers.json"))) {
-  console.log(`A1: kept papers.json from parse:motor-pdf`)
+  console.log(`A1: kept papers.json from parse:motor-docx`)
 } else {
-  console.warn("A1: no papers.json — run npm run parse:motor-pdf")
+  console.warn("A1: no papers.json — run npm run parse:motor-docx")
 }
 
-// A2: papers from A1
+// A2: keep parsed papers when available, otherwise clone from A1
 const a2Dir = join(ROOT, "database/content/A2")
+const a2PapersPath = join(a2Dir, "papers.json")
 const a1Source = existsSync(join(A1_DIR, "papers.json")) ? readA1Papers() : null
-if (a1Source) {
+if (existsSync(a2PapersPath)) {
+  console.log(`A2: kept papers.json from parse:motor-docx`)
+} else if (a1Source) {
   writeJson(
     a2Dir,
     "papers.json",
