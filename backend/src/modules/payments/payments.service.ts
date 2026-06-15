@@ -154,12 +154,12 @@ export class PaymentsService {
       return { success: true, message: "Ignored outgoing transfer" }
     }
 
-    const paymentCode = this.resolvePaymentCode(payload)
-    if (!paymentCode) {
+    const paymentCodes = this.resolvePaymentCodeCandidates(payload)
+    if (!paymentCodes.length) {
       return { success: true, message: "No payment code in webhook" }
     }
 
-    const payment = await this.findPaymentByCode(paymentCode)
+    const payment = await this.findPaymentByCodes(paymentCodes)
     if (!payment) {
       return { success: true, message: "Payment not found for code" }
     }
@@ -203,12 +203,8 @@ export class PaymentsService {
     throw new BadRequestException("Chưa tạo được mã thanh toán, vui lòng thử lại")
   }
 
-  private resolvePaymentCode(payload: SepayWebhookDto) {
+  private resolvePaymentCodeCandidates(payload: SepayWebhookDto) {
     const prefix = this.sepay.getPaymentCodePrefix()
-    if (payload.code) {
-      return String(payload.code).toUpperCase()
-    }
-
     const content = [
       payload.content,
       payload.description,
@@ -217,14 +213,25 @@ export class PaymentsService {
       .filter(Boolean)
       .join(" ")
       .toUpperCase()
-    const match = content.match(new RegExp(`${prefix}[A-Z0-9]+`))
-    return match?.[0] ?? null
+    const matches: string[] = content.match(new RegExp(`${prefix}[A-Z0-9]+`, "g")) ?? []
+    if (payload.code) matches.push(String(payload.code).toUpperCase())
+    return [...new Set(matches)]
   }
 
   private async findPaymentByCode(paymentCode: string) {
     return this.paymentsRepo
       .createQueryBuilder("p")
       .where("UPPER(p.customer_info->>'paymentCode') = :code", { code: paymentCode.toUpperCase() })
+      .orderBy("p.created_at", "DESC")
+      .getOne()
+  }
+
+  private async findPaymentByCodes(paymentCodes: string[]) {
+    return this.paymentsRepo
+      .createQueryBuilder("p")
+      .where("UPPER(p.customer_info->>'paymentCode') IN (:...codes)", {
+        codes: paymentCodes.map((code) => code.toUpperCase()),
+      })
       .orderBy("p.created_at", "DESC")
       .getOne()
   }
