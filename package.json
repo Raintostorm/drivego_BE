@@ -15,6 +15,7 @@
     "lint": "npm run lint -w frontend && npm run lint -w backend",
     "test:db": "npm run test:connection -w database",
     "seed:db": "npm run seed -w database",
+    "seed:web-test": "node database/scripts/seed-web-test-data.mjs",
     "reset:db": "node database/scripts/reset-db.mjs",
     "extend-premium": "node database/scripts/extend-premium.mjs",
     "migrate:applications": "node database/scripts/run-migration.mjs database/migrations/001_applications.sql",
