@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { SimulatorInstallCard, isCarLicenseClass } from "../components/SimulatorInstallCard.jsx"
 import { UiCard } from "../components/UiCard.jsx"
 import { useLicense } from "../context/LicenseContext.jsx"
 import { DEFAULT_LICENSE_CLASS } from "../lib/license-classes.js"
@@ -156,28 +157,33 @@ export function DocsPage() {
           )}
         </UiCard>
 
-        <UiCard variant="panel">
-          <h3 className="font-semibold text-white">FAQ</h3>
-          <ul className="mt-4 space-y-2">
-            {faqItems.map((item, idx) => (
-              <li key={item.q} className="rounded-drive border border-drive-border-soft">
-                <button
-                  type="button"
-                  className="flex w-full items-center justify-between px-3 py-2 text-left text-sm text-white"
-                  onClick={() => setOpenFaq(openFaq === idx ? -1 : idx)}
-                >
-                  {item.q}
-                  <span>{openFaq === idx ? "−" : "+"}</span>
-                </button>
-                {openFaq === idx ? (
-                  <p className="border-t border-drive-border-soft px-3 py-2 text-xs text-drive-muted">
-                    {item.a}
-                  </p>
-                ) : null}
-              </li>
-            ))}
-          </ul>
-        </UiCard>
+        <aside className="space-y-4">
+          {isCarLicenseClass(docFilter === "all" ? activeClass : docFilter) ? (
+            <SimulatorInstallCard compact />
+          ) : null}
+          <UiCard variant="panel">
+            <h3 className="font-semibold text-white">FAQ</h3>
+            <ul className="mt-4 space-y-2">
+              {faqItems.map((item, idx) => (
+                <li key={item.q} className="rounded-drive border border-drive-border-soft">
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-between px-3 py-2 text-left text-sm text-white"
+                    onClick={() => setOpenFaq(openFaq === idx ? -1 : idx)}
+                  >
+                    {item.q}
+                    <span>{openFaq === idx ? "−" : "+"}</span>
+                  </button>
+                  {openFaq === idx ? (
+                    <p className="border-t border-drive-border-soft px-3 py-2 text-xs text-drive-muted">
+                      {item.a}
+                    </p>
+                  ) : null}
+                </li>
+              ))}
+            </ul>
+          </UiCard>
+        </aside>
       </div>
     </section>
   )

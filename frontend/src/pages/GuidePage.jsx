@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom"
 import { HelpCard } from "../components/HelpCard.jsx"
+import { SimulatorInstallCard } from "../components/SimulatorInstallCard.jsx"
 import { UiCard } from "../components/UiCard.jsx"
-
-const SIMULATOR_VIDEO_URL = "https://www.youtube.com/watch?v=Xxnk7i5vGgw&t=795s"
 
 const learnerSteps = [
   {
@@ -81,21 +80,7 @@ export function GuidePage() {
 
         <aside className="space-y-4">
           <HelpCard title="Lưu ý nhanh" items={tips} />
-          <UiCard variant="panel">
-            <p className="text-xs font-semibold uppercase text-drive-action">Phần mềm mô phỏng</p>
-            <h2 className="mt-1 font-semibold text-white">Cài mô phỏng lái xe trên máy tính</h2>
-            <p className="mt-2 text-sm leading-relaxed text-drive-muted">
-              Video này hướng dẫn cài phần mềm mô phỏng lái xe để học thêm phần tình huống mô phỏng trên máy.
-            </p>
-            <a
-              href={SIMULATOR_VIDEO_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-4 inline-flex rounded-drive-pill bg-drive-action px-4 py-2 text-sm font-bold text-drive-action-contrast shadow-drive-action transition hover:brightness-110"
-            >
-              Xem video hướng dẫn
-            </a>
-          </UiCard>
+          <SimulatorInstallCard compact />
           <HelpCard title="Dành cho trung tâm" items={adminSteps} />
           <UiCard variant="panel">
             <h2 className="font-semibold text-white">Khi cần hỗ trợ</h2>

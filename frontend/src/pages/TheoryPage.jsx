@@ -4,6 +4,7 @@ import { EnrollCourseCta } from "../components/EnrollCourseCta.jsx"
 import { EnrollmentConsentCard } from "../components/EnrollmentConsentCard.jsx"
 import { LicenseContentEmpty } from "../components/LicenseContentEmpty.jsx"
 import { PrimaryButton } from "../components/PrimaryButton.jsx"
+import { SimulatorInstallCard, isCarLicenseClass } from "../components/SimulatorInstallCard.jsx"
 import { UiCard } from "../components/UiCard.jsx"
 import { useLicense } from "../context/LicenseContext.jsx"
 import { apiFetch } from "../lib/api.js"
@@ -158,6 +159,8 @@ export function TheoryPage() {
           </p>
         </UiCard>
       </div>
+
+      {isCarLicenseClass(activeClass) ? <SimulatorInstallCard /> : null}
 
       <UiCard id="theory-video" variant="panel">
         <h2 className="text-xl font-semibold text-white">{active?.title}</h2>
