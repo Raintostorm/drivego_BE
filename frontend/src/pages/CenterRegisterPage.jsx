@@ -12,7 +12,7 @@ export function CenterRegisterPage() {
           <Link to="/register" className="rounded-drive-pill py-2.5 text-drive-muted hover:text-white">
             {t("pages.register.tabStudent")}
           </Link>
-          <span className="rounded-drive-pill bg-drive-accent py-2.5 font-bold text-white">
+          <span className="rounded-drive-pill bg-drive-accent py-2.5 font-bold text-drive-accent-contrast">
             {t("pages.register.tabCenter")}
           </span>
         </div>
@@ -27,7 +27,7 @@ export function CenterRegisterPage() {
         <div className="flex flex-wrap justify-center gap-3">
           <Link
             to="/login"
-            className="rounded-drive-pill bg-drive-action px-6 py-3 text-sm font-bold text-white shadow-drive-action transition hover:brightness-110"
+            className="rounded-drive-pill bg-drive-action px-6 py-3 text-sm font-bold text-drive-action-contrast shadow-drive-action transition hover:brightness-110"
           >
             Đăng nhập quản trị
           </Link>

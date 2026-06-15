@@ -14,11 +14,11 @@ export function PrimaryButton({
     "rounded-drive-pill px-6 py-3 text-sm font-bold transition focus:outline-none focus:ring-2 focus:ring-drive-accent focus:ring-offset-2 focus:ring-offset-drive-canvas disabled:opacity-60"
   const variants = {
     primary:
-      "bg-drive-accent text-white uppercase tracking-wide shadow-drive-glow hover:brightness-110",
+      "bg-drive-accent text-drive-accent-contrast uppercase tracking-wide shadow-drive-glow hover:brightness-110",
     action:
-      "bg-drive-action text-white shadow-drive-action hover:brightness-110",
+      "bg-drive-action text-drive-action-contrast shadow-drive-action hover:brightness-110",
     outline:
-      "border border-drive-border bg-drive-elevated text-white hover:bg-drive-panel",
+      "border border-drive-border bg-drive-elevated text-drive-text hover:bg-drive-panel",
     ghost: "text-drive-muted hover:bg-drive-elevated hover:text-white",
   }
   return (

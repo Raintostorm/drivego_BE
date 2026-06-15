@@ -363,7 +363,7 @@ export function ExamPage() {
               onClick={() => setCurrentIndex(idx)}
               className={`size-8 rounded-lg text-xs font-medium ${
                 idx === currentIndex
-                  ? "bg-drive-action text-white"
+                  ? "bg-drive-action text-drive-action-contrast"
                   : answers[q.id] !== undefined
                     ? "bg-drive-success/20 text-drive-success"
                     : "bg-drive-elevated text-drive-muted"

@@ -51,7 +51,7 @@ export function AdminStudentsPage() {
             onClick={() => setTab(t.id)}
             className={`rounded-drive-pill px-4 py-2 text-sm font-medium transition ${
               tab === t.id
-                ? "bg-drive-action text-white"
+                ? "bg-drive-action text-drive-action-contrast"
                 : "border border-drive-border text-drive-muted hover:text-white"
             }`}
           >

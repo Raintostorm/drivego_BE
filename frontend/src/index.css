@@ -16,7 +16,9 @@
   --color-drive-border: #2a2a2a;
   --color-drive-border-soft: #1a1a1a;
   --color-drive-accent: #ffffff;
+  --color-drive-accent-contrast: #000000;
   --color-drive-action: #ffffff;
+  --color-drive-action-contrast: #000000;
   --color-drive-success: #0bda5b;
   --color-drive-danger: #ef4444;
   --color-drive-text: #e8e8e8;
@@ -886,7 +888,9 @@ a:hover .pressure-brand__char {
   --color-drive-border: #e0e0e0;
   --color-drive-border-soft: #f0f0f0;
   --color-drive-accent: #000000;
+  --color-drive-accent-contrast: #ffffff;
   --color-drive-action: #000000;
+  --color-drive-action-contrast: #ffffff;
   --color-drive-text: #171717;
   --color-drive-muted: #737373;
   --color-drive-placeholder: #a3a3a3;

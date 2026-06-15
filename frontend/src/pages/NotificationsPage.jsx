@@ -57,7 +57,7 @@ export function NotificationsPage() {
             onClick={() => setFilter(tab.key)}
             className={`rounded-drive-pill px-4 py-1.5 text-sm font-medium transition ${
               filter === tab.key
-                ? "bg-drive-accent text-white"
+                ? "bg-drive-accent text-drive-accent-contrast"
                 : "border border-drive-border bg-drive-elevated text-drive-muted hover:text-white"
             }`}
           >
@@ -81,7 +81,7 @@ export function NotificationsPage() {
               {n.actionUrl ? (
                 <Link
                   to={n.actionUrl}
-                  className="rounded-drive-pill bg-drive-action px-4 py-1.5 text-xs font-bold text-white shadow-drive-action transition hover:brightness-110"
+                  className="rounded-drive-pill bg-drive-action px-4 py-1.5 text-xs font-bold text-drive-action-contrast shadow-drive-action transition hover:brightness-110"
                 >
                   Xem chi tiết
                 </Link>

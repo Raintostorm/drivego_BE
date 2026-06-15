@@ -81,7 +81,7 @@ function PremiumMemberView({ user }) {
         <div className="mt-8 flex flex-wrap gap-3">
           <Link
             to="/ai-chat"
-            className="rounded-drive-pill bg-drive-action px-6 py-3 text-sm font-bold text-white shadow-drive-action transition hover:brightness-110"
+            className="rounded-drive-pill bg-drive-action px-6 py-3 text-sm font-bold text-drive-action-contrast shadow-drive-action transition hover:brightness-110"
           >
             {t("pages.upgrade.openAiChat")}
           </Link>

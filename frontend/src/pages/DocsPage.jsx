@@ -83,7 +83,7 @@ export function DocsPage() {
             onClick={() => setDocFilter("all")}
             className={`rounded-drive-pill px-4 py-2 text-sm ${
               docFilter === "all"
-                ? "bg-drive-action text-white"
+                ? "bg-drive-action text-drive-action-contrast"
                 : "border border-drive-border text-drive-muted"
             }`}
           >
@@ -94,7 +94,7 @@ export function DocsPage() {
             onClick={() => setDocFilter(activeClass)}
             className={`rounded-drive-pill px-4 py-2 text-sm ${
               docFilter === activeClass
-                ? "bg-drive-action text-white"
+                ? "bg-drive-action text-drive-action-contrast"
                 : "border border-drive-border text-drive-muted"
             }`}
           >
@@ -106,7 +106,7 @@ export function DocsPage() {
               onClick={() => setDocFilter(DEFAULT_LICENSE_CLASS)}
               className={`rounded-drive-pill px-4 py-2 text-sm ${
                 docFilter === DEFAULT_LICENSE_CLASS
-                  ? "bg-drive-action text-white"
+                  ? "bg-drive-action text-drive-action-contrast"
                   : "border border-drive-border text-drive-muted"
               }`}
             >

@@ -58,7 +58,7 @@ export function PricingPage() {
               }
             >
               {plan.featured ? (
-                <span className="mb-2 inline-block rounded-full bg-drive-action px-2 py-0.5 text-[10px] font-bold uppercase text-white">
+                <span className="mb-2 inline-block rounded-full bg-drive-action px-2 py-0.5 text-[10px] font-bold uppercase text-drive-action-contrast">
                   {t("pages.pricing.popular")}
                 </span>
               ) : null}

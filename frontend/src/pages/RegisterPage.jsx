@@ -84,7 +84,7 @@ export function RegisterPage() {
       </div>
 
       <div className="mb-6 grid grid-cols-2 rounded-drive-pill border border-drive-border bg-drive-elevated p-1 text-center text-sm">
-        <button type="button" className="rounded-drive-pill bg-drive-accent py-2.5 font-bold text-white">
+        <button type="button" className="rounded-drive-pill bg-drive-accent py-2.5 font-bold text-drive-accent-contrast">
           {t("pages.register.tabStudent")}
         </button>
         <Link
@@ -112,7 +112,7 @@ export function RegisterPage() {
                 onClick={() => setLicenseClass(item.code)}
                 className={`rounded-drive border px-3 py-2 text-left text-sm transition ${
                   licenseClass === item.code
-                    ? "border-drive-action bg-drive-action/15 text-white"
+                    ? "border-drive-action bg-drive-action/15 text-drive-text"
                     : "border-drive-border text-drive-muted hover:border-drive-action/40"
                 }`}
               >

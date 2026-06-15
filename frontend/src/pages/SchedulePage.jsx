@@ -136,7 +136,7 @@ export function SchedulePage() {
               }}
               className={`rounded-drive px-4 py-2 text-sm ${
                 licenseClass === item.code
-                  ? "bg-drive-accent text-white"
+                  ? "bg-drive-accent text-drive-accent-contrast"
                   : "border border-drive-border bg-drive-elevated text-drive-muted"
               }`}
             >
@@ -153,7 +153,7 @@ export function SchedulePage() {
             onClick={() => setSlotType("theory_exam")}
             className={`rounded-drive px-3 py-1.5 text-sm ${
               slotType === "theory_exam"
-                ? "bg-drive-action text-white"
+                ? "bg-drive-action text-drive-action-contrast"
                 : "border border-drive-border text-drive-muted"
             }`}
           >
@@ -164,7 +164,7 @@ export function SchedulePage() {
             onClick={() => setSlotType("road_test")}
             className={`rounded-drive px-3 py-1.5 text-sm ${
               slotType === "road_test"
-                ? "bg-drive-action text-white"
+                ? "bg-drive-action text-drive-action-contrast"
                 : "border border-drive-border text-drive-muted"
             }`}
           >
@@ -287,7 +287,7 @@ export function SchedulePage() {
                   onClick={() => setSelectedDate(date)}
                   className={`rounded-lg px-4 py-2 text-sm ${
                     selectedDate === date
-                      ? "bg-drive-action font-semibold text-white"
+                      ? "bg-drive-action font-semibold text-drive-action-contrast"
                       : "bg-drive-elevated text-drive-muted hover:text-white"
                   }`}
                 >

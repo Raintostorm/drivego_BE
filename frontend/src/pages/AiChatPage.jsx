@@ -104,7 +104,7 @@ export function AiChatPage() {
             onClick={() => loadSession(s.id)}
             className={`mb-1 rounded-lg px-3 py-2 text-left text-sm transition ${
               activeId === s.id
-                ? "bg-drive-action text-white"
+                ? "bg-drive-action text-drive-action-contrast"
                 : "text-drive-muted hover:bg-drive-elevated hover:text-white"
             }`}
           >
@@ -121,7 +121,7 @@ export function AiChatPage() {
               key={`${m.role}-${i}`}
               className={`max-w-xl rounded-drive p-3 text-sm ${
                 m.role === "user"
-                  ? "ml-auto bg-drive-accent text-white"
+                  ? "ml-auto bg-drive-accent text-drive-accent-contrast"
                   : "border border-drive-border-soft bg-drive-sidebar text-drive-text"
               }`}
             >

@@ -61,7 +61,7 @@ export function AdminSchedulesPage() {
             onClick={() => setSlotType(tab.id)}
             className={`rounded-drive px-4 py-2 text-sm ${
               slotType === tab.id
-                ? "bg-drive-accent text-white"
+                ? "bg-drive-accent text-drive-accent-contrast"
                 : "border border-drive-border bg-drive-elevated text-drive-muted"
             }`}
           >

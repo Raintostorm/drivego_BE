@@ -15,7 +15,7 @@ export function EnrollCourseCta({ licenseClass }) {
       <div className="mt-6 flex flex-wrap justify-center gap-3">
         <Link
           to={`/enroll?class=${encodeURIComponent(licenseClass)}`}
-          className="rounded-drive-pill bg-drive-action px-6 py-3 text-sm font-bold text-white shadow-drive-action transition hover:brightness-110"
+          className="rounded-drive-pill bg-drive-action px-6 py-3 text-sm font-bold text-drive-action-contrast shadow-drive-action transition hover:brightness-110"
         >
           Đăng ký & thanh toán
         </Link>

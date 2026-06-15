@@ -69,7 +69,7 @@ export function GuidePage() {
               <p className="mt-2 text-sm leading-relaxed text-drive-muted">{step.body}</p>
               <Link
                 to={step.to}
-                className="mt-4 inline-flex rounded-drive-pill bg-drive-action px-4 py-2 text-sm font-bold text-white shadow-drive-action transition hover:brightness-110"
+                className="mt-4 inline-flex rounded-drive-pill bg-drive-action px-4 py-2 text-sm font-bold text-drive-action-contrast shadow-drive-action transition hover:brightness-110"
               >
                 {step.cta}
               </Link>

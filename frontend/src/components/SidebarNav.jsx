@@ -14,7 +14,7 @@ export function SidebarNav({ items }) {
           className={({ isActive }) =>
             `block rounded-lg px-3 py-2.5 font-medium transition ${
               isActive
-                ? "bg-drive-action text-white"
+                ? "bg-drive-action text-drive-action-contrast"
                 : "text-drive-muted hover:bg-drive-panel hover:text-white"
             }`
           }

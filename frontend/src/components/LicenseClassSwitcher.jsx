@@ -34,7 +34,7 @@ export function LicenseClassSwitcher() {
               onClick={() => handleChange(item.code)}
               className={`rounded-lg border px-2 py-2 text-left text-xs transition ${
                 selected
-                  ? "border-drive-action bg-drive-action/15 text-white"
+                  ? "border-drive-action bg-drive-action/15 text-drive-text"
                   : "border-drive-border bg-drive-elevated text-drive-muted hover:border-drive-action/40"
               }`}
             >

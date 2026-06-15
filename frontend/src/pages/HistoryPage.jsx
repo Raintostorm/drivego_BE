@@ -112,7 +112,7 @@ export function HistoryPage() {
           </UiCard>
           <Link
             to="/exam"
-            className="block w-full rounded-drive-pill bg-drive-action px-6 py-3 text-center text-sm font-bold text-white shadow-drive-action transition hover:brightness-110"
+            className="block w-full rounded-drive-pill bg-drive-action px-6 py-3 text-center text-sm font-bold text-drive-action-contrast shadow-drive-action transition hover:brightness-110"
           >
             {t("pages.history.startReview")}
           </Link>
