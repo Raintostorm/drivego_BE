@@ -16,8 +16,6 @@ const DEFAULT_EXAM_RULES = {
   passMinCorrect: 26,
 }
 
-const EXAM_GUIDE_AUTO_OPEN_KEY = "drivego_exam_guide_auto_open"
-
 function formatTime(seconds) {
   const m = Math.floor(seconds / 60)
   const s = seconds % 60
@@ -43,12 +41,6 @@ export function ExamPage() {
   const [result, setResult] = useState(null)
   const [startedAt, setStartedAt] = useState(() => new Date().toISOString())
   const [secondsLeft, setSecondsLeft] = useState(durationSeconds)
-  const [guideAutoOpen, setGuideAutoOpen] = useState(() => {
-    return localStorage.getItem(EXAM_GUIDE_AUTO_OPEN_KEY) !== "off"
-  })
-  const [guideOpen, setGuideOpen] = useState(() => {
-    return localStorage.getItem(EXAM_GUIDE_AUTO_OPEN_KEY) !== "off"
-  })
   const autoSubmittedRef = useRef(false)
 
   useEffect(() => {
@@ -162,12 +154,6 @@ export function ExamPage() {
     handleSubmitExam()
   }, [paper, result, secondsLeft, handleSubmitExam])
 
-  function handleGuideAutoOpenChange(enabled) {
-    setGuideAutoOpen(enabled)
-    localStorage.setItem(EXAM_GUIDE_AUTO_OPEN_KEY, enabled ? "on" : "off")
-    setGuideOpen(enabled)
-  }
-
   const answeredCount = useMemo(
     () => questions.filter((q) => answers[q.id] !== undefined).length,
     [questions, answers],
@@ -239,65 +225,6 @@ export function ExamPage() {
 
   const examUi = (
     <section className="grid gap-6 lg:grid-cols-[2fr_1fr]">
-      <div className="fixed right-4 top-24 z-40 flex max-w-[calc(100vw-2rem)] flex-col items-end gap-2 lg:right-6">
-        <button
-          type="button"
-          onClick={() => setGuideOpen((open) => !open)}
-          className="rounded-drive-pill border border-drive-border bg-drive-action px-4 py-2 text-sm font-bold text-drive-action-contrast shadow-drive-action transition hover:brightness-110"
-        >
-          {guideOpen ? "Đóng hướng dẫn" : "Hướng dẫn"}
-        </button>
-        {guideOpen ? (
-          <div className="w-full max-w-sm rounded-drive-lg border border-drive-border bg-drive-surface p-4 text-sm shadow-drive-card backdrop-blur">
-            <div className="flex items-start justify-between gap-3">
-              <div>
-                <p className="text-xs font-semibold uppercase text-drive-action">Thi thử</p>
-                <h2 className="mt-1 text-lg font-bold text-white">Cách dùng màn hình này</h2>
-              </div>
-              <button
-                type="button"
-                onClick={() => setGuideOpen(false)}
-                className="rounded-full border border-drive-border px-2 py-1 text-xs text-drive-muted transition hover:text-white"
-                aria-label="Đóng hướng dẫn"
-              >
-                ×
-              </button>
-            </div>
-
-            <ul className="mt-4 space-y-3 text-drive-muted">
-              <li>
-                <span className="font-semibold text-drive-text">Chọn đề:</span> dùng hộp chọn ở trên để đổi bộ đề thi thử hiện tại.
-              </li>
-              <li>
-                <span className="font-semibold text-drive-text">Ảnh câu hỏi:</span> biển báo/sa hình được đặt trong khung vuông để bạn nhìn đủ ảnh.
-              </li>
-              <li>
-                <span className="font-semibold text-drive-text">Đáp án:</span> chọn một đáp án cho từng câu, có thể đổi lại trước khi nộp.
-              </li>
-              <li>
-                <span className="font-semibold text-drive-text">Thanh số câu:</span> bấm số câu phía dưới để nhảy nhanh; màu xanh là câu đã trả lời.
-              </li>
-              <li>
-                <span className="font-semibold text-drive-text">Đồng hồ:</span> hết giờ hệ thống sẽ tự nộp bài nếu đang làm.
-              </li>
-              <li>
-                <span className="font-semibold text-drive-text">Điểm liệt:</span> nếu sai câu có nhãn điểm liệt thì không đạt dù đủ điểm.
-              </li>
-            </ul>
-
-            <label className="mt-4 flex cursor-pointer items-center justify-between gap-3 rounded-drive border border-drive-border bg-drive-elevated px-3 py-2">
-              <span className="text-drive-text">Tự mở hướng dẫn</span>
-              <input
-                type="checkbox"
-                checked={guideAutoOpen}
-                onChange={(e) => handleGuideAutoOpenChange(e.target.checked)}
-                className="size-4 accent-drive-action"
-              />
-            </label>
-          </div>
-        ) : null}
-      </div>
-
       <div className="lg:col-span-2">
         <HelpCard
           title="Lưu ý khi làm bài thi thử"

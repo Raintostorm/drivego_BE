@@ -2,6 +2,7 @@ import { useMemo } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { BrandLogo } from "../BrandLogo.jsx"
 import { LicenseClassSwitcher } from "../LicenseClassSwitcher.jsx"
+import { PageGuide } from "../PageGuide.jsx"
 import { SidebarNav } from "../SidebarNav.jsx"
 import { useAuth } from "../../context/AuthContext.jsx"
 import { formatPremiumDate, isPremiumActive } from "../../lib/premium.js"
@@ -100,6 +101,7 @@ export function DashboardShell({ children, variant, navItems }) {
       </aside>
 
       <div className="min-w-0 flex-1 lg:pl-72">
+        {variant === "student" ? <PageGuide /> : null}
         <div className="px-4 py-6 sm:px-6 lg:px-10">{children}</div>
       </div>
     </div>
