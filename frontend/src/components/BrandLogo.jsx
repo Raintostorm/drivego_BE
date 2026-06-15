@@ -1,23 +1,23 @@
 import { Link } from "react-router-dom"
+import brandScooter from "../assets/brand-scooter.png"
 import { t } from "../lib/strings.js"
+import { PressureBrandText } from "./PressureBrandText.jsx"
 
 /**
- * @param {{ to?: string, size?: 'sm' | 'md' }} props
+ * @param {{ to?: string, size?: 'sm' | 'md', showScooter?: boolean }} props
  */
-export function BrandLogo({ to = "/", size = "md" }) {
+export function BrandLogo({ to = "/", size = "md", showScooter = false }) {
   const iconSize = size === "sm" ? "size-8" : "size-8"
-  const textSize = size === "sm" ? "text-lg" : "text-xl"
 
   const inner = (
     <>
       <img
-        src="/images/login/logo.svg"
+        src={brandScooter}
         alt=""
-        className={`${iconSize} shrink-0`}
-        width={32}
-        height={32}
+        className="h-10 sm:h-14 w-auto shrink-0 object-contain"
       />
-      <span className={`font-bold text-white ${textSize}`}>{t("brand")}</span>
+      <PressureBrandText text={t("brand")} size={size} />
+      {showScooter ? <img src={brandScooter} alt="" className="brand-logo-scooter" /> : null}
     </>
   )
 

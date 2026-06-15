@@ -1,117 +1,101 @@
-import { useEffect, useRef, useState } from "react"
-import { Link, NavLink } from "react-router-dom"
+import { useEffect, useMemo, useState } from "react"
+import { useLocation } from "react-router-dom"
 import { useAuth } from "../context/AuthContext.jsx"
 import { dashboardPathForRole, isStaffRole } from "../lib/roles.js"
 import { t } from "../lib/strings.js"
-import { marketingRoutes, moreRoutes } from "../routes.jsx"
-import { BrandLogo } from "./BrandLogo.jsx"
-
-const navLinkClass = ({ isActive }) =>
-  `text-sm font-medium transition ${isActive ? "text-white" : "text-drive-muted hover:text-white"}`
+import { moreRoutes } from "../routes.jsx"
+import { CardNav } from "./CardNav.jsx"
 
 export function MarketingNav() {
   const { user } = useAuth()
+  const location = useLocation()
   const staff = user && isStaffRole(user.role)
-  const [moreOpen, setMoreOpen] = useState(false)
-  const wrapRef = useRef(null)
+  const [open, setOpen] = useState(false)
+  const appHome = user ? dashboardPathForRole(user.role) : null
+  const homeTone = location.pathname === "/"
+
   useEffect(() => {
-    function handleClickOutside(e) {
-      if (wrapRef.current && !wrapRef.current.contains(e.target)) setMoreOpen(false)
+    function handleEscape(event) {
+      if (event.key === "Escape") setOpen(false)
     }
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
+    window.addEventListener("keydown", handleEscape)
+    return () => window.removeEventListener("keydown", handleEscape)
   }, [])
 
-  const appHome = user ? dashboardPathForRole(user.role) : null
   const visibleMoreRoutes = moreRoutes.filter((route) => {
     if (!user) return route.group === "marketing"
     if (staff) return route.group === "admin"
     return route.group === "app"
   })
 
+  const items = useMemo(() => {
+    const studyLinks = user
+      ? [
+          { label: t("nav.studentDashboard"), href: appHome || "/student-dashboard" },
+          { label: t("nav.theory"), href: "/theory" },
+          { label: t("nav.exam"), href: "/exam" },
+        ]
+      : [
+          { label: t("nav.pricing"), href: "/pricing" },
+          { label: t("nav.guide"), href: "/guide" },
+          { label: t("nav.docs"), href: "/docs" },
+        ]
+
+    const supportLinks = [
+      { label: t("nav.lookup"), href: "/lookup" },
+      { label: t("nav.docs"), href: "/docs" },
+      { label: t("nav.guide"), href: "/guide" },
+    ]
+
+    const accountLinks = user
+      ? [
+          { label: staff ? "Vào quản trị" : "Vào học", href: appHome || "/" },
+          { label: t("nav.profile"), href: "/profile" },
+          ...visibleMoreRoutes.slice(0, 1).map(({ path, labelKey }) => ({
+            label: t(labelKey),
+            href: path,
+          })),
+        ]
+      : [
+          { label: t("nav.register"), href: "/register" },
+          { label: t("nav.login"), href: "/login" },
+          { label: t("nav.centerRegister"), href: "/center-register" },
+        ]
+
+    return [
+      {
+        label: "Lộ trình",
+        bgColor: "var(--nav-card-1-bg)",
+        textColor: "var(--nav-card-1-color)",
+        links: studyLinks,
+      },
+      {
+        label: "Tra cứu",
+        bgColor: "var(--nav-card-2-bg)",
+        textColor: "var(--nav-card-2-color)",
+        links: supportLinks,
+      },
+      {
+        label: "Tài khoản",
+        bgColor: "var(--nav-card-3-bg)",
+        textColor: "var(--nav-card-3-color)",
+        links: accountLinks,
+      },
+    ]
+  }, [appHome, staff, user, visibleMoreRoutes])
+
   return (
-    <header className="sticky top-0 z-30 -mx-4 mb-8 border-b border-drive-border-soft bg-drive-canvas/90 px-4 py-4 backdrop-blur-md sm:-mx-6 sm:px-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <BrandLogo />
-
-        <nav className="hidden items-center gap-8 md:flex" aria-label="Chính">
-          {marketingRoutes.map(({ path, labelKey }) => (
-            <NavLink
-              key={path}
-              to={path}
-              className={navLinkClass}
-              end={path === "/"}
-              onClick={() => setMoreOpen(false)}
-            >
-              {t(labelKey)}
-            </NavLink>
-          ))}
-          {visibleMoreRoutes.length ? (
-            <div className="relative" ref={wrapRef}>
-              <button
-                type="button"
-                onClick={() => setMoreOpen((o) => !o)}
-                className="text-sm font-medium text-drive-muted hover:text-white"
-              >
-                {t("nav.more")}
-              </button>
-              {moreOpen ? (
-                <div className="absolute right-0 z-50 mt-2 min-w-[200px] rounded-drive border border-drive-border bg-drive-panel py-2 shadow-xl">
-                  <p className="px-3 py-1 text-[10px] font-semibold uppercase text-drive-placeholder">
-                    {t("nav.moreGroupApp")}
-                  </p>
-                  {visibleMoreRoutes.map(({ path, labelKey }) => (
-                    <NavLink
-                      key={path}
-                      to={path}
-                      className="block px-3 py-2 text-sm text-drive-text hover:bg-drive-elevated"
-                      onClick={() => setMoreOpen(false)}
-                    >
-                      {t(labelKey)}
-                    </NavLink>
-                  ))}
-                </div>
-              ) : null}
-            </div>
-          ) : null}
-        </nav>
-
-        <div className="flex items-center gap-3">
-          {user ? (
-            <>
-              <span
-                className="hidden max-w-[140px] truncate text-sm text-drive-muted sm:inline"
-                title={user.email}
-              >
-                {user.profile?.fullName || user.email}
-              </span>
-              {appHome ? (
-                <Link
-                  to={appHome}
-                  className="rounded-drive-pill bg-drive-action px-5 py-2.5 text-sm font-bold text-white shadow-drive-action transition hover:brightness-110"
-                >
-                  {staff ? "Vào quản trị" : "Vào học"}
-                </Link>
-              ) : null}
-            </>
-          ) : (
-            <>
-              <Link
-                to="/login"
-                className="hidden text-sm font-medium text-drive-muted hover:text-white sm:inline"
-              >
-                {t("nav.login")}
-              </Link>
-              <Link
-                to="/register"
-                className="rounded-drive-pill bg-drive-action px-6 py-3 text-sm font-bold text-white shadow-drive-action transition hover:brightness-110"
-              >
-                {t("nav.register")}
-              </Link>
-            </>
-          )}
-        </div>
-      </div>
-    </header>
+    <CardNav
+      items={items}
+      cta={{
+        label: user ? (staff ? "Vào quản trị" : "Vào học") : t("nav.register"),
+        href: user ? appHome || "/" : "/register",
+      }}
+      secondaryCta={user ? null : { label: t("nav.login"), href: "/login" }}
+      homeTone={homeTone}
+      isOpen={open}
+      onToggle={() => setOpen((value) => !value)}
+      onClose={() => setOpen(false)}
+    />
   )
 }
