@@ -90,25 +90,22 @@ export class AdminSchedulesService {
       const slotRepo = manager.getRepository(ScheduleSlot)
       const reg = await regRepo
         .createQueryBuilder("r")
-        .leftJoinAndSelect("r.slot", "s")
         .setLock("pessimistic_write")
         .where("r.id = :id", { id })
         .getOne()
       if (!reg) throw new NotFoundException("Không tìm thấy đăng ký")
-      await this.scope.assertCenterAccessAsync(admin, reg.slot?.centerId)
 
       if (reg.status !== "pending") {
         throw new BadRequestException("Chỉ xử lý đăng ký đang chờ duyệt")
       }
 
-      const slot =
-        reg.slot ??
-        (await slotRepo
-          .createQueryBuilder("s")
-          .setLock("pessimistic_write")
-          .where("s.id = :slotId", { slotId: reg.slotId })
-          .getOne())
+      const slot = await slotRepo
+        .createQueryBuilder("s")
+        .setLock("pessimistic_write")
+        .where("s.id = :slotId", { slotId: reg.slotId })
+        .getOne()
       if (!slot) throw new NotFoundException("Không tìm thấy ca")
+      await this.scope.assertCenterAccessAsync(admin, slot.centerId)
 
       if (dto.status === "confirmed") {
         const held = await regRepo.count({
