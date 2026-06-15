@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
+import { HelpCard } from "../components/HelpCard.jsx"
 import { PrimaryButton } from "../components/PrimaryButton.jsx"
 import { StatusBadge } from "../components/StatusBadge.jsx"
 import { TextField } from "../components/TextField.jsx"
@@ -218,6 +219,15 @@ export function UpgradePage() {
         </h1>
         <p className="mt-2 text-drive-muted">{t("pages.upgrade.subtitle")}</p>
       </header>
+
+      <HelpCard
+        title="Cách thanh toán Premium"
+        items={[
+          "Quét QR bằng app ngân hàng hoặc chuyển khoản thủ công theo đúng số tài khoản.",
+          "Nội dung chuyển khoản phải khớp mã thanh toán để hệ thống tự nhận giao dịch.",
+          "Gói Premium được kích hoạt ngay khi webhook SePay báo thanh toán thành công.",
+        ]}
+      />
 
       {notice ? (
         <p className="rounded-drive border border-drive-success/40 bg-drive-success/10 px-4 py-3 text-sm text-drive-success">

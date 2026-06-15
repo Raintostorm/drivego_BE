@@ -19,6 +19,7 @@ import { Readable } from "stream"
 import type { ReadableStream as NodeReadableStream } from "stream/web"
 import { randomUUID } from "crypto"
 import { Repository } from "typeorm"
+import { isStudyLicenseCode, DEFAULT_LICENSE_CLASS } from "../../common/license-class.constants"
 import { ApplicationDocument } from "../../entities/application-document.entity"
 import {
   ApplicationStatus,
@@ -147,7 +148,7 @@ export class ApplicationsService {
     return this.hasApprovedApplication(userId)
   }
 
-  async createDraft(userId: string, licenseClass = "B2") {
+  async createDraft(userId: string, licenseClass: string = DEFAULT_LICENSE_CLASS) {
     const existing = await this.appsRepo.findOne({
       where: { userId, status: "draft" },
       order: { createdAt: "DESC" },
@@ -159,9 +160,10 @@ export class ApplicationsService {
       }
     }
 
+    const normalizedLicenseClass = this.normalizeLicenseClass(licenseClass)
     const app = this.appsRepo.create({
       userId,
-      licenseClass,
+      licenseClass: normalizedLicenseClass,
       status: "draft",
       personalInfo: {},
     })
@@ -178,7 +180,7 @@ export class ApplicationsService {
       throw new BadRequestException("Không thể sửa hồ sơ ở trạng thái hiện tại")
     }
 
-    if (dto.licenseClass !== undefined) app.licenseClass = dto.licenseClass
+    if (dto.licenseClass !== undefined) app.licenseClass = this.normalizeLicenseClass(dto.licenseClass)
     if (dto.personalInfo !== undefined) {
       app.personalInfo = { ...(app.personalInfo ?? {}), ...dto.personalInfo }
     }
@@ -224,8 +226,9 @@ export class ApplicationsService {
     }
 
     const mime = file.mimetype ?? ""
-    if (!mime.startsWith("image/") && mime !== "application/pdf") {
-      throw new BadRequestException("Chỉ chấp nhận ảnh hoặc PDF")
+    const allowedImageMimes = new Set(["image/jpeg", "image/png", "image/webp"])
+    if (!allowedImageMimes.has(mime) && mime !== "application/pdf") {
+      throw new BadRequestException("Chỉ chấp nhận JPG, PNG, WEBP hoặc PDF")
     }
 
     const ext = extname(file.originalname) || (mime === "application/pdf" ? ".pdf" : ".jpg")
@@ -398,6 +401,14 @@ export class ApplicationsService {
     if (!bucket) return trimmed
     const suffix = `/${bucket}`
     return trimmed.endsWith(suffix) ? trimmed.slice(0, -suffix.length) : trimmed
+  }
+
+  private normalizeLicenseClass(licenseClass: string) {
+    const code = licenseClass.trim().toUpperCase()
+    if (!isStudyLicenseCode(code)) {
+      throw new BadRequestException("Hạng GPLX không hợp lệ (A1, A2, B1, B2)")
+    }
+    return code
   }
 
   /** Ưu tiên nháp đang soạn; không thì bản mới nhất (đã nộp / chờ nộp lại). */

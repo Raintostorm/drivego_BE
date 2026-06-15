@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react"
 import { Link, useNavigate, useSearchParams } from "react-router-dom"
+import { HelpCard } from "../components/HelpCard.jsx"
 import { PrimaryButton } from "../components/PrimaryButton.jsx"
 import { TextField } from "../components/TextField.jsx"
 import { UiCard } from "../components/UiCard.jsx"
@@ -136,6 +137,15 @@ export function EnrollPage() {
           Phí đăng ký thử nghiệm ~5.000đ (SePay). Sau khi thanh toán, mở khóa học và thi thử.
         </p>
       </header>
+
+      <HelpCard
+        title="Quy trình đăng ký khóa"
+        items={[
+          "Tạo mã thanh toán, chuyển khoản đúng số tiền và đúng nội dung hệ thống cung cấp.",
+          "Sau khi SePay xác nhận, khóa học sẽ tự mở cho hạng bằng bạn chọn.",
+          "Nếu đã chuyển khoản nhưng chưa cập nhật, chờ vài giây rồi bấm kiểm tra lại.",
+        ]}
+      />
 
       {notice ? <p className="text-sm text-drive-success">{notice}</p> : null}
       {error ? <p className="text-sm text-drive-danger">{error}</p> : null}

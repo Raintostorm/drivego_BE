@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { EnrollCourseCta } from "../components/EnrollCourseCta.jsx"
 import { EnrollmentConsentCard } from "../components/EnrollmentConsentCard.jsx"
+import { HelpCard } from "../components/HelpCard.jsx"
 import { LicenseContentEmpty } from "../components/LicenseContentEmpty.jsx"
 import { PrimaryButton } from "../components/PrimaryButton.jsx"
 import { UiCard } from "../components/UiCard.jsx"
@@ -224,6 +225,17 @@ export function ExamPage() {
 
   const examUi = (
     <section className="grid gap-6 lg:grid-cols-[2fr_1fr]">
+      <div className="lg:col-span-2">
+        <HelpCard
+          title="Lưu ý khi làm bài thi thử"
+          items={[
+            `Bạn cần đạt tối thiểu ${passMin}/${totalQuestions} câu và không sai câu điểm liệt.`,
+            "Hệ thống chỉ cho nộp khi đã trả lời đủ tất cả câu hỏi.",
+            "Kết quả thi thử được lưu vào lịch sử để bạn theo dõi tiến độ ôn tập.",
+          ]}
+        />
+      </div>
+
       <div className="lg:col-span-2 space-y-2">
         <p className="text-sm text-drive-muted">
           Hạng {activeClass} · {totalQuestions} câu · {examRules.durationMinutes} phút · Đạt từ{" "}

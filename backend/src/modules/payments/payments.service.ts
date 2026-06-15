@@ -72,7 +72,7 @@ export class PaymentsService {
       throw new BadRequestException("paymentType không hợp lệ")
     }
 
-    const paymentCode = this.generatePaymentCode()
+    const paymentCode = await this.generateUniquePaymentCode()
     const expiresAt = new Date(Date.now() + PAYMENT_TTL_MS).toISOString()
 
     const payment = this.paymentsRepo.create({
@@ -190,8 +190,17 @@ export class PaymentsService {
 
   private generatePaymentCode() {
     const prefix = this.sepay.getPaymentCodePrefix()
-    const suffix = randomBytes(4).toString("hex").toUpperCase()
+    const suffix = randomBytes(6).toString("hex").toUpperCase()
     return `${prefix}${suffix}`
+  }
+
+  private async generateUniquePaymentCode() {
+    for (let attempt = 0; attempt < 5; attempt += 1) {
+      const code = this.generatePaymentCode()
+      const existing = await this.findPaymentByCode(code)
+      if (!existing) return code
+    }
+    throw new BadRequestException("Chưa tạo được mã thanh toán, vui lòng thử lại")
   }
 
   private resolvePaymentCode(payload: SepayWebhookDto) {

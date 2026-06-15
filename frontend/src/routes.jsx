@@ -37,6 +37,13 @@ export const routeConfig = [
     LazyPage: lazyNamed(() => import("./pages/DocsPage.jsx"), "DocsPage"),
   },
   {
+    path: "/guide",
+    labelKey: "nav.guide",
+    group: "marketing",
+    layout: "marketing",
+    LazyPage: lazyNamed(() => import("./pages/GuidePage.jsx"), "GuidePage"),
+  },
+  {
     path: "/lookup",
     labelKey: "nav.lookup",
     group: "marketing",

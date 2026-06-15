@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { useAuth } from "../context/AuthContext.jsx"
 import { useLicense } from "../context/LicenseContext.jsx"
 import { EnrollmentConsentCard } from "../components/EnrollmentConsentCard.jsx"
+import { HelpCard } from "../components/HelpCard.jsx"
 import { PrimaryButton } from "../components/PrimaryButton.jsx"
 import { StatusBadge } from "../components/StatusBadge.jsx"
 import { UiCard } from "../components/UiCard.jsx"
@@ -171,6 +172,15 @@ export function SchedulePage() {
           </button>
         </div>
       </UiCard>
+
+      <HelpCard
+        title="Cách dùng lịch thi"
+        items={[
+          "Chọn đúng hạng bằng và loại lịch trước khi xem ca còn chỗ.",
+          "Ca lý thuyết chính thức cần hồ sơ sát hạch đã được duyệt.",
+          "Sau khi đăng ký, trạng thái sẽ là chờ xác nhận cho đến khi trung tâm duyệt.",
+        ]}
+      />
 
       {myRegs.length > 0 ? (
         <UiCard variant="panel">

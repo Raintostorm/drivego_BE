@@ -10,7 +10,7 @@ import { JwtService } from "@nestjs/jwt"
 import { InjectRepository } from "@nestjs/typeorm"
 import * as bcrypt from "bcryptjs"
 import { promises as dns } from "dns"
-import { randomBytes, randomUUID } from "crypto"
+import { createHash, randomBytes, randomUUID } from "crypto"
 import nodemailer from "nodemailer"
 import type SMTPTransport from "nodemailer/lib/smtp-transport"
 import { DataSource, Repository } from "typeorm"
@@ -175,11 +175,12 @@ export class AuthService {
     }
 
     const token = randomBytes(32).toString("hex")
+    const tokenHash = this.hashResetToken(token)
     await this.resetTokensRepo.delete({ userId: user.id })
     await this.resetTokensRepo.save(
       this.resetTokensRepo.create({
         userId: user.id,
-        token,
+        token: tokenHash,
         expiresAt: new Date(Date.now() + RESET_TOKEN_TTL_MS),
       }),
     )
@@ -190,8 +191,9 @@ export class AuthService {
 
   async resetPassword(dto: ResetPasswordDto) {
     await this.ensurePasswordResetTable()
+    const tokenHash = this.hashResetToken(dto.token)
     const row = await this.resetTokensRepo.findOne({
-      where: { token: dto.token },
+      where: [{ token: tokenHash }, { token: dto.token }],
       relations: { user: true },
     })
     if (!row || !row.user || row.expiresAt.getTime() < Date.now()) {
@@ -321,6 +323,10 @@ export class AuthService {
     } catch {
       return host
     }
+  }
+
+  private hashResetToken(token: string) {
+    return createHash("sha256").update(token).digest("hex")
   }
 
   private async ensurePasswordResetTable() {

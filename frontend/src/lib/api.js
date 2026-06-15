@@ -14,8 +14,20 @@ export function clearAuthToken() {
 
 function formatApiError(data, fallback) {
   if (!data?.message) return fallback
-  if (Array.isArray(data.message)) return data.message.join(", ")
-  return String(data.message)
+  const message = Array.isArray(data.message) ? data.message.join(", ") : String(data.message)
+  return toSafeUserMessage(message, fallback)
+}
+
+function toSafeUserMessage(message, fallback) {
+  const internalPatterns = [
+    /[A-Z0-9_]*(API_KEY|SECRET|TOKEN|PASSWORD|PASS|CREDENTIAL|PRIVATE_KEY)[A-Z0-9_]*/i,
+    /\b(ECONN|ENET|ETIMEDOUT|EAI_AGAIN|SELF_SIGNED|Prisma|TypeORM|Postgres|SQL|stack)\b/i,
+    /\bRESEND_FROM\b|\bSMTP_/i,
+  ]
+  if (internalPatterns.some((pattern) => pattern.test(message))) {
+    return fallback || "Dịch vụ tạm thời chưa sẵn sàng. Vui lòng thử lại sau."
+  }
+  return message
 }
 
 function resolveApiBaseUrl() {

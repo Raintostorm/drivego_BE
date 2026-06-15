@@ -6,6 +6,7 @@ export const vi = {
     home: "Trang chủ",
     pricing: "Bảng giá",
     docs: "Tài liệu",
+    guide: "Hướng dẫn",
     lookup: "Tra cứu",
     register: "Đăng ký",
     login: "Đăng nhập",

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { Link } from "react-router-dom"
 import { PageHeader } from "../components/PageHeader.jsx"
+import { HelpCard } from "../components/HelpCard.jsx"
 import { PrimaryButton } from "../components/PrimaryButton.jsx"
 import { StatusBadge } from "../components/StatusBadge.jsx"
 import { TextField } from "../components/TextField.jsx"
@@ -8,6 +9,7 @@ import { UiCard } from "../components/UiCard.jsx"
 import { useLicense } from "../context/LicenseContext.jsx"
 import { unwrapApplication } from "../lib/applicationApi.js"
 import { apiFetch, apiFetchBlob, apiUpload } from "../lib/api.js"
+import { STUDY_LICENSE_CODES } from "../lib/license-classes.js"
 import { vi } from "../content/vi.js"
 import { t } from "../lib/strings.js"
 
@@ -281,6 +283,15 @@ export function ApplicationPage() {
         </p>
       )}
 
+      <HelpCard
+        title="Hướng dẫn nộp hồ sơ"
+        items={[
+          "Điền đúng thông tin cá nhân theo CCCD trước khi bấm lưu hoặc nộp hồ sơ.",
+          "Ảnh hồ sơ chỉ nên dùng JPG, PNG, WEBP hoặc PDF, tối đa 5MB mỗi file.",
+          "Khi trung tâm yêu cầu bổ sung, bạn có thể upload lại tài liệu rồi nộp lại hồ sơ.",
+        ]}
+      />
+
       {readOnly && application ? (
         <UiCard variant="panel" className="border-drive-border">
           <p className="text-sm text-drive-muted">
@@ -355,12 +366,21 @@ export function ApplicationPage() {
               onChange={(e) => setNationalId(e.target.value)}
               disabled={readOnly}
             />
-            <TextField
-              label={t("application.licenseClass")}
-              value={licenseClass}
-              onChange={(e) => setLicenseClass(e.target.value)}
-              disabled={readOnly}
-            />
+            <label className="block text-sm font-medium text-drive-label">
+              {t("application.licenseClass")}
+              <select
+                value={licenseClass}
+                onChange={(e) => setLicenseClass(e.target.value)}
+                disabled={readOnly}
+                className="mt-2 w-full rounded-drive border border-drive-border bg-drive-elevated px-4 py-3 text-drive-text outline-none transition focus:border-drive-accent disabled:opacity-60"
+              >
+                {STUDY_LICENSE_CODES.map((code) => (
+                  <option key={code} value={code}>
+                    {code}
+                  </option>
+                ))}
+              </select>
+            </label>
             <TextField
               label={t("application.idIssuedAt")}
               type="date"
