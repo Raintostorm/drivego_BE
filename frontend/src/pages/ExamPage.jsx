@@ -32,6 +32,7 @@ export function ExamPage() {
   const [paper, setPaper] = useState(null)
   const [papers, setPapers] = useState([])
   const [examContentReady, setExamContentReady] = useState(false)
+  const [randomReady, setRandomReady] = useState(false)
   const [selectedPaperId, setSelectedPaperId] = useState(null)
   const [randomMode, setRandomMode] = useState(true)
   const [generating, setGenerating] = useState(false)
@@ -81,6 +82,7 @@ export function ExamPage() {
       setPapers([])
       setPaper(null)
       setExamContentReady(false)
+      setRandomReady(false)
       setSelectedPaperId(null)
       return undefined
     }
@@ -90,9 +92,11 @@ export function ExamPage() {
     apiFetch(`/exams/papers?licenseClass=${activeClass}`, { auth: true })
       .then((data) => {
         if (!cancelled) {
-          const list = data.papers ?? (Array.isArray(data) ? data : [])
+          const list = data.fixedPapers ?? data.papers ?? (Array.isArray(data) ? data : [])
+          const canGenerateRandom = Boolean(data.randomReady ?? data.randomExam?.available)
           setPapers(list)
-          setExamContentReady(Boolean(data.contentReady ?? list.length > 0))
+          setRandomReady(canGenerateRandom)
+          setExamContentReady(Boolean(data.contentReady ?? (canGenerateRandom || list.length > 0)))
           setPaper(null)
           setSelectedPaperId(null)
           setLoading(false)
@@ -112,12 +116,23 @@ export function ExamPage() {
   // Initial load: random by default, or first fixed paper when in fixed mode.
   useEffect(() => {
     if (!enrolled || !examContentReady || paper || selectedPaperId || generating) return
-    if (randomMode) {
+    if (randomMode && randomReady) {
       generateRandom()
     } else if (papers[0]) {
+      setRandomMode(false)
       setSelectedPaperId(papers[0].id)
     }
-  }, [enrolled, examContentReady, randomMode, papers, paper, selectedPaperId, generating, generateRandom])
+  }, [
+    enrolled,
+    examContentReady,
+    randomMode,
+    randomReady,
+    papers,
+    paper,
+    selectedPaperId,
+    generating,
+    generateRandom,
+  ])
 
   useEffect(() => {
     if (!enrolled || !selectedPaperId) return undefined
@@ -297,8 +312,9 @@ export function ExamPage() {
       <div className="lg:col-span-2 flex flex-wrap items-center gap-3">
         <PrimaryButton
           variant={randomMode ? "action" : "outline"}
-          disabled={generating}
+          disabled={generating || !randomReady}
           onClick={() => {
+            if (!randomReady) return
             setRandomMode(true)
             setSelectedPaperId(null)
             generateRandom()

@@ -10,6 +10,7 @@ import { ExamRulesService } from "../../common/exam-rules.service"
 import { PremiumService } from "../../common/premium.service"
 import { ExamAttempt } from "../../entities/exam-attempt.entity"
 import { ExamPaper } from "../../entities/exam-paper.entity"
+import { LicenseQuestionPool } from "../../entities/license-question-pool.entity"
 import { Question } from "../../entities/question.entity"
 import { ExamAssemblyService } from "./exam-assembly.service"
 import { SubmitAttemptDto } from "./dto/submit-attempt.dto"
@@ -23,6 +24,8 @@ export class ExamsService {
     private readonly questionsRepo: Repository<Question>,
     @InjectRepository(ExamAttempt)
     private readonly attemptsRepo: Repository<ExamAttempt>,
+    @InjectRepository(LicenseQuestionPool)
+    private readonly poolRepo: Repository<LicenseQuestionPool>,
     private readonly premium: PremiumService,
     private readonly enrollment: EnrollmentService,
     private readonly examRules: ExamRulesService,
@@ -42,9 +45,10 @@ export class ExamsService {
     await this.enrollment.assertEnrolled(userId, code)
 
     const papers = await this.papersRepo.find({
-      where: { licenseClass: code },
+      where: { licenseClass: code, isGenerated: false },
       order: { paperNumber: "ASC" },
     })
+    const randomPoolCount = await this.poolRepo.count({ where: { licenseClass: code } })
 
     const rules = await this.examRules.getRules(code)
 
@@ -59,9 +63,16 @@ export class ExamsService {
 
     return {
       licenseClass: code,
-      contentReady: mapped.length > 0,
+      contentReady: mapped.length > 0 || randomPoolCount > 0,
+      randomReady: randomPoolCount > 0,
+      fixedReady: mapped.length > 0,
       examRules: rules,
       papers: mapped,
+      fixedPapers: mapped,
+      randomExam: {
+        available: randomPoolCount > 0,
+        title: "Đề thi ngẫu nhiên",
+      },
     }
   }
 
