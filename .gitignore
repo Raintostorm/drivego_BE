@@ -40,3 +40,7 @@ database/scripts/_probe_*.py
 # NestJS
 backend/dist
 backend/uploads/
+
+# Python cache
+__pycache__/
+*.pyc

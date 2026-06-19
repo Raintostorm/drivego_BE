@@ -33,6 +33,8 @@ export function ExamPage() {
   const [papers, setPapers] = useState([])
   const [examContentReady, setExamContentReady] = useState(false)
   const [selectedPaperId, setSelectedPaperId] = useState(null)
+  const [randomMode, setRandomMode] = useState(true)
+  const [generating, setGenerating] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -46,7 +48,31 @@ export function ExamPage() {
   useEffect(() => {
     setSecondsLeft(durationSeconds)
     autoSubmittedRef.current = false
-  }, [durationSeconds, selectedPaperId])
+  }, [durationSeconds, paper?.id])
+
+  const generateRandom = useCallback(async () => {
+    setGenerating(true)
+    setLoading(true)
+    setError(null)
+    try {
+      const detail = await apiFetch(`/exams/random?licenseClass=${activeClass}`, {
+        method: "POST",
+        auth: true,
+      })
+      setPaper(detail)
+      setSelectedPaperId(null)
+      setCurrentIndex(0)
+      setAnswers({})
+      setResult(null)
+      setStartedAt(new Date().toISOString())
+      autoSubmittedRef.current = false
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Không tạo được đề ngẫu nhiên")
+    } finally {
+      setGenerating(false)
+      setLoading(false)
+    }
+  }, [activeClass])
 
   useEffect(() => {
     if (enrollmentsLoading) return undefined
@@ -67,12 +93,9 @@ export function ExamPage() {
           const list = data.papers ?? (Array.isArray(data) ? data : [])
           setPapers(list)
           setExamContentReady(Boolean(data.contentReady ?? list.length > 0))
-          if (list[0]) {
-            setSelectedPaperId(list[0].id)
-          } else {
-            setSelectedPaperId(null)
-            setLoading(false)
-          }
+          setPaper(null)
+          setSelectedPaperId(null)
+          setLoading(false)
         }
       })
       .catch((err) => {
@@ -85,6 +108,16 @@ export function ExamPage() {
       cancelled = true
     }
   }, [enrollmentsLoading, enrolled, activeClass])
+
+  // Initial load: random by default, or first fixed paper when in fixed mode.
+  useEffect(() => {
+    if (!enrolled || !examContentReady || paper || selectedPaperId || generating) return
+    if (randomMode) {
+      generateRandom()
+    } else if (papers[0]) {
+      setSelectedPaperId(papers[0].id)
+    }
+  }, [enrolled, examContentReady, randomMode, papers, paper, selectedPaperId, generating, generateRandom])
 
   useEffect(() => {
     if (!enrolled || !selectedPaperId) return undefined
@@ -209,7 +242,16 @@ export function ExamPage() {
           <PrimaryButton variant="action" onClick={() => navigate("/history")}>
             Xem lịch sử
           </PrimaryButton>
-          <PrimaryButton variant="outline" onClick={() => window.location.reload()}>
+          <PrimaryButton
+            variant="outline"
+            onClick={() => {
+              if (randomMode) {
+                generateRandom()
+              } else {
+                window.location.reload()
+              }
+            }}
+          >
             Thi lại
           </PrimaryButton>
         </div>
@@ -252,21 +294,43 @@ export function ExamPage() {
         </p>
       </div>
 
-      {papers.length > 1 ? (
-        <div className="lg:col-span-2">
-          <select
-            value={selectedPaperId ?? ""}
-            onChange={(e) => setSelectedPaperId(e.target.value)}
-            className="rounded-drive border border-drive-border bg-drive-elevated px-4 py-2 text-sm text-drive-text"
-          >
-            {papers.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.title} ({p.questionCount} câu)
+      <div className="lg:col-span-2 flex flex-wrap items-center gap-3">
+        <PrimaryButton
+          variant={randomMode ? "action" : "outline"}
+          disabled={generating}
+          onClick={() => {
+            setRandomMode(true)
+            setSelectedPaperId(null)
+            generateRandom()
+          }}
+        >
+          {generating ? "Đang tạo đề…" : "🎲 Tạo đề ngẫu nhiên"}
+        </PrimaryButton>
+
+        {papers.length > 0 ? (
+          <>
+            <span className="text-xs text-drive-muted">hoặc đề cố định:</span>
+            <select
+              value={!randomMode ? selectedPaperId ?? "" : ""}
+              onChange={(e) => {
+                setRandomMode(false)
+                setPaper(null)
+                setSelectedPaperId(e.target.value)
+              }}
+              className="rounded-drive border border-drive-border bg-drive-elevated px-4 py-2 text-sm text-drive-text"
+            >
+              <option value="" disabled>
+                Chọn đề…
               </option>
-            ))}
-          </select>
-        </div>
-      ) : null}
+              {papers.map((p) => (
+                <option key={p.id} value={p.id}>
+                  {p.title} ({p.questionCount} câu)
+                </option>
+              ))}
+            </select>
+          </>
+        ) : null}
+      </div>
 
       <UiCard variant="panel" className="space-y-4">
         <header className="flex flex-wrap items-start justify-between gap-2 rounded-drive border border-drive-border-soft bg-drive-sidebar p-4">

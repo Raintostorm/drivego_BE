@@ -21,6 +21,12 @@ export class ExamsController {
     return this.examsService.getHistory(user.userId)
   }
 
+  @Post("random")
+  @UseGuards(JwtAuthGuard)
+  generateRandom(@CurrentUser() user: AuthUser, @Query("licenseClass") licenseClass?: string) {
+    return this.examsService.generateRandomPaper(user.userId, licenseClass)
+  }
+
   @Get(":paperId")
   @UseGuards(JwtAuthGuard)
   getPaper(@CurrentUser() user: AuthUser, @Param("paperId") paperId: string) {

@@ -18,6 +18,12 @@ export class ExamPaper {
   @Column({ name: "is_mock", type: "boolean", default: true })
   isMock!: boolean
 
+  @Column({ name: "is_generated", type: "boolean", default: false })
+  isGenerated!: boolean
+
+  @Column({ name: "created_at", type: "timestamptz", default: () => "NOW()" })
+  createdAt!: Date
+
   @OneToMany(() => Question, (question) => question.paper)
   questions?: Question[]
 }

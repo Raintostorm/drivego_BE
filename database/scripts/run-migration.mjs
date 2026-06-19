@@ -11,14 +11,21 @@ if (!sqlPath) {
   process.exit(1)
 }
 
+function stripQuotes(v) {
+  if ((v.startsWith('"') && v.endsWith('"')) || (v.startsWith("'") && v.endsWith("'"))) {
+    return v.slice(1, -1)
+  }
+  return v
+}
+
 function loadDatabaseUrl() {
-  if (process.env.DATABASE_URL) return process.env.DATABASE_URL
+  if (process.env.DATABASE_URL) return stripQuotes(process.env.DATABASE_URL.trim())
   const envPath = resolve(__dirname, "../.env")
   if (existsSync(envPath)) {
     const line = readFileSync(envPath, "utf8")
       .split("\n")
       .find((l) => l.startsWith("DATABASE_URL="))
-    if (line) return line.slice("DATABASE_URL=".length).trim()
+    if (line) return stripQuotes(line.slice("DATABASE_URL=".length).trim())
   }
   return "postgresql://postgres:12345@localhost:5432/DriveGo"
 }

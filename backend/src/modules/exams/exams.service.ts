@@ -11,6 +11,7 @@ import { PremiumService } from "../../common/premium.service"
 import { ExamAttempt } from "../../entities/exam-attempt.entity"
 import { ExamPaper } from "../../entities/exam-paper.entity"
 import { Question } from "../../entities/question.entity"
+import { ExamAssemblyService } from "./exam-assembly.service"
 import { SubmitAttemptDto } from "./dto/submit-attempt.dto"
 
 @Injectable()
@@ -25,7 +26,16 @@ export class ExamsService {
     private readonly premium: PremiumService,
     private readonly enrollment: EnrollmentService,
     private readonly examRules: ExamRulesService,
+    private readonly assembly: ExamAssemblyService,
   ) {}
+
+  /** Generate a random exam paper (official quota) and return it ready to take. */
+  async generateRandomPaper(userId: string, licenseClass?: string) {
+    const code = licenseClass && isStudyLicenseCode(licenseClass) ? licenseClass : DEFAULT_LICENSE_CLASS
+    await this.enrollment.assertEnrolled(userId, code)
+    const paperId = await this.assembly.generate(code)
+    return this.getPaper(paperId, userId)
+  }
 
   async listPapers(userId: string, licenseClass?: string) {
     const code = licenseClass && isStudyLicenseCode(licenseClass) ? licenseClass : DEFAULT_LICENSE_CLASS
@@ -76,7 +86,9 @@ export class ExamsService {
       paperNumber: paper.paperNumber,
       questionCount: paper.questionCount,
       isMock: paper.isMock,
-      title: `Đề thi số ${String(paper.paperNumber).padStart(2, "0")}`,
+      title: paper.isGenerated
+        ? "Đề thi ngẫu nhiên"
+        : `Đề thi số ${String(paper.paperNumber).padStart(2, "0")}`,
       examRules: rules,
       questions: questions.map((q, index) => ({
         id: q.id,
@@ -187,6 +199,12 @@ export class ExamsService {
     })
     await this.attemptsRepo.save(attempt)
 
+    // Generated papers are single-use: drop their question rows to avoid
+    // unbounded growth. The paper stub stays for history (questionCount kept).
+    if (paper.isGenerated) {
+      await this.questionsRepo.delete({ paperId })
+    }
+
     return {
       attemptId: attempt.id,
       score: correct,
@@ -225,7 +243,9 @@ export class ExamsService {
           id: attempt.id,
           date: finished.toISOString(),
           exam: attempt.paper
-            ? `Đề thi số ${String(attempt.paper.paperNumber).padStart(2, "0")}`
+            ? attempt.paper.isGenerated
+              ? "Đề thi ngẫu nhiên"
+              : `Đề thi số ${String(attempt.paper.paperNumber).padStart(2, "0")}`
             : "Đề thi",
           rank: attempt.paper?.licenseClass ?? "B2",
           score: `${attempt.score ?? 0}/${total}`,

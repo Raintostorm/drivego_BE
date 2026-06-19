@@ -2,7 +2,10 @@ import { Module } from "@nestjs/common"
 import { ConfigModule, ConfigService } from "@nestjs/config"
 import { TypeOrmModule } from "@nestjs/typeorm"
 import { ApplicationDocument } from "../entities/application-document.entity"
+import { BankQuestion } from "../entities/bank-question.entity"
 import { CourseEnrollment } from "../entities/course-enrollment.entity"
+import { LicenseExamStructure } from "../entities/license-exam-structure.entity"
+import { LicenseQuestionPool } from "../entities/license-question-pool.entity"
 import { ChatMessage } from "../entities/chat-message.entity"
 import { ChatSession } from "../entities/chat-session.entity"
 import { LicenseApplication } from "../entities/license-application.entity"
@@ -62,6 +65,9 @@ import { User } from "../entities/user.entity"
             CourseEnrollment,
             ClassSession,
             SessionAttendance,
+            BankQuestion,
+            LicenseQuestionPool,
+            LicenseExamStructure,
           ],
           synchronize: false,
         }
