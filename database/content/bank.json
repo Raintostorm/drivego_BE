@@ -899,7 +899,7 @@
       ],
       "correctIndex": 0,
       "imageUrl": null,
-      "isCritical": true
+      "isCritical": false
     },
     {
       "number": 70,
@@ -939,7 +939,7 @@
       ],
       "correctIndex": 1,
       "imageUrl": null,
-      "isCritical": false
+      "isCritical": true
     },
     {
       "number": 73,
@@ -953,7 +953,7 @@
       ],
       "correctIndex": 2,
       "imageUrl": null,
-      "isCritical": false
+      "isCritical": true
     },
     {
       "number": 74,
