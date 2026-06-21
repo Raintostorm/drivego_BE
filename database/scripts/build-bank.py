@@ -126,7 +126,7 @@ def main() -> int:
         if "250" in p.name or "a1" in p.name.lower() or "moto" in p.name.lower():
             xml = zipfile.ZipFile(p).read("word/document.xml").decode("utf-8", "ignore")
             text = re.sub(r"<[^>]+>", " ", xml)
-            a1_pool = sorted({int(m.group(1)) for m in re.finditer(r"Câu\s+(\d+)\s*\.", text)})
+            a1_pool = sorted({int(m.group(1)) for m in re.finditer(r"Câu\s+(\d+)\s*[.:]", text)})
             break
     if not a1_pool:  # fallback: 250 pdf
         for p in sorted(ROOT.glob("*.pdf")):

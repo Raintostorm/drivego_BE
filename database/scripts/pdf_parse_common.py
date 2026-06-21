@@ -109,7 +109,10 @@ def merge_answer_lines(
             current_score = lines[i].ul_score
             i += 1
             continue
-        if re.match(r"^Câu\s+\d+\.", t, re.I):
+        if re.match(r"^Câu\s+\d+\s*[.:]", t, re.I):
+            flush()
+            break
+        if re.match(r"^CHƯƠNG\s+[IVX]", t, re.I):
             flush()
             break
         if current_num is not None:
@@ -139,7 +142,7 @@ def parse_questions(doc: fitz.Document) -> list[Question]:
     questions: list[Question] = []
     i = 0
     while i < len(all_lines):
-        m = re.match(r"^Câu\s+(\d+)\.\s*(.*)$", all_lines[i].text, re.I)
+        m = re.match(r"^Câu\s+(\d+)\s*[.:]\s*(.*)$", all_lines[i].text, re.I)
         if not m:
             i += 1
             continue
@@ -150,7 +153,9 @@ def parse_questions(doc: fitz.Document) -> list[Question]:
         i += 1
         while i < len(all_lines):
             t = all_lines[i].text
-            if re.match(r"^Câu\s+\d+\.", t, re.I):
+            if re.match(r"^Câu\s+\d+\s*[.:]", t, re.I):
+                break
+            if re.match(r"^CHƯƠNG\s+[IVX]", t, re.I):
                 break
             if re.match(r"^[1-4]\.\s", t):
                 break

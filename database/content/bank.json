@@ -2361,7 +2361,7 @@
       "answers": [
         "Xe cứu hộ giao thông đường bộ phải có dấu hiệu nhận diện, niêm yết thông tin trên xe, gắn thiết bị giám sát hành trình và thiết bị ghi nhận hình ảnh người lái xe.",
         "Phải tuân thủ quy định của pháp luật về khối lượng hàng hóa chuyên chở của xe cứu hộ và khối lượng của xe được cứu hộ ghi trên Chứng nhận kiểm định an toàn kỹ thuật và bảo vệ môi trường.",
-        "Cả hai ý trên. CHƯƠNG II. VĂN HÓA GIAO THÔNG, ĐẠO ĐỨC NGƯỜI LÁI XE, KỸ NĂNG PHÒNG CHÁY, CHỮA CHÁY VÀ CỨU HỘ, CỨU NẠN"
+        "Cả hai ý trên."
       ],
       "correctIndex": 2,
       "imageUrl": null,
@@ -2687,7 +2687,7 @@
         "Gọi số 115 để thông báo về tình trạng tai nạn và yêu cầu hỗ trợ y tế ngay lập tức. Quan sát hiện trường để giúp nạn nhân, đồng thời tránh gây tổn thương cho mình.",
         "Nhanh chóng loại bỏ nguyên nhân gây bỏng bằng cách tách nạn nhân khỏi vật gây cháy, cởi bỏ quần áo nếu bén lửa, ngâm vùng da bị bỏng vào nước sạch hoặc đắp khăn mát, lưu ý không dùng khăn hoặc nước quá lạnh.",
         "Nếu nạn nhân còn tỉnh, cần cho uống bù nước. Trong thời tiết lạnh, cần giữ ấm cho cơ thể nạn nhân, sau đó nhanh chóng đưa đến cơ sở y tế gần nhất.",
-        "Cả ba ý trên. CHƯƠNG III. KỸ THUẬT LÁI XE"
+        "Cả ba ý trên."
       ],
       "correctIndex": 3,
       "imageUrl": null,
@@ -3442,7 +3442,7 @@
         "Người lái xe phải tìm hiểu khả năng chìm trong nước của xe để xác định cung đường di chuyển.",
         "Giữ vững tay lái, đi đều ga, tránh không để xe chết máy giữa dòng, không nên dừng xe trên đường ngập nước.",
         "Lái xe tốc độ chậm, không tạo sóng và giữ khoảng cách an toàn với các phương tiện xung quanh, nhất là người đi bộ.",
-        "Cả ba ý trên. CHƯƠNG IV. CẤU TẠO VÀ SỬA CHỮA"
+        "Cả ba ý trên."
       ],
       "correctIndex": 3,
       "imageUrl": null,
@@ -3933,7 +3933,7 @@
         "Báo hiệu hệ thống túi khí đã bật.",
         "Báo hiệu đèn chiếu sáng xa đã bật.",
         "Báo hiệu chế độ lái tiết kiệm nhiên liệu đã bật.",
-        "Báo hiệu đèn cảnh báo khoảng cách đã bật. CHƯƠNG V. BÁO HIỆU ĐƯỜNG BỘ"
+        "Báo hiệu đèn cảnh báo khoảng cách đã bật."
       ],
       "correctIndex": 2,
       "imageUrl": "/content/B2/images/cau-300.png",
@@ -6356,7 +6356,7 @@
       "answers": [
         "Vị trí dừng xe của các phương tiện vận tải hành khách công cộng.",
         "Báo cho người điều khiển được dừng phương tiện trong phạm vi phần mặt đường có bố trí vạch để tránh ùn tắc giao thông.",
-        "Dùng để xác định vị trí giữa các phương tiện trên đường. CHƯƠNG VI. GIẢI THẾ SA HÌNH VÀ KỸ NĂNG XỬ LÝ TÌNH HUỐNG GIAO THÔNG"
+        "Dùng để xác định vị trí giữa các phương tiện trên đường."
       ],
       "correctIndex": 0,
       "imageUrl": "/content/B2/images/cau-485.png",
@@ -6629,13 +6629,23 @@
       "answers": [
         "Xe tải.",
         "Xe con (B).",
-        "Xe con (A). Câu 507: Theo hướng mũi tên, những hướng nào xe gắn máy được phép đi?",
+        "Xe con (A)."
+      ],
+      "correctIndex": 1,
+      "imageUrl": "/content/B2/images/cau-506.png",
+      "isCritical": false
+    },
+    {
+      "number": 507,
+      "category": "VI",
+      "body": "Theo hướng mũi tên, những hướng nào xe gắn máy được phép đi?",
+      "answers": [
         "Cả ba hướng.",
         "Chỉ hướng 1 và 3.",
         "Chỉ hướng 1."
       ],
-      "correctIndex": 3,
-      "imageUrl": "/content/B2/images/cau-506.png",
+      "correctIndex": 0,
+      "imageUrl": null,
       "isCritical": false
     },
     {
