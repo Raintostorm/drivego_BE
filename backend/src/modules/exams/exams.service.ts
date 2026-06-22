@@ -121,7 +121,10 @@ export class ExamsService {
     await this.enrollment.assertEnrolled(userId, paper.licenseClass)
     await this.premium.assertCanSubmitExam(userId)
 
-    const questions = await this.questionsRepo.find({ where: { paperId } })
+    const questions = await this.questionsRepo.find({
+      where: { paperId },
+      order: { id: "ASC" },
+    })
     if (questions.length === 0) {
       throw new NotFoundException("Đề thi chưa có câu hỏi")
     }
@@ -161,8 +164,20 @@ export class ExamsService {
     let wrong = 0
     let failedCritical = false
     const detail: Record<string, { selected: number; correct: number; isCorrect: boolean }> = {}
+    // Self-contained snapshot so the attempt can be reviewed later even after a
+    // generated paper's question rows are deleted below.
+    const review: Array<{
+      index: number
+      body: string
+      imageUrl: string | null
+      isCritical: boolean
+      answers: string[]
+      correctIndex: number
+      selected: number
+      isCorrect: boolean
+    }> = []
 
-    for (const question of questions) {
+    questions.forEach((question, i) => {
       const selected = dto.answers[question.id]
       if (typeof selected !== "number" || !Number.isInteger(selected)) {
         throw new BadRequestException(
@@ -174,12 +189,22 @@ export class ExamsService {
         throw new BadRequestException(`Đáp án không hợp lệ cho câu hỏi ${question.id}`)
       }
       const isCorrect = selected === question.correctIndex
-      
+
       detail[question.id] = {
         selected: selected ?? -1,
         correct: question.correctIndex,
         isCorrect,
       }
+      review.push({
+        index: i + 1,
+        body: question.body,
+        imageUrl: question.imageUrl ?? null,
+        isCritical: question.isCritical,
+        answers: Array.isArray(question.answers) ? question.answers : [],
+        correctIndex: question.correctIndex,
+        selected,
+        isCorrect,
+      })
       if (isCorrect) {
         correct += 1
       } else {
@@ -188,7 +213,7 @@ export class ExamsService {
           failedCritical = true
         }
       }
-    }
+    })
 
     const total = questions.length
     const passThreshold = rules.passMinCorrect
@@ -206,7 +231,7 @@ export class ExamsService {
       finishedAt,
       score: correct,
       passed,
-      answers: { correct, wrong, detail, failedCritical },
+      answers: { correct, wrong, detail, failedCritical, review },
     })
     await this.attemptsRepo.save(attempt)
 
@@ -226,6 +251,59 @@ export class ExamsService {
       passThreshold,
       failedCritical,
       durationSeconds: Math.round((finishedAt.getTime() - startedAt.getTime()) / 1000),
+    }
+  }
+
+  async getAttemptDetail(userId: string, attemptId: string) {
+    const attempt = await this.attemptsRepo.findOne({
+      where: { id: attemptId },
+      relations: { paper: true },
+    })
+    if (!attempt || attempt.userId !== userId) {
+      throw new NotFoundException("Không tìm thấy bài thi")
+    }
+
+    const data = (attempt.answers ?? {}) as {
+      correct?: number
+      wrong?: number
+      failedCritical?: boolean
+      review?: Array<{
+        index: number
+        body: string
+        imageUrl: string | null
+        isCritical: boolean
+        answers: string[]
+        correctIndex: number
+        selected: number
+        isCorrect: boolean
+      }>
+    }
+    const review = Array.isArray(data.review) ? data.review : []
+    const total = review.length || attempt.paper?.questionCount || attempt.score || 0
+    const rules = await this.examRules.getRules(attempt.paper?.licenseClass)
+    const finished = attempt.finishedAt ?? attempt.startedAt
+    const durationSeconds = Math.max(
+      0,
+      Math.round((finished.getTime() - attempt.startedAt.getTime()) / 1000),
+    )
+
+    return {
+      id: attempt.id,
+      date: finished.toISOString(),
+      licenseClass: attempt.paper?.licenseClass ?? null,
+      title: attempt.paper
+        ? attempt.paper.isGenerated
+          ? "Đề thi ngẫu nhiên"
+          : `Đề thi số ${String(attempt.paper.paperNumber).padStart(2, "0")}`
+        : "Đề thi",
+      score: attempt.score ?? data.correct ?? 0,
+      total,
+      passThreshold: rules.passMinCorrect,
+      passed: Boolean(attempt.passed),
+      failedCritical: Boolean(data.failedCritical),
+      durationSeconds,
+      hasReview: review.length > 0,
+      questions: review,
     }
   }
 

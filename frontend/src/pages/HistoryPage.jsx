@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { PageHeader } from "../components/PageHeader.jsx"
 import { StatCard } from "../components/StatCard.jsx"
 import { StatusBadge } from "../components/StatusBadge.jsx"
@@ -12,6 +12,7 @@ function formatDate(iso) {
 }
 
 export function HistoryPage() {
+  const navigate = useNavigate()
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -66,13 +67,15 @@ export function HistoryPage() {
                     <th className="px-4 py-3">Hạng</th>
                     <th className="px-4 py-3">Kết quả</th>
                     <th className="px-4 py-3">Thời gian</th>
+                    <th className="px-4 py-3"></th>
                   </tr>
                 </thead>
                 <tbody>
                   {rows.map((row) => (
                     <tr
                       key={row.id}
-                      className="border-t border-drive-border-soft text-drive-text"
+                      onClick={() => navigate(`/history/${row.id}`)}
+                      className="cursor-pointer border-t border-drive-border-soft text-drive-text transition hover:bg-drive-sidebar"
                     >
                       <td className="px-4 py-3 text-drive-muted">{formatDate(row.date)}</td>
                       <td className="px-4 py-3">{row.exam}</td>
@@ -81,6 +84,7 @@ export function HistoryPage() {
                         <StatusBadge tone={row.pass ? "success" : "danger"}>{row.score}</StatusBadge>
                       </td>
                       <td className="px-4 py-3 text-drive-muted">{row.time}</td>
+                      <td className="px-4 py-3 text-right text-drive-action">Xem lại →</td>
                     </tr>
                   ))}
                 </tbody>

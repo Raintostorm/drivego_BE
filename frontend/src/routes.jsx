@@ -92,6 +92,13 @@ export const routeConfig = [
     LazyPage: lazyNamed(() => import("./pages/HistoryPage.jsx"), "HistoryPage"),
   },
   {
+    path: "/history/:attemptId",
+    labelKey: "nav.history",
+    group: "app",
+    layout: "dashboard",
+    LazyPage: lazyNamed(() => import("./pages/ExamReviewPage.jsx"), "ExamReviewPage"),
+  },
+  {
     path: "/exam",
     labelKey: "nav.exam",
     group: "app",

@@ -21,6 +21,12 @@ export class ExamsController {
     return this.examsService.getHistory(user.userId)
   }
 
+  @Get("attempts/:attemptId")
+  @UseGuards(JwtAuthGuard)
+  attemptDetail(@CurrentUser() user: AuthUser, @Param("attemptId") attemptId: string) {
+    return this.examsService.getAttemptDetail(user.userId, attemptId)
+  }
+
   @Post("random")
   @UseGuards(JwtAuthGuard)
   generateRandom(@CurrentUser() user: AuthUser, @Query("licenseClass") licenseClass?: string) {
