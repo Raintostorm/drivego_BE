@@ -463,7 +463,7 @@
         "Người tham gia giao thông đường bộ ở phía trước và phía sau người điều khiển phải dừng lại; người tham gia giao thông đường bộ ở phía bên phải và phía bên trái người điều khiển được đi tất cả các hướng."
       ],
       "correctIndex": 3,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-036.png",
       "isCritical": false
     },
     {
@@ -3867,7 +3867,7 @@
         "Hệ thống lái gặp sự cố."
       ],
       "correctIndex": 3,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-295.png",
       "isCritical": false
     },
     {
@@ -3881,7 +3881,7 @@
         "Giữ chặt người lái và hành khách trên ghế ngồi khi xe ô tô đột ngột dừng lại."
       ],
       "correctIndex": 0,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-296.png",
       "isCritical": false
     },
     {
@@ -4097,7 +4097,7 @@
         "Biển 2."
       ],
       "correctIndex": 1,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-312.png",
       "isCritical": false
     },
     {
@@ -4124,7 +4124,7 @@
         "Cả hai biển."
       ],
       "correctIndex": 0,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-314.png",
       "isCritical": false
     },
     {
@@ -4137,7 +4137,7 @@
         "Không biển nào."
       ],
       "correctIndex": 1,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-315.png",
       "isCritical": false
     },
     {
@@ -4219,7 +4219,7 @@
         "Không biển nào."
       ],
       "correctIndex": 1,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-321.png",
       "isCritical": false
     },
     {
@@ -4258,7 +4258,7 @@
         "Cả hai biển."
       ],
       "correctIndex": 0,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-324.png",
       "isCritical": false
     },
     {
@@ -4298,7 +4298,7 @@
         "Biển 3."
       ],
       "correctIndex": 1,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-327.png",
       "isCritical": false
     },
     {
@@ -4378,7 +4378,7 @@
         "Biển 3."
       ],
       "correctIndex": 2,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-333.png",
       "isCritical": false
     },
     {
@@ -4440,7 +4440,7 @@
         "Cho phép xe ô tô có tải trọng trên trục xe từ 7 tấn trở xuống đi qua."
       ],
       "correctIndex": 1,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-338.png",
       "isCritical": false
     },
     {
@@ -4453,7 +4453,7 @@
         "Hạn chế tải trọng trên trục xe."
       ],
       "correctIndex": 0,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-339.png",
       "isCritical": false
     },
     {
@@ -4530,7 +4530,7 @@
         "Không."
       ],
       "correctIndex": 0,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-345.png",
       "isCritical": false
     },
     {
@@ -4568,7 +4568,7 @@
         "Không được phép."
       ],
       "correctIndex": 1,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-348.png",
       "isCritical": false
     },
     {
@@ -4606,7 +4606,7 @@
         "Cấm các loại xe cơ giới đi vào trừ loại xe ở biển phụ."
       ],
       "correctIndex": 0,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-351.png",
       "isCritical": false
     },
     {
@@ -4645,7 +4645,7 @@
         "Được phép đỗ xe và dừng xe theo hướng bên phải."
       ],
       "correctIndex": 1,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-354.png",
       "isCritical": false
     },
     {
@@ -4694,7 +4694,7 @@
         "Cấm xe ô tô con."
       ],
       "correctIndex": 1,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-358.png",
       "isCritical": false
     },
     {
@@ -4834,7 +4834,7 @@
         "Biển 3."
       ],
       "correctIndex": 0,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-369.png",
       "isCritical": false
     },
     {
@@ -4875,7 +4875,7 @@
         "Cả ba biển."
       ],
       "correctIndex": 2,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-372.png",
       "isCritical": false
     },
     {
@@ -5038,7 +5038,7 @@
         "Cả ba biển."
       ],
       "correctIndex": 0,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-384.png",
       "isCritical": false
     },
     {
@@ -5092,7 +5092,7 @@
         "Biển 3."
       ],
       "correctIndex": 1,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-388.png",
       "isCritical": false
     },
     {
@@ -5275,7 +5275,7 @@
         "Biển 3."
       ],
       "correctIndex": 2,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-402.png",
       "isCritical": false
     },
     {
@@ -5302,7 +5302,7 @@
         "Biển 1 và biển 2."
       ],
       "correctIndex": 2,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-404.png",
       "isCritical": false
     },
     {
@@ -5315,7 +5315,7 @@
         "Biển 3."
       ],
       "correctIndex": 1,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-405.png",
       "isCritical": false
     },
     {
@@ -5483,7 +5483,7 @@
         "Báo trước sắp đến bến phà."
       ],
       "correctIndex": 2,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-418.png",
       "isCritical": false
     },
     {
@@ -5596,7 +5596,7 @@
         "Cả hai biển."
       ],
       "correctIndex": 2,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-427.png",
       "isCritical": false
     },
     {
@@ -5711,7 +5711,7 @@
         "Biển 1 và biển 2."
       ],
       "correctIndex": 3,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-436.png",
       "isCritical": false
     },
     {
@@ -6175,7 +6175,7 @@
         "Biển 3."
       ],
       "correctIndex": 2,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-471.png",
       "isCritical": false
     },
     {
@@ -6188,7 +6188,7 @@
         "Biển 3."
       ],
       "correctIndex": 1,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-472.png",
       "isCritical": false
     },
     {
@@ -6645,7 +6645,7 @@
         "Chỉ hướng 1."
       ],
       "correctIndex": 0,
-      "imageUrl": null,
+      "imageUrl": "/content/B2/images/cau-507.png",
       "isCritical": false
     },
     {
