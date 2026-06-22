@@ -363,19 +363,15 @@ export function ExamPage() {
           ) : null}
         </header>
 
-        <div className="mx-auto flex aspect-square w-full max-w-[420px] items-center justify-center overflow-hidden rounded-drive border border-drive-border-soft bg-white p-3">
-          {question.imageUrl ? (
+        {question.imageUrl ? (
+          <div className="mx-auto flex aspect-square w-full max-w-[420px] items-center justify-center overflow-hidden rounded-drive border border-drive-border-soft bg-white p-3">
             <img
               src={question.imageUrl}
               alt=""
               className="max-h-full max-w-full object-contain"
             />
-          ) : (
-            <div className="flex size-full items-center justify-center rounded-drive bg-gradient-to-r from-drive-panel to-drive-action/25 text-sm text-drive-muted">
-              {t("license.examQuestionLabel", { code: activeClass })}
-            </div>
-          )}
-        </div>
+          </div>
+        ) : null}
 
         <div className="space-y-3">
           {question.answers.map((answer, idx) => {
