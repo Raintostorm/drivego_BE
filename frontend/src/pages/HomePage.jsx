@@ -1,7 +1,16 @@
 import { useEffect, useRef } from "react"
 import { Link } from "react-router-dom"
-import brandScooterImage from "../assets/brand-scooter.png"
-import heroImage from "../assets/hero.png"
+import practiceLineImage from "../assets/boanh/z7907357627838_b3adcc5190caaa267c02a800d9949a33.jpg"
+import practiceClassImage from "../assets/boanh/z7907357639212_bdbc6e4d16caefc28da3f32243cc699f.jpg"
+import studentBriefingImage from "../assets/boanh/z7920884503549_4725c39213fabd12da44f10563ec47c2.jpg"
+import bikeYardImage from "../assets/boanh/z7920884510543_b364c845fe6476f713fb45529966710e.jpg"
+import motorbikeRowImage from "../assets/boanh/z7920884518729_1b2114bfcebcb0da54afe39e41923706.jpg"
+import groupClassImage from "../assets/boanh/z7920884538917_b80e61e31431c1e7c60b6715f902306d.jpg"
+import theoryClassImage from "../assets/boanh/z7920884561048_a583b6d965b7c0588a138ba13b1cd6a4.jpg"
+import instructorBikeImage from "../assets/boanh/z7920884565064_661f914b7e66173cecbfcc4710285de9.jpg"
+import emptyYardImage from "../assets/boanh/z7988973616633_bf3e5cd10520d7d930a3d14633f7edce.jpg"
+import scooterGarageImage from "../assets/boanh/z7988973619848_5e0d7f0197a654eebcdf50d4b626dce2.jpg"
+import drivingTrackImage from "../assets/boanh/z7988973749907_1e8d1d1b508f47794dd85f7616de1ace.jpg"
 import motorbikeImage from "../assets/motorbike.png"
 import scooterVideo from "../assets/scooter-urban-road.mp4"
 import { DitherBackground } from "../components/DitherBackground.jsx"
@@ -30,13 +39,13 @@ export function HomePage() {
       title: "Đăng ký học lái xe máy A1",
       price: "từ 755.000đ",
       desc: "Lộ trình học gọn, phù hợp người mới bắt đầu và cần hoàn thiện hồ sơ thi sát hạch.",
-      image: motorbikeImage,
+      image: bikeYardImage,
     },
     {
       title: "Khóa học ô tô B1/B2",
       price: "từ 15.000.000đ",
       desc: "Quản lý lịch học, tiến độ lý thuyết, thực hành và luyện đề trên cùng một tài khoản DriveGo.",
-      image: heroImage,
+      image: drivingTrackImage,
     },
   ]
   const programHighlights = [
@@ -45,25 +54,37 @@ export function HomePage() {
     "AI Chat hỗ trợ giải thích luật, biển báo và mẹo ôn tập theo nhu cầu học viên.",
     "Theo dõi lịch học, lịch thi, thông báo và trạng thái premium trong dashboard.",
   ]
-  const gallery = [motorbikeImage, heroImage, brandScooterImage, motorbikeImage, heroImage, brandScooterImage]
+  const gallery = [
+    practiceLineImage,
+    practiceClassImage,
+    studentBriefingImage,
+    bikeYardImage,
+    motorbikeRowImage,
+    groupClassImage,
+    theoryClassImage,
+    instructorBikeImage,
+    emptyYardImage,
+    scooterGarageImage,
+    drivingTrackImage,
+  ]
   const news = [
     {
       title: "Cập nhật quy trình đăng ký GPLX trực tuyến",
       date: "30 Tháng 06",
       desc: "Học viên có thể chuẩn bị thông tin cá nhân, hồ sơ và chọn hạng học ngay trên DriveGo.",
-      image: heroImage,
+      image: theoryClassImage,
     },
     {
       title: "Mẹo ôn 600 câu lý thuyết hiệu quả",
       date: "27 Tháng 06",
       desc: "Tập trung câu điểm liệt, nhóm biển báo dễ nhầm và luyện đề ngẫu nhiên theo hạng bằng.",
-      image: motorbikeImage,
+      image: groupClassImage,
     },
     {
       title: "Theo dõi học phí và premium trong admin",
       date: "22 Tháng 06",
       desc: "Admin có thể cập nhật học phí theo từng hạng và gói premium để học viên xem đúng giá.",
-      image: brandScooterImage,
+      image: instructorBikeImage,
     },
   ]
 
@@ -214,7 +235,7 @@ export function HomePage() {
         <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">
           <UiCard variant="panel" padding="none" className="overflow-hidden">
             <div className="relative aspect-[4/3] bg-drive-elevated">
-              <img className="h-full w-full object-cover" src={heroImage} alt="Khu vực học lái DriveGo" />
+              <img className="h-full w-full object-cover" src={practiceClassImage} alt="Khu vực học lái DriveGo" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 rounded-drive bg-drive-panel/90 p-4">
                 <p className="text-xs font-semibold uppercase text-drive-action">Thông tin liên hệ</p>
@@ -269,7 +290,7 @@ export function HomePage() {
 
       <section id="about" className="scroll-mt-24">
         <div className="grid items-center gap-8 lg:grid-cols-[1fr_1fr]">
-          <img className="h-full min-h-80 rounded-drive object-cover shadow-drive-card" src={brandScooterImage} alt="DriveGo scooter" />
+          <img className="h-full min-h-80 rounded-drive object-cover shadow-drive-card" src={motorbikeRowImage} alt="Dàn xe thực hành DriveGo" />
           <div>
             <p className="text-sm font-semibold uppercase text-drive-action">Về chúng tôi</p>
             <h2 className="mt-2 text-3xl font-bold text-white">Nền tảng học lái xe thông minh cho trung tâm và học viên</h2>
