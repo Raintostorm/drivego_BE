@@ -2,23 +2,30 @@ import { createContext, useContext, useEffect, useState } from "react"
 
 const ThemeContext = createContext(null)
 
+function normalizeTheme(value) {
+  if (value === "day" || value === "light") return "day"
+  return "night"
+}
+
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(() => {
-    return localStorage.getItem("theme") || "dark"
+    return normalizeTheme(localStorage.getItem("theme"))
   })
 
   useEffect(() => {
     const root = document.documentElement
-    if (theme === "light") {
+    if (theme === "day") {
       root.classList.add("light")
+      root.dataset.theme = "day"
     } else {
       root.classList.remove("light")
+      root.dataset.theme = "night"
     }
     localStorage.setItem("theme", theme)
   }, [theme])
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"))
+    setTheme((prev) => (prev === "night" ? "day" : "night"))
   }
 
   return (

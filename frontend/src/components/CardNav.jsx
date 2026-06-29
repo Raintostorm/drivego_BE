@@ -16,6 +16,7 @@ import { useTheme } from "../context/ThemeContext.jsx"
  */
 export function CardNav({ items, cta, secondaryCta = null, homeTone = false, isOpen, onToggle, onClose }) {
   const { theme, toggleTheme } = useTheme()
+  const nextThemeLabel = theme === "night" ? "Day" : "Night"
 
   return (
     <header
@@ -46,13 +47,15 @@ export function CardNav({ items, cta, secondaryCta = null, homeTone = false, isO
             <button
               onClick={toggleTheme}
               className="drive-theme-toggle"
-              aria-label={theme === "dark" ? "Chuyển sang chế độ sáng" : "Chuyển sang chế độ tối"}
+              aria-label={`Chuyển sang chế độ ${nextThemeLabel}`}
+              title={`Switch to ${nextThemeLabel}`}
               type="button"
             >
               <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10" />
                 <path d="M12 18a6 6 0 1 0 0-12v12z" fill="currentColor" />
               </svg>
+              <span>{theme === "night" ? "Night" : "Day"}</span>
             </button>
             {secondaryCta ? (
               <Link className="drive-card-nav__login" to={secondaryCta.href} onClick={onClose}>
