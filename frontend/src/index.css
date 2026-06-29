@@ -896,21 +896,21 @@ a:hover .pressure-brand__char {
 }
 
 .light {
-  --color-drive-canvas: #ffffff;
-  --color-drive-surface: rgb(245 245 245 / 0.95);
-  --color-drive-panel: #f5f5f5;
-  --color-drive-sidebar: #fafafa;
-  --color-drive-elevated: #ededed;
-  --color-drive-border: #e0e0e0;
-  --color-drive-border-soft: #f0f0f0;
-  --color-drive-accent: #000000;
+  --color-drive-canvas: #f6f7f8;
+  --color-drive-surface: rgb(255 255 255 / 0.96);
+  --color-drive-panel: #ffffff;
+  --color-drive-sidebar: #ffffff;
+  --color-drive-elevated: #f2f3f5;
+  --color-drive-border: #d8dde3;
+  --color-drive-border-soft: #e8ebef;
+  --color-drive-accent: #101113;
   --color-drive-accent-contrast: #ffffff;
-  --color-drive-action: #000000;
+  --color-drive-action: #101113;
   --color-drive-action-contrast: #ffffff;
-  --color-drive-text: #171717;
-  --color-drive-muted: #737373;
-  --color-drive-placeholder: #a3a3a3;
-  --color-drive-label: #404040;
+  --color-drive-text: #111827;
+  --color-drive-muted: #5f6875;
+  --color-drive-placeholder: #8b95a1;
+  --color-drive-label: #374151;
   --shadow-drive-card: 0 25px 50px -12px rgb(0 0 0 / 0.08);
   --shadow-drive-glow: 0 0 10px rgb(0 0 0 / 0.02);
   --shadow-drive-action: 0 0 7.5px rgb(0 0 0 / 0.05);
@@ -925,9 +925,28 @@ a:hover .pressure-brand__char {
 
 .light body {
   background:
-    radial-gradient(circle at 15% 0%, rgb(0 0 0 / 0.02), transparent 40%),
-    radial-gradient(circle at 85% 100%, rgb(0 0 0 / 0.015), transparent 40%),
+    radial-gradient(circle at 15% 0%, rgb(0 0 0 / 0.035), transparent 40%),
+    radial-gradient(circle at 85% 100%, rgb(0 0 0 / 0.025), transparent 40%),
     var(--color-drive-canvas);
+}
+
+.light .text-white,
+.light .text-white\/70 {
+  color: var(--color-drive-text) !important;
+}
+
+.light .hover\:text-white:hover {
+  color: var(--color-drive-text) !important;
+}
+
+.light .bg-black {
+  background-color: #111827 !important;
+}
+
+.light .bg-drive-panel,
+.light .bg-drive-sidebar,
+.light .bg-drive-elevated {
+  color: var(--color-drive-text);
 }
 
 .light .dither-bg {
@@ -1010,6 +1029,12 @@ a:hover .pressure-brand__char {
   border-color: rgb(0 0 0 / 0.1);
 }
 
+.light .brand-logo-scooter,
+.light .drive-card-nav__logo img,
+.light aside img {
+  filter: drop-shadow(0 10px 18px rgb(0 0 0 / 0.12));
+}
+
 .light .drive-theme-switch button:hover {
   background: rgb(0 0 0 / 0.05);
 }
@@ -1055,7 +1080,7 @@ a:hover .pressure-brand__char {
 }
 
 .light .pressure-brand {
-  color: #000000;
+  color: var(--color-drive-text);
 }
 
 .light a:hover .pressure-brand__char {
@@ -1064,12 +1089,52 @@ a:hover .pressure-brand__char {
 }
 
 .light .home-dither-hero {
-  --home-ink: rgb(247 247 242);
-  --home-muted: rgb(190 190 181);
+  --home-ink: rgb(17 24 39);
+  --home-muted: rgb(70 78 89);
+  border-color: rgb(0 0 0 / 0.08);
+  background:
+    radial-gradient(circle at 50% 35%, rgb(255 255 255 / 0.92), transparent 46%),
+    linear-gradient(135deg, rgb(255 255 255), rgb(241 243 246) 52%, rgb(232 236 241));
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.9),
+    0 32px 80px rgb(15 23 42 / 0.1);
+}
+
+.light .home-dither-hero .dither-bg {
+  opacity: 0.18;
+  mix-blend-mode: multiply;
+}
+
+.light .home-hero-video {
+  opacity: 0.2;
+  filter: grayscale(0.1) saturate(0.9) contrast(0.9) brightness(1.18);
+}
+
+.light .home-dither-hero::after {
+  background:
+    radial-gradient(circle at 50% 42%, rgb(255 255 255 / 0.58), rgb(255 255 255 / 0.52) 52%, rgb(246 247 249 / 0.72)),
+    linear-gradient(90deg, rgb(246 247 249 / 0.84), rgb(255 255 255 / 0.34) 34% 62%, rgb(246 247 249 / 0.86));
+}
+
+.light .home-dither-hero h1 {
+  color: var(--home-ink) !important;
+  text-shadow: 0 18px 46px rgb(255 255 255 / 0.45);
+}
+
+.light .home-dither-hero p,
+.light .home-feature-card p {
+  color: var(--home-muted) !important;
+}
+
+.light .home-dither-hero > p:first-of-type {
+  border-color: rgb(0 0 0 / 0.08);
+  background: rgb(255 255 255 / 0.74);
+  color: rgb(55 65 81) !important;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.9);
 }
 
 .light .home-page-surface h2 {
-  color: #000000 !important;
+  color: var(--color-drive-text) !important;
 }
 
 .light .home-page-surface::before {
@@ -1078,7 +1143,7 @@ a:hover .pressure-brand__char {
     linear-gradient(180deg, rgb(245 245 245 / 0.48), rgb(240 240 240 / 0.18) 28rem, transparent 64rem);
 }
 .light .home-dither-hero h1 span.bg-clip-text {
-  background-image: linear-gradient(90deg, rgb(23 23 23), rgb(85 85 85));
+  background-image: linear-gradient(90deg, rgb(17 24 39), rgb(95 104 116));
 }
 .light .home-primary-cta {
   background: #000000 !important;
@@ -1104,6 +1169,8 @@ a:hover .pressure-brand__char {
 .light .home-preview-card,
 .light .home-feature-card,
 .light .home-plan-card {
+  border-color: rgb(0 0 0 / 0.08) !important;
+  background: rgb(255 255 255 / 0.88) !important;
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.8),
     0 24px 54px rgb(0 0 0 / 0.04);

@@ -3,6 +3,7 @@ import { InjectRepository } from "@nestjs/typeorm"
 import { Repository } from "typeorm"
 import { LicenseClass } from "../../entities/license-class.entity"
 import { StudyChapter } from "../../entities/study-chapter.entity"
+import { SubscriptionPlan } from "../../entities/subscription-plan.entity"
 
 @Injectable()
 export class AdminContentService {
@@ -11,10 +12,21 @@ export class AdminContentService {
     private readonly chaptersRepo: Repository<StudyChapter>,
     @InjectRepository(LicenseClass)
     private readonly classesRepo: Repository<LicenseClass>,
+    @InjectRepository(SubscriptionPlan)
+    private readonly plansRepo: Repository<SubscriptionPlan>,
   ) {}
 
   async listLicenseClasses() {
     return this.classesRepo.find({ order: { code: "ASC" } })
+  }
+
+  async listPricing() {
+    const [licenseClasses, subscriptionPlans] = await Promise.all([
+      this.classesRepo.find({ order: { code: "ASC" } }),
+      this.plansRepo.find({ order: { priceMonthly: "ASC" } }),
+    ])
+
+    return { licenseClasses, subscriptionPlans }
   }
 
   async listChapters(licenseClassCode: string) {

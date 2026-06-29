@@ -12,6 +12,7 @@ import { ExamRegistration, ScheduleSlot, TrainingCenter } from "../../entities/s
 import { SessionAttendance } from "../../entities/session-attendance.entity"
 import { StudentProfile } from "../../entities/student-profile.entity"
 import { StudyChapter } from "../../entities/study-chapter.entity"
+import { SubscriptionPlan } from "../../entities/subscription-plan.entity"
 import { User } from "../../entities/user.entity"
 import { ApplicationsModule } from "../applications/applications.module"
 import { AuthModule } from "../auth/auth.module"
@@ -56,6 +57,7 @@ import { AdminUsersService } from "./admin-users.service"
       Payment,
       LicenseClass,
       StudyChapter,
+      SubscriptionPlan,
       ClassSession,
       SessionAttendance,
     ]),

@@ -5,6 +5,7 @@ import { JwtAuthGuard } from "../auth/jwt-auth.guard"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Repository } from "typeorm"
 import { LicenseClass } from "../../entities/license-class.entity"
+import { SubscriptionPlan } from "../../entities/subscription-plan.entity"
 import { AdminContentService } from "./admin-content.service"
 
 @Controller("admin")
@@ -14,12 +15,20 @@ export class AdminContentController {
     private readonly service: AdminContentService,
     @InjectRepository(LicenseClass)
     private readonly classesRepo: Repository<LicenseClass>,
+    @InjectRepository(SubscriptionPlan)
+    private readonly plansRepo: Repository<SubscriptionPlan>,
   ) {}
 
   @Get("license-classes/manage")
   @Roles("center_admin", "system_admin")
   listClasses() {
     return this.service.listLicenseClasses()
+  }
+
+  @Get("pricing/manage")
+  @Roles("center_admin", "system_admin")
+  pricing() {
+    return this.service.listPricing()
   }
 
   @Patch("license-classes/:code")
@@ -35,6 +44,20 @@ export class AdminContentController {
     if (body.description !== undefined) lc.description = body.description
     await this.classesRepo.save(lc)
     return lc
+  }
+
+  @Patch("subscription-plans/:code")
+  @Roles("system_admin")
+  async patchSubscriptionPlan(
+    @Param("code") code: string,
+    @Body() body: { priceMonthly?: number; features?: string[] },
+  ) {
+    const plan = await this.plansRepo.findOne({ where: { code } })
+    if (!plan) return { error: "not found" }
+    if (body.priceMonthly !== undefined) plan.priceMonthly = String(body.priceMonthly)
+    if (Array.isArray(body.features)) plan.features = body.features
+    await this.plansRepo.save(plan)
+    return plan
   }
 
   @Get("chapters/by-class/:code")
