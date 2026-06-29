@@ -8,6 +8,13 @@ import {
 import { CourseEnrollment } from "../entities/course-enrollment.entity"
 import { LicenseClass } from "../entities/license-class.entity"
 
+const FALLBACK_ENROLLMENT_FEES: Record<string, number> = {
+  A1: 755000,
+  A2: 1800000,
+  B1: 12000000,
+  B2: 15000000,
+}
+
 @Injectable()
 export class EnrollmentService {
   constructor(
@@ -52,8 +59,9 @@ export class EnrollmentService {
   async getEnrollmentFee(licenseClass: string) {
     const code = this.normalizeClass(licenseClass)
     const row = await this.licenseRepo.findOne({ where: { code } })
-    const fee = Number(row?.enrollmentFee ?? 5000)
-    return fee > 0 ? fee : 5000
+    const fallback = FALLBACK_ENROLLMENT_FEES[code] ?? FALLBACK_ENROLLMENT_FEES[DEFAULT_LICENSE_CLASS]
+    const fee = Number(row?.enrollmentFee ?? fallback)
+    return fee > 0 ? fee : fallback
   }
 
   async activateFromPayment(userId: string, licenseClass: string, paymentId: string) {

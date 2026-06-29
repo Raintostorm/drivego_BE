@@ -22,13 +22,20 @@ export class PlansService {
       return `${n.toLocaleString("vi-VN")}đ`
     }
 
+    const fallbackFees: Record<string, number> = {
+      A1: 755000,
+      A2: 1800000,
+      B1: 12000000,
+      B2: 15000000,
+    }
+
     return {
       licenseClasses: licenses.map((l) => ({
         code: l.code,
         price: formatPrice(l.price ?? 0),
         priceRaw: Number(l.price ?? 0),
-        enrollmentFee: formatPrice(l.enrollmentFee ?? 5000),
-        enrollmentFeeRaw: Number(l.enrollmentFee ?? 5000),
+        enrollmentFee: formatPrice(l.enrollmentFee ?? fallbackFees[l.code] ?? 0),
+        enrollmentFeeRaw: Number(l.enrollmentFee ?? fallbackFees[l.code] ?? 0),
         description: l.description,
         featured: l.code === "B2",
         features: this.defaultFeatures(l.code),

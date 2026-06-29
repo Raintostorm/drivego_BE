@@ -134,7 +134,8 @@ export function EnrollPage() {
           Đăng ký khóa <span className="text-drive-action">{licenseClass}</span>
         </h1>
         <p className="mt-2 text-drive-muted">
-          Phí đăng ký thử nghiệm ~5.000đ (SePay). Sau khi thanh toán, mở khóa học và thi thử.
+          Thanh toán học phí qua SePay. Sau khi giao dịch được xác nhận, khóa học và thi thử sẽ mở
+          cho hạng bằng bạn chọn.
         </p>
       </header>
 

@@ -17,9 +17,10 @@ export class SepayConfigService {
 
   getBankInfo() {
     return {
-      bankName: this.config.get<string>("SEPAY_BANK_NAME")?.trim() ?? "",
-      accountNumber: this.config.get<string>("SEPAY_BANK_ACCOUNT")?.trim() ?? "",
-      accountHolder: this.config.get<string>("SEPAY_ACCOUNT_HOLDER")?.trim() ?? "",
+      bankName: this.config.get<string>("SEPAY_BANK_NAME")?.trim() || "MBBank",
+      accountNumber: this.config.get<string>("SEPAY_BANK_ACCOUNT")?.trim() || "0976693436",
+      accountHolder:
+        this.config.get<string>("SEPAY_ACCOUNT_HOLDER")?.trim() || "VU HA GIA BAO",
     }
   }
 

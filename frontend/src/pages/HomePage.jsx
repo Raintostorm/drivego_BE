@@ -20,6 +20,14 @@ import DecryptedText from "../components/DecryptedText.jsx"
 
 export function HomePage() {
   const heroVideoRef = useRef(null)
+  const centerInfo = {
+    name: "Trung tâm Đào tạo Lái xe DriveGo Sài Gòn",
+    address: "Khu thực hành Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh",
+    phone: "0976 693 436",
+    email: "tuvan@drivego.space",
+    hours: "Thứ 2 - Chủ nhật, 07:30 - 20:30",
+    bank: "MBBank 0976693436 - VU HA GIA BAO",
+  }
   const features = [
     { title: t("pages.home.feature1"), desc: "Video bài giảng và mô phỏng tình huống trên mọi thiết bị." },
     { title: t("pages.home.feature2"), desc: "Ngân hàng 600 câu hỏi và đề thi cập nhật theo quy định mới." },
@@ -239,9 +247,12 @@ export function HomePage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4 rounded-drive bg-drive-panel/90 p-4">
                 <p className="text-xs font-semibold uppercase text-drive-action">Thông tin liên hệ</p>
-                <h2 className="mt-1 text-xl font-bold text-white">DriveGo Training Hub</h2>
+                <h2 className="mt-1 text-xl font-bold text-white">{centerInfo.name}</h2>
                 <p className="mt-2 text-sm text-drive-muted">
-                  Tư vấn khóa học, hồ sơ, lịch thi và lộ trình ôn tập cho từng hạng bằng.
+                  {centerInfo.address}
+                </p>
+                <p className="mt-2 text-xs text-drive-muted">
+                  Hotline {centerInfo.phone} · {centerInfo.hours}
                 </p>
               </div>
             </div>
@@ -253,6 +264,17 @@ export function HomePage() {
               <p className="mt-3 text-sm leading-relaxed text-drive-muted">
                 Để lại thông tin, đội ngũ DriveGo sẽ hỗ trợ chọn hạng học, cách nộp hồ sơ và lịch học phù hợp.
               </p>
+              <div className="mt-4 grid gap-2 rounded-drive border border-drive-border-soft bg-drive-sidebar p-4 text-sm text-drive-muted">
+                <p>
+                  <span className="font-semibold text-drive-text">Hotline:</span> {centerInfo.phone}
+                </p>
+                <p>
+                  <span className="font-semibold text-drive-text">Email:</span> {centerInfo.email}
+                </p>
+                <p>
+                  <span className="font-semibold text-drive-text">Thanh toán:</span> {centerInfo.bank}
+                </p>
+              </div>
             </div>
             <form className="grid gap-3 md:grid-cols-2">
               <input className="rounded-drive border border-drive-border bg-drive-elevated px-4 py-3 text-sm text-drive-text outline-none focus:ring-2 focus:ring-drive-accent" placeholder="Họ tên của bạn" />
@@ -295,8 +317,9 @@ export function HomePage() {
             <p className="text-sm font-semibold uppercase text-drive-action">Về chúng tôi</p>
             <h2 className="mt-2 text-3xl font-bold text-white">Nền tảng học lái xe thông minh cho trung tâm và học viên</h2>
             <p className="mt-4 text-sm leading-relaxed text-drive-muted">
-              DriveGo kết hợp quản lý đào tạo, luyện đề, lịch học, hồ sơ và thanh toán trong một trải nghiệm gọn.
-              Học viên biết mình đang ở đâu trong lộ trình; admin nắm được học phí, lớp học và tiến độ vận hành.
+              {centerInfo.name} kết hợp quản lý đào tạo, luyện đề, lịch học, hồ sơ và thanh toán trong một
+              trải nghiệm gọn. Học viên biết mình đang ở đâu trong lộ trình; admin nắm được học phí,
+              lớp học và tiến độ vận hành.
             </p>
             <div className="mt-6 grid gap-3">
               {["Quy trình học rõ ràng", "Theo dõi tiến độ từng hạng", "Hỗ trợ học viên qua AI và thông báo"].map((item) => (

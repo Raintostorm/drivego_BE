@@ -11,7 +11,7 @@ export class LicenseClass {
   @Column({ type: "numeric", precision: 12, scale: 2, nullable: true })
   price?: string | null
 
-  @Column({ name: "enrollment_fee", type: "numeric", precision: 12, scale: 2, default: 5000 })
+  @Column({ name: "enrollment_fee", type: "numeric", precision: 12, scale: 2, default: 755000 })
   enrollmentFee!: string
 
   @Column({ type: "text", nullable: true })

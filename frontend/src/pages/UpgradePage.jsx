@@ -207,8 +207,8 @@ export function UpgradePage() {
     return <PremiumMemberView user={user} />
   }
 
-  const premiumPrice = plans.premium?.priceRaw ?? 5000
-  const premiumLabel = plans.premium?.priceMonthly ?? "5.000đ/tháng"
+  const premiumPrice = plans.premium?.priceRaw ?? 99000
+  const premiumLabel = plans.premium?.priceMonthly ?? "99.000đ/tháng"
 
   return (
     <section className="space-y-8">

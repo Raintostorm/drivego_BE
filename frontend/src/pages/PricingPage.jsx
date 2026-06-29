@@ -75,7 +75,7 @@ export function PricingPage() {
                 )}
               </div>
               <p className="mt-2 text-3xl font-bold text-white">
-                {plan.enrollmentFee ?? "5.000đ"}
+                {plan.enrollmentFee ?? "755.000đ"}
               </p>
               <p className="text-xs text-drive-muted">Phí đăng ký khóa (thử SePay)</p>
               <p className="mt-1 text-sm text-drive-muted line-through opacity-60">

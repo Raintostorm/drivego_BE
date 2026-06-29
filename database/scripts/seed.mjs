@@ -130,10 +130,10 @@ async function seed() {
        questions_per_exam, exam_duration_minutes, pass_min_correct,
        bank_question_count, papers_count
      ) VALUES
-     ($1, 'A1', 799000, 5000, 'Bằng A1 — xe máy', 25, 19, 21, 250, 10),
-     ($2, 'A2', 1500000, 5000, 'Bằng A2', 25, 19, 21, 250, 10),
-     ($3, 'B1', 12000000, 5000, 'Bằng B1', 30, 22, 26, 600, 20),
-     ($4, 'B2', 15000000, 5000, 'Bằng B2 — phổ biến nhất', 30, 22, 26, 600, 20)
+     ($1, 'A1', 755000, 755000, 'Bằng A1 — xe máy dưới 175cc, hồ sơ gọn, lịch học linh hoạt', 25, 19, 21, 250, 10),
+     ($2, 'A2', 1800000, 1800000, 'Bằng A2 — xe mô tô phân khối lớn, ôn lý thuyết và hướng dẫn thực hành', 25, 19, 21, 250, 10),
+     ($3, 'B1', 12000000, 12000000, 'Bằng B1 — xe số tự động, phù hợp học viên lái gia đình', 30, 22, 26, 600, 20),
+     ($4, 'B2', 15000000, 15000000, 'Bằng B2 — phổ biến nhất, học lái xe số sàn và ôn thi sát hạch', 30, 22, 26, 600, 20)
      ON CONFLICT (code) DO UPDATE SET
        price = EXCLUDED.price,
        enrollment_fee = EXCLUDED.enrollment_fee,
@@ -208,7 +208,7 @@ async function seed() {
   await client.query(
     `INSERT INTO subscription_plans (id, code, price_monthly, features) VALUES
      ($1, 'free', 0, '["10 đề thi cơ bản","Lưu kết quả gần nhất"]'::jsonb),
-     ($2, 'premium', 5000, '["Thi không giới hạn","AI Chat","Hỗ trợ 24/7","Video lý thuyết"]'::jsonb)
+     ($2, 'premium', 99000, '["Thi thử không giới hạn","AI Chat giải thích câu sai","Thống kê điểm yếu","Ưu tiên hỗ trợ học viên"]'::jsonb)
      ON CONFLICT (code) DO UPDATE SET price_monthly = EXCLUDED.price_monthly`,
     [ID.planFree, ID.planPremium],
   )
