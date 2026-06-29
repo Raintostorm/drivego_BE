@@ -8,6 +8,7 @@ export const adminNavItems = [
   { to: "/admin/schedules/slots", labelKey: "nav.adminSlots" },
   { to: "/admin/class-sessions", labelKey: "nav.adminClassSessions" },
   { to: "/admin/courses", labelKey: "nav.adminCourses" },
+  { to: "/admin/site-content", labelKey: "nav.adminSiteContent" },
   { to: "/admin/health", labelKey: "nav.adminHealth" },
   { to: "/admin/centers", labelKey: "nav.adminCenters", systemOnly: true },
 ]

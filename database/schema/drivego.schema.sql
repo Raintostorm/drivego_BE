@@ -203,3 +203,9 @@ CREATE TABLE IF NOT EXISTS lookup_records (
   result_status VARCHAR(64),
   updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
+
+CREATE TABLE IF NOT EXISTS site_content (
+  key VARCHAR(64) PRIMARY KEY,
+  value JSONB NOT NULL,
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);

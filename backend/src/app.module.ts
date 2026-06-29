@@ -17,6 +17,7 @@ import { NotificationsModule } from "./modules/notifications/notifications.modul
 import { PaymentsModule } from "./modules/payments/payments.module"
 import { PlansModule } from "./modules/plans/plans.module"
 import { SchedulesModule } from "./modules/schedules/schedules.module"
+import { SiteContentModule } from "./modules/site-content/site-content.module"
 import { StudyModule } from "./modules/study/study.module"
 import { SessionsModule } from "./modules/sessions/sessions.module"
 import { UsersModule } from "./modules/users/users.module"
@@ -44,6 +45,7 @@ import { UsersModule } from "./modules/users/users.module"
     LookupModule,
     ChatModule,
     SessionsModule,
+    SiteContentModule,
   ],
 })
 export class AppModule {}

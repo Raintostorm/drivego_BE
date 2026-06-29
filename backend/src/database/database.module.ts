@@ -21,6 +21,7 @@ import { SessionAttendance } from "../entities/session-attendance.entity"
 import { ExamRegistration, ScheduleSlot, TrainingCenter } from "../entities/schedule-slot.entity"
 import { Payment } from "../entities/payment.entity"
 import { PasswordResetToken } from "../entities/password-reset-token.entity"
+import { SiteContent } from "../entities/site-content.entity"
 import { StudentProfile } from "../entities/student-profile.entity"
 import { StudyChapter } from "../entities/study-chapter.entity"
 import { StudyProgress } from "../entities/study-progress.entity"
@@ -68,6 +69,7 @@ import { User } from "../entities/user.entity"
             BankQuestion,
             LicenseQuestionPool,
             LicenseExamStructure,
+            SiteContent,
           ],
           synchronize: false,
         }

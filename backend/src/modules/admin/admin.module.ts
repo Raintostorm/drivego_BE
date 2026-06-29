@@ -10,6 +10,7 @@ import { LicenseClass } from "../../entities/license-class.entity"
 import { Payment } from "../../entities/payment.entity"
 import { ExamRegistration, ScheduleSlot, TrainingCenter } from "../../entities/schedule-slot.entity"
 import { SessionAttendance } from "../../entities/session-attendance.entity"
+import { SiteContent } from "../../entities/site-content.entity"
 import { StudentProfile } from "../../entities/student-profile.entity"
 import { StudyChapter } from "../../entities/study-chapter.entity"
 import { SubscriptionPlan } from "../../entities/subscription-plan.entity"
@@ -18,6 +19,7 @@ import { ApplicationsModule } from "../applications/applications.module"
 import { AuthModule } from "../auth/auth.module"
 import { NotificationsModule } from "../notifications/notifications.module"
 import { PaymentsModule } from "../payments/payments.module"
+import { SiteContentModule } from "../site-content/site-content.module"
 import { AdminApplicationsController } from "./admin-applications.controller"
 import { AdminApplicationsService } from "./admin-applications.service"
 import { AdminCentersController } from "./admin-centers.controller"
@@ -60,11 +62,13 @@ import { AdminUsersService } from "./admin-users.service"
       SubscriptionPlan,
       ClassSession,
       SessionAttendance,
+      SiteContent,
     ]),
     AuthModule,
     ApplicationsModule,
     NotificationsModule,
     PaymentsModule,
+    SiteContentModule,
   ],
   controllers: [
     AdminApplicationsController,

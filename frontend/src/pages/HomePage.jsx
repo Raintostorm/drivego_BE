@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import practiceLineImage from "../assets/boanh/z7907357627838_b3adcc5190caaa267c02a800d9949a33.jpg"
 import practiceClassImage from "../assets/boanh/z7907357639212_bdbc6e4d16caefc28da3f32243cc699f.jpg"
@@ -15,19 +15,96 @@ import motorbikeImage from "../assets/motorbike.png"
 import scooterVideo from "../assets/scooter-urban-road.mp4"
 import { DitherBackground } from "../components/DitherBackground.jsx"
 import { UiCard } from "../components/UiCard.jsx"
+import { apiFetch } from "../lib/api.js"
 import { t } from "../lib/strings.js"
 import DecryptedText from "../components/DecryptedText.jsx"
 
-export function HomePage() {
-  const heroVideoRef = useRef(null)
-  const centerInfo = {
+const IMAGE_MAP = {
+  practiceLine: practiceLineImage,
+  practiceClass: practiceClassImage,
+  studentBriefing: studentBriefingImage,
+  bikeYard: bikeYardImage,
+  motorbikeRow: motorbikeRowImage,
+  groupClass: groupClassImage,
+  theoryClass: theoryClassImage,
+  instructorBike: instructorBikeImage,
+  emptyYard: emptyYardImage,
+  scooterGarage: scooterGarageImage,
+  drivingTrack: drivingTrackImage,
+}
+
+const DEFAULT_HOME_CONTENT = {
+  center: {
     name: "Trung tâm Đào tạo Lái xe DriveGo Sài Gòn",
     address: "Khu thực hành Linh Trung, TP. Thủ Đức, TP. Hồ Chí Minh",
     phone: "0976 693 436",
     email: "tuvan@drivego.space",
     hours: "Thứ 2 - Chủ nhật, 07:30 - 20:30",
     bank: "MBBank 0976693436 - VU HA GIA BAO",
-  }
+  },
+  services: [
+    {
+      title: "Đăng ký học lái xe máy A1",
+      price: "từ 755.000đ",
+      desc: "Lộ trình học gọn, phù hợp người mới bắt đầu và cần hoàn thiện hồ sơ thi sát hạch.",
+      imageKey: "bikeYard",
+    },
+    {
+      title: "Khóa học ô tô B1/B2",
+      price: "từ 15.000.000đ",
+      desc: "Quản lý lịch học, tiến độ lý thuyết, thực hành và luyện đề trên cùng một tài khoản DriveGo.",
+      imageKey: "drivingTrack",
+    },
+  ],
+  highlights: [
+    "Hồ sơ, học phí và tiến độ được hiển thị rõ ràng cho từng hạng A1, A2, B1, B2.",
+    "Bộ đề luyện thi tách riêng, không pha vào database vận hành thường ngày.",
+    "AI Chat hỗ trợ giải thích luật, biển báo và mẹo ôn tập theo nhu cầu học viên.",
+    "Theo dõi lịch học, lịch thi, thông báo và trạng thái premium trong dashboard.",
+  ],
+  gallery: [
+    { imageKey: "practiceLine", alt: "Sân thực hành xe máy DriveGo" },
+    { imageKey: "practiceClass", alt: "Khu vực hướng dẫn thực hành" },
+    { imageKey: "studentBriefing", alt: "Buổi phổ biến trước giờ học" },
+    { imageKey: "bikeYard", alt: "Khu luyện sa hình xe máy" },
+    { imageKey: "motorbikeRow", alt: "Dàn xe thực hành" },
+    { imageKey: "groupClass", alt: "Lớp học tập trung" },
+    { imageKey: "theoryClass", alt: "Phòng học lý thuyết" },
+    { imageKey: "instructorBike", alt: "Xe hướng dẫn thực hành" },
+    { imageKey: "emptyYard", alt: "Sân tập lái" },
+    { imageKey: "scooterGarage", alt: "Khu để xe học viên" },
+    { imageKey: "drivingTrack", alt: "Đường luyện tập sát hạch" },
+  ],
+  news: [
+    {
+      title: "Cập nhật quy trình đăng ký GPLX trực tuyến",
+      date: "30 Tháng 06",
+      desc: "Học viên có thể chuẩn bị thông tin cá nhân, hồ sơ và chọn hạng học ngay trên DriveGo.",
+      imageKey: "theoryClass",
+    },
+    {
+      title: "Mẹo ôn 600 câu lý thuyết hiệu quả",
+      date: "27 Tháng 06",
+      desc: "Tập trung câu điểm liệt, nhóm biển báo dễ nhầm và luyện đề ngẫu nhiên theo hạng bằng.",
+      imageKey: "groupClass",
+    },
+    {
+      title: "Theo dõi học phí và premium trong admin",
+      date: "22 Tháng 06",
+      desc: "Admin có thể cập nhật học phí theo từng hạng và gói premium để học viên xem đúng giá.",
+      imageKey: "instructorBike",
+    },
+  ],
+}
+
+function imageByKey(key, fallback = practiceClassImage) {
+  return IMAGE_MAP[key] || fallback
+}
+
+export function HomePage() {
+  const heroVideoRef = useRef(null)
+  const [siteContent, setSiteContent] = useState(DEFAULT_HOME_CONTENT)
+  const centerInfo = siteContent.center
   const features = [
     { title: t("pages.home.feature1"), desc: "Video bài giảng và mô phỏng tình huống trên mọi thiết bị." },
     { title: t("pages.home.feature2"), desc: "Ngân hàng 600 câu hỏi và đề thi cập nhật theo quy định mới." },
@@ -42,59 +119,10 @@ export function HomePage() {
     { href: "#news", label: "Tin tức" },
     { href: "#contact", label: "Liên hệ" },
   ]
-  const services = [
-    {
-      title: "Đăng ký học lái xe máy A1",
-      price: "từ 755.000đ",
-      desc: "Lộ trình học gọn, phù hợp người mới bắt đầu và cần hoàn thiện hồ sơ thi sát hạch.",
-      image: bikeYardImage,
-    },
-    {
-      title: "Khóa học ô tô B1/B2",
-      price: "từ 15.000.000đ",
-      desc: "Quản lý lịch học, tiến độ lý thuyết, thực hành và luyện đề trên cùng một tài khoản DriveGo.",
-      image: drivingTrackImage,
-    },
-  ]
-  const programHighlights = [
-    "Hồ sơ, học phí và tiến độ được hiển thị rõ ràng cho từng hạng A1, A2, B1, B2.",
-    "Bộ đề luyện thi tách riêng, không pha vào database vận hành thường ngày.",
-    "AI Chat hỗ trợ giải thích luật, biển báo và mẹo ôn tập theo nhu cầu học viên.",
-    "Theo dõi lịch học, lịch thi, thông báo và trạng thái premium trong dashboard.",
-  ]
-  const gallery = [
-    practiceLineImage,
-    practiceClassImage,
-    studentBriefingImage,
-    bikeYardImage,
-    motorbikeRowImage,
-    groupClassImage,
-    theoryClassImage,
-    instructorBikeImage,
-    emptyYardImage,
-    scooterGarageImage,
-    drivingTrackImage,
-  ]
-  const news = [
-    {
-      title: "Cập nhật quy trình đăng ký GPLX trực tuyến",
-      date: "30 Tháng 06",
-      desc: "Học viên có thể chuẩn bị thông tin cá nhân, hồ sơ và chọn hạng học ngay trên DriveGo.",
-      image: theoryClassImage,
-    },
-    {
-      title: "Mẹo ôn 600 câu lý thuyết hiệu quả",
-      date: "27 Tháng 06",
-      desc: "Tập trung câu điểm liệt, nhóm biển báo dễ nhầm và luyện đề ngẫu nhiên theo hạng bằng.",
-      image: groupClassImage,
-    },
-    {
-      title: "Theo dõi học phí và premium trong admin",
-      date: "22 Tháng 06",
-      desc: "Admin có thể cập nhật học phí theo từng hạng và gói premium để học viên xem đúng giá.",
-      image: instructorBikeImage,
-    },
-  ]
+  const services = siteContent.services
+  const programHighlights = siteContent.highlights
+  const gallery = siteContent.gallery
+  const news = siteContent.news
 
   useEffect(() => {
     const video = heroVideoRef.current
@@ -102,6 +130,25 @@ export function HomePage() {
     video.play().catch(() => {
       // The poster remains visible if the browser blocks autoplay.
     })
+  }, [])
+
+  useEffect(() => {
+    let active = true
+    apiFetch("/site-content/home")
+      .then((data) => {
+        if (!active) return
+        setSiteContent({
+          ...DEFAULT_HOME_CONTENT,
+          ...data,
+          center: { ...DEFAULT_HOME_CONTENT.center, ...(data?.center || {}) },
+        })
+      })
+      .catch(() => {
+        if (active) setSiteContent(DEFAULT_HOME_CONTENT)
+      })
+    return () => {
+      active = false
+    }
   }, [])
 
   return (
@@ -296,7 +343,7 @@ export function HomePage() {
           {services.map((service) => (
             <UiCard key={service.title} variant="panel" padding="none" as="article" className="overflow-hidden">
               <div className="relative aspect-video bg-drive-elevated">
-                <img className="h-full w-full object-cover" src={service.image} alt={service.title} />
+                <img className="h-full w-full object-cover" src={imageByKey(service.imageKey, bikeYardImage)} alt={service.title} />
                 <span className="absolute bottom-4 left-4 rounded-drive-pill bg-drive-action px-4 py-2 text-sm font-bold text-drive-action-contrast">
                   {service.price}
                 </span>
@@ -365,12 +412,12 @@ export function HomePage() {
         <p className="text-center text-sm font-semibold uppercase text-drive-action">Hình ảnh thực tế</p>
         <h2 className="mt-2 text-center text-3xl font-bold text-white">Không gian học tập và luyện thi</h2>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {gallery.map((image, index) => (
+          {gallery.map((item, index) => (
             <img
-              key={`${image}-${index}`}
+              key={`${item.imageKey}-${index}`}
               className="aspect-[4/3] rounded-drive border border-drive-border-soft object-cover shadow-drive-card"
-              src={image}
-              alt={`Hình ảnh DriveGo ${index + 1}`}
+              src={imageByKey(item.imageKey, practiceClassImage)}
+              alt={item.alt || `Hình ảnh DriveGo ${index + 1}`}
             />
           ))}
         </div>
@@ -382,7 +429,7 @@ export function HomePage() {
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {news.map((item) => (
             <UiCard key={item.title} variant="panel" padding="none" as="article" className="overflow-hidden">
-              <img className="aspect-video w-full object-cover" src={item.image} alt={item.title} />
+              <img className="aspect-video w-full object-cover" src={imageByKey(item.imageKey, theoryClassImage)} alt={item.title} />
               <div className="p-5">
                 <p className="text-xs text-drive-muted">{item.date}</p>
                 <h3 className="mt-2 font-bold text-white">{item.title}</h3>

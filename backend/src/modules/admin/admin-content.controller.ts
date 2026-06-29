@@ -31,6 +31,18 @@ export class AdminContentController {
     return this.service.listPricing()
   }
 
+  @Get("site-content/home")
+  @Roles("center_admin", "system_admin")
+  homeSiteContent() {
+    return this.service.getHomeSiteContent()
+  }
+
+  @Patch("site-content/home")
+  @Roles("system_admin")
+  patchHomeSiteContent(@Body() body: unknown) {
+    return this.service.patchHomeSiteContent(body)
+  }
+
   @Patch("license-classes/:code")
   @Roles("system_admin")
   async patchClass(

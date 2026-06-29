@@ -143,6 +143,18 @@ export async function fetchAdminPricing() {
   return apiFetch("/admin/pricing/manage", { auth: true })
 }
 
+export async function fetchAdminSiteContent() {
+  return apiFetch("/admin/site-content/home", { auth: true })
+}
+
+export async function patchAdminSiteContent(body) {
+  return apiFetch("/admin/site-content/home", {
+    method: "PATCH",
+    auth: true,
+    body: JSON.stringify(body),
+  })
+}
+
 export async function patchAdminLicenseClass(code, body) {
   return apiFetch(`/admin/license-classes/${code}`, {
     method: "PATCH",

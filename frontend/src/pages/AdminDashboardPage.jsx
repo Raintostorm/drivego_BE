@@ -16,6 +16,7 @@ const QUICK_LINKS = [
   { to: "/admin/schedules/slots", title: "Quản lý ca thi", desc: "Tạo ca lý thuyết / chạy thử." },
   { to: "/admin/class-sessions", title: "Buổi học & điểm danh", desc: "Lịch lớp và check-in học viên." },
   { to: "/admin/courses", title: "Nội dung khóa", desc: "Xem chương và học phí theo hạng.", systemOnly: false },
+  { to: "/admin/site-content", title: "Nội dung website", desc: "Chỉnh dữ liệu trang chủ đang kéo từ backend." },
   { to: "/admin/health", title: "Cấu hình hệ thống", desc: "Kiểm tra DB, Firebase, Resend, SePay và upload." },
 ]
 

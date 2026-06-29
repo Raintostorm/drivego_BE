@@ -36,6 +36,7 @@ export const vi = {
     adminClassSessions: "Buổi học & điểm danh",
     adminCourses: "Nội dung khóa",
     adminCoursesReadOnly: "Nội dung khóa (xem)",
+    adminSiteContent: "Nội dung website",
     adminHealth: "Cấu hình",
     adminCenters: "Trung tâm",
     features: "Tính năng",

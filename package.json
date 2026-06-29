@@ -31,6 +31,7 @@
     "migrate:password-reset": "node database/scripts/run-migration.mjs database/migrations/013_password_reset_tokens.sql",
     "migrate:bank": "node database/scripts/run-migration.mjs database/migrations/014_question_bank.sql",
     "migrate:exam-structure": "node database/scripts/run-migration.mjs database/migrations/015_exam_structure.sql",
+    "migrate:site-content": "node database/scripts/run-migration.mjs database/migrations/016_site_content.sql",
     "build:bank": "python database/scripts/build-bank.py",
     "seed:bank": "node database/scripts/seed-bank.mjs",
     "import:content": "node database/scripts/import-license-content.mjs",

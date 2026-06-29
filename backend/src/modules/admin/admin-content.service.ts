@@ -4,6 +4,7 @@ import { Repository } from "typeorm"
 import { LicenseClass } from "../../entities/license-class.entity"
 import { StudyChapter } from "../../entities/study-chapter.entity"
 import { SubscriptionPlan } from "../../entities/subscription-plan.entity"
+import { SiteContentService } from "../site-content/site-content.service"
 
 @Injectable()
 export class AdminContentService {
@@ -14,6 +15,7 @@ export class AdminContentService {
     private readonly classesRepo: Repository<LicenseClass>,
     @InjectRepository(SubscriptionPlan)
     private readonly plansRepo: Repository<SubscriptionPlan>,
+    private readonly siteContentService: SiteContentService,
   ) {}
 
   async listLicenseClasses() {
@@ -59,5 +61,13 @@ export class AdminContentService {
     if (dto.isPublished !== undefined) ch.isPublished = dto.isPublished
     await this.chaptersRepo.save(ch)
     return ch
+  }
+
+  async getHomeSiteContent() {
+    return this.siteContentService.getHomeContent()
+  }
+
+  async patchHomeSiteContent(value: unknown) {
+    return this.siteContentService.updateHomeContent(value)
   }
 }

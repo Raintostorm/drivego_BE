@@ -298,6 +298,16 @@ export const routeConfig = [
     ),
   },
   {
+    path: "/admin/site-content",
+    labelKey: "nav.adminSiteContent",
+    group: "admin",
+    layout: "admin",
+    LazyPage: lazyNamed(
+      () => import("./pages/AdminSiteContentPage.jsx"),
+      "AdminSiteContentPage",
+    ),
+  },
+  {
     path: "/admin/health",
     labelKey: "nav.adminHealth",
     group: "admin",
