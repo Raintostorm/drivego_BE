@@ -119,10 +119,10 @@ export function AiChatPage() {
           {messages.map((m, i) => (
             <div
               key={`${m.role}-${i}`}
-              className={`max-w-xl rounded-drive p-3 text-sm ${
+              className={`drive-chat-bubble max-w-xl rounded-drive p-3 text-sm ${
                 m.role === "user"
-                  ? "ml-auto bg-drive-accent text-drive-accent-contrast"
-                  : "border border-drive-border-soft bg-drive-sidebar text-drive-text"
+                  ? "drive-chat-bubble--user ml-auto"
+                  : "drive-chat-bubble--assistant border"
               }`}
             >
               {m.content}
