@@ -24,12 +24,12 @@ export function ThemeProvider({ children }) {
     localStorage.setItem("theme", theme)
   }, [theme])
 
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "night" ? "day" : "night"))
+  const setThemeMode = (nextTheme) => {
+    setTheme(normalizeTheme(nextTheme))
   }
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+    <ThemeContext.Provider value={{ theme, setThemeMode }}>
       {children}
     </ThemeContext.Provider>
   )

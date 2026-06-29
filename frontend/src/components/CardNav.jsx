@@ -15,8 +15,7 @@ import { useTheme } from "../context/ThemeContext.jsx"
  * }} props
  */
 export function CardNav({ items, cta, secondaryCta = null, homeTone = false, isOpen, onToggle, onClose }) {
-  const { theme, toggleTheme } = useTheme()
-  const nextThemeLabel = theme === "night" ? "Day" : "Night"
+  const { theme, setThemeMode } = useTheme()
 
   return (
     <header
@@ -44,19 +43,24 @@ export function CardNav({ items, cta, secondaryCta = null, homeTone = false, isO
           </div>
 
           <div className="drive-card-nav__actions">
-            <button
-              onClick={toggleTheme}
-              className="drive-theme-toggle"
-              aria-label={`Chuyển sang chế độ ${nextThemeLabel}`}
-              title={`Switch to ${nextThemeLabel}`}
-              type="button"
-            >
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10" />
-                <path d="M12 18a6 6 0 1 0 0-12v12z" fill="currentColor" />
-              </svg>
-              <span>{theme === "night" ? "Night" : "Day"}</span>
-            </button>
+            <div className="drive-theme-switch" role="group" aria-label="Chọn nền sáng hoặc tối">
+              <button
+                type="button"
+                className={theme === "day" ? "active" : ""}
+                aria-pressed={theme === "day"}
+                onClick={() => setThemeMode("day")}
+              >
+                Day
+              </button>
+              <button
+                type="button"
+                className={theme === "night" ? "active" : ""}
+                aria-pressed={theme === "night"}
+                onClick={() => setThemeMode("night")}
+              >
+                Night
+              </button>
+            </div>
             {secondaryCta ? (
               <Link className="drive-card-nav__login" to={secondaryCta.href} onClick={onClose}>
                 {secondaryCta.label}
