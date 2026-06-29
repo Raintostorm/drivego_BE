@@ -1244,6 +1244,38 @@ a:hover .pressure-brand__char {
   color: rgb(0 0 0 / 0.7);
 }
 
+.home-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.home-tab-link {
+  border: 1px solid var(--color-drive-border-soft);
+  border-radius: 999px;
+  padding: 0.7rem 1rem;
+  color: var(--color-drive-muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+  transition:
+    background-color 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.home-tab-link:hover {
+  border-color: var(--color-drive-action);
+  background: var(--color-drive-elevated);
+  color: var(--color-drive-text);
+  transform: translateY(-1px);
+}
+
+.home-program-card {
+  min-height: 12rem;
+}
+
 .drive-chat-bubble--user {
   background: var(--color-drive-accent);
   color: var(--color-drive-accent-contrast);
@@ -1379,5 +1411,17 @@ html[data-theme="day"] .home-dither-hero::after {
   background:
     radial-gradient(circle at 50% 42%, rgb(255 255 255 / 0.6), rgb(255 255 255 / 0.54) 52%, rgb(246 247 249 / 0.74)),
     linear-gradient(90deg, rgb(246 247 249 / 0.86), rgb(255 255 255 / 0.36) 34% 62%, rgb(246 247 249 / 0.88)) !important;
+}
+
+html[data-theme="day"] .home-tab-link {
+  border-color: rgb(0 0 0 / 0.08);
+  background: rgb(255 255 255 / 0.72);
+  color: var(--color-drive-muted);
+}
+
+html[data-theme="day"] .home-tab-link:hover {
+  border-color: rgb(0 0 0 / 0.18);
+  background: rgb(0 0 0 / 0.04);
+  color: var(--color-drive-text);
 }
 
