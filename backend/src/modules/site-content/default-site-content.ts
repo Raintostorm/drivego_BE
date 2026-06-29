@@ -13,6 +13,11 @@ export type SiteContentPayload = {
     desc: string
     imageKey: string
   }>
+  popularPlan: {
+    eyebrow: string
+    title: string
+    cta: string
+  }
   highlights: string[]
   gallery: Array<{
     imageKey: string
@@ -37,18 +42,23 @@ export const DEFAULT_HOME_CONTENT: SiteContentPayload = {
   },
   services: [
     {
-      title: "Đăng ký học lái xe máy A1",
-      price: "từ 755.000đ",
-      desc: "Lộ trình học gọn, phù hợp người mới bắt đầu và cần hoàn thiện hồ sơ thi sát hạch.",
+      title: "Khóa học bằng lái xe máy A1",
+      price: "từ 900.000đ",
+      desc: "Gói học gọn cho người mới, hỗ trợ hồ sơ, lịch ôn lý thuyết và luyện thi trước ngày sát hạch.",
       imageKey: "bikeYard",
     },
     {
-      title: "Khóa học ô tô B1/B2",
-      price: "từ 15.000.000đ",
-      desc: "Quản lý lịch học, tiến độ lý thuyết, thực hành và luyện đề trên cùng một tài khoản DriveGo.",
+      title: "Khóa học ô tô B1/B2 trọn lộ trình",
+      price: "từ 25.000.000đ",
+      desc: "Theo dõi lý thuyết, thực hành, lịch học và hồ sơ trên cùng một tài khoản DriveGo.",
       imageKey: "drivingTrack",
     },
   ],
+  popularPlan: {
+    eyebrow: "Gói học phổ biến",
+    title: "Bằng B2 trọn lộ trình — từ 25.000.000đ",
+    cta: "Xem tất cả",
+  },
   highlights: [
     "Hồ sơ, học phí và tiến độ được hiển thị rõ ràng cho từng hạng A1, A2, B1, B2.",
     "Bộ đề luyện thi tách riêng, không pha vào database vận hành thường ngày.",
@@ -126,6 +136,15 @@ function normalizeServices(value: unknown): SiteContentPayload["services"] {
   return services.length ? services : DEFAULT_HOME_CONTENT.services
 }
 
+function normalizePopularPlan(value: unknown): SiteContentPayload["popularPlan"] {
+  const input = isPlainObject(value) ? value : {}
+  return {
+    eyebrow: stringOrFallback(input.eyebrow, DEFAULT_HOME_CONTENT.popularPlan.eyebrow),
+    title: stringOrFallback(input.title, DEFAULT_HOME_CONTENT.popularPlan.title),
+    cta: stringOrFallback(input.cta, DEFAULT_HOME_CONTENT.popularPlan.cta),
+  }
+}
+
 function normalizeHighlights(value: unknown): string[] {
   if (!Array.isArray(value)) return DEFAULT_HOME_CONTENT.highlights
   const highlights = value.filter(
@@ -169,6 +188,7 @@ export function normalizeHomeContent(value: unknown): SiteContentPayload {
   return {
     center: normalizeCenter(input.center),
     services: normalizeServices(input.services),
+    popularPlan: normalizePopularPlan(input.popularPlan),
     highlights: normalizeHighlights(input.highlights),
     gallery: normalizeGallery(input.gallery),
     news: normalizeNews(input.news),

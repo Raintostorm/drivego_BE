@@ -15,6 +15,11 @@ const DEFAULT_CONTENT = {
     bank: "",
   },
   services: [],
+  popularPlan: {
+    eyebrow: "",
+    title: "",
+    cta: "",
+  },
   highlights: [],
   gallery: [],
   news: [],
@@ -40,6 +45,7 @@ export function AdminSiteContentPage() {
   const readOnly = user?.role === "center_admin"
   const [center, setCenter] = useState(DEFAULT_CONTENT.center)
   const [servicesJson, setServicesJson] = useState("[]")
+  const [popularPlan, setPopularPlan] = useState(DEFAULT_CONTENT.popularPlan)
   const [highlightsJson, setHighlightsJson] = useState("[]")
   const [galleryJson, setGalleryJson] = useState("[]")
   const [newsJson, setNewsJson] = useState("[]")
@@ -50,8 +56,14 @@ export function AdminSiteContentPage() {
   useEffect(() => {
     fetchAdminSiteContent()
       .then((data) => {
-        const merged = { ...DEFAULT_CONTENT, ...data, center: { ...DEFAULT_CONTENT.center, ...(data?.center || {}) } }
+        const merged = {
+          ...DEFAULT_CONTENT,
+          ...data,
+          center: { ...DEFAULT_CONTENT.center, ...(data?.center || {}) },
+          popularPlan: { ...DEFAULT_CONTENT.popularPlan, ...(data?.popularPlan || {}) },
+        }
         setCenter(merged.center)
+        setPopularPlan(merged.popularPlan)
         setServicesJson(stringify(merged.services))
         setHighlightsJson(stringify(merged.highlights))
         setGalleryJson(stringify(merged.gallery))
@@ -76,6 +88,10 @@ export function AdminSiteContentPage() {
     setCenter((prev) => ({ ...prev, [field]: value }))
   }
 
+  function updatePopularPlan(field, value) {
+    setPopularPlan((prev) => ({ ...prev, [field]: value }))
+  }
+
   async function saveContent() {
     setSaving(true)
     setError(null)
@@ -83,6 +99,7 @@ export function AdminSiteContentPage() {
     try {
       const payload = {
         center,
+        popularPlan,
         services: parseJson("Dịch vụ", servicesJson),
         highlights: parseJson("Điểm nổi bật", highlightsJson),
         gallery: parseJson("Gallery", galleryJson),
@@ -90,6 +107,7 @@ export function AdminSiteContentPage() {
       }
       const saved = await patchAdminSiteContent(payload)
       setCenter(saved.center)
+      setPopularPlan(saved.popularPlan)
       setServicesJson(stringify(saved.services))
       setHighlightsJson(stringify(saved.highlights))
       setGalleryJson(stringify(saved.gallery))
@@ -141,6 +159,30 @@ export function AdminSiteContentPage() {
                 value={center[field] ?? ""}
                 disabled={readOnly}
                 onChange={(e) => updateCenter(field, e.target.value)}
+                className="w-full rounded-drive border border-drive-border bg-drive-elevated px-4 py-3 text-sm text-drive-text outline-none focus:ring-2 focus:ring-drive-accent disabled:opacity-60"
+              />
+            </label>
+          ))}
+        </div>
+      </UiCard>
+
+      <UiCard variant="panel">
+        <h2 className="text-lg font-semibold text-white">Gói học phổ biến</h2>
+        <p className="mt-1 text-sm text-drive-muted">
+          Card nổi bật trên trang chủ, trước danh sách dịch vụ.
+        </p>
+        <div className="mt-5 grid gap-4 md:grid-cols-3">
+          {[
+            ["eyebrow", "Nhãn nhỏ"],
+            ["title", "Tiêu đề"],
+            ["cta", "Nút"],
+          ].map(([field, label]) => (
+            <label key={field} className="block">
+              <span className="mb-2 block text-sm font-medium text-drive-text">{label}</span>
+              <input
+                value={popularPlan[field] ?? ""}
+                disabled={readOnly}
+                onChange={(e) => updatePopularPlan(field, e.target.value)}
                 className="w-full rounded-drive border border-drive-border bg-drive-elevated px-4 py-3 text-sm text-drive-text outline-none focus:ring-2 focus:ring-drive-accent disabled:opacity-60"
               />
             </label>

@@ -44,18 +44,23 @@ const DEFAULT_HOME_CONTENT = {
   },
   services: [
     {
-      title: "Đăng ký học lái xe máy A1",
-      price: "từ 755.000đ",
-      desc: "Lộ trình học gọn, phù hợp người mới bắt đầu và cần hoàn thiện hồ sơ thi sát hạch.",
+      title: "Khóa học bằng lái xe máy A1",
+      price: "từ 900.000đ",
+      desc: "Gói học gọn cho người mới, hỗ trợ hồ sơ, lịch ôn lý thuyết và luyện thi trước ngày sát hạch.",
       imageKey: "bikeYard",
     },
     {
-      title: "Khóa học ô tô B1/B2",
-      price: "từ 15.000.000đ",
-      desc: "Quản lý lịch học, tiến độ lý thuyết, thực hành và luyện đề trên cùng một tài khoản DriveGo.",
+      title: "Khóa học ô tô B1/B2 trọn lộ trình",
+      price: "từ 25.000.000đ",
+      desc: "Theo dõi lý thuyết, thực hành, lịch học và hồ sơ trên cùng một tài khoản DriveGo.",
       imageKey: "drivingTrack",
     },
   ],
+  popularPlan: {
+    eyebrow: "Gói học phổ biến",
+    title: "Bằng B2 trọn lộ trình — từ 25.000.000đ",
+    cta: "Xem tất cả",
+  },
   highlights: [
     "Hồ sơ, học phí và tiến độ được hiển thị rõ ràng cho từng hạng A1, A2, B1, B2.",
     "Bộ đề luyện thi tách riêng, không pha vào database vận hành thường ngày.",
@@ -120,6 +125,7 @@ export function HomePage() {
     { href: "#contact", label: "Liên hệ" },
   ]
   const services = siteContent.services
+  const popularPlan = siteContent.popularPlan
   const programHighlights = siteContent.highlights
   const gallery = siteContent.gallery
   const news = siteContent.news
@@ -141,6 +147,7 @@ export function HomePage() {
           ...DEFAULT_HOME_CONTENT,
           ...data,
           center: { ...DEFAULT_HOME_CONTENT.center, ...(data?.center || {}) },
+          popularPlan: { ...DEFAULT_HOME_CONTENT.popularPlan, ...(data?.popularPlan || {}) },
         })
       })
       .catch(() => {
@@ -276,13 +283,13 @@ export function HomePage() {
       </div>
 
       <UiCard variant="panel" className="home-plan-card text-center">
-        <p className="text-sm font-medium text-white/70">Gói học phổ biến</p>
-        <h3 className="mt-2 text-2xl font-bold text-white">Bằng B2 — từ 15.000.000đ</h3>
+        <p className="text-sm font-medium text-white/70">{popularPlan.eyebrow}</p>
+        <h3 className="mt-2 text-2xl font-bold text-white">{popularPlan.title}</h3>
         <Link
           to="/pricing"
           className="mt-6 inline-block rounded-drive-pill bg-white px-6 py-3 text-sm font-bold text-black shadow-drive-action transition hover:bg-gray-200"
         >
-          {t("common.viewAll")}
+          {popularPlan.cta || t("common.viewAll")}
         </Link>
       </UiCard>
 
