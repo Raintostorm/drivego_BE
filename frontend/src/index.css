@@ -965,6 +965,14 @@ textarea {
   .rounded-drive-pill {
     border-radius: 1rem;
   }
+
+  .pressure-brand--sm {
+    font-size: 1.85rem;
+  }
+
+  .pressure-brand {
+    line-height: 1;
+  }
 }
 
 .light .text-white,

@@ -36,8 +36,8 @@ export function DashboardShell({ children, variant, navItems }) {
 
   return (
     <div className="-mx-3 flex min-h-[calc(100vh-2rem)] flex-col sm:-mx-6 lg:-mx-10 lg:flex-row">
-      <aside className="sticky top-0 z-30 flex max-h-[70svh] flex-col border-b border-drive-border-soft bg-drive-sidebar/95 backdrop-blur lg:fixed lg:inset-y-0 lg:left-0 lg:z-20 lg:max-h-none lg:w-72 lg:border-r lg:border-b-0 lg:bg-drive-sidebar">
-        <div className="shrink-0 px-3 py-3 lg:px-0 lg:py-6">
+      <aside className="sticky top-0 z-30 flex max-h-[52svh] flex-col overflow-hidden border-b border-drive-border-soft bg-drive-sidebar/95 backdrop-blur lg:fixed lg:inset-y-0 lg:left-0 lg:z-20 lg:max-h-none lg:w-72 lg:border-r lg:border-b-0 lg:bg-drive-sidebar">
+        <div className="shrink-0 px-3 py-2.5 lg:px-0 lg:py-6">
           <div className="mb-0 hidden px-5 lg:block">
             <BrandLogo to={logoTo} />
             {variant === "admin" ? (
@@ -52,7 +52,7 @@ export function DashboardShell({ children, variant, navItems }) {
               <button
                 type="button"
                 onClick={handleLogout}
-                className="shrink-0 rounded-drive-pill border border-drive-border px-3 py-2 text-xs font-semibold text-drive-muted transition hover:text-white"
+                className="min-h-10 shrink-0 rounded-drive-pill border border-drive-border px-3 py-2 text-xs font-semibold text-drive-muted transition hover:text-white"
               >
                 Đăng xuất
               </button>

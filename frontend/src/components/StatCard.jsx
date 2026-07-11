@@ -8,8 +8,8 @@ export function StatCard({ label, value, badge, badgeTone = "success" }) {
       : "bg-drive-muted/10 text-drive-muted"
 
   return (
-    <article className="flex flex-col gap-2 rounded-drive border border-drive-border-soft bg-drive-panel p-5">
-      <div className="flex items-start justify-between">
+    <article className="flex min-h-32 flex-col gap-2 rounded-drive border border-drive-border-soft bg-drive-panel p-5 sm:min-h-36">
+      <div className="flex items-start justify-between gap-3">
         <div className="flex size-10 items-center justify-center rounded-full bg-drive-action/10 text-drive-action">
           <span className="text-lg">◆</span>
         </div>

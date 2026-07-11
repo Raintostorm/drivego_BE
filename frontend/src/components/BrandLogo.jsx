@@ -7,14 +7,14 @@ import { PressureBrandText } from "./PressureBrandText.jsx"
  * @param {{ to?: string, size?: 'sm' | 'md', showScooter?: boolean }} props
  */
 export function BrandLogo({ to = "/", size = "md", showScooter = false }) {
-  const iconSize = size === "sm" ? "size-8" : "size-8"
+  const imageClass = size === "sm" ? "h-8 sm:h-10" : "h-10 sm:h-14"
 
   const inner = (
     <>
       <img
         src={brandScooter}
         alt=""
-        className="h-10 sm:h-14 w-auto shrink-0 object-contain"
+        className={`${imageClass} w-auto shrink-0 object-contain`}
       />
       <PressureBrandText text={t("brand")} size={size} />
       {showScooter ? <img src={brandScooter} alt="" className="brand-logo-scooter" /> : null}

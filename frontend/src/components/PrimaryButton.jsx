@@ -11,7 +11,7 @@ export function PrimaryButton({
   disabled,
 }) {
   const base =
-    "rounded-drive-pill px-6 py-3 text-sm font-bold transition focus:outline-none focus:ring-2 focus:ring-drive-accent focus:ring-offset-2 focus:ring-offset-drive-canvas disabled:opacity-60"
+    "inline-flex min-h-11 items-center justify-center rounded-drive-pill px-5 py-2.5 text-center text-sm font-bold transition focus:outline-none focus:ring-2 focus:ring-drive-accent focus:ring-offset-2 focus:ring-offset-drive-canvas disabled:opacity-60 sm:px-6 sm:py-3"
   const variants = {
     primary:
       "bg-drive-accent text-drive-accent-contrast uppercase tracking-wide shadow-drive-glow hover:brightness-110",

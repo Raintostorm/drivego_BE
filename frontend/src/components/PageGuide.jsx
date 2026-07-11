@@ -141,16 +141,16 @@ export function PageGuide() {
   }
 
   return (
-    <div className="fixed right-4 top-24 z-40 flex max-w-[calc(100vw-2rem)] flex-col items-end gap-2 lg:right-6">
+    <div className="fixed bottom-4 right-3 z-40 flex max-w-[calc(100vw-1.5rem)] flex-col-reverse items-end gap-2 lg:bottom-auto lg:right-6 lg:top-24 lg:flex-col">
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
-        className="rounded-drive-pill border border-drive-border bg-drive-action px-4 py-2 text-sm font-bold text-drive-action-contrast shadow-drive-action transition hover:brightness-110"
+        className="min-h-11 rounded-drive-pill border border-drive-border bg-drive-action px-4 py-2 text-sm font-bold text-drive-action-contrast shadow-drive-action transition hover:brightness-110"
       >
         {open ? "Đóng hướng dẫn" : "Hướng dẫn"}
       </button>
       {open ? (
-        <div className="w-full max-w-sm rounded-drive-lg border border-drive-border bg-drive-surface p-4 text-sm shadow-drive-card backdrop-blur">
+        <div className="max-h-[70svh] w-full max-w-sm overflow-y-auto rounded-drive-lg border border-drive-border bg-drive-surface p-4 text-sm shadow-drive-card backdrop-blur">
           <div className="flex items-start justify-between gap-3">
             <div>
               <p className="text-xs font-semibold uppercase text-drive-action">{content.label}</p>
