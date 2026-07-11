@@ -97,13 +97,13 @@ export function AiChatPage() {
           {t("pages.aiChat.newChat")}
         </PrimaryButton>
         <p className="mb-2 text-xs font-semibold uppercase text-drive-placeholder">Gần đây</p>
-        <div className="flex gap-2 overflow-x-auto pb-1 lg:block lg:overflow-visible lg:pb-0">
+        <div className="touch-pan-x flex gap-2 overflow-x-auto pb-1 lg:block lg:overflow-visible lg:pb-0">
           {sessions.map((s) => (
             <button
               key={s.id}
               type="button"
               onClick={() => loadSession(s.id)}
-              className={`mb-1 shrink-0 whitespace-nowrap rounded-lg px-3 py-2 text-left text-sm transition lg:block lg:w-full lg:whitespace-normal ${
+              className={`tap-feedback mb-1 min-h-11 shrink-0 whitespace-nowrap rounded-lg px-3 py-2 text-left text-sm transition lg:block lg:w-full lg:whitespace-normal ${
                 activeId === s.id
                   ? "bg-drive-action text-drive-action-contrast"
                   : "text-drive-muted hover:bg-drive-elevated hover:text-white"

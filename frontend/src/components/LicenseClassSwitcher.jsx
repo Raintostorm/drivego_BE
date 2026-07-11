@@ -23,7 +23,7 @@ export function LicenseClassSwitcher() {
       <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-drive-placeholder">
         {t("license.studying")}
       </p>
-      <div className="flex gap-1.5 overflow-x-auto pb-2 lg:grid lg:grid-cols-2 lg:overflow-visible lg:pb-0">
+      <div className="touch-pan-x flex gap-1.5 overflow-x-auto pb-2 lg:grid lg:grid-cols-2 lg:overflow-visible lg:pb-0">
         {catalog.map((item) => {
           const selected = item.code === activeClass
           return (
@@ -32,7 +32,7 @@ export function LicenseClassSwitcher() {
               type="button"
               disabled={saving}
               onClick={() => handleChange(item.code)}
-              className={`min-h-14 min-w-24 shrink-0 rounded-lg border px-2 py-2 text-left text-xs transition lg:min-h-0 lg:min-w-0 ${
+              className={`tap-feedback min-h-14 min-w-24 shrink-0 rounded-lg border px-2 py-2 text-left text-xs transition lg:min-h-0 lg:min-w-0 ${
                 selected
                   ? "border-drive-action bg-drive-action/15 text-drive-text"
                   : "border-drive-border bg-drive-elevated text-drive-muted hover:border-drive-action/40"

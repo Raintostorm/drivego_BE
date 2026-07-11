@@ -48,6 +48,8 @@
 
 html {
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 body {
@@ -951,6 +953,54 @@ textarea {
   font: inherit;
 }
 
+a,
+button,
+label,
+select,
+input[type="radio"],
+input[type="checkbox"] {
+  touch-action: manipulation;
+}
+
+a,
+button,
+[role="button"] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a {
+  min-touch-target-size: 44px;
+}
+
+.overflow-x-auto,
+.overflow-y-auto {
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+}
+
+.touch-pan-x {
+  touch-action: pan-x;
+}
+
+.touch-pan-y {
+  touch-action: pan-y;
+}
+
+.tap-feedback {
+  transition:
+    transform 120ms ease,
+    filter 120ms ease,
+    background-color 140ms ease,
+    border-color 140ms ease;
+}
+
+.tap-feedback:active {
+  transform: scale(0.98);
+  filter: brightness(1.08);
+}
+
 @media (max-width: 640px) {
   input,
   select,
@@ -972,6 +1022,36 @@ textarea {
 
   .pressure-brand {
     line-height: 1;
+  }
+
+  button,
+  a,
+  label[role="button"] {
+    min-height: 44px;
+  }
+
+  .overflow-x-auto {
+    scrollbar-width: none;
+    scroll-snap-type: x proximity;
+  }
+
+  .overflow-x-auto::-webkit-scrollbar {
+    display: none;
+  }
+
+  .overflow-x-auto > * {
+    scroll-snap-align: start;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .hover\:brightness-110:hover,
+  .hover\:bg-drive-panel:hover,
+  .hover\:bg-drive-elevated:hover,
+  .hover\:text-white:hover,
+  .hover\:underline:hover {
+    filter: none;
+    text-decoration: none;
   }
 }
 

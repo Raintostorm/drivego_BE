@@ -145,7 +145,7 @@ export function PageGuide() {
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
-        className="min-h-11 rounded-drive-pill border border-drive-border bg-drive-action px-4 py-2 text-sm font-bold text-drive-action-contrast shadow-drive-action transition hover:brightness-110"
+        className="tap-feedback min-h-11 rounded-drive-pill border border-drive-border bg-drive-action px-4 py-2 text-sm font-bold text-drive-action-contrast shadow-drive-action transition hover:brightness-110"
       >
         {open ? "Đóng hướng dẫn" : "Hướng dẫn"}
       </button>
@@ -159,7 +159,7 @@ export function PageGuide() {
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="rounded-full border border-drive-border px-2 py-1 text-xs text-drive-muted transition hover:text-white"
+              className="tap-feedback rounded-full border border-drive-border px-2 py-1 text-xs text-drive-muted transition hover:text-white"
               aria-label="Đóng hướng dẫn"
             >
               x

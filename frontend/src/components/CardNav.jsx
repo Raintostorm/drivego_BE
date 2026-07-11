@@ -29,7 +29,7 @@ export function CardNav({ items, cta, secondaryCta = null, homeTone = false, isO
         <div className="drive-card-nav__top">
           <button
             type="button"
-            className={`drive-card-nav__menu ${isOpen ? "open" : ""}`}
+            className={`drive-card-nav__menu tap-feedback ${isOpen ? "open" : ""}`}
             onClick={onToggle}
             aria-expanded={isOpen}
             aria-label={isOpen ? "Đóng menu" : "Mở menu"}
@@ -46,7 +46,7 @@ export function CardNav({ items, cta, secondaryCta = null, homeTone = false, isO
             <div className="drive-theme-switch" role="group" aria-label="Chọn nền sáng hoặc tối">
               <button
                 type="button"
-                className={theme === "day" ? "active" : ""}
+                className={`tap-feedback ${theme === "day" ? "active" : ""}`}
                 aria-pressed={theme === "day"}
                 onClick={() => setThemeMode("day")}
               >
@@ -54,7 +54,7 @@ export function CardNav({ items, cta, secondaryCta = null, homeTone = false, isO
               </button>
               <button
                 type="button"
-                className={theme === "night" ? "active" : ""}
+                className={`tap-feedback ${theme === "night" ? "active" : ""}`}
                 aria-pressed={theme === "night"}
                 onClick={() => setThemeMode("night")}
               >
@@ -62,11 +62,11 @@ export function CardNav({ items, cta, secondaryCta = null, homeTone = false, isO
               </button>
             </div>
             {secondaryCta ? (
-              <Link className="drive-card-nav__login" to={secondaryCta.href} onClick={onClose}>
+              <Link className="drive-card-nav__login tap-feedback" to={secondaryCta.href} onClick={onClose}>
                 {secondaryCta.label}
               </Link>
             ) : null}
-            <Link className="drive-card-nav__cta" to={cta.href} onClick={onClose}>
+            <Link className="drive-card-nav__cta tap-feedback" to={cta.href} onClick={onClose}>
               {cta.label}
             </Link>
           </div>
@@ -88,7 +88,7 @@ export function CardNav({ items, cta, secondaryCta = null, homeTone = false, isO
                 {item.links.map((link) => (
                   <Link
                     aria-label={link.ariaLabel || link.label}
-                    className="drive-card-nav__link"
+                    className="drive-card-nav__link tap-feedback"
                     key={`${item.label}-${link.href}`}
                     to={link.href}
                     onClick={onClose}
