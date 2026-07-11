@@ -35,9 +35,9 @@ export function DashboardShell({ children, variant, navItems }) {
   }
 
   return (
-    <div className="-mx-4 flex min-h-[calc(100vh-3rem)] flex-col sm:-mx-6 lg:-mx-10 lg:flex-row">
-      <aside className="flex flex-col border-b border-drive-border-soft bg-drive-sidebar lg:fixed lg:inset-y-0 lg:left-0 lg:z-20 lg:w-72 lg:border-r lg:border-b-0">
-        <div className="shrink-0 px-4 py-4 lg:px-0 lg:py-6">
+    <div className="-mx-3 flex min-h-[calc(100vh-2rem)] flex-col sm:-mx-6 lg:-mx-10 lg:flex-row">
+      <aside className="sticky top-0 z-30 flex max-h-[70svh] flex-col border-b border-drive-border-soft bg-drive-sidebar/95 backdrop-blur lg:fixed lg:inset-y-0 lg:left-0 lg:z-20 lg:max-h-none lg:w-72 lg:border-r lg:border-b-0 lg:bg-drive-sidebar">
+        <div className="shrink-0 px-3 py-3 lg:px-0 lg:py-6">
           <div className="mb-0 hidden px-5 lg:block">
             <BrandLogo to={logoTo} />
             {variant === "admin" ? (
@@ -46,12 +46,21 @@ export function DashboardShell({ children, variant, navItems }) {
               </p>
             ) : null}
           </div>
-          <div className="px-2 lg:hidden">
+          <div className="flex items-center justify-between gap-3 px-1 lg:hidden">
             <BrandLogo size="sm" to={logoTo} />
+            {user ? (
+              <button
+                type="button"
+                onClick={handleLogout}
+                className="shrink-0 rounded-drive-pill border border-drive-border px-3 py-2 text-xs font-semibold text-drive-muted transition hover:text-white"
+              >
+                Đăng xuất
+              </button>
+            ) : null}
           </div>
         </div>
 
-        <div className="min-h-0 flex-1 overflow-y-auto px-0 pb-2 lg:max-h-[calc(100vh-12rem)]">
+        <div className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-0 pb-2 lg:max-h-[calc(100vh-12rem)]">
           <SidebarNav items={items} />
           {variant === "student" ? (
             <div className="mt-4">
@@ -60,7 +69,7 @@ export function DashboardShell({ children, variant, navItems }) {
           ) : null}
         </div>
 
-        <div className="shrink-0 space-y-2 border-t border-drive-border-soft px-3 py-4">
+        <div className="hidden shrink-0 space-y-2 border-t border-drive-border-soft px-3 py-4 lg:block">
           {variant === "student" ? (
             premium ? (
               <Link
@@ -102,7 +111,7 @@ export function DashboardShell({ children, variant, navItems }) {
 
       <div className="min-w-0 flex-1 lg:pl-72">
         {variant === "student" ? <PageGuide /> : null}
-        <div className="px-4 py-6 sm:px-6 lg:px-10">{children}</div>
+        <div className="px-3 py-4 sm:px-6 lg:px-10 lg:py-6">{children}</div>
       </div>
     </div>
   )

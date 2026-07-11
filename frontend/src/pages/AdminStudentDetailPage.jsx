@@ -151,7 +151,7 @@ export function AdminStudentDetailPage() {
       {tab === "exams" ? (
         <UiCard variant="panel">
           {data.recentAttempts?.length ? (
-            <table className="w-full text-sm">
+            <table className="min-w-[640px] w-full text-sm">
               <thead>
                 <tr className="text-drive-muted">
                   <th className="py-2 text-left">Điểm</th>

@@ -281,7 +281,7 @@ export function ExamPage() {
   const progressPct = totalQuestions ? Math.round((answeredCount / totalQuestions) * 100) : 0
 
   const examUi = (
-    <section className="grid gap-6 lg:grid-cols-[2fr_1fr]">
+    <section className="grid min-w-0 gap-4 sm:gap-6 lg:grid-cols-[minmax(0,2fr)_minmax(260px,1fr)]">
       <div className="lg:col-span-2">
         <HelpCard
           title="Lưu ý khi làm bài thi thử"
@@ -309,7 +309,7 @@ export function ExamPage() {
         </p>
       </div>
 
-      <div className="lg:col-span-2 flex flex-wrap items-center gap-3">
+      <div className="lg:col-span-2 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center">
         <PrimaryButton
           variant={randomMode ? "action" : "outline"}
           disabled={generating || !randomReady}
@@ -333,7 +333,7 @@ export function ExamPage() {
                 setPaper(null)
                 setSelectedPaperId(e.target.value)
               }}
-              className="rounded-drive border border-drive-border bg-drive-elevated px-4 py-2 text-sm text-drive-text"
+              className="min-w-0 rounded-drive border border-drive-border bg-drive-elevated px-4 py-2 text-sm text-drive-text"
             >
               <option value="" disabled>
                 Chọn đề…
@@ -348,7 +348,7 @@ export function ExamPage() {
         ) : null}
       </div>
 
-      <UiCard variant="panel" className="space-y-4">
+      <UiCard variant="panel" className="min-w-0 space-y-4">
         <header className="flex flex-wrap items-start justify-between gap-2 rounded-drive border border-drive-border-soft bg-drive-sidebar p-4">
           <div>
             <p className="text-sm font-medium text-drive-action">
@@ -398,7 +398,7 @@ export function ExamPage() {
           })}
         </div>
 
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <PrimaryButton
             variant="outline"
             disabled={currentIndex === 0}
@@ -437,7 +437,7 @@ export function ExamPage() {
           </p>
         ) : null}
 
-        <div className="flex flex-wrap gap-2 pt-2">
+        <div className="flex max-h-40 flex-wrap gap-2 overflow-y-auto pt-2 sm:max-h-none">
           {questions.map((q, idx) => (
             <button
               key={q.id}
@@ -457,7 +457,7 @@ export function ExamPage() {
         </div>
       </UiCard>
 
-      <aside className="space-y-4">
+      <aside className="space-y-4 lg:sticky lg:top-6 lg:self-start">
         <UiCard variant="panel">
           <p className="text-sm text-drive-muted">{t("pages.exam.timeLeft")}</p>
           <p

@@ -11,6 +11,7 @@ export function AppShell({ children }) {
   const isDashboard =
     pathname.includes("dashboard") ||
     [
+      "/admin-dashboard",
       "/theory",
       "/exam",
       "/history",
@@ -20,7 +21,8 @@ export function AppShell({ children }) {
       "/notifications",
       "/upgrade",
       "/ai-chat",
-    ].includes(pathname)
+    ].includes(pathname) ||
+    pathname.startsWith("/admin/")
 
   if (isAuth) {
     return <main className="relative min-h-screen overflow-hidden text-drive-text">{children}</main>
@@ -31,7 +33,7 @@ export function AppShell({ children }) {
     : "min-h-screen bg-drive-canvas text-drive-text"
 
   const innerClass = isDashboard
-    ? "mx-auto max-w-[1280px] px-4 py-6 sm:px-6 lg:px-10"
+    ? "mx-auto max-w-[1280px] px-3 py-4 sm:px-6 lg:px-10 lg:py-6"
     : "mx-auto max-w-7xl px-4 py-6 sm:px-6"
 
   return (

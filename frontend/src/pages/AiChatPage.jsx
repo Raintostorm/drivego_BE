@@ -91,35 +91,37 @@ export function AiChatPage() {
   if (loading) return <p className="text-drive-muted">Đang tải chat…</p>
 
   return (
-    <section className="grid min-h-[70vh] gap-4 lg:grid-cols-[260px_1fr]">
-      <UiCard padding="sm" variant="panel" className="flex flex-col">
+    <section className="grid min-h-[70svh] gap-4 lg:grid-cols-[260px_1fr]">
+      <UiCard padding="sm" variant="panel" className="flex min-w-0 flex-col">
         <PrimaryButton variant="action" className="mb-4" onClick={handleNewChat}>
           {t("pages.aiChat.newChat")}
         </PrimaryButton>
         <p className="mb-2 text-xs font-semibold uppercase text-drive-placeholder">Gần đây</p>
-        {sessions.map((s) => (
-          <button
-            key={s.id}
-            type="button"
-            onClick={() => loadSession(s.id)}
-            className={`mb-1 rounded-lg px-3 py-2 text-left text-sm transition ${
-              activeId === s.id
-                ? "bg-drive-action text-drive-action-contrast"
-                : "text-drive-muted hover:bg-drive-elevated hover:text-white"
-            }`}
-          >
-            {s.title}
-          </button>
-        ))}
+        <div className="flex gap-2 overflow-x-auto pb-1 lg:block lg:overflow-visible lg:pb-0">
+          {sessions.map((s) => (
+            <button
+              key={s.id}
+              type="button"
+              onClick={() => loadSession(s.id)}
+              className={`mb-1 shrink-0 whitespace-nowrap rounded-lg px-3 py-2 text-left text-sm transition lg:block lg:w-full lg:whitespace-normal ${
+                activeId === s.id
+                  ? "bg-drive-action text-drive-action-contrast"
+                  : "text-drive-muted hover:bg-drive-elevated hover:text-white"
+              }`}
+            >
+              {s.title}
+            </button>
+          ))}
+        </div>
       </UiCard>
 
-      <UiCard variant="panel" className="flex flex-col">
+      <UiCard variant="panel" className="flex min-w-0 flex-col">
         <h1 className="text-xl font-bold text-white">{t("pages.aiChat.title")}</h1>
         <div className="mt-4 flex-1 space-y-3 overflow-y-auto">
           {messages.map((m, i) => (
             <div
               key={`${m.role}-${i}`}
-              className={`drive-chat-bubble max-w-xl rounded-drive p-3 text-sm ${
+              className={`drive-chat-bubble max-w-[92%] break-words rounded-drive p-3 text-sm sm:max-w-xl ${
                 m.role === "user"
                   ? "drive-chat-bubble--user ml-auto"
                   : "drive-chat-bubble--assistant border"
@@ -142,13 +144,13 @@ export function AiChatPage() {
             ) : null}
           </p>
         ) : null}
-        <form onSubmit={handleSend} className="mt-4 flex gap-2">
+        <form onSubmit={handleSend} className="mt-4 flex flex-col gap-2 sm:flex-row">
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder={t("pages.aiChat.placeholder")}
-            className="flex-1 rounded-drive-pill border border-drive-border bg-drive-elevated px-4 py-3 text-drive-text outline-none focus:ring-2 focus:ring-drive-accent"
+            className="min-w-0 flex-1 rounded-drive-pill border border-drive-border bg-drive-elevated px-4 py-3 text-drive-text outline-none focus:ring-2 focus:ring-drive-accent"
           />
           <PrimaryButton type="submit" variant="action" disabled={sending}>
             {t("pages.aiChat.send")}

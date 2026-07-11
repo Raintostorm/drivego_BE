@@ -144,7 +144,7 @@ export function AdminScheduleSlotsPage() {
       </UiCard>
 
       <UiCard variant="panel" className="overflow-x-auto">
-        <table className="w-full text-sm">
+        <table className="min-w-[720px] w-full text-sm">
           <thead>
             <tr className="text-drive-muted">
               <th className="py-2 text-left">Ngày</th>

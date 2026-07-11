@@ -59,7 +59,7 @@ export function HistoryPage() {
             {rows.length === 0 ? (
               <p className="p-6 text-sm text-drive-muted">Chưa có lần thi nào. Hãy thử đề tại trang Thi thử.</p>
             ) : (
-              <table className="w-full text-left text-sm">
+              <table className="min-w-[640px] w-full text-left text-sm">
                 <thead className="bg-drive-sidebar text-drive-muted">
                   <tr>
                     <th className="px-4 py-3">Ngày</th>

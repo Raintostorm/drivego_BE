@@ -81,7 +81,7 @@ export function AdminApplicationsPage() {
           <p className="text-sm text-drive-muted">Không có hồ sơ.</p>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
+            <table className="min-w-[720px] w-full text-left text-sm">
               <thead>
                 <tr className="border-b border-drive-border text-drive-muted">
                   <th className="py-2 pr-4">Học viên</th>
