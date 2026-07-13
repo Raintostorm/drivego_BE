@@ -106,9 +106,40 @@ function imageByKey(key, fallback = practiceClassImage) {
   return IMAGE_MAP[key] || fallback
 }
 
+const CENTER_LOCATION = {
+  name: "Trung tâm Dạy Nghề Đào Tạo & Sát Hạch Lái Xe Làng Đại Học",
+  address: "Trường ĐH TDTT Võ Trường Toản, Phường Linh Trung, Thủ Đức, Hồ Chí Minh, Việt Nam",
+  // Approximate pin for the TDTT/Linh Trung training area. Google Maps link remains the source of truth.
+  lat: 10.8792,
+  lng: 106.8027,
+}
+
+function toRad(value) {
+  return (value * Math.PI) / 180
+}
+
+function distanceKm(from, to) {
+  const earthKm = 6371
+  const dLat = toRad(to.lat - from.lat)
+  const dLng = toRad(to.lng - from.lng)
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(toRad(from.lat)) *
+      Math.cos(toRad(to.lat)) *
+      Math.sin(dLng / 2) *
+      Math.sin(dLng / 2)
+  return earthKm * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
+}
+
 export function HomePage() {
   const heroVideoRef = useRef(null)
   const [siteContent, setSiteContent] = useState(DEFAULT_HOME_CONTENT)
+  const [geoState, setGeoState] = useState({
+    loading: false,
+    userPosition: null,
+    distance: null,
+    error: "",
+  })
   const centerInfo = siteContent.center
   const features = [
     { title: t("pages.home.feature1"), desc: "Video bài giảng và mô phỏng tình huống trên mọi thiết bị." },
@@ -122,6 +153,7 @@ export function HomePage() {
     { href: "#programs", label: "Chương trình" },
     { href: "#gallery", label: "Hình ảnh" },
     { href: "#news", label: "Tin tức" },
+    { href: "#map", label: "Bản đồ" },
     { href: "#contact", label: "Liên hệ" },
   ]
   const services = siteContent.services
@@ -157,6 +189,46 @@ export function HomePage() {
       active = false
     }
   }, [])
+
+  const mapQuery = `${CENTER_LOCATION.name}, ${CENTER_LOCATION.address}`
+  const mapEmbedUrl = `https://www.google.com/maps?q=${encodeURIComponent(mapQuery)}&output=embed`
+  const directionsUrl = geoState.userPosition
+    ? `https://www.google.com/maps/dir/?api=1&origin=${geoState.userPosition.lat},${geoState.userPosition.lng}&destination=${encodeURIComponent(mapQuery)}`
+    : `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(mapQuery)}`
+
+  function locateUser() {
+    if (!navigator.geolocation) {
+      setGeoState((prev) => ({
+        ...prev,
+        error: "Trình duyệt này chưa hỗ trợ định vị. Bạn có thể mở Google Maps để xem đường đi.",
+      }))
+      return
+    }
+
+    setGeoState((prev) => ({ ...prev, loading: true, error: "" }))
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const userPosition = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        }
+        setGeoState({
+          loading: false,
+          userPosition,
+          distance: distanceKm(userPosition, CENTER_LOCATION),
+          error: "",
+        })
+      },
+      (error) => {
+        const message =
+          error.code === error.PERMISSION_DENIED
+            ? "Bạn chưa cấp quyền định vị. Hãy bật định vị trên trình duyệt để ước tính khoảng cách."
+            : "Không lấy được vị trí hiện tại. Bạn có thể mở Google Maps để xác nhận đường đi."
+        setGeoState((prev) => ({ ...prev, loading: false, error: message }))
+      },
+      { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 },
+    )
+  }
 
   return (
     <section className="home-page-surface space-y-20">
@@ -292,6 +364,55 @@ export function HomePage() {
           {popularPlan.cta || t("common.viewAll")}
         </Link>
       </UiCard>
+
+      <section id="map" className="scroll-mt-24">
+        <div className="grid gap-4 lg:grid-cols-[1.05fr_0.95fr]">
+          <UiCard variant="panel" padding="none" className="overflow-hidden">
+            <iframe
+              title="Bản đồ trung tâm lái xe Làng Đại Học"
+              src={mapEmbedUrl}
+              className="h-[320px] w-full border-0 sm:h-[420px]"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </UiCard>
+          <UiCard variant="panel" className="flex flex-col justify-between gap-5">
+            <div>
+              <p className="text-sm font-semibold uppercase text-drive-action">Bản đồ & khoảng cách</p>
+              <h2 className="mt-2 text-2xl font-bold text-white">{CENTER_LOCATION.name}</h2>
+              <p className="mt-3 text-sm leading-relaxed text-drive-muted">{CENTER_LOCATION.address}</p>
+              <div className="mt-4 rounded-drive border border-drive-border-soft bg-drive-sidebar p-4">
+                <p className="text-xs font-semibold uppercase text-drive-placeholder">Khoảng cách từ bạn</p>
+                <p className="mt-2 text-3xl font-bold text-white">
+                  {geoState.distance != null ? `${geoState.distance.toFixed(1)} km` : "Chưa xác định"}
+                </p>
+                <p className="mt-2 text-xs leading-relaxed text-drive-muted">
+                  Khoảng cách trên là ước tính đường thẳng từ vị trí trình duyệt. Mở Google Maps để xem quãng đường đi thực tế.
+                </p>
+              </div>
+              {geoState.error ? <p className="mt-3 text-sm text-drive-danger">{geoState.error}</p> : null}
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <button
+                type="button"
+                onClick={locateUser}
+                disabled={geoState.loading}
+                className="tap-feedback rounded-drive-pill bg-drive-action px-5 py-3 text-sm font-bold text-drive-action-contrast shadow-drive-action disabled:opacity-60"
+              >
+                {geoState.loading ? "Đang định vị..." : "Bật định vị"}
+              </button>
+              <a
+                href={directionsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="tap-feedback rounded-drive-pill border border-drive-border bg-drive-elevated px-5 py-3 text-center text-sm font-bold text-drive-text"
+              >
+                Mở chỉ đường
+              </a>
+            </div>
+          </UiCard>
+        </div>
+      </section>
 
       <section id="contact" className="scroll-mt-24">
         <div className="grid gap-4 lg:grid-cols-[0.9fr_1.1fr]">

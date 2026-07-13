@@ -59,36 +59,62 @@ export function HistoryPage() {
             {rows.length === 0 ? (
               <p className="p-6 text-sm text-drive-muted">Chưa có lần thi nào. Hãy thử đề tại trang Thi thử.</p>
             ) : (
-              <table className="min-w-[640px] w-full text-left text-sm">
-                <thead className="bg-drive-sidebar text-drive-muted">
-                  <tr>
-                    <th className="px-4 py-3">Ngày</th>
-                    <th className="px-4 py-3">Đề thi</th>
-                    <th className="px-4 py-3">Hạng</th>
-                    <th className="px-4 py-3">Kết quả</th>
-                    <th className="px-4 py-3">Thời gian</th>
-                    <th className="px-4 py-3"></th>
-                  </tr>
-                </thead>
-                <tbody>
+              <>
+                <div className="space-y-3 p-3 sm:hidden">
                   {rows.map((row) => (
-                    <tr
+                    <button
                       key={row.id}
+                      type="button"
                       onClick={() => navigate(`/history/${row.id}`)}
-                      className="cursor-pointer border-t border-drive-border-soft text-drive-text transition hover:bg-drive-sidebar"
+                      className="tap-feedback w-full rounded-drive border border-drive-border-soft bg-drive-sidebar p-4 text-left"
                     >
-                      <td className="px-4 py-3 text-drive-muted">{formatDate(row.date)}</td>
-                      <td className="px-4 py-3">{row.exam}</td>
-                      <td className="px-4 py-3">{row.rank}</td>
-                      <td className="px-4 py-3">
+                      <div className="flex items-start justify-between gap-3">
+                        <div>
+                          <p className="text-xs text-drive-muted">{formatDate(row.date)} · Hạng {row.rank}</p>
+                          <h2 className="mt-1 text-sm font-semibold text-white">{row.exam}</h2>
+                        </div>
                         <StatusBadge tone={row.pass ? "success" : "danger"}>{row.score}</StatusBadge>
-                      </td>
-                      <td className="px-4 py-3 text-drive-muted">{row.time}</td>
-                      <td className="px-4 py-3 text-right text-drive-action">Xem lại →</td>
-                    </tr>
+                      </div>
+                      <div className="mt-3 flex items-center justify-between text-xs text-drive-muted">
+                        <span>Thời gian: {row.time}</span>
+                        <span className="font-semibold text-drive-action">Xem lại →</span>
+                      </div>
+                    </button>
                   ))}
-                </tbody>
-              </table>
+                </div>
+                <div className="hidden overflow-x-auto sm:block">
+                  <table className="min-w-[640px] w-full text-left text-sm">
+                    <thead className="bg-drive-sidebar text-drive-muted">
+                      <tr>
+                        <th className="px-4 py-3">Ngày</th>
+                        <th className="px-4 py-3">Đề thi</th>
+                        <th className="px-4 py-3">Hạng</th>
+                        <th className="px-4 py-3">Kết quả</th>
+                        <th className="px-4 py-3">Thời gian</th>
+                        <th className="px-4 py-3"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {rows.map((row) => (
+                        <tr
+                          key={row.id}
+                          onClick={() => navigate(`/history/${row.id}`)}
+                          className="cursor-pointer border-t border-drive-border-soft text-drive-text transition hover:bg-drive-sidebar"
+                        >
+                          <td className="px-4 py-3 text-drive-muted">{formatDate(row.date)}</td>
+                          <td className="px-4 py-3">{row.exam}</td>
+                          <td className="px-4 py-3">{row.rank}</td>
+                          <td className="px-4 py-3">
+                            <StatusBadge tone={row.pass ? "success" : "danger"}>{row.score}</StatusBadge>
+                          </td>
+                          <td className="px-4 py-3 text-drive-muted">{row.time}</td>
+                          <td className="px-4 py-3 text-right text-drive-action">Xem lại →</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
             )}
           </UiCard>
         </div>

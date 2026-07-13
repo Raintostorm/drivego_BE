@@ -141,7 +141,7 @@ export function PageGuide() {
   }
 
   return (
-    <div className="fixed bottom-4 right-3 z-40 flex max-w-[calc(100vw-1.5rem)] flex-col-reverse items-end gap-2 lg:bottom-auto lg:right-6 lg:top-24 lg:flex-col">
+    <div className="fixed bottom-[calc(env(safe-area-inset-bottom)+4.5rem)] right-3 z-40 flex max-w-[calc(100vw-1.5rem)] flex-col-reverse items-end gap-2 lg:bottom-auto lg:right-6 lg:top-24 lg:flex-col">
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
