@@ -23,7 +23,7 @@ export const OPTIONAL_DOCUMENT_SLOTS: Record<string, number> = {
 }
 
 export const DOC_TYPE_LABELS: Record<string, string> = {
-  [APPLICATION_DOC_TYPES.PHOTO_3X4_BLUE]: "Ảnh 3×4cm nền xanh",
+  [APPLICATION_DOC_TYPES.PHOTO_3X4_BLUE]: "Ảnh 3×4cm nền trắng",
   [APPLICATION_DOC_TYPES.PHOTO_4X6_WHITE]: "Ảnh 4×6cm nền trắng",
   [APPLICATION_DOC_TYPES.CCCD_FRONT]: "CCCD mặt trước",
   [APPLICATION_DOC_TYPES.CCCD_BACK]: "CCCD mặt sau",

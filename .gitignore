@@ -41,6 +41,11 @@ database/scripts/_probe_*.py
 backend/dist
 backend/uploads/
 
+# Private real-person seed materials (never commit)
+A/
+B/
+database/private-seeds/
+
 # Python cache
 __pycache__/
 *.pyc

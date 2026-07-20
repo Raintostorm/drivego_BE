@@ -336,7 +336,7 @@ export const vi = {
       rejected: "Từ chối",
     },
     docTypes: {
-      photo3x4: "Ảnh 3×4cm nền xanh",
+      photo3x4: "Ảnh 3×4cm nền trắng",
       photo4x6: "Ảnh 4×6cm nền trắng",
       cccdFront: "CCCD mặt trước",
       cccdBack: "CCCD mặt sau",
