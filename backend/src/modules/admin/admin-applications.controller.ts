@@ -9,6 +9,7 @@ import {
   Res,
   UseGuards,
 } from "@nestjs/common"
+import archiver = require("archiver")
 import type { Response } from "express"
 import { Roles } from "../../common/decorators/roles.decorator"
 import { CurrentUser } from "../../common/current-user.decorator"
@@ -18,6 +19,12 @@ import { JwtAuthGuard } from "../auth/jwt-auth.guard"
 import { AdminApplicationsService } from "./admin-applications.service"
 import { PatchApplicationAdminDto } from "./dto/patch-application-admin.dto"
 import { RequestDossierDto } from "./dto/request-dossier.dto"
+
+type ArchiverFactory = (
+  format: "zip",
+  options: { zlib: { level: number } },
+) => archiver.Archiver
+const createArchive = archiver as unknown as ArchiverFactory
 
 @Controller("admin/applications")
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -48,6 +55,31 @@ export class AdminApplicationsController {
       `attachment; filename="${encodeURIComponent(originalName)}"`,
     )
     stream.pipe(res)
+  }
+
+  @Get(":id/documents/archive")
+  async downloadArchive(
+    @CurrentUser() user: AuthUser,
+    @Param("id") id: string,
+    @Res() res: Response,
+  ) {
+    const archive = createArchive("zip", { zlib: { level: 9 } })
+    archive.on("error", (error: Error) => {
+      if (!res.headersSent) {
+        res.status(500).json({ message: "Không tạo được file ZIP" })
+        return
+      }
+      res.destroy(error)
+    })
+
+    const { filename } = await this.service.appendDocumentsArchive(user, id, archive)
+    res.setHeader("Content-Type", "application/zip")
+    res.setHeader(
+      "Content-Disposition",
+      `attachment; filename="${encodeURIComponent(filename)}"`,
+    )
+    archive.pipe(res)
+    await archive.finalize()
   }
 
   @Get(":id")

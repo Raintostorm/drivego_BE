@@ -5,6 +5,7 @@ import { PageHeader } from "../components/PageHeader.jsx"
 import { StatusBadge } from "../components/StatusBadge.jsx"
 import { UiCard } from "../components/UiCard.jsx"
 import {
+  adminDownloadApplicationArchive,
   adminDownloadDocument,
   fetchAdminApplication,
   patchAdminApplication,
@@ -17,6 +18,7 @@ export function AdminApplicationDetailPage() {
   const [note, setNote] = useState("")
   const [loading, setLoading] = useState(true)
   const [busy, setBusy] = useState(false)
+  const [archiveBusy, setArchiveBusy] = useState(false)
   const [message, setMessage] = useState(null)
   const [dossierDeadline, setDossierDeadline] = useState("")
 
@@ -100,7 +102,43 @@ export function AdminApplicationDetailPage() {
       </UiCard>
 
       <UiCard variant="panel">
-        <h2 className="font-semibold text-white">Tài liệu đính kèm</h2>
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <h2 className="font-semibold text-white">Tài liệu đính kèm</h2>
+            <p className="mt-1 text-sm text-drive-muted">
+              {(app.documents ?? []).length} file trong hồ sơ học viên.
+            </p>
+          </div>
+          <button
+            type="button"
+            disabled={archiveBusy || !(app.documents ?? []).length}
+            className="rounded-drive-pill bg-drive-action px-4 py-2 text-sm font-bold text-drive-action-contrast shadow-drive-action transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-60"
+            onClick={async () => {
+              if (!id) return
+              setArchiveBusy(true)
+              setMessage(null)
+              try {
+                const safeName = String(app.studentName ?? "hoc-vien")
+                  .normalize("NFD")
+                  .replace(/[\u0300-\u036f]/g, "")
+                  .replace(/đ/g, "d")
+                  .replace(/Đ/g, "D")
+                  .replace(/[^a-zA-Z0-9._-]+/g, "_")
+                  .replace(/^_+|_+$/g, "")
+                await adminDownloadApplicationArchive(
+                  id,
+                  `${safeName || "hoc-vien"}_${app.licenseClass}_ho-so.zip`,
+                )
+              } catch (e) {
+                setMessage(e instanceof Error ? e.message : "Không tải được file ZIP")
+              } finally {
+                setArchiveBusy(false)
+              }
+            }}
+          >
+            {archiveBusy ? "Đang nén…" : "Tải cả bộ ZIP"}
+          </button>
+        </div>
         <ul className="mt-4 space-y-2">
           {(app.documents ?? []).map((d) => (
             <li

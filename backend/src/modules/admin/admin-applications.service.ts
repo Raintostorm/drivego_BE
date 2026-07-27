@@ -4,6 +4,7 @@ import {
   NotFoundException,
 } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
+import type { Archiver } from "archiver"
 import { Repository } from "typeorm"
 import { ApplicationDocument } from "../../entities/application-document.entity"
 import {
@@ -25,6 +26,17 @@ const ADMIN_LIST_STATUSES: ApplicationStatus[] = [
   "approved",
   "rejected",
 ]
+
+function safeArchiveName(value: string) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/đ/g, "d")
+    .replace(/Đ/g, "D")
+    .replace(/[^a-zA-Z0-9._-]+/g, "_")
+    .replace(/^_+|_+$/g, "")
+    .slice(0, 120)
+}
 
 @Injectable()
 export class AdminApplicationsService {
@@ -139,6 +151,52 @@ export class AdminApplicationsService {
     if (!doc) throw new NotFoundException("Không tìm thấy tài liệu")
     await this.scope.assertApplicationAccessAsync(admin, doc.application.centerId, doc.application.userId)
     return this.applicationsService.resolveDocumentStream(doc)
+  }
+
+  async appendDocumentsArchive(admin: AuthUser, applicationId: string, archive: Archiver) {
+    const app = await this.appsRepo.findOne({
+      where: { id: applicationId },
+      relations: { documents: true, user: true },
+    })
+    if (!app) throw new NotFoundException("Không tìm thấy hồ sơ")
+    await this.scope.assertApplicationAccessAsync(admin, app.centerId, app.userId)
+
+    const profile = await this.profilesRepo.findOne({ where: { userId: app.userId } })
+    const studentName = profile?.fullName ?? app.user?.email ?? "hoc-vien"
+    const baseFolder = safeArchiveName(
+      `${studentName}_${app.licenseClass}_${String(app.id).slice(0, 8)}`,
+    )
+    const docs = [...(app.documents ?? [])].sort((a, b) => {
+      const type = a.docType.localeCompare(b.docType)
+      return type !== 0 ? type : a.slotIndex - b.slotIndex
+    })
+
+    if (!docs.length) {
+      archive.append("Ho so nay chua co tai lieu dinh kem.\n", {
+        name: `${baseFolder}/README.txt`,
+      })
+      return {
+        filename: `${baseFolder}.zip`,
+        count: 0,
+      }
+    }
+
+    for (const doc of docs) {
+      const { stream, originalName } =
+        await this.applicationsService.resolveDocumentStream(doc)
+      const ext = originalName?.includes(".")
+        ? originalName.slice(originalName.lastIndexOf("."))
+        : ""
+      const fallback = `${doc.docType}_${doc.slotIndex}${ext || ".bin"}`
+      const cleanedOriginal = safeArchiveName(originalName ?? fallback) || fallback
+      const entryName = `${baseFolder}/${safeArchiveName(doc.docType)}_${doc.slotIndex}_${cleanedOriginal}`
+      archive.append(stream, { name: entryName })
+    }
+
+    return {
+      filename: `${baseFolder}.zip`,
+      count: docs.length,
+    }
   }
 
   async patchStatus(admin: AuthUser, id: string, dto: PatchApplicationAdminDto) {

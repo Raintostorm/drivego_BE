@@ -11,6 +11,19 @@ export function adminDownloadDocument(documentId, filename) {
   })
 }
 
+export function adminDownloadApplicationArchive(applicationId, filename) {
+  return apiFetchBlob(`/admin/applications/${applicationId}/documents/archive`, {
+    auth: true,
+  }).then((blob) => {
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement("a")
+    a.href = url
+    a.download = filename || "ho-so-hoc-vien.zip"
+    a.click()
+    URL.revokeObjectURL(url)
+  })
+}
+
 export function adminOpenDocument(documentId) {
   return apiFetchBlob(`/admin/applications/documents/${documentId}/file`).then((blob) => {
     const url = URL.createObjectURL(blob)
