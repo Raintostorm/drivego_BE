@@ -44,6 +44,7 @@ backend/uploads/
 # Private real-person seed materials (never commit)
 A/
 B/
+/src/
 database/private-seeds/
 
 # Python cache
