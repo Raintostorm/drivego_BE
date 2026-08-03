@@ -18,6 +18,16 @@ const STATUS_TABS = [
 
 const STATUS_LABEL = { pending: "Chờ duyệt", confirmed: "Đã xác nhận", rejected: "Đã từ chối" }
 
+function formatSlotDate(value) {
+  if (!value) return "Chưa xếp ngày"
+  return new Date(`${String(value).slice(0, 10)}T00:00:00`).toLocaleDateString("vi-VN", {
+    weekday: "short",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  })
+}
+
 function regStatusTone(status) {
   if (status === "confirmed") return "success"
   if (status === "rejected") return "danger"
@@ -72,13 +82,13 @@ export function AdminSchedulesPage() {
     <section className="space-y-6">
       <PageHeader title="Duyệt đăng ký ca thi" subtitle="Xác nhận yêu cầu đăng ký ca sát hạch" />
 
-      <div className="flex flex-wrap gap-2">
+      <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
         {TABS.map((tab) => (
           <button
             key={tab.id}
             type="button"
             onClick={() => setSlotType(tab.id)}
-            className={`rounded-drive px-4 py-2 text-sm ${
+            className={`min-h-11 rounded-drive px-3 py-2 text-sm ${
               slotType === tab.id
                 ? "bg-drive-accent text-drive-accent-contrast"
                 : "border border-drive-border bg-drive-elevated text-drive-muted"
@@ -90,7 +100,7 @@ export function AdminSchedulesPage() {
       </div>
 
       <UiCard variant="panel" className="space-y-3">
-        <div className="flex flex-wrap gap-2">
+        <div className="grid grid-cols-3 gap-2 sm:flex sm:flex-wrap">
           {STATUS_TABS.map((tab) => (
             <button key={tab.id} type="button" onClick={() => { setLoading(true); setStatus(tab.id) }} className={`min-h-10 rounded-drive-pill px-4 text-sm ${status === tab.id ? "bg-drive-action font-semibold text-drive-action-contrast" : "border border-drive-border bg-drive-elevated text-drive-muted"}`}>
               {tab.label}
@@ -112,30 +122,32 @@ export function AdminSchedulesPage() {
         ) : filteredRows.length === 0 ? (
           <p className="text-sm text-drive-muted">Không có đăng ký phù hợp.</p>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-3">
             {filteredRows.map((r) => (
               <div
                 key={r.id}
-                className="rounded-drive border border-drive-border-soft bg-drive-sidebar p-4"
+                className="rounded-drive border border-drive-border-soft bg-drive-sidebar p-4 transition-colors hover:border-drive-border"
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
-                    <p className="font-medium text-white">{r.studentName}</p>
+                    <p className="font-semibold text-drive-text">{r.studentName}</p>
                     <p className="text-xs text-drive-muted">{r.studentEmail}</p>
                     {r.slot ? (
-                      <p className="mt-2 text-sm text-drive-text">
-                        {new Date(r.slot.date).toLocaleDateString("vi-VN")} ·{" "}
-                        {String(r.slot.startTime).slice(0, 5)}–{String(r.slot.endTime).slice(0, 5)}
-                        {r.slot.venue ? ` · ${r.slot.venue}` : ""}
-                      </p>
+                      <div className="mt-3 grid gap-1 text-sm text-drive-text sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+                        <div>
+                          <p className="font-medium">{formatSlotDate(r.slot.date)}</p>
+                          <p className="text-drive-muted">{String(r.slot.startTime).slice(0, 5)}–{String(r.slot.endTime).slice(0, 5)}{r.slot.venue ? ` · ${r.slot.venue}` : ""}</p>
+                        </div>
+                        <span className="text-xs text-drive-muted">{slotType === "theory_exam" ? "Lý thuyết" : "Thực hành"}</span>
+                      </div>
                     ) : null}
                   </div>
                   <StatusBadge tone={regStatusTone(r.status)}>{STATUS_LABEL[r.status] ?? r.status}</StatusBadge>
                 </div>
-                {r.status === "pending" ? <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+                {r.status === "pending" ? <div className="mt-4 grid grid-cols-2 gap-2 sm:flex">
                   <PrimaryButton
                     variant="action"
-                    className="!py-1.5 !text-xs"
+                    className="w-full !text-xs sm:w-auto"
                     disabled={busyId === r.id}
                     onClick={() => handlePatch(r.id, "confirmed")}
                   >
@@ -143,7 +155,7 @@ export function AdminSchedulesPage() {
                   </PrimaryButton>
                   <PrimaryButton
                     variant="outline"
-                    className="!py-1.5 !text-xs"
+                    className="w-full !text-xs sm:w-auto"
                     disabled={busyId === r.id}
                     onClick={() => handlePatch(r.id, "rejected")}
                   >

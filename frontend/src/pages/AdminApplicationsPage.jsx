@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useSearchParams } from "react-router-dom"
 import { PageHeader } from "../components/PageHeader.jsx"
 import { StatusBadge } from "../components/StatusBadge.jsx"
 import { UiCard } from "../components/UiCard.jsx"
@@ -33,12 +33,22 @@ function statusTone(status) {
 }
 
 export function AdminApplicationsPage() {
-  const [status, setStatus] = useState("")
+  const [searchParams, setSearchParams] = useSearchParams()
+  const [status, setStatus] = useState(() => searchParams.get("status") ?? "")
   const [licenseClass, setLicenseClass] = useState("")
   const [query, setQuery] = useState("")
   const [rows, setRows] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
+
+  function selectStatus(value) {
+    setLoading(true)
+    setStatus(value)
+    const next = new URLSearchParams(searchParams)
+    if (value) next.set("status", value)
+    else next.delete("status")
+    setSearchParams(next, { replace: true })
+  }
 
   useEffect(() => {
     fetchAdminApplications({
@@ -87,7 +97,7 @@ export function AdminApplicationsPage() {
             <button
               key={option.value}
               type="button"
-              onClick={() => { setLoading(true); setStatus(option.value) }}
+              onClick={() => selectStatus(option.value)}
               className={`min-h-10 rounded-drive-pill px-4 text-sm transition ${
                 status === option.value
                   ? "bg-drive-action font-semibold text-drive-action-contrast"

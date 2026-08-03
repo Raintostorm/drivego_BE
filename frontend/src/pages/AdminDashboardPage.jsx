@@ -7,6 +7,7 @@ import { UiCard } from "../components/UiCard.jsx"
 import { useAuth } from "../context/AuthContext.jsx"
 import { fetchAdminSummary } from "../lib/admin-api.js"
 import { t } from "../lib/strings.js"
+import { displayLicenseClass } from "../lib/license-class.js"
 
 const APPLICATION_LABELS = {
   draft: "Nháp",
@@ -34,6 +35,16 @@ const QUICK_LINKS = [
   { to: "/admin/site-content", title: "Nội dung website", desc: "Chỉnh dữ liệu trang chủ đang kéo từ backend." },
   { to: "/admin/health", title: "Cấu hình hệ thống", desc: "Kiểm tra DB, Firebase, Resend, SePay và upload." },
 ]
+
+function WorkItem({ to, label, count, detail, tone = "neutral" }) {
+  const toneClass = tone === "danger" ? "text-drive-danger" : tone === "warning" ? "text-amber-300" : "text-drive-action"
+  return (
+    <Link to={to} className="tap-feedback flex min-h-16 items-center justify-between gap-4 border-b border-drive-border-soft py-3 last:border-b-0">
+      <div className="min-w-0"><p className="font-medium text-drive-text">{label}</p><p className="mt-0.5 text-xs text-drive-muted">{detail}</p></div>
+      <span className={`shrink-0 text-2xl font-bold ${toneClass}`}>{count}</span>
+    </Link>
+  )
+}
 
 function formatMoney(value) {
   return `${Number(value ?? 0).toLocaleString("vi-VN")}đ`
@@ -104,27 +115,62 @@ export function AdminDashboardPage() {
         </UiCard>
       ) : null}
 
-      <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
+      <div className="grid grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-5">
         <StatCard
           label="Hồ sơ nháp"
           value={summary ? String(summary.draftApplications ?? 0) : "—"}
+          to="/admin/applications?status=draft"
+          helper="Chưa được học viên nộp"
         />
         <StatCard
           label="Hồ sơ chờ duyệt"
           value={summary ? String(summary.pendingApplications ?? summary.submittedApplications) : "—"}
+          to="/admin/applications?status=submitted"
+          helper="Cần xử lý"
+          tone="warning"
         />
         <StatCard
           label="Đăng ký ca chờ"
           value={summary ? String(summary.pendingRegistrations) : "—"}
+          to="/admin/schedules"
+          helper="Đang chờ xác nhận"
+          tone="warning"
         />
         <StatCard
           label="Buổi học sắp tới"
           value={summary ? String(summary.upcomingSessions ?? 0) : "—"}
+          to="/admin/class-sessions"
+          helper="Theo lịch trung tâm"
+          tone="success"
         />
         <StatCard
           label="Điểm danh (30 ngày)"
           value={summary ? `${summary.attendanceRate ?? 0}%` : "—"}
+          to="/admin/class-sessions"
+          helper="Tỷ lệ trong 30 ngày"
+          tone="success"
         />
+      </div>
+
+      <div className="mt-4 grid gap-4 xl:grid-cols-[1.1fr_0.9fr]">
+        <UiCard variant="panel">
+          <div className="flex items-start justify-between gap-3"><div><h2 className="font-semibold text-white">Cần xử lý</h2><p className="mt-1 text-sm text-drive-muted">Ưu tiên công việc có ảnh hưởng trực tiếp tới học viên.</p></div><span className="rounded-drive-pill border border-drive-border px-3 py-1 text-xs text-drive-muted">Hôm nay</span></div>
+          <div className="mt-3">
+            <WorkItem to="/admin/applications" label="Hồ sơ chờ duyệt" count={summary?.pendingApplications ?? summary?.submittedApplications ?? 0} detail="Kiểm tra giấy tờ và phản hồi học viên" tone="warning" />
+            <WorkItem to="/admin/applications" label="Hồ sơ quá hạn bổ sung" count={summary?.deadlines?.overdue ?? 0} detail="Cần liên hệ hoặc đóng yêu cầu" tone="danger" />
+            <WorkItem to="/admin/licenses" label="GPLX cần theo dõi" count={summary?.missingDocuments?.incompleteApplications ?? 0} detail="Xác minh thông tin và hạn sử dụng" />
+            <WorkItem to="/admin/schedules" label="Đăng ký ca thi chờ duyệt" count={summary?.pendingRegistrations ?? 0} detail="Sắp xếp ca và xác nhận cho học viên" />
+          </div>
+        </UiCard>
+        <UiCard variant="panel">
+          <div className="flex items-start justify-between gap-3"><div><h2 className="font-semibold text-white">Tình hình 30 ngày</h2><p className="mt-1 text-sm text-drive-muted">Tóm tắt hoạt động gần nhất.</p></div><Link to="/admin/payments" className="text-sm font-medium text-drive-action">Chi tiết</Link></div>
+          <dl className="mt-5 grid grid-cols-2 gap-x-4 gap-y-5">
+            <div><dt className="text-xs text-drive-muted">Doanh thu</dt><dd className="mt-1 text-xl font-bold text-white">{formatMoney(summary?.revenue30Days)}</dd></div>
+            <div><dt className="text-xs text-drive-muted">Check-in</dt><dd className="mt-1 text-xl font-bold text-white">{summary?.checkInsLast30Days ?? 0}</dd></div>
+            <div><dt className="text-xs text-drive-muted">Tỷ lệ điểm danh</dt><dd className="mt-1 text-xl font-bold text-drive-success">{summary?.attendanceRate ?? 0}%</dd></div>
+            <div><dt className="text-xs text-drive-muted">Học viên</dt><dd className="mt-1 text-xl font-bold text-white">{summary?.totalStudents ?? 0}</dd></div>
+          </dl>
+        </UiCard>
       </div>
 
       <div className="mt-6 grid gap-4 xl:grid-cols-[1.2fr_0.8fr]">
@@ -198,7 +244,7 @@ export function AdminDashboardPage() {
               summary.studentsByClass.map((row) => (
                 <BarRow
                   key={row.licenseClass}
-                  label={`Hạng ${row.licenseClass}`}
+                  label={`Hạng ${displayLicenseClass(row.licenseClass)}`}
                   value={row.count}
                   total={summary.totalStudents}
                   tone="success"
@@ -262,21 +308,17 @@ export function AdminDashboardPage() {
         </UiCard>
       </div>
 
-      <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-8">
+        <div className="mb-3"><h2 className="font-semibold text-white">Công cụ quản trị</h2><p className="mt-1 text-sm text-drive-muted">Đi nhanh đến các nghiệp vụ thường dùng.</p></div>
+        <div className="grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
         {QUICK_LINKS.filter(
           (item) => !item.systemOnly || user?.role === "system_admin",
         ).map((item) => (
-          <UiCard key={item.to} variant="panel">
-            <h2 className="font-semibold text-white">{item.title}</h2>
-            <p className="mt-2 text-sm text-drive-muted">{item.desc}</p>
-            <Link
-              to={item.to}
-              className="mt-4 inline-block text-sm font-medium text-drive-action hover:underline"
-            >
-              Mở →
-            </Link>
-          </UiCard>
+          <Link key={item.to} to={item.to} className="tap-feedback group rounded-drive border border-drive-border-soft bg-drive-panel p-4 transition hover:border-drive-border hover:bg-drive-elevated">
+            <div className="flex items-start justify-between gap-3"><div><h3 className="font-semibold text-white">{item.title}</h3><p className="mt-1 text-sm leading-relaxed text-drive-muted">{item.desc}</p></div><span className="text-drive-action transition group-hover:translate-x-0.5">→</span></div>
+          </Link>
         ))}
+        </div>
       </div>
     </section>
   )

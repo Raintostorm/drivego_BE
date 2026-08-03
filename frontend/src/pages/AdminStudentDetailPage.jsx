@@ -152,6 +152,11 @@ export function AdminStudentDetailPage() {
       {tab === "exams" ? (
         <UiCard variant="panel">
           {data.recentAttempts?.length ? (
+            <>
+            <div className="grid gap-2 md:hidden">
+              {data.recentAttempts.map((a) => <article key={a.id} className="flex items-center justify-between gap-3 rounded-drive border border-drive-border-soft bg-drive-sidebar p-3"><div><p className="text-xs text-drive-muted">Điểm</p><p className="text-xl font-bold text-drive-text">{a.score ?? "—"}</p><p className="mt-1 text-xs text-drive-muted">{a.finishedAt ? new Date(a.finishedAt).toLocaleString("vi-VN") : "Chưa hoàn tất"}</p></div><StatusBadge tone={a.passed ? "success" : "danger"}>{a.passed ? "Đạt" : "Chưa đạt"}</StatusBadge></article>)}
+            </div>
+            <div className="hidden overflow-x-auto md:block">
             <table className="min-w-[640px] w-full text-sm">
               <thead>
                 <tr className="text-drive-muted">
@@ -180,6 +185,8 @@ export function AdminStudentDetailPage() {
                 ))}
               </tbody>
             </table>
+            </div>
+            </>
           ) : (
             <p className="text-drive-muted">Chưa có lượt thi.</p>
           )}

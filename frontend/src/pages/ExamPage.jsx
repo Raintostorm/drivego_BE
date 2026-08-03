@@ -321,7 +321,7 @@ export function ExamPage() {
             generateRandom()
           }}
         >
-          {generating ? "Đang tạo đề…" : "🎲 Tạo đề ngẫu nhiên"}
+          {generating ? "Đang tạo đề…" : "Tạo đề ngẫu nhiên"}
         </PrimaryButton>
 
         {papers.length > 0 ? (
@@ -334,7 +334,7 @@ export function ExamPage() {
                 setPaper(null)
                 setSelectedPaperId(e.target.value)
               }}
-              className="min-w-0 rounded-drive border border-drive-border bg-drive-elevated px-4 py-2 text-sm text-drive-text"
+              className="min-h-11 min-w-0 flex-1 rounded-drive border border-drive-border bg-drive-elevated px-4 py-2 text-sm text-drive-text sm:flex-none"
             >
               <option value="" disabled>
                 Chọn đề…
@@ -384,7 +384,7 @@ export function ExamPage() {
             return (
               <label
                 key={`${question.id}-${idx}`}
-                className={`flex cursor-pointer items-start gap-3 rounded-drive border bg-drive-elevated p-3 text-sm text-drive-text transition ${borderClass}`}
+                className={`tap-feedback flex min-h-14 cursor-pointer items-start gap-3 rounded-drive border bg-drive-elevated p-4 text-sm text-drive-text transition ${borderClass}`}
               >
                 <input
                   type="radio"
@@ -402,18 +402,19 @@ export function ExamPage() {
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
           <PrimaryButton
             variant="outline"
+            className="w-full sm:w-auto"
             disabled={currentIndex === 0}
             onClick={() => setCurrentIndex((i) => i - 1)}
           >
             Câu trước
           </PrimaryButton>
           {!isLast ? (
-            <PrimaryButton variant="outline" onClick={() => setCurrentIndex((i) => i + 1)}>
+            <PrimaryButton className="w-full sm:w-auto" variant="outline" onClick={() => setCurrentIndex((i) => i + 1)}>
               Câu sau
             </PrimaryButton>
           ) : null}
           {allAnswered ? (
-            <PrimaryButton variant="action" disabled={submitting || secondsLeft === 0} onClick={handleSubmitExam}>
+            <PrimaryButton className="w-full sm:w-auto" variant="action" disabled={submitting || secondsLeft === 0} onClick={handleSubmitExam}>
               {submitting ? "Đang nộp…" : "Nộp bài"}
             </PrimaryButton>
           ) : (
@@ -444,7 +445,7 @@ export function ExamPage() {
               key={q.id}
               type="button"
               onClick={() => setCurrentIndex(idx)}
-              className={`size-8 rounded-lg text-xs font-medium ${
+              className={`min-h-11 min-w-11 rounded-drive text-xs font-medium ${
                 idx === currentIndex
                   ? "bg-drive-action text-drive-action-contrast"
                   : answers[q.id] !== undefined
@@ -458,7 +459,7 @@ export function ExamPage() {
         </div>
       </UiCard>
 
-      <aside className="space-y-4 lg:sticky lg:top-6 lg:self-start">
+      <aside className="grid grid-cols-2 gap-3 lg:sticky lg:top-6 lg:grid-cols-1 lg:self-start">
         <UiCard variant="panel">
           <p className="text-sm text-drive-muted">{t("pages.exam.timeLeft")}</p>
           <p
@@ -476,7 +477,7 @@ export function ExamPage() {
             {answeredCount}/{totalQuestions}
           </p>
         </UiCard>
-        <UiCard variant="panel" className="text-sm text-drive-muted">
+        <UiCard variant="panel" className="col-span-2 text-sm text-drive-muted lg:col-span-1">
           <p>{t("license.examAside", { count: String(totalQuestions), code: activeClass })}</p>
           <Link to="/theory" className="mt-2 inline-block text-drive-action hover:underline">
             Ôn lý thuyết trước khi thi

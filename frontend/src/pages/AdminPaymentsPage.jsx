@@ -11,6 +11,7 @@ const STATUS_TONE = {
   expired: "danger",
   failed: "danger",
 }
+const STATUS_LABEL = { paid: "Đã thanh toán", pending: "Đang chờ", expired: "Hết hạn", failed: "Thất bại" }
 
 function formatMoney(value) {
   return Number(value ?? 0).toLocaleString("vi-VN")
@@ -52,7 +53,12 @@ export function AdminPaymentsPage() {
   }
 
   useEffect(() => {
-    load()
+    let cancelled = false
+    fetchAdminPayments(filters)
+      .then((data) => { if (!cancelled) setRows(data) })
+      .catch((err) => { if (!cancelled) setError(err instanceof Error ? err.message : "Không tải được giao dịch") })
+      .finally(() => { if (!cancelled) setLoading(false) })
+    return () => { cancelled = true }
   }, [filters])
 
   async function handleConfirm(row) {
@@ -84,11 +90,11 @@ export function AdminPaymentsPage() {
       />
 
       <UiCard variant="panel" className="mt-4">
-        <div className="flex flex-wrap gap-3">
+        <div className="grid gap-3 sm:grid-cols-[180px_180px_auto]">
           <select
-            className="rounded-drive border border-drive-border bg-drive-elevated px-3 py-2 text-sm text-white"
+            className="min-h-11 w-full rounded-drive border border-drive-border bg-drive-elevated px-3 py-2 text-sm text-white"
             value={status}
-            onChange={(e) => setStatus(e.target.value)}
+            onChange={(e) => { setLoading(true); setStatus(e.target.value) }}
           >
             <option value="">Tất cả trạng thái</option>
             <option value="pending">Đang chờ</option>
@@ -96,9 +102,9 @@ export function AdminPaymentsPage() {
             <option value="expired">Hết hạn</option>
           </select>
           <select
-            className="rounded-drive border border-drive-border bg-drive-elevated px-3 py-2 text-sm text-white"
+            className="min-h-11 w-full rounded-drive border border-drive-border bg-drive-elevated px-3 py-2 text-sm text-white"
             value={paymentType}
-            onChange={(e) => setPaymentType(e.target.value)}
+            onChange={(e) => { setLoading(true); setPaymentType(e.target.value) }}
           >
             <option value="">Tất cả loại</option>
             <option value="enrollment">Đăng ký khóa</option>
@@ -113,12 +119,21 @@ export function AdminPaymentsPage() {
       {notice ? <p className="mt-4 text-sm text-drive-success">{notice}</p> : null}
       {error ? <p className="mt-4 text-sm text-drive-danger">{error}</p> : null}
 
-      <UiCard variant="panel" className="mt-4 overflow-x-auto">
+      <UiCard variant="panel" padding="sm" className="mt-4">
         {loading ? (
           <p className="text-sm text-drive-muted">Đang tải giao dịch...</p>
         ) : rows.length === 0 ? (
           <p className="text-sm text-drive-muted">Không có giao dịch phù hợp.</p>
         ) : (
+          <>
+          <div className="grid gap-3 md:hidden">
+            {rows.map((row) => <article key={row.id} className="rounded-drive border border-drive-border-soft bg-drive-sidebar p-4">
+              <div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="truncate font-semibold text-drive-text">{row.studentName || "Chưa có tên"}</p><p className="truncate text-xs text-drive-muted">{row.studentEmail}</p></div><StatusBadge tone={STATUS_TONE[row.status] || "neutral"}>{STATUS_LABEL[row.status] || row.status}</StatusBadge></div>
+              <div className="mt-4 flex items-end justify-between gap-3"><div><p className="text-xs text-drive-muted">{row.paymentType === "enrollment" ? `Khóa ${row.licenseClass || ""}` : "Premium"}</p><p className="mt-1 text-xl font-bold text-drive-text">{formatMoney(row.amount)}đ</p><p className="mt-1 font-mono text-xs text-drive-muted">{row.paymentCode || row.id.slice(0, 8)}</p></div><p className="text-right text-xs text-drive-muted">{formatDate(row.createdAt)}</p></div>
+              {row.status === "pending" ? <PrimaryButton className="mt-4 w-full" variant="outline" disabled={actionId === row.id} onClick={() => handleConfirm(row)}>Xác nhận đã nhận tiền</PrimaryButton> : null}
+            </article>)}
+          </div>
+          <div className="hidden overflow-x-auto md:block">
           <table className="min-w-full text-left text-sm">
             <thead className="text-drive-muted">
               <tr>
@@ -151,7 +166,7 @@ export function AdminPaymentsPage() {
                   </td>
                   <td className="px-3 py-3">
                     <StatusBadge tone={STATUS_TONE[row.status] || "neutral"}>
-                      {row.status}
+                      {STATUS_LABEL[row.status] || row.status}
                     </StatusBadge>
                     {row.manualConfirmed ? (
                       <p className="mt-1 text-xs text-drive-muted">Xác nhận thủ công</p>
@@ -177,6 +192,8 @@ export function AdminPaymentsPage() {
               ))}
             </tbody>
           </table>
+          </div>
+          </>
         )}
       </UiCard>
     </section>

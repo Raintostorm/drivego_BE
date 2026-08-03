@@ -1,9 +1,10 @@
-import { useMemo } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useEffect, useMemo, useState } from "react"
+import { Link, useLocation, useNavigate } from "react-router-dom"
 import { BrandLogo } from "../BrandLogo.jsx"
 import { LicenseClassSwitcher } from "../LicenseClassSwitcher.jsx"
 import { PageGuide } from "../PageGuide.jsx"
 import { SidebarNav } from "../SidebarNav.jsx"
+import { ThemeToggle } from "../ThemeToggle.jsx"
 import { useAuth } from "../../context/AuthContext.jsx"
 import { formatPremiumDate, isPremiumActive } from "../../lib/premium.js"
 import { t } from "../../lib/strings.js"
@@ -18,6 +19,8 @@ import { t } from "../../lib/strings.js"
 export function DashboardShell({ children, variant, navItems }) {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
+  const location = useLocation()
+  const [menuOpen, setMenuOpen] = useState(false)
   const premium = isPremiumActive(user)
   const logoTo = variant === "admin" ? "/admin-dashboard" : "/"
 
@@ -34,34 +37,63 @@ export function DashboardShell({ children, variant, navItems }) {
     navigate("/login", { replace: true })
   }
 
+  useEffect(() => {
+    queueMicrotask(() => setMenuOpen(false))
+  }, [location.pathname])
+
+  useEffect(() => {
+    if (!menuOpen) return undefined
+    const previous = document.body.style.overflow
+    document.body.style.overflow = "hidden"
+    return () => { document.body.style.overflow = previous }
+  }, [menuOpen])
+
   return (
-    <div className="-mx-3 flex min-h-[calc(100vh-2rem)] flex-col sm:-mx-6 lg:-mx-10 lg:flex-row">
-      <aside className="sticky top-0 z-30 flex max-h-[52svh] flex-col overflow-hidden border-b border-drive-border-soft bg-drive-sidebar/95 backdrop-blur lg:fixed lg:inset-y-0 lg:left-0 lg:z-20 lg:max-h-none lg:w-72 lg:border-r lg:border-b-0 lg:bg-drive-sidebar">
+    <div className="-mx-3 min-h-[calc(100vh-2rem)] sm:-mx-6 lg:-mx-10">
+      <header className="sticky top-0 z-30 flex min-h-16 items-center justify-between border-b border-drive-border-soft bg-drive-sidebar/95 px-3 backdrop-blur lg:hidden">
+        <BrandLogo size="sm" to={logoTo} />
+        <button
+          type="button"
+          className="tap-feedback inline-flex size-11 items-center justify-center rounded-lg border border-drive-border text-drive-text"
+          aria-label="Mở menu"
+          aria-expanded={menuOpen}
+          aria-controls="dashboard-navigation"
+          onClick={() => setMenuOpen(true)}
+        >
+          <span className="flex w-5 flex-col gap-1.5" aria-hidden="true"><span className="h-0.5 w-full bg-current" /><span className="h-0.5 w-full bg-current" /><span className="h-0.5 w-full bg-current" /></span>
+        </button>
+      </header>
+
+      {menuOpen ? (
+        <button
+          type="button"
+          aria-label="Đóng menu"
+          className="fixed inset-0 z-40 bg-black/60 backdrop-blur-[2px] lg:hidden"
+          onClick={() => setMenuOpen(false)}
+        />
+      ) : null}
+
+      <aside
+        id="dashboard-navigation"
+        className={`fixed inset-y-0 left-0 z-50 flex w-[min(22rem,88vw)] flex-col overflow-hidden border-r border-drive-border-soft bg-drive-sidebar shadow-2xl transition-transform duration-200 lg:z-20 lg:w-72 lg:translate-x-0 lg:shadow-none ${menuOpen ? "translate-x-0" : "-translate-x-full"}`}
+      >
         <div className="shrink-0 px-3 py-2.5 lg:px-0 lg:py-6">
           <div className="mb-0 hidden px-5 lg:block">
-            <BrandLogo to={logoTo} />
+            <BrandLogo size="sm" to={logoTo} />
             {variant === "admin" ? (
               <p className="mt-2 text-xs font-medium uppercase tracking-wide text-drive-action">
                 Portal quản trị
               </p>
             ) : null}
           </div>
-          <div className="flex items-center justify-between gap-3 px-1 lg:hidden">
+          <div className="flex min-h-12 items-center justify-between gap-3 px-1 lg:hidden">
             <BrandLogo size="sm" to={logoTo} />
-            {user ? (
-              <button
-                type="button"
-                onClick={handleLogout}
-                className="min-h-10 shrink-0 rounded-drive-pill border border-drive-border px-3 py-2 text-xs font-semibold text-drive-muted transition hover:text-white"
-              >
-                Đăng xuất
-              </button>
-            ) : null}
+            <button type="button" onClick={() => setMenuOpen(false)} aria-label="Đóng menu" className="tap-feedback inline-flex size-11 items-center justify-center rounded-lg border border-drive-border text-2xl leading-none text-drive-text">×</button>
           </div>
         </div>
 
         <div className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden px-0 pb-2 lg:max-h-[calc(100vh-12rem)]">
-          <SidebarNav items={items} />
+          <SidebarNav items={items} stackOnMobile onNavigate={() => setMenuOpen(false)} />
           {variant === "student" ? (
             <div className="mt-4">
               <LicenseClassSwitcher />
@@ -69,7 +101,8 @@ export function DashboardShell({ children, variant, navItems }) {
           ) : null}
         </div>
 
-        <div className="hidden shrink-0 space-y-2 border-t border-drive-border-soft px-3 py-4 lg:block">
+        <div className="shrink-0 space-y-2 border-t border-drive-border-soft px-3 py-4">
+          <ThemeToggle />
           {variant === "student" ? (
             premium ? (
               <Link
@@ -111,7 +144,7 @@ export function DashboardShell({ children, variant, navItems }) {
 
       <div className="min-w-0 flex-1 lg:pl-72">
         {variant === "student" ? <PageGuide /> : null}
-        <div className="px-3 py-4 sm:px-6 lg:px-10 lg:py-6">{children}</div>
+        <main className="px-3 py-4 sm:px-6 lg:px-10 lg:py-6">{children}</main>
       </div>
     </div>
   )

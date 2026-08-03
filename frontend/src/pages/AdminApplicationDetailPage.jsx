@@ -34,6 +34,18 @@ const FIELD_LABEL = {
   issuedPlace: "Nơi cấp",
 }
 
+const REVIEW_STEPS = [
+  { id: "submitted", label: "Đã nộp" },
+  { id: "reviewing", label: "Đang duyệt" },
+  { id: "approved", label: "Hoàn tất" },
+]
+
+function ReviewProgress({ status }) {
+  const effective = status === "rejected" ? "reviewing" : status
+  const activeIndex = Math.max(0, REVIEW_STEPS.findIndex((step) => step.id === effective))
+  return <ol className="grid grid-cols-3 gap-2" aria-label="Tiến độ duyệt hồ sơ">{REVIEW_STEPS.map((step, index) => <li key={step.id} className="min-w-0"><div className={`h-1.5 rounded-full ${index <= activeIndex ? status === "rejected" && index === activeIndex ? "bg-drive-danger" : "bg-drive-success" : "bg-drive-elevated"}`} /><p className={`mt-2 truncate text-xs ${index <= activeIndex ? "font-medium text-drive-text" : "text-drive-muted"}`}>{step.label}</p></li>)}</ol>
+}
+
 export function AdminApplicationDetailPage() {
   const { id } = useParams()
   const [app, setApp] = useState(null)
@@ -103,6 +115,11 @@ export function AdminApplicationDetailPage() {
       <Link to="/admin/applications" className="text-sm text-drive-action hover:underline">
         ← Danh sách hồ sơ
       </Link>
+
+      <UiCard variant="panel" padding="sm">
+        <div className="flex items-center justify-between gap-3"><p className="text-sm font-medium text-drive-text">Quy trình xử lý</p>{app.status === "rejected" ? <StatusBadge tone="danger">Cần bổ sung</StatusBadge> : null}</div>
+        <div className="mt-3"><ReviewProgress status={app.status} /></div>
+      </UiCard>
 
       {message ? (
         <UiCard variant="panel">
@@ -182,7 +199,7 @@ export function AdminApplicationDetailPage() {
                 <p className="truncate text-sm font-medium text-drive-text">{d.originalName ?? "Tài liệu"}</p>
                 <p className="text-xs text-drive-muted">{d.docType} · bản {d.slotIndex + 1}</p>
               </div>
-              <div className="flex gap-3">
+              <div className="grid w-full grid-cols-2 gap-2 sm:flex sm:w-auto sm:gap-3">
                 <button type="button" className="min-h-10 text-sm font-medium text-drive-action hover:underline" onClick={() => adminOpenDocument(d.id)}>
                   Xem nhanh
                 </button>

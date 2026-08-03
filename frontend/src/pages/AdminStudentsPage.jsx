@@ -14,7 +14,6 @@ export function AdminStudentsPage() {
   const [error, setError] = useState(null)
 
   useEffect(() => {
-    setLoading(true)
     const params =
       tab === "premium"
         ? { premium: "true" }
@@ -49,7 +48,7 @@ export function AdminStudentsPage() {
           <button
             key={t.id}
             type="button"
-            onClick={() => setTab(t.id)}
+          onClick={() => { setLoading(true); setTab(t.id) }}
             className={`rounded-drive-pill px-4 py-2 text-sm font-medium transition ${
               tab === t.id
                 ? "bg-drive-action text-drive-action-contrast"
@@ -65,7 +64,17 @@ export function AdminStudentsPage() {
       {loading ? (
         <p className="text-drive-muted">Đang tải…</p>
       ) : (
-        <UiCard variant="panel" className="overflow-x-auto">
+        <UiCard variant="panel" padding="sm">
+          <div className="grid gap-3 md:hidden">
+            {filtered.map((r) => (
+              <article key={r.userId} className="rounded-drive border border-drive-border-soft bg-drive-sidebar p-4">
+                <div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="truncate font-semibold text-drive-text">{r.fullName ?? r.email}</p><p className="truncate text-xs text-drive-muted">{r.email}</p></div>{r.isPremium ? <StatusBadge tone="success">Premium</StatusBadge> : <StatusBadge tone="neutral">Free</StatusBadge>}</div>
+                <div className="mt-4"><p className="text-xs text-drive-muted">Khóa đang học</p>{r.enrollments?.length ? <div className="mt-2 flex flex-wrap gap-2">{r.enrollments.map((e) => <span key={e.licenseClass} className="rounded-drive-pill border border-drive-border px-3 py-1 text-xs text-drive-text">Hạng {displayLicenseClass(e.licenseClass)}</span>)}</div> : <p className="mt-1 text-sm text-drive-muted">Chưa đăng ký khóa</p>}</div>
+                <Link to={`/admin/students/${r.userId}`} className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-drive bg-drive-action px-4 text-sm font-bold text-drive-action-contrast">Xem học viên</Link>
+              </article>
+            ))}
+          </div>
+          <div className="hidden overflow-x-auto md:block">
           <table className="w-full min-w-[640px] text-left text-sm">
             <thead>
               <tr className="border-b border-drive-border text-drive-muted">
@@ -121,6 +130,7 @@ export function AdminStudentsPage() {
               ))}
             </tbody>
           </table>
+          </div>
           {!filtered.length ? (
             <p className="py-6 text-center text-drive-muted">Không có học viên phù hợp.</p>
           ) : null}

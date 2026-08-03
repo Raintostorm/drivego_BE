@@ -24,6 +24,17 @@ const EMPTY = {
   centerId: "",
 }
 
+const SLOT_LABEL = { theory_exam: "Thi lý thuyết", road_test: "Chạy thử / thực hành" }
+
+function formatDate(value) {
+  return new Date(`${String(value).slice(0, 10)}T00:00:00`).toLocaleDateString("vi-VN", {
+    weekday: "short",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  })
+}
+
 export function AdminScheduleSlotsPage() {
   const { user } = useAuth()
   const isSystemAdmin = user?.role === "system_admin"
@@ -77,13 +88,17 @@ export function AdminScheduleSlotsPage() {
       />
       {error ? <p className="text-drive-danger">{error}</p> : null}
 
-      <UiCard variant="panel">
+      <UiCard variant="panel" className="space-y-4">
+        <div>
+          <h2 className="font-semibold text-drive-text">Tạo ca thi mới</h2>
+          <p className="mt-1 text-sm text-drive-muted">Thiết lập thời gian, sức chứa và địa điểm trước khi mở đăng ký.</p>
+        </div>
         <form onSubmit={handleCreate} className="grid gap-3 sm:grid-cols-2">
           {isSystemAdmin ? (
             <label className="sm:col-span-2 block text-sm">
               <span className="mb-2 block font-medium text-drive-text">Trung tâm</span>
               <select
-                className="w-full rounded-drive border border-drive-border bg-drive-elevated px-3 py-2 text-white"
+                className="min-h-12 w-full rounded-drive border border-drive-border bg-drive-elevated px-3 py-2 text-drive-text"
                 value={form.centerId}
                 onChange={(e) => setForm({ ...form, centerId: e.target.value })}
                 required
@@ -134,7 +149,7 @@ export function AdminScheduleSlotsPage() {
             className="sm:col-span-2"
           />
           <select
-            className="rounded-drive border border-drive-border bg-drive-elevated px-3 py-2 text-white"
+            className="min-h-12 rounded-drive border border-drive-border bg-drive-elevated px-3 py-2 text-drive-text"
             value={form.slotType}
             onChange={(e) => setForm({ ...form, slotType: e.target.value })}
           >
@@ -149,27 +164,29 @@ export function AdminScheduleSlotsPage() {
 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <h2 className="text-lg font-semibold text-drive-text">Danh sách ca thi</h2>
-        <select value={slotTypeFilter} onChange={(e) => setSlotTypeFilter(e.target.value)} className="min-h-11 rounded-drive border border-drive-border bg-drive-elevated px-3 text-sm text-drive-text">
+        <select value={slotTypeFilter} onChange={(e) => setSlotTypeFilter(e.target.value)} className="min-h-11 w-full rounded-drive border border-drive-border bg-drive-elevated px-3 text-sm text-drive-text sm:w-auto">
           <option value="">Tất cả loại ca</option>
           <option value="theory_exam">Thi lý thuyết</option>
           <option value="road_test">Chạy thử / thực hành</option>
         </select>
       </div>
 
+      {!rows.length ? <UiCard variant="panel"><p className="text-sm text-drive-muted">Chưa có ca thi phù hợp với bộ lọc.</p></UiCard> : null}
+
       <div className="grid gap-3 md:hidden">
         {rows.map((slot) => {
           const held = slot.heldSeats ?? slot.registeredCount ?? 0
           const percent = Math.min(100, Math.round((held / Math.max(1, slot.capacity)) * 100))
           return <UiCard key={slot.id} variant="panel">
-            <div className="flex items-start justify-between gap-3"><div><p className="font-semibold text-drive-text">{new Date(`${slot.date ?? slot.slotDate}T00:00:00`).toLocaleDateString("vi-VN")}</p><p className="text-sm text-drive-muted">{String(slot.startTime).slice(0, 5)}–{String(slot.endTime).slice(0, 5)} · Hạng {slot.licenseClass}</p></div><StatusBadge tone={percent >= 100 ? "danger" : percent >= 80 ? "warning" : "success"}>{held}/{slot.capacity} chỗ</StatusBadge></div>
-            <p className="mt-3 text-sm text-drive-muted">{slot.slotType === "theory_exam" ? "Thi lý thuyết" : "Chạy thử / thực hành"}{slot.venue ? ` · ${slot.venue}` : ""}</p>
+            <div className="flex items-start justify-between gap-3"><div><p className="font-semibold text-drive-text">{formatDate(slot.date ?? slot.slotDate)}</p><p className="mt-1 text-sm text-drive-muted">{String(slot.startTime).slice(0, 5)}–{String(slot.endTime).slice(0, 5)} · Hạng {slot.licenseClass}</p></div><StatusBadge tone={percent >= 100 ? "danger" : percent >= 80 ? "warning" : "success"}>{held}/{slot.capacity} chỗ</StatusBadge></div>
+            <p className="mt-3 text-sm text-drive-muted">{SLOT_LABEL[slot.slotType]}{slot.venue ? ` · ${slot.venue}` : ""}</p>
             <div className="mt-3 h-2 overflow-hidden rounded-full bg-drive-elevated"><div className="h-full bg-drive-action" style={{ width: `${percent}%` }} /></div>
             <button type="button" className="mt-4 min-h-11 w-full rounded-drive border border-drive-danger text-sm text-drive-danger" onClick={() => { if (held > 0) { setError("Không thể xóa nhanh ca đã có học viên giữ chỗ."); return } if (window.confirm("Xóa ca thi này?")) deleteAdminSlot(slot.id).then(reload) }}>Xóa ca</button>
           </UiCard>
         })}
       </div>
 
-      <UiCard variant="panel" className="hidden overflow-x-auto md:block">
+      {rows.length ? <UiCard variant="panel" className="hidden overflow-x-auto md:block">
         <table className="min-w-[720px] w-full text-sm">
           <thead>
             <tr className="text-drive-muted">
@@ -184,15 +201,15 @@ export function AdminScheduleSlotsPage() {
           <tbody>
             {rows.map((s) => (
               <tr key={s.id} className="border-t border-drive-border-soft">
-                <td className="py-2 text-white">{s.date ?? s.slotDate}</td>
-                <td className="py-2 text-white">
+                <td className="py-3 text-drive-text">{formatDate(s.date ?? s.slotDate)}</td>
+                <td className="py-3 text-drive-text">
                   {String(s.startTime).slice(0, 5)}–{String(s.endTime).slice(0, 5)}
                 </td>
                 <td className="py-2">{s.licenseClass}</td>
                 <td className="py-2 text-drive-muted">
                   {s.heldSeats ?? s.registeredCount ?? 0}/{s.capacity}
                 </td>
-                <td className="py-2">{s.slotType === "theory_exam" ? "Thi lý thuyết" : "Chạy thử / thực hành"}</td>
+                <td className="py-2">{SLOT_LABEL[s.slotType]}</td>
                 <td className="py-2 text-right">
                   <button
                     type="button"
@@ -210,7 +227,7 @@ export function AdminScheduleSlotsPage() {
             ))}
           </tbody>
         </table>
-      </UiCard>
+      </UiCard> : null}
     </section>
   )
 }

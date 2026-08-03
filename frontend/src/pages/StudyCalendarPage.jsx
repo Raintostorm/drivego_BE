@@ -3,8 +3,24 @@ import { Link } from "react-router-dom"
 import { PageHeader } from "../components/PageHeader.jsx"
 import { PrimaryButton } from "../components/PrimaryButton.jsx"
 import { UiCard } from "../components/UiCard.jsx"
+import { StatusBadge } from "../components/StatusBadge.jsx"
 import { apiFetch } from "../lib/api.js"
 import { t } from "../lib/strings.js"
+
+const SESSION_META = {
+  theory: { label: "Lý thuyết", tone: "info" },
+  simulation: { label: "Mô phỏng", tone: "warning" },
+  practice: { label: "Thực hành", tone: "success" },
+}
+
+function formatDate(value) {
+  return new Date(`${value}T00:00:00`).toLocaleDateString("vi-VN", {
+    weekday: "long",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  })
+}
 
 export function StudyCalendarPage() {
   const [sessions, setSessions] = useState([])
@@ -58,15 +74,15 @@ export function StudyCalendarPage() {
                   <button
                     type="button"
                     onClick={() => setSelected(s)}
-                    className={`w-full rounded-drive border px-3 py-2 text-left ${
+                    className={`min-h-20 w-full rounded-drive border px-3 py-3 text-left transition-colors ${
                       selected?.id === s.id
                         ? "border-drive-action bg-drive-action/10"
                         : "border-drive-border-soft"
                     }`}
                   >
-                    <p className="font-medium text-white">{s.title}</p>
-                    <p className="text-xs text-drive-muted">
-                      {s.sessionDate} · {s.startTime}–{s.endTime}
+                    <div className="flex items-start justify-between gap-3"><p className="font-semibold text-drive-text">{s.title}</p><StatusBadge tone={SESSION_META[s.sessionType]?.tone}>{SESSION_META[s.sessionType]?.label ?? "Buổi học"}</StatusBadge></div>
+                    <p className="mt-1 text-xs text-drive-muted">
+                      {formatDate(s.sessionDate)} · {String(s.startTime).slice(0, 5)}–{String(s.endTime).slice(0, 5)}
                       {s.venue ? ` · ${s.venue}` : ""}
                     </p>
                   </button>
@@ -90,18 +106,16 @@ export function StudyCalendarPage() {
         <UiCard variant="panel">
           {selected ? (
             <>
-              <p className="text-xs text-drive-muted">{selected.sessionDate}</p>
-              <h2 className="mt-2 font-semibold text-white">{selected.title}</h2>
+              <div className="flex flex-wrap items-start justify-between gap-2"><div><p className="text-xs capitalize text-drive-muted">{formatDate(selected.sessionDate)}</p><h2 className="mt-2 font-semibold text-drive-text">{selected.title}</h2></div><StatusBadge tone={SESSION_META[selected.sessionType]?.tone}>{SESSION_META[selected.sessionType]?.label ?? "Buổi học"}</StatusBadge></div>
               <p className="mt-2 text-sm text-drive-text">
-                {selected.startTime}–{selected.endTime}
-                {selected.sessionType ? ` · ${selected.sessionType}` : ""}
+                {String(selected.startTime).slice(0, 5)}–{String(selected.endTime).slice(0, 5)}
               </p>
               {selected.venue ? (
                 <p className="text-xs text-drive-muted">{selected.venue}</p>
               ) : null}
               <PrimaryButton
                 variant="action"
-                className="mt-4"
+                className="mt-4 w-full sm:w-auto"
                 disabled={checking}
                 onClick={handleCheckIn}
               >

@@ -3,6 +3,7 @@ import { PageHeader } from "../components/PageHeader.jsx"
 import { PrimaryButton } from "../components/PrimaryButton.jsx"
 import { TextField } from "../components/TextField.jsx"
 import { UiCard } from "../components/UiCard.jsx"
+import { StatusBadge } from "../components/StatusBadge.jsx"
 import {
   adminSessionCheckIn,
   createAdminClassSession,
@@ -20,6 +21,20 @@ const EMPTY = {
   sessionType: "theory",
   licenseClass: "B2",
   maxCapacity: 30,
+}
+
+const SESSION_META = {
+  theory: { label: "Lý thuyết", tone: "info" },
+  simulation: { label: "Mô phỏng", tone: "warning" },
+  practice: { label: "Thực hành", tone: "success" },
+}
+
+function formatDate(value) {
+  return new Date(`${value}T00:00:00`).toLocaleDateString("vi-VN", {
+    weekday: "short",
+    day: "2-digit",
+    month: "2-digit",
+  })
 }
 
 export function AdminClassSessionsPage() {
@@ -77,7 +92,11 @@ export function AdminClassSessionsPage() {
       <PageHeader title="Buổi học & điểm danh" subtitle="Lịch lớp tại trung tâm" />
       {error ? <p className="text-drive-danger">{error}</p> : null}
 
-      <UiCard variant="panel">
+      <UiCard variant="panel" className="space-y-4">
+        <div>
+          <h2 className="font-semibold text-drive-text">Tạo buổi học mới</h2>
+          <p className="mt-1 text-sm text-drive-muted">Thông tin này sẽ xuất hiện trong lịch học của học viên thuộc trung tâm.</p>
+        </div>
         <form onSubmit={handleCreate} className="grid gap-3 sm:grid-cols-2">
           <TextField
             label="Tiêu đề"
@@ -128,37 +147,41 @@ export function AdminClassSessionsPage() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <UiCard variant="panel">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <h3 className="font-semibold text-white">Danh sách buổi</h3>
-            <div className="flex rounded-drive border border-drive-border p-1 text-xs">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <h3 className="font-semibold text-drive-text">Danh sách buổi</h3>
+            <div className="grid grid-cols-3 rounded-drive border border-drive-border p-1 text-xs">
               {[{ id: "upcoming", label: "Sắp tới" }, { id: "past", label: "Đã qua" }, { id: "all", label: "Tất cả" }].map((item) => <button key={item.id} type="button" onClick={() => setFilter(item.id)} className={`min-h-9 rounded px-3 ${filter === item.id ? "bg-drive-action text-drive-action-contrast" : "text-drive-muted"}`}>{item.label}</button>)}
             </div>
           </div>
-          <ul className="mt-3 space-y-2 text-sm">
+          <ul className="mt-4 space-y-2 text-sm">
             {visibleRows.map((s) => (
               <li key={s.id}>
                 <button
                   type="button"
-                  className={`w-full rounded-drive border px-3 py-2 text-left ${
+                  className={`min-h-20 w-full rounded-drive border px-3 py-3 text-left transition-colors ${
                     selectedId === s.id
                       ? "border-drive-action bg-drive-action/10"
                       : "border-drive-border"
                   }`}
                   onClick={() => setSelectedId(s.id)}
                 >
-                  <span className="flex items-start justify-between gap-3"><span className="font-medium text-white">{s.title}</span><span className="shrink-0 text-xs text-drive-action">{s.attendanceCount ?? 0}/{s.maxCapacity}</span></span>
-                  <span className="block text-drive-muted">
-                    {new Date(`${s.sessionDate}T00:00:00`).toLocaleDateString("vi-VN")} · {String(s.startTime).slice(0, 5)}–{String(s.endTime).slice(0, 5)}
+                  <span className="flex items-start justify-between gap-3"><span className="font-semibold text-drive-text">{s.title}</span><StatusBadge tone={SESSION_META[s.sessionType]?.tone}>{SESSION_META[s.sessionType]?.label ?? s.sessionType}</StatusBadge></span>
+                  <span className="mt-1 block text-drive-muted">
+                    {formatDate(s.sessionDate)} · {String(s.startTime).slice(0, 5)}–{String(s.endTime).slice(0, 5)}
                   </span>
-                  <span className="mt-1 block text-xs text-drive-muted">{s.sessionType === "theory" ? "Lý thuyết" : s.sessionType === "simulation" ? "Mô phỏng" : "Thực hành"} · Hạng {s.licenseClass ?? "chung"}{s.venue ? ` · ${s.venue}` : ""}</span>
+                  <span className="mt-1 flex justify-between gap-3 text-xs text-drive-muted"><span>Hạng {s.licenseClass ?? "chung"}{s.venue ? ` · ${s.venue}` : ""}</span><span className="shrink-0">{s.attendanceCount ?? 0}/{s.maxCapacity} có mặt</span></span>
                 </button>
               </li>
             ))}
+            {!visibleRows.length ? <li className="rounded-drive border border-dashed border-drive-border p-4 text-drive-muted">Chưa có buổi học trong nhóm này.</li> : null}
           </ul>
         </UiCard>
 
         <UiCard variant="panel">
-          <h3 className="font-semibold text-white">Điểm danh{selectedSession ? ` · ${selectedSession.title}` : ""}</h3>
+          <div className="flex flex-wrap items-start justify-between gap-2">
+            <div><h3 className="font-semibold text-drive-text">Điểm danh{selectedSession ? ` · ${selectedSession.title}` : ""}</h3>{selectedSession ? <p className="mt-1 text-xs text-drive-muted">{formatDate(selectedSession.sessionDate)} · {String(selectedSession.startTime).slice(0, 5)}–{String(selectedSession.endTime).slice(0, 5)}</p> : null}</div>
+            {selectedSession ? <StatusBadge tone="info">{attendance.length}/{selectedSession.maxCapacity} có mặt</StatusBadge> : null}
+          </div>
           {selectedId ? (
             <>
               <div className="mt-3 flex flex-col gap-2 sm:flex-row">
@@ -168,7 +191,7 @@ export function AdminClassSessionsPage() {
                     {students.filter((student) => !attendance.some((item) => item.userId === student.userId)).map((student) => <option key={student.userId} value={student.userId}>{student.fullName ?? student.email} · {student.email}</option>)}
                   </select>
                 </label>
-                <PrimaryButton type="button" className="self-end" onClick={handleCheckIn}>
+                <PrimaryButton type="button" className="w-full self-end sm:w-auto" disabled={!checkInUserId} onClick={handleCheckIn}>
                   Xác nhận có mặt
                 </PrimaryButton>
               </div>
@@ -176,7 +199,7 @@ export function AdminClassSessionsPage() {
                 {attendance.map((a) => (
                   <li key={a.id} className="flex flex-wrap items-center justify-between gap-2 rounded-drive border border-drive-border-soft bg-drive-sidebar px-3 py-2">
                     <span><span className="block font-medium text-drive-text">{a.studentName ?? a.userId}</span><span className="text-xs">{a.studentEmail}</span></span>
-                    <span className="text-xs text-drive-action">Có mặt · {new Date(a.checkedInAt).toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}</span>
+                    <StatusBadge tone="success">Có mặt · {new Date(a.checkedInAt).toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}</StatusBadge>
                   </li>
                 ))}
                 {!attendance.length ? <li>Chưa có điểm danh.</li> : null}
