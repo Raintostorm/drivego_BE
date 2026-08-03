@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { PageHeader } from "../components/PageHeader.jsx"
 import { PrimaryButton } from "../components/PrimaryButton.jsx"
 import { StatusBadge } from "../components/StatusBadge.jsx"
@@ -10,6 +10,14 @@ const TABS = [
   { id: "road_test", label: "Chạy thử / thực hành" },
 ]
 
+const STATUS_TABS = [
+  { id: "pending", label: "Chờ duyệt" },
+  { id: "confirmed", label: "Đã xác nhận" },
+  { id: "rejected", label: "Đã từ chối" },
+]
+
+const STATUS_LABEL = { pending: "Chờ duyệt", confirmed: "Đã xác nhận", rejected: "Đã từ chối" }
+
 function regStatusTone(status) {
   if (status === "confirmed") return "success"
   if (status === "rejected") return "danger"
@@ -18,6 +26,8 @@ function regStatusTone(status) {
 
 export function AdminSchedulesPage() {
   const [slotType, setSlotType] = useState("theory_exam")
+  const [status, setStatus] = useState("pending")
+  const [query, setQuery] = useState("")
   const [rows, setRows] = useState([])
   const [loading, setLoading] = useState(true)
   const [message, setMessage] = useState(null)
@@ -25,15 +35,24 @@ export function AdminSchedulesPage() {
 
   function load() {
     setLoading(true)
-    fetchAdminRegistrations({ status: "pending", slotType })
+    fetchAdminRegistrations({ status, slotType })
       .then(setRows)
       .catch((e) => setMessage(e instanceof Error ? e.message : "Lỗi"))
       .finally(() => setLoading(false))
   }
 
   useEffect(() => {
-    load()
-  }, [slotType])
+    fetchAdminRegistrations({ status, slotType })
+      .then(setRows)
+      .catch((e) => setMessage(e instanceof Error ? e.message : "Lỗi"))
+      .finally(() => setLoading(false))
+  }, [slotType, status])
+
+  const filteredRows = useMemo(() => {
+    const needle = query.trim().toLocaleLowerCase("vi-VN")
+    if (!needle) return rows
+    return rows.filter((row) => `${row.studentName ?? ""} ${row.studentEmail ?? ""}`.toLocaleLowerCase("vi-VN").includes(needle))
+  }, [query, rows])
 
   async function handlePatch(regId, status) {
     setBusyId(regId)
@@ -70,6 +89,17 @@ export function AdminSchedulesPage() {
         ))}
       </div>
 
+      <UiCard variant="panel" className="space-y-3">
+        <div className="flex flex-wrap gap-2">
+          {STATUS_TABS.map((tab) => (
+            <button key={tab.id} type="button" onClick={() => { setLoading(true); setStatus(tab.id) }} className={`min-h-10 rounded-drive-pill px-4 text-sm ${status === tab.id ? "bg-drive-action font-semibold text-drive-action-contrast" : "border border-drive-border bg-drive-elevated text-drive-muted"}`}>
+              {tab.label}
+            </button>
+          ))}
+        </div>
+        <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Tìm tên hoặc email học viên" className="min-h-11 w-full rounded-drive border border-drive-border bg-drive-elevated px-3 text-sm text-drive-text outline-none focus:ring-2 focus:ring-drive-action" />
+      </UiCard>
+
       {message ? (
         <UiCard variant="panel">
           <p className="text-sm text-drive-action">{message}</p>
@@ -79,11 +109,11 @@ export function AdminSchedulesPage() {
       <UiCard variant="panel">
         {loading ? (
           <p className="text-drive-muted">Đang tải…</p>
-        ) : rows.length === 0 ? (
-          <p className="text-sm text-drive-muted">Không có đăng ký chờ duyệt.</p>
+        ) : filteredRows.length === 0 ? (
+          <p className="text-sm text-drive-muted">Không có đăng ký phù hợp.</p>
         ) : (
           <div className="space-y-4">
-            {rows.map((r) => (
+            {filteredRows.map((r) => (
               <div
                 key={r.id}
                 className="rounded-drive border border-drive-border-soft bg-drive-sidebar p-4"
@@ -100,9 +130,9 @@ export function AdminSchedulesPage() {
                       </p>
                     ) : null}
                   </div>
-                  <StatusBadge tone={regStatusTone(r.status)}>{r.status}</StatusBadge>
+                  <StatusBadge tone={regStatusTone(r.status)}>{STATUS_LABEL[r.status] ?? r.status}</StatusBadge>
                 </div>
-                <div className="mt-3 flex flex-wrap gap-2">
+                {r.status === "pending" ? <div className="mt-3 flex flex-col gap-2 sm:flex-row">
                   <PrimaryButton
                     variant="action"
                     className="!py-1.5 !text-xs"
@@ -119,7 +149,7 @@ export function AdminSchedulesPage() {
                   >
                     Từ chối
                   </PrimaryButton>
-                </div>
+                </div> : r.adminNote ? <p className="mt-3 rounded-drive bg-drive-elevated p-3 text-sm text-drive-muted">Ghi chú: {r.adminNote}</p> : null}
               </div>
             ))}
           </div>

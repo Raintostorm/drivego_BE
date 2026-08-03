@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import { PageHeader } from "../components/PageHeader.jsx"
 import { PrimaryButton } from "../components/PrimaryButton.jsx"
 import { TextField } from "../components/TextField.jsx"
@@ -8,6 +8,7 @@ import {
   createAdminClassSession,
   fetchAdminClassSessions,
   fetchAdminSessionAttendance,
+  fetchAdminStudents,
 } from "../lib/admin-api.js"
 
 const EMPTY = {
@@ -27,6 +28,8 @@ export function AdminClassSessionsPage() {
   const [selectedId, setSelectedId] = useState(null)
   const [attendance, setAttendance] = useState([])
   const [checkInUserId, setCheckInUserId] = useState("")
+  const [students, setStudents] = useState([])
+  const [filter, setFilter] = useState("upcoming")
   const [error, setError] = useState(null)
 
   function reload() {
@@ -35,6 +38,7 @@ export function AdminClassSessionsPage() {
 
   useEffect(() => {
     reload()
+    fetchAdminStudents({ enrolled: "true" }).then(setStudents).catch(() => setStudents([]))
   }, [])
 
   useEffect(() => {
@@ -52,6 +56,13 @@ export function AdminClassSessionsPage() {
       setError(err instanceof Error ? err.message : "Lỗi")
     }
   }
+
+  const visibleRows = useMemo(() => {
+    const today = new Date().toISOString().slice(0, 10)
+    return rows.filter((row) => filter === "all" || (filter === "upcoming" ? row.sessionDate >= today : row.sessionDate < today))
+  }, [filter, rows])
+
+  const selectedSession = rows.find((row) => row.id === selectedId)
 
   async function handleCheckIn() {
     if (!selectedId || !checkInUserId.trim()) return
@@ -75,6 +86,16 @@ export function AdminClassSessionsPage() {
             required
             className="sm:col-span-2"
           />
+          <label className="block text-sm">
+            <span className="mb-2 block font-medium text-drive-text">Loại buổi</span>
+            <select value={form.sessionType} onChange={(e) => setForm({ ...form, sessionType: e.target.value })} className="min-h-14 w-full rounded-drive-pill border border-drive-border bg-drive-elevated px-4 text-drive-text">
+              <option value="theory">Lý thuyết</option>
+              <option value="simulation">Mô phỏng</option>
+              <option value="practice">Thực hành</option>
+            </select>
+          </label>
+          <TextField label="Sức chứa" type="number" value={String(form.maxCapacity)} onChange={(e) => setForm({ ...form, maxCapacity: Number(e.target.value) })} />
+          <TextField label="Địa điểm / phòng" value={form.venue} onChange={(e) => setForm({ ...form, venue: e.target.value })} className="sm:col-span-2" />
           <TextField
             label="Ngày"
             type="date"
@@ -107,9 +128,14 @@ export function AdminClassSessionsPage() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         <UiCard variant="panel">
-          <h3 className="font-semibold text-white">Danh sách buổi</h3>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <h3 className="font-semibold text-white">Danh sách buổi</h3>
+            <div className="flex rounded-drive border border-drive-border p-1 text-xs">
+              {[{ id: "upcoming", label: "Sắp tới" }, { id: "past", label: "Đã qua" }, { id: "all", label: "Tất cả" }].map((item) => <button key={item.id} type="button" onClick={() => setFilter(item.id)} className={`min-h-9 rounded px-3 ${filter === item.id ? "bg-drive-action text-drive-action-contrast" : "text-drive-muted"}`}>{item.label}</button>)}
+            </div>
+          </div>
           <ul className="mt-3 space-y-2 text-sm">
-            {rows.map((s) => (
+            {visibleRows.map((s) => (
               <li key={s.id}>
                 <button
                   type="button"
@@ -120,10 +146,11 @@ export function AdminClassSessionsPage() {
                   }`}
                   onClick={() => setSelectedId(s.id)}
                 >
-                  <span className="font-medium text-white">{s.title}</span>
+                  <span className="flex items-start justify-between gap-3"><span className="font-medium text-white">{s.title}</span><span className="shrink-0 text-xs text-drive-action">{s.attendanceCount ?? 0}/{s.maxCapacity}</span></span>
                   <span className="block text-drive-muted">
-                    {s.sessionDate} · {s.startTime}–{s.endTime}
+                    {new Date(`${s.sessionDate}T00:00:00`).toLocaleDateString("vi-VN")} · {String(s.startTime).slice(0, 5)}–{String(s.endTime).slice(0, 5)}
                   </span>
+                  <span className="mt-1 block text-xs text-drive-muted">{s.sessionType === "theory" ? "Lý thuyết" : s.sessionType === "simulation" ? "Mô phỏng" : "Thực hành"} · Hạng {s.licenseClass ?? "chung"}{s.venue ? ` · ${s.venue}` : ""}</span>
                 </button>
               </li>
             ))}
@@ -131,24 +158,25 @@ export function AdminClassSessionsPage() {
         </UiCard>
 
         <UiCard variant="panel">
-          <h3 className="font-semibold text-white">Điểm danh</h3>
+          <h3 className="font-semibold text-white">Điểm danh{selectedSession ? ` · ${selectedSession.title}` : ""}</h3>
           {selectedId ? (
             <>
-              <div className="mt-3 flex gap-2">
-                <TextField
-                  label="User ID học viên"
-                  value={checkInUserId}
-                  onChange={(e) => setCheckInUserId(e.target.value)}
-                  className="flex-1"
-                />
+              <div className="mt-3 flex flex-col gap-2 sm:flex-row">
+                <label className="flex-1 text-sm text-drive-text">Học viên
+                  <select value={checkInUserId} onChange={(e) => setCheckInUserId(e.target.value)} className="mt-2 min-h-12 w-full rounded-drive border border-drive-border bg-drive-elevated px-3 text-drive-text">
+                    <option value="">Chọn theo tên hoặc email</option>
+                    {students.filter((student) => !attendance.some((item) => item.userId === student.userId)).map((student) => <option key={student.userId} value={student.userId}>{student.fullName ?? student.email} · {student.email}</option>)}
+                  </select>
+                </label>
                 <PrimaryButton type="button" className="self-end" onClick={handleCheckIn}>
-                  Check-in
+                  Xác nhận có mặt
                 </PrimaryButton>
               </div>
               <ul className="mt-4 space-y-1 text-sm text-drive-muted">
                 {attendance.map((a) => (
-                  <li key={a.id}>
-                    {a.userId} · {new Date(a.checkedInAt).toLocaleString("vi-VN")} ({a.method})
+                  <li key={a.id} className="flex flex-wrap items-center justify-between gap-2 rounded-drive border border-drive-border-soft bg-drive-sidebar px-3 py-2">
+                    <span><span className="block font-medium text-drive-text">{a.studentName ?? a.userId}</span><span className="text-xs">{a.studentEmail}</span></span>
+                    <span className="text-xs text-drive-action">Có mặt · {new Date(a.checkedInAt).toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}</span>
                   </li>
                 ))}
                 {!attendance.length ? <li>Chưa có điểm danh.</li> : null}

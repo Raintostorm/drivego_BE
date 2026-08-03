@@ -3,6 +3,8 @@ import { InjectRepository } from "@nestjs/typeorm"
 import { Repository } from "typeorm"
 import { ClassSession } from "../../entities/class-session.entity"
 import { SessionAttendance } from "../../entities/session-attendance.entity"
+import { StudentProfile } from "../../entities/student-profile.entity"
+import { User } from "../../entities/user.entity"
 import { AuthUser } from "../auth/jwt.strategy"
 import { AdminScopeService } from "./admin-scope.service"
 
@@ -22,7 +24,20 @@ export class AdminClassSessionsService {
       .createQueryBuilder("s")
       .orderBy("s.session_date", "ASC")
     if (centerId) qb.andWhere("s.center_id = :centerId", { centerId })
-    return qb.getMany()
+    const sessions = await qb.getMany()
+    if (!sessions.length) return []
+    const counts = await this.attendanceRepo
+      .createQueryBuilder("a")
+      .select("a.session_id", "sessionId")
+      .addSelect("COUNT(*)", "count")
+      .where("a.session_id IN (:...ids)", { ids: sessions.map((session) => session.id) })
+      .groupBy("a.session_id")
+      .getRawMany<{ sessionId: string; count: string }>()
+    const countBySession = new Map(counts.map((row) => [row.sessionId, Number(row.count)]))
+    return sessions.map((session) => ({
+      ...session,
+      attendanceCount: countBySession.get(session.id) ?? 0,
+    }))
   }
 
   async create(
@@ -103,10 +118,29 @@ export class AdminClassSessionsService {
     const session = await this.sessionsRepo.findOne({ where: { id: sessionId } })
     if (!session) throw new NotFoundException("Không tìm thấy buổi học")
     await this.scope.assertCenterAccessAsync(admin, session.centerId)
-    return this.attendanceRepo.find({
-      where: { sessionId },
-      order: { checkedInAt: "DESC" },
-    })
+    const rows = await this.attendanceRepo
+      .createQueryBuilder("a")
+      .innerJoin(User, "u", "u.id = a.user_id")
+      .leftJoin(StudentProfile, "p", "p.user_id = a.user_id")
+      .where("a.session_id = :sessionId", { sessionId })
+      .orderBy("a.checked_in_at", "DESC")
+      .select([
+        "a.id AS id",
+        "a.user_id AS user_id",
+        "a.checked_in_at AS checked_in_at",
+        "a.method AS method",
+        "u.email AS email",
+        "p.full_name AS full_name",
+      ])
+      .getRawMany<{ id: string; user_id: string; checked_in_at: Date; method: string; email: string; full_name: string | null }>()
+    return rows.map((row) => ({
+      id: row.id,
+      userId: row.user_id,
+      checkedInAt: row.checked_in_at,
+      method: row.method,
+      studentEmail: row.email,
+      studentName: row.full_name ?? row.email,
+    }))
   }
 
   async attendanceReport(admin: AuthUser) {

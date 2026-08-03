@@ -7,10 +7,32 @@ import { UiCard } from "../components/UiCard.jsx"
 import {
   adminDownloadApplicationArchive,
   adminDownloadDocument,
+  adminOpenDocument,
   fetchAdminApplication,
   patchAdminApplication,
   requestAdminDossier,
 } from "../lib/admin-api.js"
+
+const STATUS_LABEL = {
+  draft: "Nháp",
+  submitted: "Đã nộp",
+  reviewing: "Đang duyệt",
+  approved: "Đã duyệt",
+  rejected: "Từ chối",
+}
+
+const FIELD_LABEL = {
+  fullName: "Họ và tên",
+  dateOfBirth: "Ngày sinh",
+  gender: "Giới tính",
+  phone: "Số điện thoại",
+  email: "Email",
+  address: "Địa chỉ",
+  citizenId: "CCCD",
+  identityNumber: "CCCD",
+  issuedDate: "Ngày cấp",
+  issuedPlace: "Nơi cấp",
+}
 
 export function AdminApplicationDetailPage() {
   const { id } = useParams()
@@ -22,9 +44,8 @@ export function AdminApplicationDetailPage() {
   const [message, setMessage] = useState(null)
   const [dossierDeadline, setDossierDeadline] = useState("")
 
-  function reload() {
+  useEffect(() => {
     if (!id) return
-    setLoading(true)
     fetchAdminApplication(id)
       .then((data) => {
         setApp(data)
@@ -32,14 +53,16 @@ export function AdminApplicationDetailPage() {
       })
       .catch((e) => setMessage(e instanceof Error ? e.message : "Lỗi"))
       .finally(() => setLoading(false))
-  }
-
-  useEffect(() => {
-    reload()
   }, [id])
 
   async function handleStatus(nextStatus) {
     if (!id) return
+    if (nextStatus === "rejected" && !note.trim()) {
+      setMessage("Vui lòng nhập lý do từ chối để học viên biết cần bổ sung gì.")
+      return
+    }
+    const action = nextStatus === "approved" ? "duyệt" : nextStatus === "rejected" ? "từ chối" : "bắt đầu xem xét"
+    if (!window.confirm(`Xác nhận ${action} hồ sơ của ${app?.studentName ?? "học viên"}?`)) return
     setBusy(true)
     setMessage(null)
     try {
@@ -89,16 +112,26 @@ export function AdminApplicationDetailPage() {
 
       <UiCard variant="panel">
         <div className="flex flex-wrap items-center gap-3">
-          <StatusBadge tone="neutral">{app.status}</StatusBadge>
+          <StatusBadge tone={app.status === "approved" ? "success" : app.status === "rejected" ? "danger" : "warning"}>
+            {STATUS_LABEL[app.status] ?? app.status}
+          </StatusBadge>
           {app.submittedAt ? (
             <span className="text-sm text-drive-muted">
               Nộp: {new Date(app.submittedAt).toLocaleString("vi-VN")}
             </span>
           ) : null}
         </div>
-        <pre className="mt-4 max-h-48 overflow-auto rounded-drive bg-drive-sidebar p-3 text-xs text-drive-muted">
-          {JSON.stringify(app.personalInfo, null, 2)}
-        </pre>
+        <div className="mt-5 grid gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
+          {Object.entries(app.personalInfo ?? {}).map(([key, value]) => (
+            <div key={key} className="min-w-0 border-b border-drive-border-soft pb-3">
+              <p className="text-xs text-drive-muted">{FIELD_LABEL[key] ?? key.replace(/([A-Z])/g, " $1")}</p>
+              <p className="mt-1 break-words text-sm font-medium text-drive-text">
+                {value === null || value === undefined || value === "" ? "Chưa cung cấp" : String(value)}
+              </p>
+            </div>
+          ))}
+          {!Object.keys(app.personalInfo ?? {}).length ? <p className="text-sm text-drive-muted">Chưa có thông tin cá nhân.</p> : null}
+        </div>
       </UiCard>
 
       <UiCard variant="panel">
@@ -145,16 +178,16 @@ export function AdminApplicationDetailPage() {
               key={d.id}
               className="flex flex-wrap items-center justify-between gap-2 rounded-drive border border-drive-border-soft bg-drive-sidebar px-3 py-2"
             >
-              <span className="text-sm text-white">
-                {d.docType}[{d.slotIndex}] — {d.originalName ?? "file"}
-              </span>
-              <button
-                type="button"
-                className="text-sm font-medium text-drive-action hover:underline"
-                onClick={() => adminDownloadDocument(d.id, d.originalName ?? "document")}
-              >
-                Tải xuống
-              </button>
+              <div className="min-w-0">
+                <p className="truncate text-sm font-medium text-drive-text">{d.originalName ?? "Tài liệu"}</p>
+                <p className="text-xs text-drive-muted">{d.docType} · bản {d.slotIndex + 1}</p>
+              </div>
+              <div className="flex gap-3">
+                <button type="button" className="min-h-10 text-sm font-medium text-drive-action hover:underline" onClick={() => adminOpenDocument(d.id)}>
+                  Xem nhanh
+                </button>
+                <button type="button" className="min-h-10 text-sm font-medium text-drive-action hover:underline" onClick={() => adminDownloadDocument(d.id, d.originalName ?? "document")}>Tải xuống</button>
+              </div>
             </li>
           ))}
         </ul>
@@ -217,14 +250,16 @@ export function AdminApplicationDetailPage() {
 
       <UiCard variant="panel">
         <h2 className="font-semibold text-white">Duyệt hồ sơ</h2>
+        <label className="mt-3 block text-sm text-drive-muted" htmlFor="admin-application-note">Ghi chú gửi học viên</label>
         <textarea
+          id="admin-application-note"
           className="mt-3 w-full rounded-drive border border-drive-border bg-drive-elevated p-3 text-sm text-white"
           rows={3}
-          placeholder="Ghi chú cho học viên (tùy chọn)"
+          placeholder="Nêu rõ giấy tờ cần bổ sung hoặc lý do từ chối"
           value={note}
           onChange={(e) => setNote(e.target.value)}
         />
-        <div className="mt-4 flex flex-wrap gap-2">
+        <div className="sticky bottom-3 mt-4 flex flex-col-reverse gap-2 rounded-drive border border-drive-border-soft bg-drive-panel/95 p-3 shadow-drive-card backdrop-blur sm:static sm:flex-row sm:border-0 sm:bg-transparent sm:p-0 sm:shadow-none">
           {app.status === "submitted" ? (
             <PrimaryButton variant="action" disabled={busy} onClick={() => handleStatus("reviewing")}>
               Bắt đầu xem xét
@@ -233,7 +268,7 @@ export function AdminApplicationDetailPage() {
           {["submitted", "reviewing"].includes(app.status) ? (
             <>
               <PrimaryButton variant="action" disabled={busy} onClick={() => handleStatus("approved")}>
-                Duyệt
+                Duyệt hồ sơ
               </PrimaryButton>
               <PrimaryButton
                 variant="outline"
