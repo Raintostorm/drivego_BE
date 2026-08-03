@@ -39,6 +39,7 @@ export const vi = {
     adminSiteContent: "Nội dung website",
     adminHealth: "Cấu hình",
     adminCenters: "Trung tâm",
+    adminLicenses: "GPLX & hết hạn",
     features: "Tính năng",
     support: "Hỗ trợ",
     courses: "Khóa học",

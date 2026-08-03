@@ -5,6 +5,7 @@ import { StatusBadge } from "../components/StatusBadge.jsx"
 import { UiCard } from "../components/UiCard.jsx"
 import { fetchAdminStudents } from "../lib/admin-api.js"
 import { formatPremiumDate } from "../lib/premium.js"
+import { displayLicenseClass } from "../lib/license-class.js"
 
 export function AdminStudentsPage() {
   const [rows, setRows] = useState([])
@@ -95,7 +96,7 @@ export function AdminStudentsPage() {
                       <ul className="space-y-1">
                         {r.enrollments.map((e) => (
                           <li key={e.licenseClass} className="text-white">
-                            Hạng {e.licenseClass}
+                            Hạng {displayLicenseClass(e.licenseClass)}
                             {e.enrolledAt ? (
                               <span className="ml-2 text-xs text-drive-muted">
                                 {new Date(e.enrolledAt).toLocaleDateString("vi-VN")}

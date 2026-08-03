@@ -21,6 +21,7 @@ import { SiteContentModule } from "./modules/site-content/site-content.module"
 import { StudyModule } from "./modules/study/study.module"
 import { SessionsModule } from "./modules/sessions/sessions.module"
 import { UsersModule } from "./modules/users/users.module"
+import { LicensesModule } from "./modules/licenses/licenses.module"
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { UsersModule } from "./modules/users/users.module"
     HealthModule,
     AuthModule,
     UsersModule,
+    LicensesModule,
     ExamsModule,
     StudyModule,
     SchedulesModule,

@@ -8,6 +8,7 @@ import { dashboardPathForRole, useAuth } from "../context/AuthContext.jsx"
 import { apiFetch } from "../lib/api.js"
 import { DEFAULT_LICENSE_CLASS, isStudyLicenseCode } from "../lib/license-classes.js"
 import { t } from "../lib/strings.js"
+import { displayLicenseClass } from "../lib/license-class.js"
 
 export function RegisterPage() {
   const navigate = useNavigate()
@@ -116,7 +117,7 @@ export function RegisterPage() {
                     : "border-drive-border text-drive-muted hover:border-drive-action/40"
                 }`}
               >
-                <span className="font-semibold">{item.code}</span>
+                <span className="font-semibold">{displayLicenseClass(item.code)}</span>
                 {item.contentReady ? (
                   <span className="block text-[10px] text-drive-success">{t("license.ready")}</span>
                 ) : (

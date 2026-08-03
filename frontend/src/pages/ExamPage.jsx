@@ -9,6 +9,7 @@ import { UiCard } from "../components/UiCard.jsx"
 import { useLicense } from "../context/LicenseContext.jsx"
 import { apiFetch } from "../lib/api.js"
 import { t } from "../lib/strings.js"
+import { displayLicenseClass } from "../lib/license-class.js"
 
 const DEFAULT_EXAM_RULES = {
   questionsPerExam: 30,
@@ -295,7 +296,7 @@ export function ExamPage() {
 
       <div className="lg:col-span-2 space-y-2">
         <p className="text-sm text-drive-muted">
-          Hạng {activeClass} · {totalQuestions} câu · {examRules.durationMinutes} phút · Đạt từ{" "}
+          Hạng {displayLicenseClass(activeClass)} · {totalQuestions} câu · {examRules.durationMinutes} phút · Đạt từ{" "}
           {passMin}/{totalQuestions} + không sai điểm liệt
         </p>
         <div className="h-2 overflow-hidden rounded-full bg-drive-elevated">

@@ -248,6 +248,16 @@ export const routeConfig = [
     ),
   },
   {
+    path: "/admin/licenses",
+    labelKey: "nav.adminLicenses",
+    group: "admin",
+    layout: "admin",
+    LazyPage: lazyNamed(
+      () => import("./pages/AdminLicensesPage.jsx"),
+      "AdminLicensesPage",
+    ),
+  },
+  {
     path: "/admin/payments",
     labelKey: "nav.adminPayments",
     group: "admin",

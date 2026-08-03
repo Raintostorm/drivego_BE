@@ -71,6 +71,12 @@ const MIGRATIONS = [
   "database/migrations/010_content_admin.sql",
   "database/migrations/011_class_sessions.sql",
   "database/migrations/012_exam_rules.sql",
+  "database/migrations/013_password_reset_tokens.sql",
+  "database/migrations/014_question_bank.sql",
+  "database/migrations/015_exam_structure.sql",
+  "database/migrations/016_site_content.sql",
+  "database/migrations/017_seed_home_site_content.sql",
+  "database/migrations/018_student_licenses.sql",
 ]
 
 async function applyMigrations(client) {

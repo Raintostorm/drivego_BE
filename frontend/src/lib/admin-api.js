@@ -267,3 +267,15 @@ export async function requestAdminDossier(applicationId, body = {}) {
     body: JSON.stringify(body),
   })
 }
+
+export async function fetchAdminLicenses(q = "") {
+  return apiFetch(`/admin/licenses${q ? `?q=${encodeURIComponent(q)}` : ""}`, { auth: true })
+}
+
+export async function reviewAdminLicense(id, body) {
+  return apiFetch(`/admin/licenses/${id}/review`, {
+    method: "PATCH",
+    auth: true,
+    body: JSON.stringify(body),
+  })
+}

@@ -6,6 +6,7 @@ import {
   DEMO_NOTIFICATIONS,
   LOOKUP_CODES,
 } from "./seed-content.mjs"
+import { CANONICAL_CENTER, CENTER_VENUES } from "./center-config.mjs"
 
 const DATABASE_URL =
   process.env.DATABASE_URL ||
@@ -19,7 +20,7 @@ const DEMO_EMAILS = [
 ]
 
 const ID = {
-  center: "11111111-1111-4111-8111-111111111101",
+  center: CANONICAL_CENTER.id,
   userStudent: "22222222-2222-4222-8222-222222222201",
   userCenter: "22222222-2222-4222-8222-222222222202",
   userAdmin: "22222222-2222-4222-8222-222222222203",
@@ -87,8 +88,12 @@ async function seed() {
   await client.query(
     `INSERT INTO training_centers (id, name, tax_code, city, address)
      VALUES ($1, $2, $3, $4, $5)
-     ON CONFLICT (id) DO UPDATE SET name = EXCLUDED.name`,
-    [ID.center, "Trung tâm Lái xe DriveGo Củ Chi", "0312345678", "TP. Hồ Chí Minh", "123 Đường Lái Xe, Củ Chi"],
+     ON CONFLICT (id) DO UPDATE SET
+       name = EXCLUDED.name,
+       tax_code = EXCLUDED.tax_code,
+       city = EXCLUDED.city,
+       address = EXCLUDED.address`,
+    [ID.center, CANONICAL_CENTER.name, CANONICAL_CENTER.taxCode, CANONICAL_CENTER.city, CANONICAL_CENTER.address],
   )
 
   await client.query(
@@ -177,13 +182,13 @@ async function seed() {
 
   await client.query(
     `INSERT INTO schedule_slots (id, center_id, slot_date, start_time, end_time, venue, license_class, capacity, registered_count, slot_type) VALUES
-     ($1, $8, CURRENT_DATE + 7, '08:00', '11:30', 'Sân sát hạch Củ Chi', 'B2', 40, 12, 'theory_exam'),
-     ($2, $8, CURRENT_DATE + 7, '13:30', '17:00', 'Sân sát hạch Củ Chi', 'B2', 40, 28, 'theory_exam'),
-     ($3, $8, CURRENT_DATE + 14, '08:00', '11:30', 'Sân sát hạch Củ Chi', 'B2', 40, 5, 'theory_exam'),
-     ($4, $8, CURRENT_DATE + 14, '13:30', '17:00', 'Sân sát hạch Củ Chi', 'B2', 40, 35, 'theory_exam'),
-     ($5, $8, CURRENT_DATE + 21, '08:00', '11:30', 'Sân sát hạch Củ Chi', 'B1', 30, 30, 'theory_exam'),
-     ($6, $8, CURRENT_DATE + 10, '07:00', '10:00', 'Sân chạy thử Củ Chi', 'B2', 20, 3, 'road_test'),
-     ($7, $8, CURRENT_DATE + 17, '14:00', '17:00', 'Sân chạy thử Củ Chi', 'B2', 20, 0, 'road_test')
+     ($1, $8, CURRENT_DATE + 7, '08:00', '11:30', $9, 'B2', 40, 12, 'theory_exam'),
+     ($2, $8, CURRENT_DATE + 7, '13:30', '17:00', $9, 'B2', 40, 28, 'theory_exam'),
+     ($3, $8, CURRENT_DATE + 14, '08:00', '11:30', $9, 'B2', 40, 5, 'theory_exam'),
+     ($4, $8, CURRENT_DATE + 14, '13:30', '17:00', $9, 'B2', 40, 35, 'theory_exam'),
+     ($5, $8, CURRENT_DATE + 21, '08:00', '11:30', $9, 'B1', 30, 30, 'theory_exam'),
+     ($6, $8, CURRENT_DATE + 10, '07:00', '10:00', $10, 'B2', 20, 3, 'road_test'),
+     ($7, $8, CURRENT_DATE + 17, '14:00', '17:00', $10, 'B2', 20, 0, 'road_test')
      ON CONFLICT (id) DO UPDATE SET
        registered_count = EXCLUDED.registered_count,
        slot_type = EXCLUDED.slot_type`,
@@ -196,6 +201,8 @@ async function seed() {
       ID.slotRoad1,
       ID.slotRoad2,
       ID.center,
+      CENTER_VENUES.theory,
+      CENTER_VENUES.practice,
     ],
   )
 

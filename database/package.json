@@ -4,7 +4,9 @@
   "type": "module",
   "scripts": {
     "test:connection": "node scripts/test-connection.mjs",
-    "seed": "node scripts/seed.mjs"
+    "seed": "node scripts/seed.mjs",
+    "center:check": "node scripts/normalize-center-data.mjs",
+    "center:normalize": "node scripts/normalize-center-data.mjs --apply"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",

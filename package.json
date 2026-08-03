@@ -33,6 +33,7 @@
     "migrate:exam-structure": "node database/scripts/run-migration.mjs database/migrations/015_exam_structure.sql",
     "migrate:site-content": "node database/scripts/run-migration.mjs database/migrations/016_site_content.sql",
     "migrate:home-content": "node database/scripts/run-migration.mjs database/migrations/017_seed_home_site_content.sql",
+    "migrate:student-licenses": "node database/scripts/run-migration.mjs database/migrations/018_student_licenses.sql",
     "build:bank": "python database/scripts/build-bank.py",
     "seed:bank": "node database/scripts/seed-bank.mjs",
     "import:content": "node database/scripts/import-license-content.mjs",

@@ -15,6 +15,9 @@ import { StudentProfile } from "../../entities/student-profile.entity"
 import { StudyChapter } from "../../entities/study-chapter.entity"
 import { SubscriptionPlan } from "../../entities/subscription-plan.entity"
 import { User } from "../../entities/user.entity"
+import { StudentLicense } from "../../entities/student-license.entity"
+import { LicensesModule } from "../licenses/licenses.module"
+import { AdminLicensesController } from "./admin-licenses.controller"
 import { ApplicationsModule } from "../applications/applications.module"
 import { AuthModule } from "../auth/auth.module"
 import { NotificationsModule } from "../notifications/notifications.module"
@@ -63,12 +66,14 @@ import { AdminUsersService } from "./admin-users.service"
       ClassSession,
       SessionAttendance,
       SiteContent,
+      StudentLicense,
     ]),
     AuthModule,
     ApplicationsModule,
     NotificationsModule,
     PaymentsModule,
     SiteContentModule,
+    LicensesModule,
   ],
   controllers: [
     AdminApplicationsController,
@@ -82,6 +87,7 @@ import { AdminUsersService } from "./admin-users.service"
     AdminClassSessionsController,
     AdminCentersController,
     AdminUsersController,
+    AdminLicensesController,
   ],
   providers: [
     RolesGuard,

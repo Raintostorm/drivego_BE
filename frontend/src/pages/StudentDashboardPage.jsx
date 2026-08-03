@@ -7,6 +7,7 @@ import { useAuth } from "../context/AuthContext.jsx"
 import { apiFetch } from "../lib/api.js"
 import { isPremiumActive } from "../lib/premium.js"
 import { t } from "../lib/strings.js"
+import { displayLicenseClass } from "../lib/license-class.js"
 
 export function StudentDashboardPage() {
   const { user } = useAuth()
@@ -86,7 +87,7 @@ export function StudentDashboardPage() {
             {t("pages.studentDashboard.currentLesson")}
           </p>
           <h2 className="mt-2 text-2xl font-semibold text-white">
-            Hạng {summary?.licenseClass ?? user?.profile?.licenseClass ?? "B2"}
+            Hạng {displayLicenseClass(summary?.licenseClass ?? user?.profile?.licenseClass ?? "B2")}
           </h2>
           <div className="mt-6 rounded-drive border border-drive-border-soft bg-drive-sidebar p-4">
             <div className="h-2.5 overflow-hidden rounded-full bg-drive-elevated">

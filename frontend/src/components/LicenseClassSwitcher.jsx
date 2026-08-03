@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { useLicense } from "../context/LicenseContext.jsx"
 import { t } from "../lib/strings.js"
+import { displayLicenseClass } from "../lib/license-class.js"
 
 export function LicenseClassSwitcher() {
   const { catalog, catalogLoading, activeClass, setActiveClass } = useLicense()
@@ -38,7 +39,7 @@ export function LicenseClassSwitcher() {
                   : "border-drive-border bg-drive-elevated text-drive-muted hover:border-drive-action/40"
               }`}
             >
-              <span className="font-semibold">{item.code}</span>
+              <span className="font-semibold">{displayLicenseClass(item.code)}</span>
               {item.contentReady ? (
                 <span className="mt-0.5 block text-[10px] text-drive-success">
                   {t("license.ready")}

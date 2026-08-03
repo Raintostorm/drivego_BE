@@ -9,6 +9,7 @@ import { StatusBadge } from "../components/StatusBadge.jsx"
 import { UiCard } from "../components/UiCard.jsx"
 import { apiFetch } from "../lib/api.js"
 import { t } from "../lib/strings.js"
+import { displayLicenseClass } from "../lib/license-class.js"
 
 function toneForSlot(slot) {
   if (slot.full) return "danger"
@@ -140,7 +141,7 @@ export function SchedulePage() {
                   : "border border-drive-border bg-drive-elevated text-drive-muted"
               }`}
             >
-              Hạng {item.code}
+              Hạng {displayLicenseClass(item.code)}
               {item.hasScheduleSlots === false ? (
                 <span className="ml-1 text-[10px] opacity-80">· {t("license.noSlots")}</span>
               ) : null}

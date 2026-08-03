@@ -3,6 +3,7 @@ export const adminNavItems = [
   { to: "/admin-dashboard", labelKey: "nav.adminDashboard" },
   { to: "/admin/students", labelKey: "nav.adminStudents" },
   { to: "/admin/applications", labelKey: "nav.adminApplications" },
+  { to: "/admin/licenses", labelKey: "nav.adminLicenses" },
   { to: "/admin/payments", labelKey: "nav.adminPayments" },
   { to: "/admin/schedules", labelKey: "nav.adminSchedules" },
   { to: "/admin/schedules/slots", labelKey: "nav.adminSlots" },

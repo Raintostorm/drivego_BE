@@ -136,12 +136,12 @@ export function buildPaper2Questions(ID) {
 }
 
 export const DEMO_NOTIFICATIONS = [
-  { type: "exam", title: "Thông báo lịch thi", body: "Lịch thi sát hạch B2 đã xác nhận — có mặt lúc 07:30 tại sân Củ Chi.", action: "/schedule", daysAgo: 1, unread: true },
+  { type: "exam", title: "Thông báo lịch thi", body: "Lịch thi sát hạch B2 đã xác nhận — có mặt lúc 07:30 tại Trung tâm Làng Đại Học.", action: "/schedule", daysAgo: 1, unread: true },
   { type: "study", title: "Nhắc nhở bài học", body: "Hoàn thành Chương 2: Quy tắc giao thông trước ngày mai.", action: "/theory", daysAgo: 2, unread: true },
   { type: "exam", title: "Kết quả thi thử", body: "Bạn đạt 10/10 ở đề số 08 — tiếp tục phong độ nhé!", action: "/history", daysAgo: 3, unread: false },
   { type: "system", title: "Gói Premium sắp hết hạn", body: "Premium của bạn còn 7 ngày. Gia hạn để thi không giới hạn.", action: "/upgrade", daysAgo: 4, unread: true },
   { type: "study", title: "Video mới", body: "Chương 3: Kỹ thuật lái xe an toàn đã có video bài giảng.", action: "/theory", daysAgo: 5, unread: false },
   { type: "exam", title: "Đề thi mới", body: "Đề thi số 07 với 10 câu mới đã được thêm vào thư viện.", action: "/exam", daysAgo: 6, unread: true },
-  { type: "schedule", title: "Ca thi còn chỗ", body: "Ca chiều 13:30 ngày mai còn 35 suất trống tại Củ Chi.", action: "/schedule", daysAgo: 0, unread: true },
+  { type: "schedule", title: "Ca thi còn chỗ", body: "Ca chiều 13:30 ngày mai còn 35 suất trống tại Trung tâm Làng Đại Học.", action: "/schedule", daysAgo: 0, unread: true },
   { type: "system", title: "Cập nhật 600 câu", body: "Bộ câu hỏi lý thuyết đã đồng bộ theo quy định mới nhất.", action: "/docs", daysAgo: 7, unread: false },
 ]

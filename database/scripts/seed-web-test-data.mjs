@@ -2,13 +2,14 @@ import { readFileSync } from "node:fs"
 import { resolve } from "node:path"
 import bcrypt from "bcryptjs"
 import pg from "pg"
+import { CANONICAL_CENTER, CENTER_VENUES } from "./center-config.mjs"
 
 const DEMO_PASSWORD = "DriveGo123!"
 const DATABASE_URL =
   process.env.DATABASE_URL || loadDatabaseUrlFromEnvFile("backend/.env")
 
 const ID = {
-  center: "12121212-1212-4121-8121-121212121201",
+  center: CANONICAL_CENTER.id,
   centerAdmin: "23232323-2323-4232-8232-232323232301",
   studentA2: "34343434-3434-4343-8343-343434343401",
   studentB2: "34343434-3434-4343-8343-343434343402",
@@ -62,13 +63,13 @@ async function seed() {
 
     await client.query(
       `INSERT INTO training_centers (id, name, tax_code, city, address)
-       VALUES ($1, 'DriveGo Test Center - Quận 7', 'TEST-DRIVEGO-001', 'TP. Hồ Chí Minh', 'Khu sát hạch thử nghiệm DriveGo, Quận 7')
+       VALUES ($1, $2, $3, $4, $5)
        ON CONFLICT (id) DO UPDATE SET
          name = EXCLUDED.name,
          tax_code = EXCLUDED.tax_code,
          city = EXCLUDED.city,
          address = EXCLUDED.address`,
-      [ID.center],
+      [ID.center, CANONICAL_CENTER.name, CANONICAL_CENTER.taxCode, CANONICAL_CENTER.city, CANONICAL_CENTER.address],
     )
 
     await client.query(
@@ -142,11 +143,11 @@ async function seed() {
 
     await client.query(
       `INSERT INTO schedule_slots (id, center_id, slot_date, start_time, end_time, venue, license_class, capacity, registered_count, slot_type, created_by) VALUES
-       ($1, $6, CURRENT_DATE + 5, '08:00', '10:30', 'Phòng thi lý thuyết DriveGo Q7', 'A1', 35, 4, 'theory_exam', $7),
-       ($2, $6, CURRENT_DATE + 6, '13:30', '16:00', 'Phòng thi lý thuyết DriveGo Q7', 'A2', 30, 7, 'theory_exam', $7),
-       ($3, $6, CURRENT_DATE + 8, '08:00', '11:00', 'Phòng thi lý thuyết DriveGo Q7', 'B1', 40, 10, 'theory_exam', $7),
-       ($4, $6, CURRENT_DATE + 9, '13:30', '16:30', 'Phòng thi lý thuyết DriveGo Q7', 'B2', 45, 18, 'theory_exam', $7),
-       ($5, $6, CURRENT_DATE + 11, '07:30', '10:30', 'Sân thực hành DriveGo Q7', 'B2', 20, 5, 'road_test', $7)
+       ($1, $6, CURRENT_DATE + 5, '08:00', '10:30', $8, 'A1', 35, 4, 'theory_exam', $7),
+       ($2, $6, CURRENT_DATE + 6, '13:30', '16:00', $8, 'A2', 30, 7, 'theory_exam', $7),
+       ($3, $6, CURRENT_DATE + 8, '08:00', '11:00', $8, 'B1', 40, 10, 'theory_exam', $7),
+       ($4, $6, CURRENT_DATE + 9, '13:30', '16:30', $8, 'B2', 45, 18, 'theory_exam', $7),
+       ($5, $6, CURRENT_DATE + 11, '07:30', '10:30', $9, 'B2', 20, 5, 'road_test', $7)
        ON CONFLICT (id) DO UPDATE SET
          slot_date = EXCLUDED.slot_date,
          start_time = EXCLUDED.start_time,
@@ -165,6 +166,8 @@ async function seed() {
         ID.slotB2Road,
         ID.center,
         ID.centerAdmin,
+        CENTER_VENUES.theory,
+        CENTER_VENUES.practice,
       ],
     )
 
@@ -194,9 +197,9 @@ async function seed() {
     if (await hasTable(client, "class_sessions")) {
       await client.query(
         `INSERT INTO class_sessions (id, center_id, title, session_date, start_time, end_time, venue, session_type, license_class, max_capacity, created_by) VALUES
-         ($1, $4, '[TEST] Ôn biển báo A1/A2', CURRENT_DATE + 2, '18:00', '20:00', 'Phòng học 2 - DriveGo Q7', 'theory', 'A2', 30, $5),
-         ($2, $4, '[TEST] Luyện sa hình B2', CURRENT_DATE + 3, '08:00', '10:00', 'Sân thực hành DriveGo Q7', 'practice', 'B2', 20, $5),
-         ($3, $4, '[TEST] Cài và luyện phần mềm mô phỏng', CURRENT_DATE + 4, '19:00', '20:30', 'Phòng máy DriveGo Q7', 'simulator', 'B2', 25, $5)
+         ($1, $4, '[TEST] Ôn biển báo A1/A2', CURRENT_DATE + 2, '18:00', '20:00', $6, 'theory', 'A2', 30, $5),
+         ($2, $4, '[TEST] Luyện sa hình B2', CURRENT_DATE + 3, '08:00', '10:00', $7, 'practice', 'B2', 20, $5),
+         ($3, $4, '[TEST] Cài và luyện phần mềm mô phỏng', CURRENT_DATE + 4, '19:00', '20:30', $8, 'simulator', 'B2', 25, $5)
          ON CONFLICT (id) DO UPDATE SET
            session_date = EXCLUDED.session_date,
            start_time = EXCLUDED.start_time,
@@ -205,7 +208,16 @@ async function seed() {
            session_type = EXCLUDED.session_type,
            license_class = EXCLUDED.license_class,
            max_capacity = EXCLUDED.max_capacity`,
-        [ID.sessionTheory, ID.sessionPractice, ID.sessionSimulator, ID.center, ID.centerAdmin],
+        [
+          ID.sessionTheory,
+          ID.sessionPractice,
+          ID.sessionSimulator,
+          ID.center,
+          ID.centerAdmin,
+          CENTER_VENUES.classroom,
+          CENTER_VENUES.practice,
+          CENTER_VENUES.simulator,
+        ],
       )
     }
 

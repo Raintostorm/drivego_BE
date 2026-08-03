@@ -7,6 +7,7 @@ import { TextField } from "../components/TextField.jsx"
 import { UiCard } from "../components/UiCard.jsx"
 import { fetchAdminStudent, patchAdminStudentNote } from "../lib/admin-api.js"
 import { formatPremiumDate } from "../lib/premium.js"
+import { displayLicenseClass } from "../lib/license-class.js"
 
 const TABS = [
   { id: "info", label: "Thông tin" },
@@ -99,7 +100,7 @@ export function AdminStudentDetailPage() {
           <dl className="grid gap-3 text-sm sm:grid-cols-2">
             <div>
               <dt className="text-drive-muted">Hạng</dt>
-              <dd className="text-white">{data.licenseClass ?? "—"}</dd>
+              <dd className="text-white">{displayLicenseClass(data.licenseClass) || "—"}</dd>
             </div>
             <div>
               <dt className="text-drive-muted">Premium</dt>
@@ -133,7 +134,7 @@ export function AdminStudentDetailPage() {
             <ul className="space-y-2 text-sm">
               {data.enrollments.map((e) => (
                 <li key={e.id ?? e.licenseClass} className="text-white">
-                  Hạng {e.licenseClass} · {e.status ?? "active"}
+                  Hạng {displayLicenseClass(e.licenseClass)} · {e.status ?? "active"}
                   {e.enrolledAt ? (
                     <span className="ml-2 text-drive-muted">
                       {new Date(e.enrolledAt).toLocaleDateString("vi-VN")}

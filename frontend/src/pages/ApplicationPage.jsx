@@ -12,6 +12,7 @@ import { apiFetch, apiFetchBlob, apiUpload } from "../lib/api.js"
 import { STUDY_LICENSE_CODES } from "../lib/license-classes.js"
 import { vi } from "../content/vi.js"
 import { t } from "../lib/strings.js"
+import { displayLicenseClass } from "../lib/license-class.js"
 
 const DOC_TYPE_KEYS = {
   photo_3x4_blue: "application.docTypes.photo3x4",
@@ -376,7 +377,7 @@ export function ApplicationPage() {
               >
                 {STUDY_LICENSE_CODES.map((code) => (
                   <option key={code} value={code}>
-                    {code}
+                    {displayLicenseClass(code)}
                   </option>
                 ))}
               </select>

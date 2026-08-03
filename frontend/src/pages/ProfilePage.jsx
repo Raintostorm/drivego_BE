@@ -5,6 +5,8 @@ import { PrimaryButton } from "../components/PrimaryButton.jsx"
 import { StatusBadge } from "../components/StatusBadge.jsx"
 import { TextField } from "../components/TextField.jsx"
 import { UiCard } from "../components/UiCard.jsx"
+import { StudentLicensesCard } from "../components/StudentLicensesCard.jsx"
+import { displayLicenseClass } from "../lib/license-class.js"
 import { useAuth } from "../context/AuthContext.jsx"
 import { apiFetch } from "../lib/api.js"
 import { formatPremiumDate, formatPremiumUntil, isPremiumActive } from "../lib/premium.js"
@@ -194,7 +196,7 @@ export function ProfilePage() {
                         : "border-drive-border text-drive-muted hover:border-drive-action/50"
                     }`}
                   >
-                    {code}
+                    {displayLicenseClass(code)}
                   </button>
                 )
               })}
@@ -210,6 +212,8 @@ export function ProfilePage() {
           </div>
         </form>
       </UiCard>
+
+      <StudentLicensesCard />
 
       <UiCard variant="panel" className="border-drive-action/30">
         <h3 className="font-semibold text-white">{t("pages.profile.examDossierTitle")}</h3>
