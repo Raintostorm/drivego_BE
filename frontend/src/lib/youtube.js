@@ -18,7 +18,7 @@ export function toYoutubeEmbedUrl(url) {
     id = null
   }
   if (!id) return url
-  return `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&origin=${encodeURIComponent(typeof window !== "undefined" ? window.location.origin : "http://localhost:5173")}`
+  return `https://www.youtube-nocookie.com/embed/${id}?rel=0&modestbranding=1&enablejsapi=1&origin=${encodeURIComponent(typeof window !== "undefined" ? window.location.origin : "http://localhost:5173")}`
 }
 
 /** @param {string | null | undefined} url */

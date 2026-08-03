@@ -19,7 +19,7 @@ const guideContent = {
     title: "Cách học hiệu quả",
     items: [
       "Chọn chương ở lộ trình bên dưới để đổi bài học.",
-      "Xem video, sau đó bấm Đã xem 50% hoặc Hoàn thành chương để lưu tiến độ.",
+      "Tiến độ video được tự động lưu trong lúc xem và hoàn thành khi video kết thúc.",
       "Nếu video không phát trong trang, bấm link mở trực tiếp trên YouTube.",
     ],
     links: [{ label: "Video cài phần mềm mô phỏng", href: SIMULATOR_VIDEO_URL }],

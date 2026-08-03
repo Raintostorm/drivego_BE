@@ -6,6 +6,7 @@ import { LicenseContentEmpty } from "../components/LicenseContentEmpty.jsx"
 import { PrimaryButton } from "../components/PrimaryButton.jsx"
 import { SimulatorInstallCard, isCarLicenseClass } from "../components/SimulatorInstallCard.jsx"
 import { UiCard } from "../components/UiCard.jsx"
+import { YouTubeProgressPlayer } from "../components/YouTubeProgressPlayer.jsx"
 import { useLicense } from "../context/LicenseContext.jsx"
 import { apiFetch } from "../lib/api.js"
 import { toYoutubeEmbedUrl, toYoutubeWatchUrl } from "../lib/youtube.js"
@@ -169,16 +170,13 @@ export function TheoryPage() {
         ) : null}
         {embedSrc ? (
           <div className="mt-4 space-y-2">
-            <div className="aspect-video overflow-hidden rounded-drive border border-drive-border-soft bg-black">
-              <iframe
-                title={active.title}
-                src={embedSrc}
-                className="h-full w-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              />
-            </div>
+            <YouTubeProgressPlayer
+              key={active.id}
+              title={active.title}
+              src={embedSrc}
+              initialPercent={active.percent ?? 0}
+              onProgress={markProgress}
+            />
             {watchUrl ? (
               <a
                 href={watchUrl}
@@ -193,14 +191,7 @@ export function TheoryPage() {
         ) : (
           <p className="mt-4 text-sm text-drive-muted">Chưa có video cho chương này.</p>
         )}
-        <div className="mt-4 flex flex-wrap gap-3">
-          <PrimaryButton variant="action" disabled={saving} onClick={() => markProgress(50)}>
-            Đã xem 50%
-          </PrimaryButton>
-          <PrimaryButton variant="outline" disabled={saving} onClick={() => markProgress(100)}>
-            Hoàn thành chương
-          </PrimaryButton>
-        </div>
+        {saving ? <p className="mt-3 text-xs text-drive-action">Đang lưu tiến độ…</p> : null}
       </UiCard>
 
       <UiCard variant="panel">
