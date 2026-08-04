@@ -122,11 +122,20 @@ export function AdminClassSessionsPage() {
             onChange={(e) => setForm({ ...form, sessionDate: e.target.value })}
             required
           />
-          <TextField
-            label="Hạng (tùy chọn)"
-            value={form.licenseClass}
-            onChange={(e) => setForm({ ...form, licenseClass: e.target.value })}
-          />
+          <label className="block text-sm">
+            <span className="mb-2 block font-medium text-drive-text">Hạng (tùy chọn)</span>
+            <select
+              value={form.licenseClass}
+              onChange={(e) => setForm({ ...form, licenseClass: e.target.value })}
+              className="min-h-14 w-full rounded-drive-pill border border-drive-border bg-drive-elevated px-4 text-drive-text outline-none focus:ring-2 focus:ring-drive-action"
+            >
+              <option value="">Dùng chung mọi hạng</option>
+              <option value="A1">Hạng A1</option>
+              <option value="A2">Hạng A</option>
+              <option value="B1">Hạng B1</option>
+              <option value="B2">Hạng B</option>
+            </select>
+          </label>
           <TextField
             label="Bắt đầu"
             type="time"
