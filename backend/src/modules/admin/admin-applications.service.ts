@@ -5,6 +5,7 @@ import {
 } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import type { Archiver } from "archiver"
+import type { Readable } from "stream"
 import { Repository } from "typeorm"
 import { ApplicationDocument } from "../../entities/application-document.entity"
 import {
@@ -26,6 +27,8 @@ const ADMIN_LIST_STATUSES: ApplicationStatus[] = [
   "approved",
   "rejected",
 ]
+
+const MAX_ARCHIVE_BYTES = 50 * 1024 * 1024
 
 function safeArchiveName(value: string) {
   return value
@@ -181,22 +184,43 @@ export class AdminApplicationsService {
       }
     }
 
+    let archiveBytes = 0
     for (const doc of docs) {
       const { stream, originalName } =
         await this.applicationsService.resolveDocumentStream(doc)
+      const content = await this.readStream(stream)
+      archiveBytes += content.length
+      if (archiveBytes > MAX_ARCHIVE_BYTES) {
+        throw new BadRequestException("Tổng dung lượng hồ sơ vượt quá 50MB")
+      }
       const ext = originalName?.includes(".")
         ? originalName.slice(originalName.lastIndexOf("."))
         : ""
       const fallback = `${doc.docType}_${doc.slotIndex}${ext || ".bin"}`
       const cleanedOriginal = safeArchiveName(originalName ?? fallback) || fallback
       const entryName = `${baseFolder}/${safeArchiveName(doc.docType)}_${doc.slotIndex}_${cleanedOriginal}`
-      archive.append(stream, { name: entryName })
+      archive.append(content, { name: entryName })
     }
 
     return {
       filename: `${baseFolder}.zip`,
       count: docs.length,
     }
+  }
+
+  private async readStream(stream: Readable) {
+    const chunks: Buffer[] = []
+    let total = 0
+    for await (const chunk of stream) {
+      const buffer = Buffer.isBuffer(chunk) ? chunk : Buffer.from(chunk)
+      total += buffer.length
+      if (total > MAX_ARCHIVE_BYTES) {
+        stream.destroy()
+        throw new BadRequestException("Một tài liệu vượt quá giới hạn tải ZIP")
+      }
+      chunks.push(buffer)
+    }
+    return Buffer.concat(chunks, total)
   }
 
   async patchStatus(admin: AuthUser, id: string, dto: PatchApplicationAdminDto) {

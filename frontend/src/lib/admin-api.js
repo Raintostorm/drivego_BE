@@ -1,13 +1,20 @@
 import { apiFetch, apiFetchBlob } from "./api.js"
 
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement("a")
+  a.href = url
+  a.download = filename
+  a.style.display = "none"
+  document.body.appendChild(a)
+  a.click()
+  a.remove()
+  window.setTimeout(() => URL.revokeObjectURL(url), 60_000)
+}
+
 export function adminDownloadDocument(documentId, filename) {
   return apiFetchBlob(`/admin/applications/documents/${documentId}/file`).then((blob) => {
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    a.href = url
-    a.download = filename || "document"
-    a.click()
-    URL.revokeObjectURL(url)
+    downloadBlob(blob, filename || "document")
   })
 }
 
@@ -15,12 +22,7 @@ export function adminDownloadApplicationArchive(applicationId, filename) {
   return apiFetchBlob(`/admin/applications/${applicationId}/documents/archive`, {
     auth: true,
   }).then((blob) => {
-    const url = URL.createObjectURL(blob)
-    const a = document.createElement("a")
-    a.href = url
-    a.download = filename || "ho-so-hoc-vien.zip"
-    a.click()
-    URL.revokeObjectURL(url)
+    downloadBlob(blob, filename || "ho-so-hoc-vien.zip")
   })
 }
 

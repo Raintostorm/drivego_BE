@@ -140,6 +140,7 @@ export function HomePage() {
     distance: null,
     error: "",
   })
+  const [consultNotice, setConsultNotice] = useState("")
   const centerInfo = siteContent.center
   const features = [
     { title: t("pages.home.feature1"), desc: "Video bài giảng và mô phỏng tình huống trên mọi thiết bị." },
@@ -228,6 +229,21 @@ export function HomePage() {
       },
       { enableHighAccuracy: true, timeout: 12000, maximumAge: 60000 },
     )
+  }
+
+  function submitConsultation(event) {
+    event.preventDefault()
+    const data = new FormData(event.currentTarget)
+    const subject = `Yêu cầu tư vấn DriveGo - ${String(data.get("fullName") || "Học viên")}`
+    const body = [
+      `Họ tên: ${data.get("fullName") || ""}`,
+      `Email: ${data.get("email") || ""}`,
+      `Số điện thoại: ${data.get("phone") || ""}`,
+      "",
+      String(data.get("note") || "Cần tư vấn khóa học."),
+    ].join("\n")
+    setConsultNotice("Đang mở ứng dụng email để gửi yêu cầu tư vấn.")
+    window.location.href = `mailto:${centerInfo.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
   }
 
   return (
@@ -451,12 +467,13 @@ export function HomePage() {
                 </p>
               </div>
             </div>
-            <form className="grid gap-3 md:grid-cols-2">
-              <input className="rounded-drive border border-drive-border bg-drive-elevated px-4 py-3 text-sm text-drive-text outline-none focus:ring-2 focus:ring-drive-accent" placeholder="Họ tên của bạn" />
-              <input className="rounded-drive border border-drive-border bg-drive-elevated px-4 py-3 text-sm text-drive-text outline-none focus:ring-2 focus:ring-drive-accent" placeholder="Email của bạn" />
-              <input className="rounded-drive border border-drive-border bg-drive-elevated px-4 py-3 text-sm text-drive-text outline-none focus:ring-2 focus:ring-drive-accent md:col-span-2" placeholder="Số điện thoại" />
-              <textarea className="min-h-28 rounded-drive border border-drive-border bg-drive-elevated px-4 py-3 text-sm text-drive-text outline-none focus:ring-2 focus:ring-drive-accent md:col-span-2" placeholder="Ghi chú" />
-              <button type="button" className="rounded-drive-pill bg-drive-action px-6 py-3 text-sm font-bold text-drive-action-contrast shadow-drive-action">
+            <form className="grid gap-3 md:grid-cols-2" onSubmit={submitConsultation}>
+              <input name="fullName" required autoComplete="name" className="rounded-drive border border-drive-border bg-drive-elevated px-4 py-3 text-sm text-drive-text outline-none focus:ring-2 focus:ring-drive-accent" placeholder="Họ tên của bạn" />
+              <input name="email" type="email" required autoComplete="email" className="rounded-drive border border-drive-border bg-drive-elevated px-4 py-3 text-sm text-drive-text outline-none focus:ring-2 focus:ring-drive-accent" placeholder="Email của bạn" />
+              <input name="phone" type="tel" required autoComplete="tel" className="rounded-drive border border-drive-border bg-drive-elevated px-4 py-3 text-sm text-drive-text outline-none focus:ring-2 focus:ring-drive-accent md:col-span-2" placeholder="Số điện thoại" />
+              <textarea name="note" className="min-h-28 rounded-drive border border-drive-border bg-drive-elevated px-4 py-3 text-sm text-drive-text outline-none focus:ring-2 focus:ring-drive-accent md:col-span-2" placeholder="Ghi chú" />
+              {consultNotice ? <p className="text-sm text-drive-success md:col-span-2">{consultNotice}</p> : null}
+              <button type="submit" className="rounded-drive-pill bg-drive-action px-6 py-3 text-sm font-bold text-drive-action-contrast shadow-drive-action">
                 Gửi tư vấn
               </button>
             </form>
