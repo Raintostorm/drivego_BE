@@ -3,7 +3,9 @@ import { Link, useSearchParams } from "react-router-dom"
 import { PageHeader } from "../components/PageHeader.jsx"
 import { StatusBadge } from "../components/StatusBadge.jsx"
 import { UiCard } from "../components/UiCard.jsx"
+import { Pagination } from "../components/Pagination.jsx"
 import { fetchAdminApplications } from "../lib/admin-api.js"
+import { usePagination } from "../hooks/usePagination.js"
 
 const STATUS_OPTIONS = [
   { value: "", label: "Tất cả" },
@@ -74,6 +76,7 @@ export function AdminApplicationsPage() {
     () => rows.reduce((acc, row) => ({ ...acc, [row.status]: (acc[row.status] ?? 0) + 1 }), {}),
     [rows],
   )
+  const pagination = usePagination(filteredRows)
 
   function deadlineMeta(row) {
     if (!row.dossierDeadline) return null
@@ -148,7 +151,7 @@ export function AdminApplicationsPage() {
         ) : (
           <>
           <div className="grid gap-3 md:hidden">
-            {filteredRows.map((row) => {
+            {pagination.pageItems.map((row) => {
               const deadline = deadlineMeta(row)
               return (
                 <article key={row.id} className="rounded-drive border border-drive-border-soft bg-drive-sidebar p-4">
@@ -184,7 +187,7 @@ export function AdminApplicationsPage() {
                 </tr>
               </thead>
               <tbody>
-                {filteredRows.map((r) => {
+                {pagination.pageItems.map((r) => {
                   const deadline = deadlineMeta(r)
                   return (
                   <tr key={r.id} className="border-b border-drive-border-soft">
@@ -220,6 +223,7 @@ export function AdminApplicationsPage() {
               </tbody>
             </table>
           </div>
+          <Pagination {...pagination} total={filteredRows.length} onPageChange={pagination.setPage} label="hồ sơ" />
           </>
         )}
       </UiCard>

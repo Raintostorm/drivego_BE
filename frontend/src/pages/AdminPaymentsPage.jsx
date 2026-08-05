@@ -3,7 +3,9 @@ import { PageHeader } from "../components/PageHeader.jsx"
 import { PrimaryButton } from "../components/PrimaryButton.jsx"
 import { StatusBadge } from "../components/StatusBadge.jsx"
 import { UiCard } from "../components/UiCard.jsx"
+import { Pagination } from "../components/Pagination.jsx"
 import { confirmAdminPayment, fetchAdminPayments } from "../lib/admin-api.js"
+import { usePagination } from "../hooks/usePagination.js"
 
 const STATUS_TONE = {
   paid: "success",
@@ -38,6 +40,7 @@ export function AdminPaymentsPage() {
     }),
     [paymentType, status],
   )
+  const pagination = usePagination(rows)
 
   async function load() {
     setLoading(true)
@@ -127,7 +130,7 @@ export function AdminPaymentsPage() {
         ) : (
           <>
           <div className="grid gap-3 md:hidden">
-            {rows.map((row) => <article key={row.id} className="rounded-drive border border-drive-border-soft bg-drive-sidebar p-4">
+            {pagination.pageItems.map((row) => <article key={row.id} className="rounded-drive border border-drive-border-soft bg-drive-sidebar p-4">
               <div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="truncate font-semibold text-drive-text">{row.studentName || "Chưa có tên"}</p><p className="truncate text-xs text-drive-muted">{row.studentEmail}</p></div><StatusBadge tone={STATUS_TONE[row.status] || "neutral"}>{STATUS_LABEL[row.status] || row.status}</StatusBadge></div>
               <div className="mt-4 flex items-end justify-between gap-3"><div><p className="text-xs text-drive-muted">{row.paymentType === "enrollment" ? `Khóa ${row.licenseClass || ""}` : "Premium"}</p><p className="mt-1 text-xl font-bold text-drive-text">{formatMoney(row.amount)}đ</p><p className="mt-1 font-mono text-xs text-drive-muted">{row.paymentCode || row.id.slice(0, 8)}</p></div><p className="text-right text-xs text-drive-muted">{formatDate(row.createdAt)}</p></div>
               {row.status === "pending" ? <PrimaryButton className="mt-4 w-full" variant="outline" disabled={actionId === row.id} onClick={() => handleConfirm(row)}>Xác nhận đã nhận tiền</PrimaryButton> : null}
@@ -147,7 +150,7 @@ export function AdminPaymentsPage() {
               </tr>
             </thead>
             <tbody>
-              {rows.map((row) => (
+              {pagination.pageItems.map((row) => (
                 <tr key={row.id} className="border-t border-drive-border/70">
                   <td className="px-3 py-3 font-mono text-white">
                     {row.paymentCode || row.id.slice(0, 8)}
@@ -193,6 +196,7 @@ export function AdminPaymentsPage() {
             </tbody>
           </table>
           </div>
+          <Pagination {...pagination} total={rows.length} onPageChange={pagination.setPage} label="giao dịch" />
           </>
         )}
       </UiCard>

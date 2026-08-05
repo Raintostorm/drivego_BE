@@ -6,6 +6,8 @@ import { TextField } from "../components/TextField.jsx"
 import { UiCard } from "../components/UiCard.jsx"
 import { StatusBadge } from "../components/StatusBadge.jsx"
 import { useAuth } from "../context/AuthContext.jsx"
+import { Pagination } from "../components/Pagination.jsx"
+import { usePagination } from "../hooks/usePagination.js"
 import {
   createAdminSlot,
   deleteAdminSlot,
@@ -43,6 +45,7 @@ export function AdminScheduleSlotsPage() {
   const [form, setForm] = useState(EMPTY)
   const [error, setError] = useState(null)
   const [slotTypeFilter, setSlotTypeFilter] = useState("")
+  const pagination = usePagination(rows)
 
   function reload() {
     fetchAdminSlots(slotTypeFilter ? { slotType: slotTypeFilter } : {}).then(setRows).catch((e) => setError(e.message))
@@ -174,7 +177,7 @@ export function AdminScheduleSlotsPage() {
       {!rows.length ? <UiCard variant="panel"><p className="text-sm text-drive-muted">Chưa có ca thi phù hợp với bộ lọc.</p></UiCard> : null}
 
       <div className="grid gap-3 md:hidden">
-        {rows.map((slot) => {
+        {pagination.pageItems.map((slot) => {
           const held = slot.heldSeats ?? slot.registeredCount ?? 0
           const percent = Math.min(100, Math.round((held / Math.max(1, slot.capacity)) * 100))
           return <UiCard key={slot.id} variant="panel">
@@ -199,7 +202,7 @@ export function AdminScheduleSlotsPage() {
             </tr>
           </thead>
           <tbody>
-            {rows.map((s) => (
+            {pagination.pageItems.map((s) => (
               <tr key={s.id} className="border-t border-drive-border-soft">
                 <td className="py-3 text-drive-text">{formatDate(s.date ?? s.slotDate)}</td>
                 <td className="py-3 text-drive-text">
@@ -228,6 +231,7 @@ export function AdminScheduleSlotsPage() {
           </tbody>
         </table>
       </UiCard> : null}
+      <Pagination {...pagination} total={rows.length} onPageChange={pagination.setPage} label="ca thi" />
     </section>
   )
 }

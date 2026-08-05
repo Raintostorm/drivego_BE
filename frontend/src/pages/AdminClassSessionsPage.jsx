@@ -4,6 +4,8 @@ import { PrimaryButton } from "../components/PrimaryButton.jsx"
 import { TextField } from "../components/TextField.jsx"
 import { UiCard } from "../components/UiCard.jsx"
 import { StatusBadge } from "../components/StatusBadge.jsx"
+import { Pagination } from "../components/Pagination.jsx"
+import { usePagination } from "../hooks/usePagination.js"
 import {
   adminSessionCheckIn,
   createAdminClassSession,
@@ -76,6 +78,8 @@ export function AdminClassSessionsPage() {
     const today = new Date().toISOString().slice(0, 10)
     return rows.filter((row) => filter === "all" || (filter === "upcoming" ? row.sessionDate >= today : row.sessionDate < today))
   }, [filter, rows])
+  const sessionPagination = usePagination(visibleRows)
+  const attendancePagination = usePagination(attendance)
 
   const selectedSession = rows.find((row) => row.id === selectedId)
 
@@ -163,7 +167,7 @@ export function AdminClassSessionsPage() {
             </div>
           </div>
           <ul className="mt-4 space-y-2 text-sm">
-            {visibleRows.map((s) => (
+            {sessionPagination.pageItems.map((s) => (
               <li key={s.id}>
                 <button
                   type="button"
@@ -184,6 +188,7 @@ export function AdminClassSessionsPage() {
             ))}
             {!visibleRows.length ? <li className="rounded-drive border border-dashed border-drive-border p-4 text-drive-muted">Chưa có buổi học trong nhóm này.</li> : null}
           </ul>
+          <Pagination {...sessionPagination} total={visibleRows.length} onPageChange={sessionPagination.setPage} label="buổi học" />
         </UiCard>
 
         <UiCard variant="panel">
@@ -205,7 +210,7 @@ export function AdminClassSessionsPage() {
                 </PrimaryButton>
               </div>
               <ul className="mt-4 space-y-1 text-sm text-drive-muted">
-                {attendance.map((a) => (
+                {attendancePagination.pageItems.map((a) => (
                   <li key={a.id} className="flex flex-wrap items-center justify-between gap-2 rounded-drive border border-drive-border-soft bg-drive-sidebar px-3 py-2">
                     <span><span className="block font-medium text-drive-text">{a.studentName ?? a.userId}</span><span className="text-xs">{a.studentEmail}</span></span>
                     <StatusBadge tone="success">Có mặt · {new Date(a.checkedInAt).toLocaleTimeString("vi-VN", { hour: "2-digit", minute: "2-digit" })}</StatusBadge>
@@ -213,6 +218,7 @@ export function AdminClassSessionsPage() {
                 ))}
                 {!attendance.length ? <li>Chưa có điểm danh.</li> : null}
               </ul>
+              <Pagination {...attendancePagination} total={attendance.length} onPageChange={attendancePagination.setPage} label="học viên điểm danh" />
             </>
           ) : (
             <p className="mt-2 text-sm text-drive-muted">Chọn một buổi học.</p>

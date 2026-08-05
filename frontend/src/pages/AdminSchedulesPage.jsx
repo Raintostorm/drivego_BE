@@ -3,7 +3,9 @@ import { PageHeader } from "../components/PageHeader.jsx"
 import { PrimaryButton } from "../components/PrimaryButton.jsx"
 import { StatusBadge } from "../components/StatusBadge.jsx"
 import { UiCard } from "../components/UiCard.jsx"
+import { Pagination } from "../components/Pagination.jsx"
 import { fetchAdminRegistrations, patchAdminRegistration } from "../lib/admin-api.js"
+import { usePagination } from "../hooks/usePagination.js"
 
 const TABS = [
   { id: "theory_exam", label: "Sát hạch lý thuyết" },
@@ -63,6 +65,7 @@ export function AdminSchedulesPage() {
     if (!needle) return rows
     return rows.filter((row) => `${row.studentName ?? ""} ${row.studentEmail ?? ""}`.toLocaleLowerCase("vi-VN").includes(needle))
   }, [query, rows])
+  const pagination = usePagination(filteredRows)
 
   async function handlePatch(regId, status) {
     setBusyId(regId)
@@ -123,7 +126,7 @@ export function AdminSchedulesPage() {
           <p className="text-sm text-drive-muted">Không có đăng ký phù hợp.</p>
         ) : (
           <div className="space-y-3">
-            {filteredRows.map((r) => (
+            {pagination.pageItems.map((r) => (
               <div
                 key={r.id}
                 className="rounded-drive border border-drive-border-soft bg-drive-sidebar p-4 transition-colors hover:border-drive-border"
@@ -164,6 +167,7 @@ export function AdminSchedulesPage() {
                 </div> : r.adminNote ? <p className="mt-3 rounded-drive bg-drive-elevated p-3 text-sm text-drive-muted">Ghi chú: {r.adminNote}</p> : null}
               </div>
             ))}
+            <Pagination {...pagination} total={filteredRows.length} onPageChange={pagination.setPage} label="đăng ký" />
           </div>
         )}
       </UiCard>

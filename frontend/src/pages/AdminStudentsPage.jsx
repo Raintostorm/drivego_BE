@@ -3,9 +3,11 @@ import { Link } from "react-router-dom"
 import { PageHeader } from "../components/PageHeader.jsx"
 import { StatusBadge } from "../components/StatusBadge.jsx"
 import { UiCard } from "../components/UiCard.jsx"
+import { Pagination } from "../components/Pagination.jsx"
 import { fetchAdminStudents } from "../lib/admin-api.js"
 import { formatPremiumDate } from "../lib/premium.js"
 import { displayLicenseClass } from "../lib/license-class.js"
+import { usePagination } from "../hooks/usePagination.js"
 
 export function AdminStudentsPage() {
   const [rows, setRows] = useState([])
@@ -31,6 +33,7 @@ export function AdminStudentsPage() {
     if (tab === "enrolled") return rows.filter((r) => r.isEnrolled)
     return rows
   }, [rows, tab])
+  const pagination = usePagination(filtered)
 
   return (
     <section className="space-y-6">
@@ -66,7 +69,7 @@ export function AdminStudentsPage() {
       ) : (
         <UiCard variant="panel" padding="sm">
           <div className="grid gap-3 md:hidden">
-            {filtered.map((r) => (
+            {pagination.pageItems.map((r) => (
               <article key={r.userId} className="rounded-drive border border-drive-border-soft bg-drive-sidebar p-4">
                 <div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="truncate font-semibold text-drive-text">{r.fullName ?? r.email}</p><p className="truncate text-xs text-drive-muted">{r.email}</p></div>{r.isPremium ? <StatusBadge tone="success">Premium</StatusBadge> : <StatusBadge tone="neutral">Free</StatusBadge>}</div>
                 <div className="mt-4"><p className="text-xs text-drive-muted">Khóa đang học</p>{r.enrollments?.length ? <div className="mt-2 flex flex-wrap gap-2">{r.enrollments.map((e) => <span key={e.licenseClass} className="rounded-drive-pill border border-drive-border px-3 py-1 text-xs text-drive-text">Hạng {displayLicenseClass(e.licenseClass)}</span>)}</div> : <p className="mt-1 text-sm text-drive-muted">Chưa đăng ký khóa</p>}</div>
@@ -85,7 +88,7 @@ export function AdminStudentsPage() {
               </tr>
             </thead>
             <tbody>
-              {filtered.map((r) => (
+              {pagination.pageItems.map((r) => (
                 <tr key={r.userId} className="border-b border-drive-border-soft">
                   <td className="py-3 pr-4">
                     <p className="font-medium text-white">{r.fullName ?? r.email}</p>
@@ -134,6 +137,7 @@ export function AdminStudentsPage() {
           {!filtered.length ? (
             <p className="py-6 text-center text-drive-muted">Không có học viên phù hợp.</p>
           ) : null}
+          <Pagination {...pagination} total={filtered.length} onPageChange={pagination.setPage} label="học viên" />
         </UiCard>
       )}
     </section>

@@ -2,7 +2,9 @@ import { useEffect, useMemo, useState } from "react"
 import { PageHeader } from "../components/PageHeader.jsx"
 import { StatusBadge } from "../components/StatusBadge.jsx"
 import { UiCard } from "../components/UiCard.jsx"
+import { Pagination } from "../components/Pagination.jsx"
 import { fetchAdminLicenses, reviewAdminLicense } from "../lib/admin-api.js"
+import { usePagination } from "../hooks/usePagination.js"
 
 const STATUS = {
   unverified: ["Chưa xác minh", "neutral"],
@@ -52,6 +54,7 @@ export function AdminLicensesPage() {
     if (tab === "expired") return row.expiryState?.stage === "expired"
     return true
   }), [rows, tab])
+  const pagination = usePagination(visibleRows)
 
   async function review(row, status) {
     try {
@@ -81,7 +84,7 @@ export function AdminLicensesPage() {
       {loading ? <p className="text-drive-muted">Đang tải...</p> : (
         <UiCard variant="panel" padding="sm">
           <div className="grid gap-3 md:hidden">
-            {visibleRows.map((row) => {
+            {pagination.pageItems.map((row) => {
               const [label, tone] = STATUS[row.verificationStatus] ?? STATUS.unverified
               const expiryTone = row.expiryState?.stage === "expired" ? "danger" : ["90_days", "30_days", "7_days"].includes(row.expiryState?.stage) ? "warning" : "neutral"
               return <article key={row.id} className="rounded-drive border border-drive-border-soft bg-drive-sidebar p-4">
@@ -94,7 +97,7 @@ export function AdminLicensesPage() {
           <div className="hidden overflow-x-auto md:block">
           <table className="w-full min-w-[900px] text-left text-sm">
             <thead><tr className="border-b border-drive-border text-drive-muted"><th className="py-3">Học viên</th><th>GPLX</th><th>Ngày cấp</th><th>Hạn sử dụng</th><th>Xác minh</th><th /></tr></thead>
-            <tbody>{visibleRows.map((row) => {
+            <tbody>{pagination.pageItems.map((row) => {
               const [label, tone] = STATUS[row.verificationStatus] ?? STATUS.unverified
               return <tr key={row.id} className="border-b border-drive-border-soft">
                 <td className="py-4"><p className="font-medium text-white">{row.studentName || row.studentEmail}</p><p className="text-xs text-drive-muted">{row.studentEmail}</p></td>
@@ -108,6 +111,7 @@ export function AdminLicensesPage() {
           </table>
           </div>
           {!visibleRows.length ? <p className="py-8 text-center text-drive-muted">Không có GPLX phù hợp với bộ lọc.</p> : null}
+          <Pagination {...pagination} total={visibleRows.length} onPageChange={pagination.setPage} label="GPLX" />
         </UiCard>
       )}
     </section>
