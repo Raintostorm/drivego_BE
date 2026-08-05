@@ -24,7 +24,7 @@ const learnerSteps = [
   },
   {
     title: "4. Hoàn thiện hồ sơ sát hạch",
-    body: "Điền thông tin cá nhân, upload ảnh/CCCD/VNeID/GPLX nếu có. File nên là JPG, PNG, WEBP hoặc PDF và không vượt quá 5MB mỗi file.",
+    body: "Điền thông tin cá nhân, upload ảnh 3×4, ảnh 4×6, CCCD và GPLX nếu có. Nên dùng ảnh nền trắng; file JPG, PNG, WEBP hoặc PDF không vượt quá 5MB mỗi file.",
     to: "/application",
     cta: "Nộp hồ sơ",
   },

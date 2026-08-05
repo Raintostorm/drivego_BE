@@ -19,7 +19,6 @@ const DOC_TYPE_KEYS = {
   photo_4x6_white: "application.docTypes.photo4x6",
   cccd_front: "application.docTypes.cccdFront",
   cccd_back: "application.docTypes.cccdBack",
-  vneid_l2: "application.docTypes.vneid",
   gplx_optional: "application.docTypes.gplx",
 }
 

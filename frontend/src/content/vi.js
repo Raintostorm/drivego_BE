@@ -201,7 +201,7 @@ export const vi = {
       saved: "Đã lưu hồ sơ cá nhân.",
       examDossierTitle: "Hồ sơ nộp thi sát hạch",
       examDossierDesc:
-        "Ảnh 3×4, CCCD, VNeID… theo quy định mới nhất — quản lý tại trang Nộp hồ sơ, không lưu trong mục này.",
+        "Ảnh 3×4, ảnh 4×6 và CCCD — quản lý tại trang Nộp hồ sơ, không lưu trong mục này.",
       examDossierRequired: "Cần nộp đủ hồ sơ trước khi thi thử và đăng ký ca thi chính thức.",
       changePassword: "Đổi mật khẩu",
       active: "Đang hoạt động",
@@ -337,11 +337,10 @@ export const vi = {
       rejected: "Từ chối",
     },
     docTypes: {
-      photo3x4: "Ảnh 3×4cm nền trắng",
-      photo4x6: "Ảnh 4×6cm nền trắng",
+      photo3x4: "Ảnh 3×4cm (ưu tiên nền trắng)",
+      photo4x6: "Ảnh 4×6cm (ưu tiên nền trắng)",
       cccdFront: "CCCD mặt trước",
       cccdBack: "CCCD mặt sau",
-      vneid: "Ảnh VNeID định danh mức 2",
       gplx: "Giấy phép lái xe (nếu có)",
     },
   },
