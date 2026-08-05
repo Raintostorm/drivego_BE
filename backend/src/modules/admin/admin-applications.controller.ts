@@ -9,7 +9,7 @@ import {
   Res,
   UseGuards,
 } from "@nestjs/common"
-import archiver = require("archiver")
+import { ZipArchive } from "archiver"
 import type { Response } from "express"
 import { Roles } from "../../common/decorators/roles.decorator"
 import { CurrentUser } from "../../common/current-user.decorator"
@@ -19,12 +19,6 @@ import { JwtAuthGuard } from "../auth/jwt-auth.guard"
 import { AdminApplicationsService } from "./admin-applications.service"
 import { PatchApplicationAdminDto } from "./dto/patch-application-admin.dto"
 import { RequestDossierDto } from "./dto/request-dossier.dto"
-
-type ArchiverFactory = (
-  format: "zip",
-  options: { zlib: { level: number } },
-) => archiver.Archiver
-const createArchive = archiver as unknown as ArchiverFactory
 
 @Controller("admin/applications")
 @UseGuards(JwtAuthGuard, RolesGuard)
@@ -63,7 +57,7 @@ export class AdminApplicationsController {
     @Param("id") id: string,
     @Res() res: Response,
   ) {
-    const archive = createArchive("zip", { zlib: { level: 9 } })
+    const archive = new ZipArchive({ zlib: { level: 9 } })
     archive.on("error", (error: Error) => {
       if (!res.headersSent) {
         res.status(500).json({ message: "Không tạo được file ZIP" })
