@@ -40,6 +40,9 @@ export class AdminDashboardService {
       studentsByClass,
       paymentStatus,
       revenue30Days,
+      revenueByClass,
+      operationsFunnel,
+      actionQueue,
       missingDocuments,
       deadlines,
     ] = await Promise.all([
@@ -51,6 +54,9 @@ export class AdminDashboardService {
       this.studentsByLicenseClass(admin),
       this.paymentStatusBreakdown(admin),
       this.revenueLast30Days(admin),
+      this.revenueByLicenseClass(admin),
+      this.operationsFunnel(admin),
+      this.actionQueue(admin),
       this.missingDocumentSummary(admin),
       this.dossierDeadlineSummary(admin),
     ])
@@ -74,6 +80,9 @@ export class AdminDashboardService {
       studentsByClass,
       paymentStatus,
       revenue30Days,
+      revenueByClass,
+      operationsFunnel,
+      actionQueue,
       missingDocuments,
       deadlines,
     }
@@ -174,6 +183,105 @@ export class AdminDashboardService {
     this.scopePaymentQuery(qb, centerId)
     const row = await qb.getRawOne<{ amount: string }>()
     return Number(row?.amount ?? 0)
+  }
+
+  private async revenueByLicenseClass(admin: AuthUser) {
+    const centerId = await this.scopedCenterId(admin)
+    const qb = this.paymentsRepo
+      .createQueryBuilder("pay")
+      .select("COALESCE(pay.license_class, pay.payment_type)", "licenseClass")
+      .addSelect("COUNT(*)", "count")
+      .addSelect("COALESCE(SUM(pay.amount), 0)", "amount")
+      .where("pay.status = :status", { status: "paid" })
+      .andWhere("pay.created_at >= NOW() - INTERVAL '30 days'")
+      .groupBy("COALESCE(pay.license_class, pay.payment_type)")
+      .orderBy("COALESCE(SUM(pay.amount), 0)", "DESC")
+    this.scopePaymentQuery(qb, centerId)
+    const rows = await qb.getRawMany<{ licenseClass: string; count: string; amount: string }>()
+    return rows.map((row) => ({
+      licenseClass: row.licenseClass,
+      count: Number(row.count),
+      amount: Number(row.amount),
+    }))
+  }
+
+  private async operationsFunnel(admin: AuthUser) {
+    const centerId = await this.scopedCenterId(admin)
+
+    const profiles = this.profilesRepo.createQueryBuilder("p").select("COUNT(*)", "count")
+    this.scopeProfileQuery(profiles, centerId)
+
+    const paid = this.paymentsRepo
+      .createQueryBuilder("pay")
+      .select("COUNT(DISTINCT pay.user_id)", "count")
+      .where("pay.status = :status", { status: "paid" })
+    this.scopePaymentQuery(paid, centerId)
+
+    const submitted = this.appsRepo
+      .createQueryBuilder("a")
+      .select("COUNT(*)", "count")
+      .where("a.status IN (:...statuses)", { statuses: ["submitted", "reviewing", "approved"] })
+    this.scopeApplicationQuery(submitted, centerId)
+
+    const approved = this.appsRepo
+      .createQueryBuilder("a")
+      .select("COUNT(*)", "count")
+      .where("a.status = :status", { status: "approved" })
+    this.scopeApplicationQuery(approved, centerId)
+
+    const [profilesRow, paidRow, submittedRow, approvedRow] = await Promise.all([
+      profiles.getRawOne<{ count: string }>(),
+      paid.getRawOne<{ count: string }>(),
+      submitted.getRawOne<{ count: string }>(),
+      approved.getRawOne<{ count: string }>(),
+    ])
+
+    return [
+      { key: "students", label: "Học viên", count: Number(profilesRow?.count ?? 0) },
+      { key: "paid", label: "Đã thanh toán", count: Number(paidRow?.count ?? 0) },
+      { key: "submitted", label: "Đã nộp hồ sơ", count: Number(submittedRow?.count ?? 0) },
+      { key: "approved", label: "Hồ sơ duyệt", count: Number(approvedRow?.count ?? 0) },
+    ]
+  }
+
+  private async actionQueue(admin: AuthUser) {
+    const centerId = await this.scopedCenterId(admin)
+    const apps = this.appsRepo
+      .createQueryBuilder("a")
+      .select([
+        "a.id AS id",
+        "a.status AS status",
+        "a.license_class AS license_class",
+        "a.submitted_at AS submitted_at",
+        "a.dossier_deadline AS dossier_deadline",
+        "p.full_name AS full_name",
+      ])
+      .leftJoin(StudentProfile, "p", "p.user_id = a.user_id")
+      .where("a.status IN (:...statuses)", { statuses: ["submitted", "reviewing", "rejected"] })
+      .orderBy(
+        "CASE WHEN a.dossier_deadline IS NOT NULL AND a.dossier_deadline < NOW() THEN 0 WHEN a.status = 'submitted' THEN 1 ELSE 2 END",
+        "ASC",
+      )
+      .addOrderBy("a.submitted_at", "ASC", "NULLS LAST")
+      .limit(5)
+    this.scopeApplicationQuery(apps, centerId)
+    const rows = await apps.getRawMany<{
+      id: string
+      status: string
+      license_class: string | null
+      submitted_at: Date | null
+      dossier_deadline: Date | null
+      full_name: string | null
+    }>()
+    return rows.map((row) => ({
+      id: row.id,
+      status: row.status,
+      licenseClass: row.license_class,
+      submittedAt: row.submitted_at,
+      dossierDeadline: row.dossier_deadline,
+      studentName: row.full_name,
+      overdue: Boolean(row.dossier_deadline && new Date(row.dossier_deadline) < new Date()),
+    }))
   }
 
   private async missingDocumentSummary(admin: AuthUser) {

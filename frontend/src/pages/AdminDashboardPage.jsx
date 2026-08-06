@@ -81,6 +81,26 @@ function EmptyStat({ children = "Chưa có dữ liệu." }) {
   return <p className="rounded-drive border border-drive-border-soft bg-drive-sidebar p-3 text-sm text-drive-muted">{children}</p>
 }
 
+function Funnel({ rows = [] }) {
+  const max = Math.max(1, ...rows.map((row) => Number(row.count ?? 0)))
+  return (
+    <div className="grid gap-3 sm:grid-cols-4">
+      {rows.map((row, index) => {
+        const pct = Math.max(8, percent(row.count, max))
+        return (
+          <div key={row.key ?? row.label} className="rounded-drive border border-drive-border-soft bg-drive-sidebar p-3">
+            <p className="text-xs text-drive-muted">{index + 1}. {row.label}</p>
+            <p className="mt-2 text-2xl font-bold text-white">{row.count}</p>
+            <div className="mt-3 h-2 overflow-hidden rounded-full bg-drive-elevated">
+              <div className="h-full rounded-full bg-drive-action" style={{ width: `${pct}%` }} />
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
+
 export function AdminDashboardPage() {
   const { user } = useAuth()
   const [summary, setSummary] = useState(null)
@@ -174,6 +194,19 @@ export function AdminDashboardPage() {
       </div>
 
       <div className="mt-6 grid gap-4 xl:grid-cols-[1.2fr_0.8fr]">
+        <UiCard variant="panel" className="xl:col-span-2">
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div>
+              <h2 className="font-semibold text-white">Funnel vận hành</h2>
+              <p className="mt-1 text-sm text-drive-muted">Từ học viên đến thanh toán, hồ sơ và duyệt chính thức.</p>
+            </div>
+            <Link to="/admin/students" className="text-sm font-medium text-drive-action">Xem học viên →</Link>
+          </div>
+          <div className="mt-4">
+            {summary?.operationsFunnel?.length ? <Funnel rows={summary.operationsFunnel} /> : <EmptyStat />}
+          </div>
+        </UiCard>
+
         <UiCard variant="panel">
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
@@ -281,6 +314,59 @@ export function AdminDashboardPage() {
               ))
             ) : (
               <EmptyStat />
+            )}
+          </div>
+        </UiCard>
+
+        <UiCard variant="panel">
+          <h2 className="font-semibold text-white">Doanh thu theo hạng</h2>
+          <p className="mt-1 text-sm text-drive-muted">Các khoản đã thanh toán trong 30 ngày.</p>
+          <div className="mt-5 space-y-4">
+            {summary?.revenueByClass?.length ? (
+              summary.revenueByClass.map((row) => (
+                <div key={row.licenseClass} className="rounded-drive border border-drive-border-soft bg-drive-sidebar p-3">
+                  <div className="flex items-start justify-between gap-3">
+                    <div>
+                      <p className="text-sm font-medium text-white">
+                        {row.licenseClass === "premium" ? "Premium" : `Hạng ${displayLicenseClass(row.licenseClass)}`}
+                      </p>
+                      <p className="mt-1 text-xs text-drive-muted">{row.count} giao dịch</p>
+                    </div>
+                    <span className="font-semibold text-drive-success">{formatMoney(row.amount)}</span>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <EmptyStat />
+            )}
+          </div>
+        </UiCard>
+      </div>
+
+      <div className="mt-4 grid gap-4 xl:grid-cols-[1fr_1fr]">
+        <UiCard variant="panel">
+          <div className="flex items-start justify-between gap-3">
+            <div>
+              <h2 className="font-semibold text-white">Hàng chờ xử lý</h2>
+              <p className="mt-1 text-sm text-drive-muted">Các hồ sơ nên mở trước khi demo nghiệp vụ admin.</p>
+            </div>
+            <Link to="/admin/applications" className="text-sm font-medium text-drive-action">Mở hồ sơ</Link>
+          </div>
+          <div className="mt-4 space-y-2">
+            {summary?.actionQueue?.length ? (
+              summary.actionQueue.map((item) => (
+                <Link key={item.id} to={`/admin/applications/${item.id}`} className="tap-feedback flex items-center justify-between gap-3 rounded-drive border border-drive-border-soft bg-drive-sidebar p-3">
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-medium text-white">{item.studentName ?? "Học viên chưa đặt tên"}</p>
+                    <p className="mt-1 text-xs text-drive-muted">Hạng {displayLicenseClass(item.licenseClass)} · {APPLICATION_LABELS[item.status] ?? item.status}</p>
+                  </div>
+                  <span className={`shrink-0 rounded-full px-2 py-1 text-xs font-bold ${item.overdue ? "bg-drive-danger/10 text-drive-danger" : "bg-drive-action/10 text-drive-action"}`}>
+                    {item.overdue ? "Quá hạn" : "Mở"}
+                  </span>
+                </Link>
+              ))
+            ) : (
+              <EmptyStat>Không có hồ sơ cần xử lý ngay.</EmptyStat>
             )}
           </div>
         </UiCard>

@@ -31,6 +31,18 @@ function confirmationLabel(row) {
   return "Đã thanh toán"
 }
 
+function paymentEvents(row) {
+  if (Array.isArray(row.paymentEvents) && row.paymentEvents.length) return row.paymentEvents
+  if (row.paidAt) {
+    return [{
+      type: row.manualConfirmed ? "manual_confirmed" : "sepay_webhook_confirmed",
+      at: row.paidAt,
+      sepayReferenceCode: row.sepayReferenceCode,
+    }]
+  }
+  return []
+}
+
 export function AdminPaymentsPage() {
   const [rows, setRows] = useState([])
   const [status, setStatus] = useState("pending")
@@ -185,6 +197,15 @@ export function AdminPaymentsPage() {
                     <p className="text-drive-text">{confirmationLabel(row)}</p>
                     <p className="text-xs">{row.paidAt ? formatDate(row.paidAt) : "—"}</p>
                     {row.sepayReferenceCode ? <p className="font-mono text-xs">Ref: {row.sepayReferenceCode}</p> : null}
+                    {paymentEvents(row).length ? (
+                      <div className="mt-2 space-y-1 border-l border-drive-border-soft pl-2">
+                        {paymentEvents(row).slice(-2).map((event, index) => (
+                          <p key={`${row.id}-${event.type}-${index}`} className="text-xs">
+                            {event.type === "manual_confirmed" ? "Manual" : "SePay"} · {formatDate(event.at)}
+                          </p>
+                        ))}
+                      </div>
+                    ) : null}
                   </td>
                   <td className="px-3 py-3 text-drive-muted">
                     {formatDate(row.createdAt)}

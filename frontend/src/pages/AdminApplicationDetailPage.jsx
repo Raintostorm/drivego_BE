@@ -40,10 +40,21 @@ const REVIEW_STEPS = [
   { id: "approved", label: "Hoàn tất" },
 ]
 
+const DOCUMENT_CHECKLIST = [
+  { docType: "photo_3x4_blue", label: "Ảnh 3x4", min: 4, hint: "Nên nền trắng từ 01/07" },
+  { docType: "photo_4x6_white", label: "Ảnh 4x6", min: 1, hint: "Ảnh hồ sơ chính" },
+  { docType: "cccd_front", label: "CCCD mặt trước", min: 1, hint: "Rõ số CCCD" },
+  { docType: "cccd_back", label: "CCCD mặt sau", min: 1, hint: "Rõ ngày cấp/nơi cấp" },
+]
+
 function ReviewProgress({ status }) {
   const effective = status === "rejected" ? "reviewing" : status
   const activeIndex = Math.max(0, REVIEW_STEPS.findIndex((step) => step.id === effective))
   return <ol className="grid grid-cols-3 gap-2" aria-label="Tiến độ duyệt hồ sơ">{REVIEW_STEPS.map((step, index) => <li key={step.id} className="min-w-0"><div className={`h-1.5 rounded-full ${index <= activeIndex ? status === "rejected" && index === activeIndex ? "bg-drive-danger" : "bg-drive-success" : "bg-drive-elevated"}`} /><p className={`mt-2 truncate text-xs ${index <= activeIndex ? "font-medium text-drive-text" : "text-drive-muted"}`}>{step.label}</p></li>)}</ol>
+}
+
+function documentCount(documents, docType) {
+  return (documents ?? []).filter((doc) => doc.docType === docType).length
 }
 
 export function AdminApplicationDetailPage() {
@@ -188,6 +199,23 @@ export function AdminApplicationDetailPage() {
           >
             {archiveBusy ? "Đang nén…" : "Tải cả bộ ZIP"}
           </button>
+        </div>
+        <div className="mt-4 grid gap-2 sm:grid-cols-2 xl:grid-cols-4">
+          {DOCUMENT_CHECKLIST.map((item) => {
+            const count = documentCount(app.documents, item.docType)
+            const complete = count >= item.min
+            return (
+              <div key={item.docType} className={`rounded-drive border p-3 ${complete ? "border-drive-success/40 bg-drive-success/10" : "border-amber-400/40 bg-amber-400/10"}`}>
+                <div className="flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-sm font-semibold text-drive-text">{item.label}</p>
+                    <p className="mt-1 text-xs text-drive-muted">{item.hint}</p>
+                  </div>
+                  <StatusBadge tone={complete ? "success" : "warning"}>{count}/{item.min}</StatusBadge>
+                </div>
+              </div>
+            )
+          })}
         </div>
         <ul className="mt-4 space-y-2">
           {(app.documents ?? []).map((d) => (
