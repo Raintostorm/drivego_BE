@@ -58,6 +58,7 @@ export class AdminStudentsService {
         "p.full_name AS full_name",
         "p.premium_until AS premium_until",
         "p.license_class AS license_class",
+        "p.center_id AS center_id",
       ])
       .getRawMany<{
         id: string
@@ -65,6 +66,7 @@ export class AdminStudentsService {
         full_name: string | null
         premium_until: Date | null
         license_class: string | null
+        center_id: string | null
       }>()
 
     const userIds = users.map((u) => u.id)
@@ -96,6 +98,7 @@ export class AdminStudentsService {
         email: u.email,
         fullName: u.full_name,
         licenseClass: u.license_class,
+        centerId: u.center_id,
         premiumUntil: u.premium_until,
         isPremium: Boolean(u.premium_until && new Date(u.premium_until) > new Date()),
         enrollments: activeEnrollments.map((e) => ({

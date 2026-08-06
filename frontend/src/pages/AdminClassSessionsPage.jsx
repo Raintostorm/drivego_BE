@@ -5,16 +5,19 @@ import { TextField } from "../components/TextField.jsx"
 import { UiCard } from "../components/UiCard.jsx"
 import { StatusBadge } from "../components/StatusBadge.jsx"
 import { Pagination } from "../components/Pagination.jsx"
+import { useAuth } from "../context/AuthContext.jsx"
 import { usePagination } from "../hooks/usePagination.js"
 import {
   adminSessionCheckIn,
   createAdminClassSession,
+  fetchAdminCenters,
   fetchAdminClassSessions,
   fetchAdminSessionAttendance,
   fetchAdminStudents,
 } from "../lib/admin-api.js"
 
 const EMPTY = {
+  centerId: "",
   title: "",
   sessionDate: "",
   startTime: "08:00",
@@ -40,8 +43,11 @@ function formatDate(value) {
 }
 
 export function AdminClassSessionsPage() {
+  const { user } = useAuth()
+  const isSystemAdmin = user?.role === "system_admin"
   const [rows, setRows] = useState([])
   const [form, setForm] = useState(EMPTY)
+  const [centers, setCenters] = useState([])
   const [selectedId, setSelectedId] = useState(null)
   const [attendance, setAttendance] = useState([])
   const [checkInUserId, setCheckInUserId] = useState("")
@@ -56,7 +62,8 @@ export function AdminClassSessionsPage() {
   useEffect(() => {
     reload()
     fetchAdminStudents({ enrolled: "true" }).then(setStudents).catch(() => setStudents([]))
-  }, [])
+    if (isSystemAdmin) fetchAdminCenters().then(setCenters).catch(() => setCenters([]))
+  }, [isSystemAdmin])
 
   useEffect(() => {
     if (!selectedId) return
@@ -67,7 +74,7 @@ export function AdminClassSessionsPage() {
     e.preventDefault()
     try {
       await createAdminClassSession(form)
-      setForm(EMPTY)
+      setForm({ ...EMPTY, centerId: form.centerId })
       reload()
     } catch (err) {
       setError(err instanceof Error ? err.message : "Lỗi")
@@ -82,6 +89,17 @@ export function AdminClassSessionsPage() {
   const attendancePagination = usePagination(attendance)
 
   const selectedSession = rows.find((row) => row.id === selectedId)
+  const eligibleStudents = useMemo(() => {
+    if (!selectedSession) return students
+    return students.filter((student) => {
+      const sameCenter = !selectedSession.centerId || !student.centerId || student.centerId === selectedSession.centerId
+      const sameClass =
+        !selectedSession.licenseClass ||
+        student.enrollments?.some((item) => item.licenseClass === selectedSession.licenseClass)
+      const notCheckedIn = !attendance.some((item) => item.userId === student.userId)
+      return sameCenter && sameClass && notCheckedIn
+    })
+  }, [attendance, selectedSession, students])
 
   async function handleCheckIn() {
     if (!selectedId || !checkInUserId.trim()) return
@@ -102,6 +120,24 @@ export function AdminClassSessionsPage() {
           <p className="mt-1 text-sm text-drive-muted">Thông tin này sẽ xuất hiện trong lịch học của học viên thuộc trung tâm.</p>
         </div>
         <form onSubmit={handleCreate} className="grid gap-3 sm:grid-cols-2">
+          {isSystemAdmin ? (
+            <label className="block text-sm sm:col-span-2">
+              <span className="mb-2 block font-medium text-drive-text">Trung tâm</span>
+              <select
+                value={form.centerId}
+                onChange={(e) => setForm({ ...form, centerId: e.target.value })}
+                required
+                className="min-h-14 w-full rounded-drive-pill border border-drive-border bg-drive-elevated px-4 text-drive-text outline-none focus:ring-2 focus:ring-drive-action"
+              >
+                <option value="">Chọn trung tâm quản lý buổi học</option>
+                {centers.map((center) => (
+                  <option key={center.id} value={center.id}>
+                    {center.name} · {center.city}
+                  </option>
+                ))}
+              </select>
+            </label>
+          ) : null}
           <TextField
             label="Tiêu đề"
             value={form.title}
@@ -202,7 +238,7 @@ export function AdminClassSessionsPage() {
                 <label className="flex-1 text-sm text-drive-text">Học viên
                   <select value={checkInUserId} onChange={(e) => setCheckInUserId(e.target.value)} className="mt-2 min-h-12 w-full rounded-drive border border-drive-border bg-drive-elevated px-3 text-drive-text">
                     <option value="">Chọn theo tên hoặc email</option>
-                    {students.filter((student) => !attendance.some((item) => item.userId === student.userId)).map((student) => <option key={student.userId} value={student.userId}>{student.fullName ?? student.email} · {student.email}</option>)}
+                    {eligibleStudents.map((student) => <option key={student.userId} value={student.userId}>{student.fullName ?? student.email} · {student.email}</option>)}
                   </select>
                 </label>
                 <PrimaryButton type="button" className="w-full self-end sm:w-auto" disabled={!checkInUserId} onClick={handleCheckIn}>
@@ -217,6 +253,7 @@ export function AdminClassSessionsPage() {
                   </li>
                 ))}
                 {!attendance.length ? <li>Chưa có điểm danh.</li> : null}
+                {attendance.length && !eligibleStudents.length ? <li className="text-xs">Không còn học viên hợp lệ để thêm vào buổi này.</li> : null}
               </ul>
               <Pagination {...attendancePagination} total={attendance.length} onPageChange={attendancePagination.setPage} label="học viên điểm danh" />
             </>

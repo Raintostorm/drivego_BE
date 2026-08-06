@@ -7,6 +7,7 @@ import {
   LICENSE_LABELS,
   STUDY_LICENSE_CODES,
 } from "../../common/license-class.constants"
+import { fallbackEnrollmentFee } from "../../common/pricing.constants"
 import { ExamPaper } from "../../entities/exam-paper.entity"
 import { LicenseClass } from "../../entities/license-class.entity"
 import { ScheduleSlot } from "../../entities/schedule-slot.entity"
@@ -68,13 +69,6 @@ export class LicenseClassesService {
       const n = Number(value ?? 0)
       return `${n.toLocaleString("vi-VN")}đ`
     }
-    const fallbackFees: Record<string, number> = {
-      A1: 755000,
-      A2: 1800000,
-      B1: 12000000,
-      B2: 15000000,
-    }
-
     const byCode = new Map(licenses.map((l) => [l.code, l]))
 
     return STUDY_LICENSE_CODES.map((code) => {
@@ -90,8 +84,8 @@ export class LicenseClassesService {
         description: row?.description ?? null,
         price: formatPrice(row?.price),
         priceRaw: Number(row?.price ?? 0),
-        enrollmentFee: formatPrice(row?.enrollmentFee ?? fallbackFees[code] ?? 0),
-        enrollmentFeeRaw: Number(row?.enrollmentFee ?? fallbackFees[code] ?? 0),
+        enrollmentFee: formatPrice(row?.enrollmentFee ?? fallbackEnrollmentFee(code)),
+        enrollmentFeeRaw: Number(row?.enrollmentFee ?? fallbackEnrollmentFee(code)),
         contentStatus: contentReady ? "ready" : "coming_soon",
         contentReady,
         hasStudyChapters: chapterCount > 0,

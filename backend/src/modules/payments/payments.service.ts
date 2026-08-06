@@ -6,9 +6,10 @@ import {
 } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { randomBytes } from "crypto"
-import { Repository } from "typeorm"
+import { DataSource, Repository } from "typeorm"
 import { EnrollmentService } from "../../common/enrollment.service"
 import { isStudyLicenseCode } from "../../common/license-class.constants"
+import { CourseEnrollment } from "../../entities/course-enrollment.entity"
 import { Payment } from "../../entities/payment.entity"
 import { StudentProfile } from "../../entities/student-profile.entity"
 import { SubscriptionPlan } from "../../entities/subscription-plan.entity"
@@ -31,6 +32,7 @@ export class PaymentsService {
     private readonly profilesRepo: Repository<StudentProfile>,
     @InjectRepository(User)
     private readonly usersRepo: Repository<User>,
+    private readonly dataSource: DataSource,
     private readonly enrollment: EnrollmentService,
     private readonly sepay: SepayConfigService,
   ) {}
@@ -246,48 +248,106 @@ export class PaymentsService {
     payment: Payment,
     payload: SepayWebhookDto | { manual: true; adminUserId: string; note: string | null },
   ) {
-    payment.status = "paid"
     const manualPayload = "manual" in payload
-    payment.customerInfo = {
-      ...(payment.customerInfo ?? {}),
-      paidAt: new Date().toISOString(),
-      ...(manualPayload
-        ? {
-            manualConfirmed: true,
-            manualConfirmedBy: payload.adminUserId,
-            manualConfirmNote: payload.note,
-          }
-        : {
-            sepayTransactionId: payload.id,
-            sepayReferenceCode: payload.referenceCode ?? null,
-            sepayGateway: payload.gateway ?? null,
-          }),
+    const paidAt = new Date().toISOString()
+
+    await this.dataSource.transaction(async (manager) => {
+      const payments = manager.getRepository(Payment)
+      const lockedPayment = await payments
+        .createQueryBuilder("p")
+        .setLock("pessimistic_write")
+        .where("p.id = :id", { id: payment.id })
+        .getOne()
+
+      if (!lockedPayment) throw new NotFoundException("Không tìm thấy giao dịch")
+      if (lockedPayment.status === "paid") return
+      if (lockedPayment.status !== "pending") {
+        throw new BadRequestException("Chỉ có thể xác nhận giao dịch đang chờ")
+      }
+
+      const type = lockedPayment.paymentType ?? (lockedPayment.planId ? "premium" : "enrollment")
+
+      if (type === "enrollment" && lockedPayment.licenseClass) {
+        await this.activateEnrollmentInTransaction(
+          manager.getRepository(CourseEnrollment),
+          lockedPayment.userId,
+          lockedPayment.licenseClass,
+          lockedPayment.id,
+        )
+      } else if (lockedPayment.planId) {
+        await this.extendPremiumInTransaction(
+          manager.getRepository(StudentProfile),
+          lockedPayment.userId,
+        )
+      }
+
+      lockedPayment.status = "paid"
+      lockedPayment.customerInfo = {
+        ...(lockedPayment.customerInfo ?? {}),
+        paidAt,
+        ...(manualPayload
+          ? {
+              manualConfirmed: true,
+              manualConfirmedBy: payload.adminUserId,
+              manualConfirmNote: payload.note,
+            }
+          : {
+              sepayTransactionId: payload.id,
+              sepayReferenceCode: payload.referenceCode ?? null,
+              sepayGateway: payload.gateway ?? null,
+            }),
+      }
+      await payments.save(lockedPayment)
+    })
+  }
+
+  private async activateEnrollmentInTransaction(
+    enrollments: Repository<CourseEnrollment>,
+    userId: string,
+    licenseClass: string,
+    paymentId: string,
+  ) {
+    const code = this.enrollment.normalizeClass(licenseClass)
+    let row = await enrollments
+      .createQueryBuilder("e")
+      .setLock("pessimistic_write")
+      .where("e.user_id = :userId AND e.license_class = :code", { userId, code })
+      .getOne()
+
+    if (!row) {
+      row = enrollments.create({
+        userId,
+        licenseClass: code,
+        status: "active",
+        paymentId,
+        enrolledAt: new Date(),
+      })
+    } else {
+      row.status = "active"
+      row.paymentId = paymentId
+      row.enrolledAt = row.enrolledAt ?? new Date()
     }
-    await this.paymentsRepo.save(payment)
+    await enrollments.save(row)
+  }
 
-    const type = payment.paymentType ?? (payment.planId ? "premium" : "enrollment")
-
-    if (type === "enrollment" && payment.licenseClass) {
-      await this.enrollment.activateFromPayment(
-        payment.userId,
-        payment.licenseClass,
-        payment.id,
-      )
-      return
-    }
-
-    if (!payment.planId) return
-
-    const profile = await this.profilesRepo.findOne({ where: { userId: payment.userId } })
+  private async extendPremiumInTransaction(
+    profiles: Repository<StudentProfile>,
+    userId: string,
+  ) {
+    const profile = await profiles
+      .createQueryBuilder("p")
+      .setLock("pessimistic_write")
+      .where("p.user_id = :userId", { userId })
+      .getOne()
     if (!profile) return
 
     const now = new Date()
-    const base =
-      profile.premiumUntil && profile.premiumUntil > now ? profile.premiumUntil : now
+    const base = profile.premiumUntil && profile.premiumUntil > now ? profile.premiumUntil : now
     const premiumUntil = new Date(base)
     premiumUntil.setDate(premiumUntil.getDate() + PREMIUM_DAYS)
 
-    await this.profilesRepo.update(payment.userId, { premiumUntil })
+    profile.premiumUntil = premiumUntil
+    await profiles.save(profile)
   }
 
   private toPaymentStatus(payment: Payment) {

@@ -2,6 +2,7 @@ import { BadRequestException, Injectable, NotFoundException } from "@nestjs/comm
 import { InjectRepository } from "@nestjs/typeorm"
 import { Repository } from "typeorm"
 import { ClassSession } from "../../entities/class-session.entity"
+import { CourseEnrollment } from "../../entities/course-enrollment.entity"
 import { SessionAttendance } from "../../entities/session-attendance.entity"
 import { StudentProfile } from "../../entities/student-profile.entity"
 import { User } from "../../entities/user.entity"
@@ -15,6 +16,10 @@ export class AdminClassSessionsService {
     private readonly sessionsRepo: Repository<ClassSession>,
     @InjectRepository(SessionAttendance)
     private readonly attendanceRepo: Repository<SessionAttendance>,
+    @InjectRepository(StudentProfile)
+    private readonly profilesRepo: Repository<StudentProfile>,
+    @InjectRepository(CourseEnrollment)
+    private readonly enrollmentsRepo: Repository<CourseEnrollment>,
     private readonly scope: AdminScopeService,
   ) {}
 
@@ -95,15 +100,29 @@ export class AdminClassSessionsService {
     if (!session) throw new NotFoundException("Không tìm thấy buổi học")
     await this.scope.assertCenterAccessAsync(admin, session.centerId)
 
-    const count = await this.attendanceRepo.count({ where: { sessionId } })
-    if (count >= session.maxCapacity) {
-      throw new BadRequestException("Buổi học đã đủ sĩ số")
+    const profile = await this.profilesRepo.findOne({ where: { userId } })
+    if (!profile) throw new BadRequestException("Học viên chưa có hồ sơ")
+    if (profile.centerId !== session.centerId) {
+      throw new BadRequestException("Học viên không thuộc trung tâm của buổi học")
+    }
+    if (session.licenseClass) {
+      const enrollment = await this.enrollmentsRepo.findOne({
+        where: { userId, licenseClass: session.licenseClass, status: "active" },
+      })
+      if (!enrollment) {
+        throw new BadRequestException(`Học viên chưa có khóa ${session.licenseClass} đang hoạt động`)
+      }
     }
 
     const existing = await this.attendanceRepo.findOne({
       where: { sessionId, userId },
     })
     if (existing) return existing
+
+    const count = await this.attendanceRepo.count({ where: { sessionId } })
+    if (count >= session.maxCapacity) {
+      throw new BadRequestException("Buổi học đã đủ sĩ số")
+    }
 
     const row = this.attendanceRepo.create({
       sessionId,

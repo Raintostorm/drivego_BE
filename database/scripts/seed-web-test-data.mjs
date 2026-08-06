@@ -36,6 +36,7 @@ const TEST_EMAILS = [
   "student.b2@drivego.test",
   "student.b1@drivego.test",
 ]
+const INCLUDE_EXTRA_TEST_USERS = process.env.DRIVEGO_INCLUDE_EXTRA_TEST_USERS === "true"
 
 function loadDatabaseUrlFromEnvFile(path) {
   const text = readFileSync(resolve(path), "utf8")
@@ -222,10 +223,13 @@ async function seed() {
     }
 
     const targetUsers = await client.query(
-      `SELECT id FROM users WHERE role = 'student' AND (
-         email = ANY($1::text[]) OR email NOT LIKE '%@drivego.test'
+      `SELECT id FROM users
+       WHERE role = 'student'
+       AND (
+         email = ANY($1::text[])
+         OR ($2::boolean = true AND email LIKE '%@drivego.test')
        )`,
-      [TEST_EMAILS],
+      [TEST_EMAILS, INCLUDE_EXTRA_TEST_USERS],
     )
     const targetUserIds = targetUsers.rows.map((row) => row.id)
 

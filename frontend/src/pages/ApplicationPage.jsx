@@ -100,7 +100,7 @@ export function ApplicationPage() {
         data = await apiFetch("/applications", {
           method: "POST",
           auth: true,
-          body: JSON.stringify({ licenseClass }),
+          body: JSON.stringify({ licenseClass: activeClass }),
         })
         app = unwrapApplication(data)
       }
@@ -121,7 +121,7 @@ export function ApplicationPage() {
     } finally {
       setLoading(false)
     }
-  }, [])
+  }, [activeClass])
 
   useEffect(() => {
     loadApplication()
