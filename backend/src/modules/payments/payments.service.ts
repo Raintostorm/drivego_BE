@@ -18,7 +18,7 @@ import { CheckoutDto } from "./dto/checkout.dto"
 import { SepayWebhookDto } from "./dto/sepay-webhook.dto"
 import { SepayConfigService } from "./sepay-config.service"
 
-const PREMIUM_DAYS = 30
+const PREMIUM_DAYS = readPositiveInt("DRIVEGO_PREMIUM_DAYS", 30)
 const PAYMENT_TTL_MS = 24 * 60 * 60 * 1000
 
 @Injectable()
@@ -282,9 +282,29 @@ export class PaymentsService {
       }
 
       lockedPayment.status = "paid"
+      const paymentEvents = Array.isArray(lockedPayment.customerInfo?.paymentEvents)
+        ? lockedPayment.customerInfo.paymentEvents
+        : []
       lockedPayment.customerInfo = {
         ...(lockedPayment.customerInfo ?? {}),
         paidAt,
+        paymentEvents: [
+          ...paymentEvents,
+          manualPayload
+            ? {
+                type: "manual_confirmed",
+                at: paidAt,
+                adminUserId: payload.adminUserId,
+                note: payload.note,
+              }
+            : {
+                type: "sepay_webhook_confirmed",
+                at: paidAt,
+                sepayTransactionId: payload.id,
+                sepayReferenceCode: payload.referenceCode ?? null,
+                sepayGateway: payload.gateway ?? null,
+              },
+        ],
         ...(manualPayload
           ? {
               manualConfirmed: true,
@@ -362,4 +382,11 @@ export class PaymentsService {
       manualConfirmed: Boolean(payment.customerInfo?.manualConfirmed),
     }
   }
+}
+
+function readPositiveInt(name: string, fallback: number) {
+  const value = process.env[name]
+  if (!value) return fallback
+  const parsed = Number(value)
+  return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback
 }

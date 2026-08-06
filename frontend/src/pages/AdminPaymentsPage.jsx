@@ -24,6 +24,13 @@ function formatDate(value) {
   return new Date(value).toLocaleString("vi-VN")
 }
 
+function confirmationLabel(row) {
+  if (row.status !== "paid") return "Chưa xác nhận"
+  if (row.manualConfirmed) return "Admin xác nhận"
+  if (row.sepayTransactionId || row.sepayReferenceCode) return "SePay webhook"
+  return "Đã thanh toán"
+}
+
 export function AdminPaymentsPage() {
   const [rows, setRows] = useState([])
   const [status, setStatus] = useState("pending")
@@ -133,6 +140,7 @@ export function AdminPaymentsPage() {
             {pagination.pageItems.map((row) => <article key={row.id} className="rounded-drive border border-drive-border-soft bg-drive-sidebar p-4">
               <div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="truncate font-semibold text-drive-text">{row.studentName || "Chưa có tên"}</p><p className="truncate text-xs text-drive-muted">{row.studentEmail}</p></div><StatusBadge tone={STATUS_TONE[row.status] || "neutral"}>{STATUS_LABEL[row.status] || row.status}</StatusBadge></div>
               <div className="mt-4 flex items-end justify-between gap-3"><div><p className="text-xs text-drive-muted">{row.paymentType === "enrollment" ? `Khóa ${row.licenseClass || ""}` : "Premium"}</p><p className="mt-1 text-xl font-bold text-drive-text">{formatMoney(row.amount)}đ</p><p className="mt-1 font-mono text-xs text-drive-muted">{row.paymentCode || row.id.slice(0, 8)}</p></div><p className="text-right text-xs text-drive-muted">{formatDate(row.createdAt)}</p></div>
+              <div className="mt-3 rounded-drive border border-drive-border-soft bg-drive-elevated/60 px-3 py-2 text-xs text-drive-muted"><span className="font-medium text-drive-text">{confirmationLabel(row)}</span>{row.paidAt ? ` · ${formatDate(row.paidAt)}` : ""}{row.sepayReferenceCode ? <span className="block font-mono">Ref: {row.sepayReferenceCode}</span> : null}</div>
               {row.status === "pending" ? <PrimaryButton className="mt-4 w-full" variant="outline" disabled={actionId === row.id} onClick={() => handleConfirm(row)}>Xác nhận đã nhận tiền</PrimaryButton> : null}
             </article>)}
           </div>
@@ -145,6 +153,7 @@ export function AdminPaymentsPage() {
                 <th className="px-3 py-2">Loại</th>
                 <th className="px-3 py-2">Số tiền</th>
                 <th className="px-3 py-2">Trạng thái</th>
+                <th className="px-3 py-2">Xác nhận</th>
                 <th className="px-3 py-2">Ngày tạo</th>
                 <th className="px-3 py-2 text-right">Thao tác</th>
               </tr>
@@ -171,9 +180,11 @@ export function AdminPaymentsPage() {
                     <StatusBadge tone={STATUS_TONE[row.status] || "neutral"}>
                       {STATUS_LABEL[row.status] || row.status}
                     </StatusBadge>
-                    {row.manualConfirmed ? (
-                      <p className="mt-1 text-xs text-drive-muted">Xác nhận thủ công</p>
-                    ) : null}
+                  </td>
+                  <td className="px-3 py-3 text-drive-muted">
+                    <p className="text-drive-text">{confirmationLabel(row)}</p>
+                    <p className="text-xs">{row.paidAt ? formatDate(row.paidAt) : "—"}</p>
+                    {row.sepayReferenceCode ? <p className="font-mono text-xs">Ref: {row.sepayReferenceCode}</p> : null}
                   </td>
                   <td className="px-3 py-3 text-drive-muted">
                     {formatDate(row.createdAt)}
