@@ -5,7 +5,7 @@ import { PrimaryButton } from "../components/PrimaryButton.jsx"
 import { StatusBadge } from "../components/StatusBadge.jsx"
 import { TextField } from "../components/TextField.jsx"
 import { UiCard } from "../components/UiCard.jsx"
-import { fetchAdminStudent, patchAdminStudentNote } from "../lib/admin-api.js"
+import { fetchAdminStudent, patchAdminStudentNote, unlockAdminStudentCourse } from "../lib/admin-api.js"
 import { formatPremiumDate } from "../lib/premium.js"
 import { displayLicenseClass } from "../lib/license-class.js"
 
@@ -16,13 +16,28 @@ const TABS = [
   { id: "application", label: "Hồ sơ" },
 ]
 
+const LICENSE_OPTIONS = ["A1", "A2", "B1", "B2"]
+
+function formatMoney(value) {
+  return Number(value ?? 0).toLocaleString("vi-VN")
+}
+
+function formatDateTime(value) {
+  if (!value) return "—"
+  return new Date(value).toLocaleString("vi-VN")
+}
+
 export function AdminStudentDetailPage() {
   const { userId } = useParams()
   const [data, setData] = useState(null)
   const [tab, setTab] = useState("info")
   const [note, setNote] = useState("")
   const [saving, setSaving] = useState(false)
+  const [unlocking, setUnlocking] = useState(false)
+  const [unlockClass, setUnlockClass] = useState("A1")
+  const [unlockNote, setUnlockNote] = useState("Đã thu tiền trực tiếp tại trung tâm.")
   const [error, setError] = useState(null)
+  const [notice, setNotice] = useState(null)
 
   useEffect(() => {
     fetchAdminStudent(userId)
@@ -42,6 +57,26 @@ export function AdminStudentDetailPage() {
       setError(e instanceof Error ? e.message : "Lỗi lưu")
     } finally {
       setSaving(false)
+    }
+  }
+
+  async function handleUnlockCourse() {
+    const ok = window.confirm(`Mở khóa học hạng ${displayLicenseClass(unlockClass)} cho ${data.fullName || data.email}?`)
+    if (!ok) return
+    setUnlocking(true)
+    setError(null)
+    setNotice(null)
+    try {
+      const updated = await unlockAdminStudentCourse(userId, {
+        licenseClass: unlockClass,
+        note: unlockNote,
+      })
+      setData(updated)
+      setNotice(`Đã mở khóa học hạng ${displayLicenseClass(unlockClass)} và ghi nhận thanh toán trực tiếp.`)
+    } catch (e) {
+      setError(e instanceof Error ? e.message : "Không mở khóa được")
+    } finally {
+      setUnlocking(false)
     }
   }
 
@@ -95,6 +130,9 @@ export function AdminStudentDetailPage() {
         ))}
       </div>
 
+      {notice ? <p className="rounded-drive border border-drive-success/40 bg-drive-success/10 px-4 py-3 text-sm text-drive-success">{notice}</p> : null}
+      {error ? <p className="rounded-drive border border-drive-danger/40 bg-drive-danger/10 px-4 py-3 text-sm text-drive-danger">{error}</p> : null}
+
       {tab === "info" ? (
         <UiCard variant="panel">
           <dl className="grid gap-3 text-sm sm:grid-cols-2">
@@ -129,24 +167,50 @@ export function AdminStudentDetailPage() {
       ) : null}
 
       {tab === "courses" ? (
-        <UiCard variant="panel">
-          {data.enrollments?.length ? (
-            <ul className="space-y-2 text-sm">
-              {data.enrollments.map((e) => (
-                <li key={e.id ?? e.licenseClass} className="text-white">
-                  Hạng {displayLicenseClass(e.licenseClass)} · {e.status ?? "active"}
-                  {e.enrolledAt ? (
-                    <span className="ml-2 text-drive-muted">
-                      {new Date(e.enrolledAt).toLocaleDateString("vi-VN")}
-                    </span>
-                  ) : null}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-drive-muted">Chưa có đăng ký khóa.</p>
-          )}
-        </UiCard>
+        <div className="grid gap-4 lg:grid-cols-[1fr_0.9fr]">
+          <UiCard variant="panel">
+            <div className="flex items-start justify-between gap-3">
+              <div>
+                <h2 className="font-semibold text-white">Khóa đã mở</h2>
+                <p className="mt-1 text-sm text-drive-muted">Các hạng học viên có thể học và làm đề.</p>
+              </div>
+              <StatusBadge tone={data.enrollments?.some((e) => e.status === "active") ? "success" : "neutral"}>
+                {data.enrollments?.filter((e) => e.status === "active").length ?? 0} active
+              </StatusBadge>
+            </div>
+            {data.enrollments?.length ? (
+              <ul className="mt-4 space-y-2 text-sm">
+                {data.enrollments.map((e) => (
+                  <li key={e.id ?? e.licenseClass} className="rounded-drive border border-drive-border-soft bg-drive-sidebar p-3 text-white">
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <span className="font-medium">Hạng {displayLicenseClass(e.licenseClass)}</span>
+                      <StatusBadge tone={e.status === "active" ? "success" : "warning"}>{e.status ?? "active"}</StatusBadge>
+                    </div>
+                    <p className="mt-1 text-xs text-drive-muted">Mở: {formatDateTime(e.enrolledAt)}</p>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="mt-4 text-drive-muted">Chưa có đăng ký khóa.</p>
+            )}
+          </UiCard>
+
+          <UiCard variant="panel">
+            <h2 className="font-semibold text-white">Mở khóa học</h2>
+            <p className="mt-1 text-sm text-drive-muted">Dùng khi học viên đã đóng tiền trực tiếp tại trung tâm.</p>
+            <label className="mt-4 block text-sm text-drive-text">
+              Hạng cần mở
+              <select value={unlockClass} onChange={(e) => setUnlockClass(e.target.value)} className="mt-2 min-h-12 w-full rounded-drive border border-drive-border bg-drive-elevated px-3 text-drive-text">
+                {LICENSE_OPTIONS.map((code) => <option key={code} value={code}>{displayLicenseClass(code)}</option>)}
+              </select>
+            </label>
+            <TextField className="mt-3" label="Ghi chú thanh toán" value={unlockNote} onChange={(e) => setUnlockNote(e.target.value)} />
+            <PrimaryButton className="mt-4 w-full" disabled={unlocking} onClick={handleUnlockCourse}>
+              {unlocking ? "Đang mở…" : "Mở khóa học"}
+            </PrimaryButton>
+            <p className="mt-3 text-xs text-drive-muted">Hệ thống sẽ tự tạo một payment đã thanh toán bằng phương thức trực tiếp để dashboard vẫn có dòng tiền.</p>
+          </UiCard>
+        </div>
       ) : null}
 
       {tab === "exams" ? (
@@ -194,12 +258,18 @@ export function AdminStudentDetailPage() {
       ) : null}
 
       {tab === "application" ? (
+        <div className="grid gap-4 lg:grid-cols-[1fr_1fr]">
         <UiCard variant="panel">
+          <h2 className="font-semibold text-white">Hồ sơ sát hạch</h2>
           {data.application ? (
             <>
-              <p className="text-white">
-                Hạng {data.application.licenseClass} · {data.application.status}
-              </p>
+              <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
+                <div><dt className="text-drive-muted">Hạng</dt><dd className="text-white">{displayLicenseClass(data.application.licenseClass)}</dd></div>
+                <div><dt className="text-drive-muted">Trạng thái</dt><dd><StatusBadge tone={data.application.status === "approved" ? "success" : data.application.status === "rejected" ? "danger" : "warning"}>{data.application.status}</StatusBadge></dd></div>
+                <div><dt className="text-drive-muted">Ngày nộp</dt><dd className="text-white">{formatDateTime(data.application.submittedAt)}</dd></div>
+                <div><dt className="text-drive-muted">Hạn bổ sung</dt><dd className="text-white">{formatDateTime(data.application.dossierDeadline)}</dd></div>
+              </dl>
+              {data.application.adminNote ? <p className="mt-4 rounded-drive border border-drive-border-soft bg-drive-sidebar p-3 text-sm text-drive-muted">{data.application.adminNote}</p> : null}
               <Link
                 to={`/admin/applications/${data.application.id}`}
                 className="mt-3 inline-block text-drive-action hover:underline"
@@ -211,6 +281,31 @@ export function AdminStudentDetailPage() {
             <p className="text-drive-muted">Chưa có hồ sơ sát hạch.</p>
           )}
         </UiCard>
+        <UiCard variant="panel">
+          <h2 className="font-semibold text-white">Tiền & thanh toán</h2>
+          {data.payments?.length ? (
+            <ul className="mt-4 space-y-2">
+              {data.payments.map((payment) => (
+                <li key={payment.id} className="rounded-drive border border-drive-border-soft bg-drive-sidebar p-3 text-sm">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                      <p className="font-medium text-white">{payment.paymentType === "enrollment" ? `Khóa ${displayLicenseClass(payment.licenseClass)}` : "Premium"}</p>
+                      <p className="mt-1 text-xs text-drive-muted">{payment.method || "sepay"} · {formatDateTime(payment.paidAt || payment.createdAt)}</p>
+                    </div>
+                    <div className="text-right">
+                      <p className="font-bold text-white">{formatMoney(payment.amount)}đ</p>
+                      <StatusBadge tone={payment.status === "paid" ? "success" : payment.status === "pending" ? "warning" : "danger"}>{payment.status}</StatusBadge>
+                    </div>
+                  </div>
+                  {payment.note ? <p className="mt-2 text-xs text-drive-muted">{payment.note}</p> : null}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="mt-4 text-drive-muted">Chưa có giao dịch.</p>
+          )}
+        </UiCard>
+        </div>
       ) : null}
     </section>
   )

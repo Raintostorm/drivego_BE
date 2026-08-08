@@ -50,7 +50,10 @@ export class AdminPaymentsService {
         "pay.customer_info ->> 'manualConfirmed' AS manual_confirmed",
         "pay.customer_info ->> 'sepayTransactionId' AS sepay_transaction_id",
         "pay.customer_info ->> 'sepayReferenceCode' AS sepay_reference_code",
+        "pay.customer_info ->> 'source' AS source",
+        "pay.customer_info ->> 'note' AS note",
         "pay.customer_info -> 'paymentEvents' AS payment_events",
+        "pay.method AS method",
         "pay.created_at AS created_at",
         "u.email AS email",
         "p.full_name AS full_name",
@@ -66,6 +69,7 @@ export class AdminPaymentsService {
       amount: r.amount,
       status: r.status,
       paymentCode: r.payment_code,
+      method: r.method,
       createdAt: r.created_at,
       studentEmail: r.email,
       studentName: r.full_name,
@@ -73,6 +77,8 @@ export class AdminPaymentsService {
       paidAt: r.paid_at,
       sepayTransactionId: r.sepay_transaction_id,
       sepayReferenceCode: r.sepay_reference_code,
+      source: r.source,
+      note: r.note,
       paymentEvents: r.payment_events ?? [],
     }))
   }

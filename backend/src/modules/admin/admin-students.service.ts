@@ -1,9 +1,12 @@
 import { Injectable, NotFoundException } from "@nestjs/common"
 import { InjectRepository } from "@nestjs/typeorm"
 import { Repository } from "typeorm"
+import { fallbackEnrollmentFee } from "../../common/pricing.constants"
 import { CourseEnrollment } from "../../entities/course-enrollment.entity"
 import { ExamAttempt } from "../../entities/exam-attempt.entity"
 import { LicenseApplication } from "../../entities/license-application.entity"
+import { LicenseClass } from "../../entities/license-class.entity"
+import { Payment } from "../../entities/payment.entity"
 import { StudentProfile } from "../../entities/student-profile.entity"
 import { User } from "../../entities/user.entity"
 import { AuthUser } from "../auth/jwt.strategy"
@@ -22,6 +25,10 @@ export class AdminStudentsService {
     private readonly attemptsRepo: Repository<ExamAttempt>,
     @InjectRepository(LicenseApplication)
     private readonly appsRepo: Repository<LicenseApplication>,
+    @InjectRepository(Payment)
+    private readonly paymentsRepo: Repository<Payment>,
+    @InjectRepository(LicenseClass)
+    private readonly licenseRepo: Repository<LicenseClass>,
     private readonly scope: AdminScopeService,
   ) {}
 
@@ -146,6 +153,11 @@ export class AdminStudentsService {
       where: { userId },
       order: { createdAt: "DESC" },
     })
+    const payments = await this.paymentsRepo.find({
+      where: { userId },
+      order: { createdAt: "DESC" },
+      take: 20,
+    })
 
     return {
       userId: user.id,
@@ -171,14 +183,86 @@ export class AdminStudentsService {
             licenseClass: application.licenseClass,
             submittedAt: application.submittedAt,
             dossierRequestedAt: application.dossierRequestedAt,
+            dossierDeadline: application.dossierDeadline,
+            adminNote: application.adminNote,
           }
         : null,
+      payments: payments.map((payment) => ({
+        id: payment.id,
+        paymentType: payment.paymentType,
+        licenseClass: payment.licenseClass,
+        amount: Number(payment.amount),
+        method: payment.method,
+        status: payment.status,
+        createdAt: payment.createdAt,
+        paidAt: payment.customerInfo?.paidAt ?? null,
+        source: payment.customerInfo?.source ?? null,
+        note: payment.customerInfo?.note ?? null,
+        paymentCode: payment.customerInfo?.paymentCode ?? null,
+      })),
     }
   }
 
   async updateNote(admin: AuthUser, userId: string, adminNote: string) {
     await this.getOne(admin, userId)
     await this.profilesRepo.update({ userId }, { adminNote })
+    return this.getOne(admin, userId)
+  }
+
+  async unlockCourse(admin: AuthUser, userId: string, input: { licenseClass: string; note?: string }) {
+    await this.getOne(admin, userId)
+    const code = input.licenseClass
+    const license = await this.licenseRepo.findOne({ where: { code } })
+    const amount = Number(license?.enrollmentFee ?? fallbackEnrollmentFee(code))
+    const now = new Date()
+
+    const existing = await this.enrollmentsRepo.findOne({
+      where: { userId, licenseClass: code, status: "active" },
+    })
+    if (existing) return this.getOne(admin, userId)
+
+    const payment = await this.paymentsRepo.save(
+      this.paymentsRepo.create({
+        userId,
+        paymentType: "enrollment",
+        licenseClass: code,
+        amount: String(amount),
+        method: "direct",
+        status: "paid",
+        customerInfo: {
+          source: "admin_direct_unlock",
+          paidAt: now.toISOString(),
+          adminUserId: admin.userId,
+          note: input.note?.trim() || "Admin mở khóa học do học viên đã đóng tiền trực tiếp.",
+          paymentEvents: [
+            {
+              type: "admin_direct_unlock",
+              at: now.toISOString(),
+              adminUserId: admin.userId,
+              note: input.note?.trim() || null,
+            },
+          ],
+        },
+      }),
+    )
+
+    let enrollment = await this.enrollmentsRepo.findOne({
+      where: { userId, licenseClass: code },
+    })
+    if (!enrollment) {
+      enrollment = this.enrollmentsRepo.create({
+        userId,
+        licenseClass: code,
+        status: "active",
+        paymentId: payment.id,
+        enrolledAt: now,
+      })
+    } else {
+      enrollment.status = "active"
+      enrollment.paymentId = payment.id
+      enrollment.enrolledAt = enrollment.enrolledAt ?? now
+    }
+    await this.enrollmentsRepo.save(enrollment)
     return this.getOne(admin, userId)
   }
 }

@@ -26,6 +26,7 @@ function formatDate(value) {
 
 function confirmationLabel(row) {
   if (row.status !== "paid") return "Chưa xác nhận"
+  if (row.source === "admin_direct_unlock" || row.method === "direct") return "Đóng trực tiếp"
   if (row.manualConfirmed) return "Admin xác nhận"
   if (row.sepayTransactionId || row.sepayReferenceCode) return "SePay webhook"
   return "Đã thanh toán"

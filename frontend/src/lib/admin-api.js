@@ -99,6 +99,14 @@ export async function patchAdminStudentNote(userId, adminNote) {
   })
 }
 
+export async function unlockAdminStudentCourse(userId, body) {
+  return apiFetch(`/admin/students/${userId}/unlock-course`, {
+    method: "POST",
+    auth: true,
+    body: JSON.stringify(body),
+  })
+}
+
 export async function fetchAdminEnrollments(params = {}) {
   const q = new URLSearchParams()
   if (params.status) q.set("status", params.status)
