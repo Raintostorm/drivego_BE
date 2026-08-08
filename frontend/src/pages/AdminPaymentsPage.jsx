@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react"
+import { Link } from "react-router-dom"
 import { PageHeader } from "../components/PageHeader.jsx"
 import { PrimaryButton } from "../components/PrimaryButton.jsx"
 import { StatusBadge } from "../components/StatusBadge.jsx"
@@ -113,7 +114,7 @@ export function AdminPaymentsPage() {
       />
 
       <UiCard variant="panel" className="mt-4">
-        <div className="grid gap-3 sm:grid-cols-[180px_180px_auto]">
+        <div className="grid gap-3 lg:grid-cols-[180px_180px_auto_auto]">
           <select
             className="min-h-11 w-full rounded-drive border border-drive-border bg-drive-elevated px-3 py-2 text-sm text-white"
             value={status}
@@ -136,7 +137,16 @@ export function AdminPaymentsPage() {
           <PrimaryButton variant="outline" onClick={load} disabled={loading}>
             Làm mới
           </PrimaryButton>
+          <Link
+            to="/admin/students"
+            className="inline-flex min-h-11 items-center justify-center rounded-drive-pill border border-drive-action px-4 text-sm font-bold text-drive-action transition hover:bg-drive-action/10"
+          >
+            Mở khóa học
+          </Link>
         </div>
+        <p className="mt-3 text-xs text-drive-muted">
+          Học viên đóng tiền trực tiếp: vào Học viên & mở khóa → chọn học viên → tab Khóa học.
+        </p>
       </UiCard>
 
       {notice ? <p className="mt-4 text-sm text-drive-success">{notice}</p> : null}

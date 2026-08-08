@@ -27,7 +27,7 @@ export const vi = {
     notifications: "Thông báo",
     centerRegister: "Đăng ký trung tâm",
     adminDashboard: "Quản trị TT",
-    adminStudents: "Học viên",
+    adminStudents: "Học viên & mở khóa",
     adminApplications: "Hồ sơ HV",
     adminApplicationDetail: "Chi tiết hồ sơ",
     adminPayments: "Thanh toán",
