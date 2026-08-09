@@ -9,6 +9,31 @@ import { formatPremiumDate } from "../lib/premium.js"
 import { displayLicenseClass } from "../lib/license-class.js"
 import { usePagination } from "../hooks/usePagination.js"
 
+function paymentTone(payment) {
+  if (!payment) return "neutral"
+  if (payment.status === "pending") return "warning"
+  if (payment.status !== "paid") return "danger"
+  if (payment.method === "direct") return "warning"
+  if (payment.sepayTransactionId) return "success"
+  if (payment.method === "seed") return "neutral"
+  return "success"
+}
+
+function paymentLabel(payment) {
+  if (!payment) return "Chưa rõ"
+  if (payment.status === "pending") return "Chờ thanh toán"
+  if (payment.status !== "paid") return payment.status
+  if (payment.method === "direct") return "Đóng trực tiếp"
+  if (payment.sepayTransactionId && payment.importedFrom) return "SePay Excel"
+  if (payment.sepayTransactionId) return "SePay thật"
+  if (payment.method === "seed") return "Seed demo"
+  return payment.method || "Đã thanh toán"
+}
+
+function formatMoney(value) {
+  return Number(value ?? 0).toLocaleString("vi-VN")
+}
+
 export function AdminStudentsPage() {
   const [rows, setRows] = useState([])
   const [loading, setLoading] = useState(true)
@@ -72,7 +97,22 @@ export function AdminStudentsPage() {
             {pagination.pageItems.map((r) => (
               <article key={r.userId} className="rounded-drive border border-drive-border-soft bg-drive-sidebar p-4">
                 <div className="flex items-start justify-between gap-3"><div className="min-w-0"><p className="truncate font-semibold text-drive-text">{r.fullName ?? r.email}</p><p className="truncate text-xs text-drive-muted">{r.email}</p></div>{r.isPremium ? <StatusBadge tone="success">Premium</StatusBadge> : <StatusBadge tone="neutral">Free</StatusBadge>}</div>
-                <div className="mt-4"><p className="text-xs text-drive-muted">Khóa đang học</p>{r.enrollments?.length ? <div className="mt-2 flex flex-wrap gap-2">{r.enrollments.map((e) => <span key={e.licenseClass} className="rounded-drive-pill border border-drive-border px-3 py-1 text-xs text-drive-text">Hạng {displayLicenseClass(e.licenseClass)}</span>)}</div> : <p className="mt-1 text-sm text-drive-muted">Chưa đăng ký khóa</p>}</div>
+                <div className="mt-4">
+                  <p className="text-xs text-drive-muted">Khóa đang học</p>
+                  {r.enrollments?.length ? (
+                    <div className="mt-2 space-y-2">
+                      {r.enrollments.map((e) => (
+                        <div key={e.licenseClass} className="rounded-drive border border-drive-border-soft px-3 py-2">
+                          <div className="flex items-center justify-between gap-2">
+                            <span className="text-xs font-medium text-drive-text">Hạng {displayLicenseClass(e.licenseClass)}</span>
+                            <StatusBadge tone={paymentTone(e.payment)}>{paymentLabel(e.payment)}</StatusBadge>
+                          </div>
+                          {e.payment?.amount ? <p className="mt-1 text-xs text-drive-muted">{formatMoney(e.payment.amount)}đ</p> : null}
+                        </div>
+                      ))}
+                    </div>
+                  ) : <p className="mt-1 text-sm text-drive-muted">Chưa đăng ký khóa</p>}
+                </div>
                 <Link to={`/admin/students/${r.userId}`} className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-drive bg-drive-action px-4 text-sm font-bold text-drive-action-contrast">Xem học viên</Link>
               </article>
             ))}
@@ -107,13 +147,11 @@ export function AdminStudentsPage() {
                     {r.enrollments?.length ? (
                       <ul className="space-y-1">
                         {r.enrollments.map((e) => (
-                          <li key={e.licenseClass} className="text-white">
-                            Hạng {displayLicenseClass(e.licenseClass)}
-                            {e.enrolledAt ? (
-                              <span className="ml-2 text-xs text-drive-muted">
-                                {new Date(e.enrolledAt).toLocaleDateString("vi-VN")}
-                              </span>
-                            ) : null}
+                          <li key={e.licenseClass} className="flex flex-wrap items-center gap-2 text-white">
+                            <span>Hạng {displayLicenseClass(e.licenseClass)}</span>
+                            <StatusBadge tone={paymentTone(e.payment)}>{paymentLabel(e.payment)}</StatusBadge>
+                            {e.payment?.amount ? <span className="text-xs text-drive-muted">{formatMoney(e.payment.amount)}đ</span> : null}
+                            {e.enrolledAt ? <span className="text-xs text-drive-muted">{new Date(e.enrolledAt).toLocaleDateString("vi-VN")}</span> : null}
                           </li>
                         ))}
                       </ul>

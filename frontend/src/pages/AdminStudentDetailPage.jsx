@@ -27,6 +27,27 @@ function formatDateTime(value) {
   return new Date(value).toLocaleString("vi-VN")
 }
 
+function paymentTone(payment) {
+  if (!payment) return "neutral"
+  if (payment.status === "pending") return "warning"
+  if (payment.status !== "paid") return "danger"
+  if (payment.method === "direct") return "warning"
+  if (payment.sepayTransactionId) return "success"
+  if (payment.method === "seed") return "neutral"
+  return "success"
+}
+
+function paymentLabel(payment) {
+  if (!payment) return "Chưa có payment"
+  if (payment.status === "pending") return "Chờ thanh toán"
+  if (payment.status !== "paid") return payment.status
+  if (payment.method === "direct") return "Đóng trực tiếp"
+  if (payment.sepayTransactionId && payment.importedFrom) return "SePay Excel"
+  if (payment.sepayTransactionId) return "SePay thật"
+  if (payment.method === "seed") return "Seed demo"
+  return payment.method || "Đã thanh toán"
+}
+
 export function AdminStudentDetailPage() {
   const { userId } = useParams()
   const [data, setData] = useState(null)
@@ -187,6 +208,20 @@ export function AdminStudentDetailPage() {
                       <StatusBadge tone={e.status === "active" ? "success" : "warning"}>{e.status ?? "active"}</StatusBadge>
                     </div>
                     <p className="mt-1 text-xs text-drive-muted">Mở: {formatDateTime(e.enrolledAt)}</p>
+                    {e.payment ? (
+                      <div className="mt-3 rounded-drive border border-drive-border-soft bg-drive-elevated/60 p-3">
+                        <div className="flex flex-wrap items-center justify-between gap-2">
+                          <StatusBadge tone={paymentTone(e.payment)}>{paymentLabel(e.payment)}</StatusBadge>
+                          <span className="text-xs font-semibold text-drive-text">{formatMoney(e.payment.amount)}đ</span>
+                        </div>
+                        <dl className="mt-2 grid gap-1 text-xs text-drive-muted sm:grid-cols-2">
+                          <div><dt>Mã thanh toán</dt><dd className="break-all text-drive-text">{e.payment.paymentCode || "—"}</dd></div>
+                          <div><dt>SePay transaction</dt><dd className="break-all text-drive-text">{e.payment.sepayTransactionId || "—"}</dd></div>
+                          <div><dt>Mã tham chiếu</dt><dd className="break-all text-drive-text">{e.payment.sepayReferenceCode || "—"}</dd></div>
+                          <div><dt>Nguồn</dt><dd className="break-all text-drive-text">{e.payment.importedFrom || e.payment.sourceType || e.payment.source || e.payment.method || "—"}</dd></div>
+                        </dl>
+                      </div>
+                    ) : null}
                   </li>
                 ))}
               </ul>
@@ -290,13 +325,19 @@ export function AdminStudentDetailPage() {
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
                       <p className="font-medium text-white">{payment.paymentType === "enrollment" ? `Khóa ${displayLicenseClass(payment.licenseClass)}` : "Premium"}</p>
-                      <p className="mt-1 text-xs text-drive-muted">{payment.method || "sepay"} · {formatDateTime(payment.paidAt || payment.createdAt)}</p>
+                      <p className="mt-1 text-xs text-drive-muted">{paymentLabel(payment)} · {formatDateTime(payment.paidAt || payment.createdAt)}</p>
                     </div>
                     <div className="text-right">
                       <p className="font-bold text-white">{formatMoney(payment.amount)}đ</p>
-                      <StatusBadge tone={payment.status === "paid" ? "success" : payment.status === "pending" ? "warning" : "danger"}>{payment.status}</StatusBadge>
+                      <StatusBadge tone={paymentTone(payment)}>{payment.status}</StatusBadge>
                     </div>
                   </div>
+                  <dl className="mt-3 grid gap-2 text-xs text-drive-muted sm:grid-cols-2">
+                    <div><dt>Mã thanh toán</dt><dd className="break-all text-drive-text">{payment.paymentCode || "—"}</dd></div>
+                    <div><dt>SePay transaction</dt><dd className="break-all text-drive-text">{payment.sepayTransactionId || "—"}</dd></div>
+                    <div><dt>Mã tham chiếu</dt><dd className="break-all text-drive-text">{payment.sepayReferenceCode || "—"}</dd></div>
+                    <div><dt>Nguồn</dt><dd className="break-all text-drive-text">{payment.importedFrom || payment.sourceType || payment.source || payment.method || "—"}</dd></div>
+                  </dl>
                   {payment.note ? <p className="mt-2 text-xs text-drive-muted">{payment.note}</p> : null}
                 </li>
               ))}

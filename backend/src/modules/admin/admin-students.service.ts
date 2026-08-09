@@ -78,6 +78,7 @@ export class AdminStudentsService {
 
     const userIds = users.map((u) => u.id)
     let enrollments: CourseEnrollment[] = []
+    let enrollmentPayments: Payment[] = []
     if (userIds.length > 0) {
       const eq = this.enrollmentsRepo
         .createQueryBuilder("e")
@@ -89,6 +90,13 @@ export class AdminStudentsService {
         })
       }
       enrollments = await eq.getMany()
+      const paymentIds = enrollments.map((e) => e.paymentId).filter(Boolean) as string[]
+      if (paymentIds.length > 0) {
+        enrollmentPayments = await this.paymentsRepo
+          .createQueryBuilder("pay")
+          .where("pay.id IN (:...paymentIds)", { paymentIds })
+          .getMany()
+      }
     }
 
     const enrollmentsByUser = new Map<string, CourseEnrollment[]>()
@@ -97,6 +105,7 @@ export class AdminStudentsService {
       list.push(e)
       enrollmentsByUser.set(e.userId, list)
     }
+    const paymentById = new Map(enrollmentPayments.map((payment) => [payment.id, payment]))
 
     let rows = users.map((u) => {
       const activeEnrollments = enrollmentsByUser.get(u.id) ?? []
@@ -111,6 +120,7 @@ export class AdminStudentsService {
         enrollments: activeEnrollments.map((e) => ({
           licenseClass: e.licenseClass,
           enrolledAt: e.enrolledAt,
+          payment: this.toPaymentSummary(paymentById.get(e.paymentId ?? "")),
         })),
         isEnrolled: activeEnrollments.length > 0,
       }
@@ -197,6 +207,11 @@ export class AdminStudentsService {
         createdAt: payment.createdAt,
         paidAt: payment.customerInfo?.paidAt ?? null,
         source: payment.customerInfo?.source ?? null,
+        sourceType: payment.customerInfo?.sourceType ?? null,
+        sepayTransactionId: payment.customerInfo?.sepayTransactionId ?? null,
+        sepayReferenceCode: payment.customerInfo?.sepayReferenceCode ?? null,
+        importedFrom: payment.customerInfo?.importedFrom ?? null,
+        transferContent: payment.customerInfo?.transferContent ?? null,
         note: payment.customerInfo?.note ?? null,
         paymentCode: payment.customerInfo?.paymentCode ?? null,
       })),
@@ -264,5 +279,25 @@ export class AdminStudentsService {
     }
     await this.enrollmentsRepo.save(enrollment)
     return this.getOne(admin, userId)
+  }
+
+  private toPaymentSummary(payment?: Payment | null) {
+    if (!payment) return null
+    return {
+      id: payment.id,
+      paymentType: payment.paymentType,
+      licenseClass: payment.licenseClass,
+      amount: Number(payment.amount),
+      method: payment.method,
+      status: payment.status,
+      createdAt: payment.createdAt,
+      paidAt: payment.customerInfo?.paidAt ?? null,
+      source: payment.customerInfo?.source ?? null,
+      sourceType: payment.customerInfo?.sourceType ?? null,
+      sepayTransactionId: payment.customerInfo?.sepayTransactionId ?? null,
+      sepayReferenceCode: payment.customerInfo?.sepayReferenceCode ?? null,
+      importedFrom: payment.customerInfo?.importedFrom ?? null,
+      paymentCode: payment.customerInfo?.paymentCode ?? null,
+    }
   }
 }
