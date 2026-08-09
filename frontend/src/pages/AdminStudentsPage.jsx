@@ -12,22 +12,23 @@ import { usePagination } from "../hooks/usePagination.js"
 function paymentTone(payment) {
   if (!payment) return "neutral"
   if (payment.status === "pending") return "warning"
+  if (payment.status === "expired") return "danger"
+  if (payment.status === "failed") return "danger"
   if (payment.status !== "paid") return "danger"
   if (payment.method === "direct") return "warning"
-  if (payment.sepayTransactionId) return "success"
-  if (payment.method === "seed") return "neutral"
+  if (payment.method === "sepay" || payment.sepayTransactionId) return "success"
   return "success"
 }
 
 function paymentLabel(payment) {
-  if (!payment) return "Chưa rõ"
+  if (!payment) return "Chưa có thanh toán"
   if (payment.status === "pending") return "Chờ thanh toán"
+  if (payment.status === "expired") return "Quá hạn thanh toán"
+  if (payment.status === "failed") return "Thanh toán lỗi"
   if (payment.status !== "paid") return payment.status
-  if (payment.method === "direct") return "Đóng trực tiếp"
-  if (payment.sepayTransactionId && payment.importedFrom) return "SePay Excel"
-  if (payment.sepayTransactionId) return "SePay thật"
-  if (payment.method === "seed") return "Seed demo"
-  return payment.method || "Đã thanh toán"
+  if (payment.method === "direct") return "Đã thu tiền mặt"
+  if (payment.method === "sepay" || payment.sepayTransactionId) return "Đã thanh toán qua SePay"
+  return "Đã thanh toán"
 }
 
 function formatMoney(value) {

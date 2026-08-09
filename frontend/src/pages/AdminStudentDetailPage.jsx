@@ -30,22 +30,30 @@ function formatDateTime(value) {
 function paymentTone(payment) {
   if (!payment) return "neutral"
   if (payment.status === "pending") return "warning"
+  if (payment.status === "expired") return "danger"
+  if (payment.status === "failed") return "danger"
   if (payment.status !== "paid") return "danger"
   if (payment.method === "direct") return "warning"
-  if (payment.sepayTransactionId) return "success"
-  if (payment.method === "seed") return "neutral"
+  if (payment.method === "sepay" || payment.sepayTransactionId) return "success"
   return "success"
 }
 
 function paymentLabel(payment) {
-  if (!payment) return "Chưa có payment"
+  if (!payment) return "Chưa có thanh toán"
   if (payment.status === "pending") return "Chờ thanh toán"
+  if (payment.status === "expired") return "Quá hạn thanh toán"
+  if (payment.status === "failed") return "Thanh toán lỗi"
   if (payment.status !== "paid") return payment.status
-  if (payment.method === "direct") return "Đóng trực tiếp"
-  if (payment.sepayTransactionId && payment.importedFrom) return "SePay Excel"
-  if (payment.sepayTransactionId) return "SePay thật"
-  if (payment.method === "seed") return "Seed demo"
-  return payment.method || "Đã thanh toán"
+  if (payment.method === "direct") return "Đã thu tiền mặt"
+  if (payment.method === "sepay" || payment.sepayTransactionId) return "Đã thanh toán qua SePay"
+  return "Đã thanh toán"
+}
+
+function paymentSourceLabel(payment) {
+  if (!payment) return "—"
+  if (payment.method === "direct") return "Tiền mặt tại trung tâm"
+  if (payment.method === "sepay" || payment.sepayTransactionId) return "SePay"
+  return payment.method || "—"
 }
 
 export function AdminStudentDetailPage() {
@@ -218,7 +226,7 @@ export function AdminStudentDetailPage() {
                           <div><dt>Mã thanh toán</dt><dd className="break-all text-drive-text">{e.payment.paymentCode || "—"}</dd></div>
                           <div><dt>SePay transaction</dt><dd className="break-all text-drive-text">{e.payment.sepayTransactionId || "—"}</dd></div>
                           <div><dt>Mã tham chiếu</dt><dd className="break-all text-drive-text">{e.payment.sepayReferenceCode || "—"}</dd></div>
-                          <div><dt>Nguồn</dt><dd className="break-all text-drive-text">{e.payment.importedFrom || e.payment.sourceType || e.payment.source || e.payment.method || "—"}</dd></div>
+                          <div><dt>Kênh thanh toán</dt><dd className="break-all text-drive-text">{paymentSourceLabel(e.payment)}</dd></div>
                         </dl>
                       </div>
                     ) : null}
@@ -336,7 +344,7 @@ export function AdminStudentDetailPage() {
                     <div><dt>Mã thanh toán</dt><dd className="break-all text-drive-text">{payment.paymentCode || "—"}</dd></div>
                     <div><dt>SePay transaction</dt><dd className="break-all text-drive-text">{payment.sepayTransactionId || "—"}</dd></div>
                     <div><dt>Mã tham chiếu</dt><dd className="break-all text-drive-text">{payment.sepayReferenceCode || "—"}</dd></div>
-                    <div><dt>Nguồn</dt><dd className="break-all text-drive-text">{payment.importedFrom || payment.sourceType || payment.source || payment.method || "—"}</dd></div>
+                    <div><dt>Kênh thanh toán</dt><dd className="break-all text-drive-text">{paymentSourceLabel(payment)}</dd></div>
                   </dl>
                   {payment.note ? <p className="mt-2 text-xs text-drive-muted">{payment.note}</p> : null}
                 </li>
