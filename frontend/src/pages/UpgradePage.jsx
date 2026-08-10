@@ -255,7 +255,7 @@ export function UpgradePage() {
           </p>
           <ul className="mt-4 space-y-2 text-sm text-drive-muted">
             <li>
-              <span className="text-drive-success">✓</span> 10 đề thi cơ bản
+              <span className="text-drive-success">✓</span> Làm toàn bộ đề cố định theo hạng
             </li>
             <li>
               <span className="text-drive-success">✓</span> Lưu kết quả gần nhất

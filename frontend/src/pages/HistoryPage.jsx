@@ -42,10 +42,20 @@ export function HistoryPage() {
 
   const rows = data?.rows ?? []
   const stats = data?.stats ?? { totalExams: 0, passRate: "0%", bestScore: "0/0" }
+  const limited = Boolean(data?.hasMore)
 
   return (
     <section>
       <PageHeader title={t("pages.history.title")} subtitle={t("pages.history.subtitle")} />
+
+      {limited ? (
+        <UiCard variant="panel" className="mb-4 border-drive-action/40">
+          <p className="text-sm text-drive-muted">
+            Tài khoản miễn phí chỉ xem lại 3 đề gần nhất. Nâng cấp Premium để xem toàn bộ {data.totalAvailable} lượt đã làm.
+          </p>
+          <Link to="/upgrade" className="mt-2 inline-block text-sm font-semibold text-drive-action hover:underline">Nâng cấp Premium →</Link>
+        </UiCard>
+      ) : null}
 
       <div className="grid gap-4 lg:grid-cols-[1fr_280px]">
         <div className="space-y-4">

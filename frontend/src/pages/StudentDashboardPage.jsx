@@ -44,7 +44,7 @@ export function StudentDashboardPage() {
 
       {!premium ? (
         <p className="mb-4 rounded-drive border border-drive-action/40 bg-drive-action/10 px-4 py-3 text-sm text-drive-text">
-          Tài khoản miễn phí: tối đa 10 bài thi, AI Chat cần Premium.{" "}
+          Tài khoản miễn phí: làm toàn bộ đề cố định, AI Chat và đề ngẫu nhiên cần Premium.{" "}
           <Link to="/upgrade" className="font-medium text-drive-action underline">
             Nâng cấp ngay
           </Link>

@@ -7,7 +7,9 @@ import { LicenseContentEmpty } from "../components/LicenseContentEmpty.jsx"
 import { PrimaryButton } from "../components/PrimaryButton.jsx"
 import { UiCard } from "../components/UiCard.jsx"
 import { useLicense } from "../context/LicenseContext.jsx"
+import { useAuth } from "../context/AuthContext.jsx"
 import { apiFetch } from "../lib/api.js"
+import { isPremiumActive } from "../lib/premium.js"
 import { t } from "../lib/strings.js"
 import { displayLicenseClass } from "../lib/license-class.js"
 
@@ -25,8 +27,10 @@ function formatTime(seconds) {
 
 export function ExamPage() {
   const navigate = useNavigate()
+  const { user } = useAuth()
   const { activeClass, activeEntry, isEnrolled, enrollmentsLoading } = useLicense()
   const enrolled = isEnrolled(activeClass)
+  const premium = isPremiumActive(user)
   const examRules = activeEntry?.examRules ?? DEFAULT_EXAM_RULES
   const durationSeconds = (examRules.durationMinutes ?? 22) * 60
 
@@ -35,7 +39,7 @@ export function ExamPage() {
   const [examContentReady, setExamContentReady] = useState(false)
   const [randomReady, setRandomReady] = useState(false)
   const [selectedPaperId, setSelectedPaperId] = useState(null)
-  const [randomMode, setRandomMode] = useState(true)
+  const [randomMode, setRandomMode] = useState(false)
   const [generating, setGenerating] = useState(false)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -96,8 +100,8 @@ export function ExamPage() {
           const list = data.fixedPapers ?? data.papers ?? (Array.isArray(data) ? data : [])
           const canGenerateRandom = Boolean(data.randomReady ?? data.randomExam?.available)
           setPapers(list)
-          setRandomReady(canGenerateRandom)
-          setExamContentReady(Boolean(data.contentReady ?? (canGenerateRandom || list.length > 0)))
+          setRandomReady(premium && canGenerateRandom)
+          setExamContentReady(Boolean(data.contentReady ?? ((premium && canGenerateRandom) || list.length > 0)))
           setPaper(null)
           setSelectedPaperId(null)
           setLoading(false)
@@ -112,7 +116,7 @@ export function ExamPage() {
     return () => {
       cancelled = true
     }
-  }, [enrollmentsLoading, enrolled, activeClass])
+  }, [enrollmentsLoading, enrolled, activeClass, premium])
 
   // Initial load: random by default, or first fixed paper when in fixed mode.
   useEffect(() => {
@@ -311,22 +315,24 @@ export function ExamPage() {
       </div>
 
       <div className="lg:col-span-2 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-        <PrimaryButton
-          variant={randomMode ? "action" : "outline"}
-          disabled={generating || !randomReady}
-          onClick={() => {
-            if (!randomReady) return
-            setRandomMode(true)
-            setSelectedPaperId(null)
-            generateRandom()
-          }}
-        >
-          {generating ? "Đang tạo đề…" : "Tạo đề ngẫu nhiên"}
-        </PrimaryButton>
+        {premium ? (
+          <PrimaryButton
+            variant={randomMode ? "action" : "outline"}
+            disabled={generating || !randomReady}
+            onClick={() => {
+              if (!randomReady) return
+              setRandomMode(true)
+              setSelectedPaperId(null)
+              generateRandom()
+            }}
+          >
+            {generating ? "Đang tạo đề…" : "Tạo đề ngẫu nhiên"}
+          </PrimaryButton>
+        ) : null}
 
         {papers.length > 0 ? (
           <>
-            <span className="text-xs text-drive-muted">hoặc đề cố định:</span>
+            {premium ? <span className="text-xs text-drive-muted">hoặc đề cố định:</span> : null}
             <select
               value={!randomMode ? selectedPaperId ?? "" : ""}
               onChange={(e) => {

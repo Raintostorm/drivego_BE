@@ -1,10 +1,10 @@
-import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common"
+import { BadRequestException, ForbiddenException, Injectable, NotFoundException } from "@nestjs/common"
 import {
   DEFAULT_LICENSE_CLASS,
   isStudyLicenseCode,
 } from "../../common/license-class.constants"
 import { InjectRepository } from "@nestjs/typeorm"
-import { Repository } from "typeorm"
+import { IsNull, Not, Repository } from "typeorm"
 import { EnrollmentService } from "../../common/enrollment.service"
 import { ExamRulesService } from "../../common/exam-rules.service"
 import { PremiumService } from "../../common/premium.service"
@@ -36,7 +36,10 @@ export class ExamsService {
   async generateRandomPaper(userId: string, licenseClass?: string) {
     const code = licenseClass && isStudyLicenseCode(licenseClass) ? licenseClass : DEFAULT_LICENSE_CLASS
     await this.enrollment.assertEnrolled(userId, code)
-    const paperId = await this.assembly.generate(code)
+    if (!(await this.premium.isPremium(userId))) {
+      throw new ForbiddenException("Đề thi ngẫu nhiên chỉ dành cho tài khoản Premium.")
+    }
+    const paperId = await this.assembly.generate(code, userId)
     return this.getPaper(paperId, userId)
   }
 
@@ -49,6 +52,7 @@ export class ExamsService {
       order: { paperNumber: "ASC" },
     })
     const randomPoolCount = await this.poolRepo.count({ where: { licenseClass: code } })
+    const isPremium = await this.premium.isPremium(userId)
 
     const rules = await this.examRules.getRules(code)
 
@@ -63,14 +67,15 @@ export class ExamsService {
 
     return {
       licenseClass: code,
-      contentReady: mapped.length > 0 || randomPoolCount > 0,
-      randomReady: randomPoolCount > 0,
+      contentReady: mapped.length > 0 || (isPremium && randomPoolCount > 0),
+      randomReady: isPremium && randomPoolCount > 0,
       fixedReady: mapped.length > 0,
       examRules: rules,
       papers: mapped,
       fixedPapers: mapped,
       randomExam: {
-        available: randomPoolCount > 0,
+        available: isPremium && randomPoolCount > 0,
+        premiumRequired: !isPremium,
         title: "Đề thi ngẫu nhiên",
       },
     }
@@ -119,7 +124,6 @@ export class ExamsService {
     }
 
     await this.enrollment.assertEnrolled(userId, paper.licenseClass)
-    await this.premium.assertCanSubmitExam(userId)
 
     const questions = await this.questionsRepo.find({
       where: { paperId },
@@ -255,6 +259,17 @@ export class ExamsService {
   }
 
   async getAttemptDetail(userId: string, attemptId: string) {
+    if (!(await this.premium.isPremium(userId))) {
+      const visibleAttempts = await this.attemptsRepo.find({
+        where: { userId, finishedAt: Not(IsNull()) },
+        select: { id: true },
+        order: { finishedAt: "DESC" },
+        take: 3,
+      })
+      if (!visibleAttempts.some((attempt) => attempt.id === attemptId)) {
+        throw new ForbiddenException("Tài khoản miễn phí chỉ xem lại 3 đề gần nhất.")
+      }
+    }
     const attempt = await this.attemptsRepo.findOne({
       where: { id: attemptId },
       relations: { paper: true },
@@ -308,10 +323,15 @@ export class ExamsService {
   }
 
   async getHistory(userId: string) {
+    const isPremium = await this.premium.isPremium(userId)
+    const totalAvailable = await this.attemptsRepo.count({
+      where: { userId, finishedAt: Not(IsNull()) },
+    })
     const attempts = await this.attemptsRepo.find({
-      where: { userId },
+      where: { userId, finishedAt: Not(IsNull()) },
       relations: { paper: true },
       order: { finishedAt: "DESC" },
+      ...(isPremium ? {} : { take: 3 }),
     })
 
     const rows = await Promise.all(
@@ -363,6 +383,10 @@ export class ExamsService {
         bestScore: bestScore.text,
       },
       rows,
+      isPremium,
+      historyLimit: isPremium ? null : 3,
+      totalAvailable,
+      hasMore: !isPremium && totalAvailable > rows.length,
     }
   }
 }
