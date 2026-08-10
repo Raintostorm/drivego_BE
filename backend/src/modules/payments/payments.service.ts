@@ -18,7 +18,6 @@ import { CheckoutDto } from "./dto/checkout.dto"
 import { SepayWebhookDto } from "./dto/sepay-webhook.dto"
 import { SepayConfigService } from "./sepay-config.service"
 
-const PREMIUM_DAYS = readPositiveInt("DRIVEGO_PREMIUM_DAYS", 30)
 const PAYMENT_TTL_MS = 24 * 60 * 60 * 1000
 
 @Injectable()
@@ -274,8 +273,8 @@ export class PaymentsService {
           lockedPayment.licenseClass,
           lockedPayment.id,
         )
-      } else if (lockedPayment.planId) {
-        await this.extendPremiumInTransaction(
+      } else if (type === "premium") {
+        await this.grantLifetimePremiumInTransaction(
           manager.getRepository(StudentProfile),
           lockedPayment.userId,
         )
@@ -350,7 +349,7 @@ export class PaymentsService {
     await enrollments.save(row)
   }
 
-  private async extendPremiumInTransaction(
+  private async grantLifetimePremiumInTransaction(
     profiles: Repository<StudentProfile>,
     userId: string,
   ) {
@@ -361,12 +360,8 @@ export class PaymentsService {
       .getOne()
     if (!profile) return
 
-    const now = new Date()
-    const base = profile.premiumUntil && profile.premiumUntil > now ? profile.premiumUntil : now
-    const premiumUntil = new Date(base)
-    premiumUntil.setDate(premiumUntil.getDate() + PREMIUM_DAYS)
-
-    profile.premiumUntil = premiumUntil
+    profile.premiumLifetime = true
+    profile.premiumUntil = null
     await profiles.save(profile)
   }
 
@@ -382,11 +377,4 @@ export class PaymentsService {
       manualConfirmed: Boolean(payment.customerInfo?.manualConfirmed),
     }
   }
-}
-
-function readPositiveInt(name: string, fallback: number) {
-  const value = process.env[name]
-  if (!value) return fallback
-  const parsed = Number(value)
-  return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback
 }

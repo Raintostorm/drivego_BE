@@ -51,6 +51,7 @@ export class UsersService {
             licenseClass: user.profile.licenseClass,
             centerId: user.profile.centerId ?? null,
             premiumUntil: user.profile.premiumUntil,
+            premiumLifetime: user.profile.premiumLifetime,
             heldLicenses: user.profile.heldLicenses ?? [],
           }
         : null,

@@ -133,13 +133,13 @@ export function AdminCoursesPage() {
       </div>
       <UiCard variant="panel">
         <h2 className="text-lg font-semibold text-white">Gói Premium</h2>
-        <p className="mt-1 text-sm text-drive-muted">Giá dùng cho đăng ký premium trên trang nâng cấp.</p>
+        <p className="mt-1 text-sm text-drive-muted">Giá mở Premium một lần, sử dụng vĩnh viễn.</p>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {subscriptions.map((plan) => (
             <div key={plan.code} className="rounded-drive border border-drive-border bg-drive-elevated p-4">
               <p className="text-sm font-semibold text-white">{plan.code}</p>
               <p className="mt-1 text-sm text-drive-muted">
-                Hiện tại: {Number(plan.priceMonthly ?? 0).toLocaleString("vi-VN")}đ/tháng
+                Hiện tại: {Number(plan.priceMonthly ?? 0).toLocaleString("vi-VN")}đ một lần
               </p>
               {!readOnly ? (
                 <div className="mt-3 flex gap-2">

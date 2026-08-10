@@ -44,14 +44,14 @@ function paymentLabel(payment) {
   if (payment.status === "expired") return "Quá hạn thanh toán"
   if (payment.status === "failed") return "Thanh toán lỗi"
   if (payment.status !== "paid") return payment.status
-  if (payment.method === "direct") return "Đã thu tiền mặt"
+  if (payment.method === "direct" || payment.method === "cash") return "Đã thu tiền mặt"
   if (payment.method === "sepay" || payment.sepayTransactionId) return "Đã thanh toán qua SePay"
   return "Đã thanh toán"
 }
 
 function paymentSourceLabel(payment) {
   if (!payment) return "—"
-  if (payment.method === "direct") return "Tiền mặt tại trung tâm"
+  if (payment.method === "direct" || payment.method === "cash") return "Tiền mặt tại trung tâm"
   if (payment.method === "sepay" || payment.sepayTransactionId) return "SePay"
   return payment.method || "—"
 }
@@ -172,7 +172,9 @@ export function AdminStudentDetailPage() {
             <div>
               <dt className="text-drive-muted">Premium</dt>
               <dd className="text-white">
-                {data.premiumUntil
+                {data.premiumLifetime
+                  ? "Vĩnh viễn"
+                  : data.premiumUntil
                   ? formatPremiumDate(data.premiumUntil)
                   : "Chưa có"}
               </dd>
@@ -351,7 +353,10 @@ export function AdminStudentDetailPage() {
               ))}
             </ul>
           ) : (
-            <p className="mt-4 text-drive-muted">Chưa có giao dịch.</p>
+            <div className="mt-4 rounded-drive border border-drive-border-soft bg-drive-sidebar p-3 text-sm text-drive-muted">
+              <p>Chưa có giao dịch.</p>
+              {data.application?.adminNote ? <p className="mt-2">Lý do: {data.application.adminNote}</p> : null}
+            </div>
           )}
         </UiCard>
         </div>

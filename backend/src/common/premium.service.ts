@@ -26,6 +26,7 @@ export class PremiumService {
 
   async isPremium(userId: string): Promise<boolean> {
     const profile = await this.profilesRepo.findOne({ where: { userId } })
+    if (profile?.premiumLifetime) return true
     if (!profile?.premiumUntil) return false
     return profile.premiumUntil.getTime() > Date.now()
   }

@@ -4,7 +4,7 @@ import { BrandLogo } from "../BrandLogo.jsx"
 import { LicenseClassSwitcher } from "../LicenseClassSwitcher.jsx"
 import { SidebarNav } from "../SidebarNav.jsx"
 import { useAuth } from "../../context/AuthContext.jsx"
-import { formatPremiumDate, isPremiumActive } from "../../lib/premium.js"
+import { formatPremiumDate, isLifetimePremium, isPremiumActive } from "../../lib/premium.js"
 import { t } from "../../lib/strings.js"
 
 const studentNav = [
@@ -35,6 +35,7 @@ export function DashboardLayout({ children, variant = "student" }) {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
   const premium = isPremiumActive(user)
+  const lifetime = isLifetimePremium(user)
 
   const items = useMemo(() => {
     const base = variant === "admin" ? adminNav : studentNav
@@ -74,7 +75,7 @@ export function DashboardLayout({ children, variant = "student" }) {
                 <span className="text-sm font-semibold text-drive-success">★ Premium</span>
                 <span className="mt-0.5 block text-xs text-drive-muted">
                   {t("pages.upgrade.validUntil")}{" "}
-                  {formatPremiumDate(user?.profile?.premiumUntil)}
+                  {lifetime ? "Quyền truy cập vĩnh viễn" : formatPremiumDate(user?.profile?.premiumUntil)}
                 </span>
               </Link>
             ) : (

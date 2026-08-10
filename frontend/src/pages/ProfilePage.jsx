@@ -9,7 +9,7 @@ import { StudentLicensesCard } from "../components/StudentLicensesCard.jsx"
 import { displayLicenseClass } from "../lib/license-class.js"
 import { useAuth } from "../context/AuthContext.jsx"
 import { apiFetch } from "../lib/api.js"
-import { formatPremiumDate, formatPremiumUntil, isPremiumActive } from "../lib/premium.js"
+import { formatPremiumDate, formatPremiumUntil, isLifetimePremium, isPremiumActive } from "../lib/premium.js"
 import { t } from "../lib/strings.js"
 
 const LICENSE_OPTIONS = ["A1", "A2", "B1", "B2", "C", "D", "E", "F"]
@@ -25,6 +25,7 @@ const APP_STATUS_LABEL = {
 export function ProfilePage() {
   const { user, refreshUser } = useAuth()
   const premium = isPremiumActive(user)
+  const lifetime = isLifetimePremium(user)
   const [fullName, setFullName] = useState("")
   const [phone, setPhone] = useState("")
   const [targetClass, setTargetClass] = useState("B2")
@@ -122,11 +123,11 @@ export function ProfilePage() {
             <p className="mt-1 text-sm text-drive-muted">{user?.email}</p>
             <div className="mt-3 flex flex-wrap gap-2">
               <StatusBadge tone={premium ? "success" : "neutral"}>
-                {premium ? `Premium · ${formatPremiumDate(user?.profile?.premiumUntil)}` : "Miễn phí"}
+                {premium ? (lifetime ? "Premium · Vĩnh viễn" : `Premium · ${formatPremiumDate(user?.profile?.premiumUntil)}`) : "Miễn phí"}
               </StatusBadge>
               {premium ? (
                 <span className="text-xs text-drive-muted">
-                  {formatPremiumUntil(user?.profile?.premiumUntil)}
+                  {lifetime ? "Đã mở quyền truy cập vĩnh viễn" : formatPremiumUntil(user?.profile?.premiumUntil)}
                 </span>
               ) : null}
             </div>

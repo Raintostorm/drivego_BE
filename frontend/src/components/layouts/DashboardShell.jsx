@@ -6,7 +6,7 @@ import { PageGuide } from "../PageGuide.jsx"
 import { SidebarNav } from "../SidebarNav.jsx"
 import { ThemeToggle } from "../ThemeToggle.jsx"
 import { useAuth } from "../../context/AuthContext.jsx"
-import { formatPremiumDate, isPremiumActive } from "../../lib/premium.js"
+import { formatPremiumDate, isLifetimePremium, isPremiumActive } from "../../lib/premium.js"
 import { t } from "../../lib/strings.js"
 
 /**
@@ -22,6 +22,7 @@ export function DashboardShell({ children, variant, navItems }) {
   const location = useLocation()
   const [menuOpen, setMenuOpen] = useState(false)
   const premium = isPremiumActive(user)
+  const lifetime = isLifetimePremium(user)
   const logoTo = variant === "admin" ? "/admin-dashboard" : "/"
 
   const items = useMemo(() => {
@@ -112,7 +113,7 @@ export function DashboardShell({ children, variant, navItems }) {
                 <span className="text-sm font-semibold text-drive-success">★ Premium</span>
                 <span className="mt-0.5 block text-xs text-drive-muted">
                   {t("pages.upgrade.validUntil")}{" "}
-                  {formatPremiumDate(user?.profile?.premiumUntil)}
+                  {lifetime ? "Quyền truy cập vĩnh viễn" : formatPremiumDate(user?.profile?.premiumUntil)}
                 </span>
               </Link>
             ) : (

@@ -31,6 +31,9 @@ export class StudentProfile {
   @Column({ name: "premium_until", type: "timestamptz", nullable: true })
   premiumUntil?: Date | null
 
+  @Column({ name: "premium_lifetime", type: "boolean", default: false })
+  premiumLifetime!: boolean
+
   /** Các hạng GPLX học viên đang có (A1, B2, …) */
   @Column({ name: "held_licenses", type: "jsonb", default: () => "'[]'" })
   heldLicenses!: string[]

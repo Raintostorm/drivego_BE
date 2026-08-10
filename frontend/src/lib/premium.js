@@ -1,4 +1,9 @@
+export function isLifetimePremium(user) {
+  return Boolean(user?.profile?.premiumLifetime)
+}
+
 export function isPremiumActive(user) {
+  if (isLifetimePremium(user)) return true
   const until = user?.profile?.premiumUntil
   if (!until) return false
   return new Date(until) > new Date()
@@ -20,6 +25,7 @@ export function formatPremiumDate(iso) {
 }
 
 export function premiumDaysRemaining(user) {
+  if (isLifetimePremium(user)) return null
   const until = user?.profile?.premiumUntil
   if (!until) return null
   const ms = new Date(until).getTime() - Date.now()

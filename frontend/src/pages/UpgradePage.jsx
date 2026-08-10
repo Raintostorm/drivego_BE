@@ -11,6 +11,7 @@ import {
   formatPremiumDate,
   formatPremiumUntil,
   isPremiumActive,
+  isLifetimePremium,
   premiumDaysRemaining,
 } from "../lib/premium.js"
 import { t } from "../lib/strings.js"
@@ -28,6 +29,7 @@ const PREMIUM_BENEFITS = [
 function PremiumMemberView({ user }) {
   const daysLeft = premiumDaysRemaining(user)
   const until = user?.profile?.premiumUntil
+  const lifetime = isLifetimePremium(user)
 
   return (
     <section className="space-y-6">
@@ -48,10 +50,15 @@ function PremiumMemberView({ user }) {
             <StatusBadge tone="success">{t("pages.upgrade.memberActive")}</StatusBadge>
             <p className="mt-3 text-2xl font-bold text-white">DriveGo Premium</p>
             <p className="mt-2 text-sm text-drive-muted">
-              {t("pages.upgrade.validUntil")}{" "}
-              <span className="font-medium text-white">{formatPremiumDate(until)}</span>
-              <span className="mx-2 text-drive-border">·</span>
-              <span className="text-drive-muted">{formatPremiumUntil(until)}</span>
+              {lifetime ? (
+                <span className="font-medium text-white">Quyền truy cập vĩnh viễn</span>
+              ) : (
+                <>
+                  <span className="font-medium text-white">{formatPremiumDate(until)}</span>
+                  <span className="mx-2 text-drive-border">·</span>
+                  <span className="text-drive-muted">{formatPremiumUntil(until)}</span>
+                </>
+              )}
             </p>
             {daysLeft !== null && daysLeft <= 30 ? (
               <p className="mt-2 text-sm font-medium text-amber-300">
@@ -94,7 +101,7 @@ function PremiumMemberView({ user }) {
         </div>
       </UiCard>
 
-      <p className="text-center text-xs text-drive-muted">{t("pages.upgrade.renewHint")}</p>
+      {!lifetime ? <p className="text-center text-xs text-drive-muted">{t("pages.upgrade.renewHint")}</p> : null}
     </section>
   )
 }
@@ -208,7 +215,7 @@ export function UpgradePage() {
   }
 
   const premiumPrice = plans.premium?.priceRaw ?? 99000
-  const premiumLabel = plans.premium?.priceMonthly ?? "99.000đ/tháng"
+  const premiumLabel = plans.premium?.priceMonthly ?? "99.000đ"
 
   return (
     <section className="space-y-8">
@@ -244,7 +251,7 @@ export function UpgradePage() {
         <UiCard variant="panel">
           <p className="text-sm text-drive-muted">{t("pages.upgrade.free")}</p>
           <p className="text-4xl font-bold text-white">
-            {loading ? "…" : (plans.free?.priceMonthly ?? "0đ/tháng")}
+            {loading ? "…" : (plans.free?.priceMonthly ?? "0đ")}
           </p>
           <ul className="mt-4 space-y-2 text-sm text-drive-muted">
             <li>
@@ -261,6 +268,7 @@ export function UpgradePage() {
         >
           <p className="text-sm font-medium text-drive-action">{t("pages.upgrade.premium")}</p>
           <p className="text-4xl font-bold text-white">{loading ? "…" : premiumLabel}</p>
+          <p className="mt-2 text-sm text-drive-muted">Thanh toán một lần, sử dụng vĩnh viễn.</p>
           <PrimaryButton
             variant="action"
             className="mt-4"

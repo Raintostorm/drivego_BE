@@ -26,7 +26,7 @@ function paymentLabel(payment) {
   if (payment.status === "expired") return "Quá hạn thanh toán"
   if (payment.status === "failed") return "Thanh toán lỗi"
   if (payment.status !== "paid") return payment.status
-  if (payment.method === "direct") return "Đã thu tiền mặt"
+  if (payment.method === "direct" || payment.method === "cash") return "Đã thu tiền mặt"
   if (payment.method === "sepay" || payment.sepayTransactionId) return "Đã thanh toán qua SePay"
   return "Đã thanh toán"
 }
@@ -138,7 +138,7 @@ export function AdminStudentsPage() {
                   <td className="py-3 pr-4">
                     {r.isPremium ? (
                       <StatusBadge tone="success">
-                        đến {formatPremiumDate(r.premiumUntil)}
+                        {r.premiumLifetime ? "Vĩnh viễn" : `đến ${formatPremiumDate(r.premiumUntil)}`}
                       </StatusBadge>
                     ) : (
                       <span className="text-drive-muted">—</span>

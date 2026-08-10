@@ -53,9 +53,9 @@ export class AdminStudentsService {
     }
 
     if (filters.premium === "true") {
-      qb.andWhere("p.premium_until > NOW()")
+      qb.andWhere("(p.premium_lifetime = TRUE OR p.premium_until > NOW())")
     } else if (filters.premium === "false") {
-      qb.andWhere("(p.premium_until IS NULL OR p.premium_until <= NOW())")
+      qb.andWhere("p.premium_lifetime = FALSE AND (p.premium_until IS NULL OR p.premium_until <= NOW())")
     }
 
     const users = await qb
@@ -64,6 +64,7 @@ export class AdminStudentsService {
         "u.email AS email",
         "p.full_name AS full_name",
         "p.premium_until AS premium_until",
+        "p.premium_lifetime AS premium_lifetime",
         "p.license_class AS license_class",
         "p.center_id AS center_id",
       ])
@@ -72,6 +73,7 @@ export class AdminStudentsService {
         email: string
         full_name: string | null
         premium_until: Date | null
+        premium_lifetime: boolean
         license_class: string | null
         center_id: string | null
       }>()
@@ -116,7 +118,8 @@ export class AdminStudentsService {
         licenseClass: u.license_class,
         centerId: u.center_id,
         premiumUntil: u.premium_until,
-        isPremium: Boolean(u.premium_until && new Date(u.premium_until) > new Date()),
+        premiumLifetime: Boolean(u.premium_lifetime),
+        isPremium: Boolean(u.premium_lifetime || (u.premium_until && new Date(u.premium_until) > new Date())),
         enrollments: activeEnrollments.map((e) => ({
           licenseClass: e.licenseClass,
           enrolledAt: e.enrolledAt,
@@ -176,6 +179,7 @@ export class AdminStudentsService {
       phone: profile.phone,
       licenseClass: profile.licenseClass,
       premiumUntil: profile.premiumUntil,
+      premiumLifetime: profile.premiumLifetime,
       adminNote: profile.adminNote,
       centerId: profile.centerId,
       enrollments,
