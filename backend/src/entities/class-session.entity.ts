@@ -41,6 +41,18 @@ export class ClassSession {
   @Column({ name: "session_type", type: "varchar", length: 32, default: "theory" })
   sessionType!: string
 
+  @Column({ name: "delivery_mode", type: "varchar", length: 16, default: "in_person" })
+  deliveryMode!: "in_person" | "online" | "hybrid"
+
+  @Column({ name: "online_url", type: "text", nullable: true })
+  onlineUrl?: string | null
+
+  @Column({ name: "instructor_name", type: "varchar", length: 255, nullable: true })
+  instructorName?: string | null
+
+  @Column({ type: "varchar", length: 16, default: "scheduled" })
+  status!: "scheduled" | "cancelled" | "completed"
+
   @Column({ name: "license_class", type: "varchar", length: 16, nullable: true })
   licenseClass?: string | null
 

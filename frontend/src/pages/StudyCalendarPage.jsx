@@ -13,6 +13,12 @@ const SESSION_META = {
   practice: { label: "Thực hành", tone: "success" },
 }
 
+const DELIVERY_META = {
+  in_person: "Trực tiếp tại trung tâm",
+  online: "Học online",
+  hybrid: "Kết hợp trực tiếp và online",
+}
+
 function formatDate(value) {
   return new Date(`${value}T00:00:00`).toLocaleDateString("vi-VN", {
     weekday: "long",
@@ -112,6 +118,20 @@ export function StudyCalendarPage() {
               </p>
               {selected.venue ? (
                 <p className="text-xs text-drive-muted">{selected.venue}</p>
+              ) : null}
+              <p className="mt-2 text-xs text-drive-muted">
+                {DELIVERY_META[selected.deliveryMode] ?? DELIVERY_META.in_person}
+                {selected.instructorName ? ` · Giáo viên: ${selected.instructorName}` : ""}
+              </p>
+              {selected.onlineUrl ? (
+                <a
+                  href={selected.onlineUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-3 inline-block text-sm font-semibold text-drive-action hover:underline"
+                >
+                  Vào phòng học online →
+                </a>
               ) : null}
               <PrimaryButton
                 variant="action"

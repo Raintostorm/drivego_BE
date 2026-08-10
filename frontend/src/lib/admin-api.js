@@ -242,6 +242,25 @@ export async function adminSessionCheckIn(sessionId, userId) {
   })
 }
 
+export async function fetchAdminSessionRoster(sessionId) {
+  return apiFetch(`/admin/class-sessions/${sessionId}/students`, { auth: true })
+}
+
+export async function assignAdminSessionStudent(sessionId, userId) {
+  return apiFetch(`/admin/class-sessions/${sessionId}/students`, {
+    method: "POST",
+    auth: true,
+    body: JSON.stringify({ userId }),
+  })
+}
+
+export async function removeAdminSessionStudent(sessionId, userId) {
+  return apiFetch(`/admin/class-sessions/${sessionId}/students/${userId}`, {
+    method: "DELETE",
+    auth: true,
+  })
+}
+
 export async function fetchAdminCenters() {
   return apiFetch("/admin/centers", { auth: true })
 }

@@ -17,6 +17,7 @@ import { LookupRecord } from "../entities/lookup-record.entity"
 import { Notification } from "../entities/notification.entity"
 import { Question } from "../entities/question.entity"
 import { ClassSession } from "../entities/class-session.entity"
+import { ClassSessionEnrollment } from "../entities/class-session-enrollment.entity"
 import { SessionAttendance } from "../entities/session-attendance.entity"
 import { ExamRegistration, ScheduleSlot, TrainingCenter } from "../entities/schedule-slot.entity"
 import { Payment } from "../entities/payment.entity"
@@ -67,6 +68,7 @@ import { User } from "../entities/user.entity"
             ApplicationDocument,
             CourseEnrollment,
             ClassSession,
+            ClassSessionEnrollment,
             SessionAttendance,
             BankQuestion,
             LicenseQuestionPool,

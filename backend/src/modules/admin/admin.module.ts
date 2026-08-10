@@ -3,6 +3,7 @@ import { TypeOrmModule } from "@nestjs/typeorm"
 import { RolesGuard } from "../../common/guards/roles.guard"
 import { ApplicationDocument } from "../../entities/application-document.entity"
 import { ClassSession } from "../../entities/class-session.entity"
+import { ClassSessionEnrollment } from "../../entities/class-session-enrollment.entity"
 import { CourseEnrollment } from "../../entities/course-enrollment.entity"
 import { ExamAttempt } from "../../entities/exam-attempt.entity"
 import { LicenseApplication } from "../../entities/license-application.entity"
@@ -64,6 +65,7 @@ import { AdminUsersService } from "./admin-users.service"
       StudyChapter,
       SubscriptionPlan,
       ClassSession,
+      ClassSessionEnrollment,
       SessionAttendance,
       SiteContent,
       StudentLicense,

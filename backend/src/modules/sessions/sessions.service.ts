@@ -7,6 +7,8 @@ import {
 import { InjectRepository } from "@nestjs/typeorm"
 import { Repository } from "typeorm"
 import { ClassSession } from "../../entities/class-session.entity"
+import { ClassSessionEnrollment } from "../../entities/class-session-enrollment.entity"
+import { CourseEnrollment } from "../../entities/course-enrollment.entity"
 import { SessionAttendance } from "../../entities/session-attendance.entity"
 import { StudentProfile } from "../../entities/student-profile.entity"
 
@@ -15,6 +17,10 @@ export class SessionsService {
   constructor(
     @InjectRepository(ClassSession)
     private readonly sessionsRepo: Repository<ClassSession>,
+    @InjectRepository(ClassSessionEnrollment)
+    private readonly sessionEnrollmentsRepo: Repository<ClassSessionEnrollment>,
+    @InjectRepository(CourseEnrollment)
+    private readonly courseEnrollmentsRepo: Repository<CourseEnrollment>,
     @InjectRepository(SessionAttendance)
     private readonly attendanceRepo: Repository<SessionAttendance>,
     @InjectRepository(StudentProfile)
@@ -45,8 +51,15 @@ export class SessionsService {
 
     return this.sessionsRepo
       .createQueryBuilder("s")
+      .innerJoin(
+        ClassSessionEnrollment,
+        "assignment",
+        "assignment.session_id = s.id AND assignment.user_id = :userId AND assignment.status = :assignmentStatus",
+        { userId, assignmentStatus: "scheduled" },
+      )
       .where("s.center_id = :centerId", { centerId: profile.centerId })
       .andWhere("s.session_date >= CURRENT_DATE")
+      .andWhere("s.status = :status", { status: "scheduled" })
       .orderBy("s.session_date", "ASC")
       .addOrderBy("s.start_time", "ASC")
       .limit(20)
@@ -60,6 +73,26 @@ export class SessionsService {
 
     if (!profile?.centerId || profile.centerId !== session.centerId) {
       throw new ForbiddenException("Buổi học không thuộc trung tâm của bạn")
+    }
+
+    if (session.status !== "scheduled") {
+      throw new BadRequestException("Buổi học không còn mở để điểm danh")
+    }
+
+    const assignment = await this.sessionEnrollmentsRepo.findOne({
+      where: { sessionId, userId },
+    })
+    if (!assignment || assignment.status === "cancelled") {
+      throw new ForbiddenException("Bạn chưa được xếp vào buổi học này")
+    }
+
+    if (session.licenseClass) {
+      const enrollment = await this.courseEnrollmentsRepo.findOne({
+        where: { userId, licenseClass: session.licenseClass, status: "active" },
+      })
+      if (!enrollment) {
+        throw new ForbiddenException("Khóa học của bạn không còn hoạt động cho buổi này")
+      }
     }
 
     this.assertCheckInWindow(session)
@@ -82,6 +115,8 @@ export class SessionsService {
         checkedInAt: new Date(),
       }),
     )
+    assignment.status = "attended"
+    await this.sessionEnrollmentsRepo.save(assignment)
     return { ok: true, attendance }
   }
 }

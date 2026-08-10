@@ -5,6 +5,7 @@ import { DataSource, In, Repository } from "typeorm"
 import { ExamRegistration, ScheduleSlot } from "../../entities/schedule-slot.entity"
 import { StudentProfile } from "../../entities/student-profile.entity"
 import { LicenseApplication } from "../../entities/license-application.entity"
+import { CourseEnrollment } from "../../entities/course-enrollment.entity"
 
 const HELD_STATUSES = ["pending", "confirmed"] as const
 
@@ -19,6 +20,8 @@ export class SchedulesService {
     private readonly profilesRepo: Repository<StudentProfile>,
     @InjectRepository(LicenseApplication)
     private readonly appsRepo: Repository<LicenseApplication>,
+    @InjectRepository(CourseEnrollment)
+    private readonly enrollmentsRepo: Repository<CourseEnrollment>,
     private readonly dataSource: DataSource,
     private readonly applications: ApplicationsService,
   ) {}
@@ -149,6 +152,15 @@ export class SchedulesService {
         if (slot.licenseClass && slot.licenseClass !== approvedApp.licenseClass) {
           throw new BadRequestException(
             `Ca thi hạng ${slot.licenseClass} không khớp hồ sơ đã duyệt (${approvedApp.licenseClass})`,
+          )
+        }
+        const enrolledClass = slot.licenseClass ?? approvedApp.licenseClass
+        const enrollment = await this.enrollmentsRepo.findOne({
+          where: { userId, licenseClass: enrolledClass, status: "active" },
+        })
+        if (!enrollment) {
+          throw new ForbiddenException(
+            `Cần có khóa ${enrolledClass} đang hoạt động trước khi đăng ký ca thi.`,
           )
         }
         const profile = await this.profilesRepo.findOne({ where: { userId } })

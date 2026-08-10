@@ -55,6 +55,29 @@ export class AdminClassSessionsController {
     return this.service.listAttendance(req.user, id)
   }
 
+  @Get(":id/students")
+  listRoster(@Req() req: { user: AuthUser }, @Param("id") id: string) {
+    return this.service.listRoster(req.user, id)
+  }
+
+  @Post(":id/students")
+  assignStudent(
+    @Req() req: { user: AuthUser },
+    @Param("id") id: string,
+    @Body() body: { userId: string; note?: string },
+  ) {
+    return this.service.assignStudent(req.user, id, body.userId, body.note)
+  }
+
+  @Delete(":id/students/:userId")
+  removeStudent(
+    @Req() req: { user: AuthUser },
+    @Param("id") id: string,
+    @Param("userId") userId: string,
+  ) {
+    return this.service.removeStudent(req.user, id, userId)
+  }
+
   @Post(":id/attendance")
   checkIn(
     @Req() req: { user: AuthUser },
